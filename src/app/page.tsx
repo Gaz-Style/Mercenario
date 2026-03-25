@@ -3,9 +3,35 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { ArrowRight, Crosshair, Target, Cpu, MessageSquare, Database, ChevronRight, Zap, Palette, Video, Mail, Search, Globe, TrendingUp, BarChart, ExternalLink } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 export default function Home() {
     const [currentProject, setCurrentProject] = useState(0);
+    const [formData, setFormData] = useState({ name: "", email: "", challenge: "" });
+    const [formStatus, setFormStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+    const handleFormSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setFormStatus("loading");
+
+        const { error } = await supabase
+            .from("leads")
+            .insert([{ 
+                name: formData.name, 
+                email: formData.email, 
+                challenge: formData.challenge 
+            }]);
+
+        if (error) {
+            console.error("Error inserting lead:", error);
+            setFormStatus("error");
+            setTimeout(() => setFormStatus("idle"), 4000);
+        } else {
+            setFormStatus("success");
+            setFormData({ name: "", email: "", challenge: "" });
+            setTimeout(() => setFormStatus("idle"), 5000);
+        }
+    };
 
     const projects = [
         { title: "NeuroV", cat: "Inteligencia Artificial & UX", desc: "SaaS médico automatizado para clínicas estéticas.", link: "https://neuro-v.vercel.app/", bg: "bg-neutral-950 border-mercenario-danger/20", image: "/imagenes/ejecutados/neuroV.jpeg" },
@@ -267,11 +293,34 @@ export default function Home() {
                         <p className="text-[10px] text-neutral-500 font-mono">Iniciando protocolo de auditoría técnica</p>
                     </div>
 
-                    <form className="w-full bg-[#060606] border border-white/[0.04] p-5 space-y-4 rounded shadow-2xl relative">
-                        <div><label className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest font-mono">Nombre / Empresa</label><input type="text" className="w-full bg-[#020202] border border-white/5 rounded px-3 py-2 text-xs mt-1 focus:outline-none focus:border-mercenario-danger/50 text-gray-300 font-mono transition-colors" required /></div>
-                        <div><label className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest font-mono">Correo Corporativo</label><input type="email" className="w-full bg-[#020202] border border-white/5 rounded px-3 py-2 text-xs mt-1 focus:outline-none focus:border-mercenario-danger/50 text-gray-300 font-mono transition-colors" required /></div>
-                        <div><label className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest font-mono">Principal Desafío Comercial</label><input type="text" className="w-full bg-[#020202] border border-white/5 rounded px-3 py-2 text-xs mt-1 focus:outline-none focus:border-mercenario-danger/50 text-gray-300 font-mono placeholder:text-neutral-800 placeholder:italic transition-colors" placeholder="Ej: Escala de pauta" /></div>
-                        <button type="submit" className="w-full bg-mercenario-danger hover:bg-red-700 text-white font-black py-3 px-4 rounded text-[10px] uppercase tracking-widest transition-all mt-2 shadow-lg hover:shadow-mercenario-danger/20 font-mono">ENVIAR_SOLICITUD_</button>
+                    <form onSubmit={handleFormSubmit} className="w-full bg-[#060606] border border-white/[0.04] p-5 space-y-4 rounded shadow-2xl relative">
+                        <div>
+                            <label className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest font-mono">Nombre / Empresa</label>
+                            <input type="text" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-[#020202] border border-white/5 rounded px-3 py-2 text-xs mt-1 focus:outline-none focus:border-mercenario-danger/50 text-gray-300 font-mono transition-colors" required disabled={formStatus === "loading" || formStatus === "success"} />
+                        </div>
+                        <div>
+                            <label className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest font-mono">Correo Corporativo</label>
+                            <input type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-[#020202] border border-white/5 rounded px-3 py-2 text-xs mt-1 focus:outline-none focus:border-mercenario-danger/50 text-gray-300 font-mono transition-colors" required disabled={formStatus === "loading" || formStatus === "success"} />
+                        </div>
+                        <div>
+                            <label className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest font-mono">Principal Desafío Comercial</label>
+                            <input type="text" value={formData.challenge} onChange={(e) => setFormData({...formData, challenge: e.target.value})} className="w-full bg-[#020202] border border-white/5 rounded px-3 py-2 text-xs mt-1 focus:outline-none focus:border-mercenario-danger/50 text-gray-300 font-mono placeholder:text-neutral-800 placeholder:italic transition-colors" placeholder="Ej: Escala de pauta" disabled={formStatus === "loading" || formStatus === "success"} />
+                        </div>
+                        
+                        {formStatus === "error" && (
+                            <p className="text-mercenario-danger text-[10px] font-mono mt-2 text-center">Fallo en la comunicación. Intenta nuevamente.</p>
+                        )}
+                        {formStatus === "success" && (
+                            <p className="text-green-500 text-[10px] font-mono mt-2 text-center font-bold">CONTACTO RECIBIDO. INICIANDO PROTOCOLO.</p>
+                        )}
+
+                        <button 
+                            type="submit" 
+                            disabled={formStatus === "loading" || formStatus === "success"}
+                            className="w-full bg-mercenario-danger hover:bg-red-700 disabled:bg-neutral-800 disabled:text-neutral-500 text-white font-black py-3 px-4 rounded text-[10px] uppercase tracking-widest transition-all mt-4 pt-4 shadow-lg hover:shadow-mercenario-danger/20 font-mono flex items-center justify-center gap-2"
+                        >
+                            {formStatus === "loading" ? "Procesando..." : formStatus === "success" ? "Completado_" : "ENVIAR_SOLICITUD_"}
+                        </button>
                     </form>
                 </motion.section>
 
