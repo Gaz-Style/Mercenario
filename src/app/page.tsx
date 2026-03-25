@@ -173,7 +173,7 @@ export default function Home() {
                     </div>
                 </section>
                 {/* 3. SERVICIOS ESPECIALIZADOS */}
-                <section className="w-full space-y-12 pt-20 md:pt-32 mt-12 md:mt-20">
+                <section className="w-full space-y-6 md:space-y-10 pt-20 md:pt-32 mt-12 md:mt-20">
                     <div className="text-center space-y-1">
                         <h2 className="text-xl sm:text-2xl font-black font-mono tracking-wider uppercase text-white">SERVICIOS_ESPECIALIZADOS_</h2>
                         <p className="text-[10px] sm:text-[11px] text-neutral-600 font-mono">Respuesta directa bajo arquitectura propia y ejecución quirúrgica</p>
