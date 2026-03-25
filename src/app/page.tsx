@@ -82,6 +82,46 @@ export default function Home() {
                     </div>
                 </section>
 
+                {/* 1.5 INFINITE ADS LOGOS CAROUSEL */}
+                <section className="w-full overflow-hidden py-10 bg-[#020202]/30 flex mt-12 mb-12">
+                    <motion.div 
+                        className="flex flex-nowrap"
+                        animate={{ x: ["0%", "-50%"] }}
+                        transition={{
+                            ease: "linear",
+                            duration: 25,
+                            repeat: Infinity
+                        }}
+                    >
+                        <div className="flex gap-16 items-center flex-shrink-0 pr-16">
+                            <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/linkedin.svg" alt="LinkedIn Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/anthropic-1.svg" alt="Anthropic" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                        </div>
+                        <div className="flex gap-16 items-center flex-shrink-0 pr-16">
+                            <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/linkedin.svg" alt="LinkedIn Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/anthropic-1.svg" alt="Anthropic" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                        </div>
+                    </motion.div>
+                </section>
+
                 {/* 2. PROYECTOS DESTACADOS - CARRUSEL INFINITO FORMATO MÓVIL */}
                 <section className="w-full pt-28 md:pt-40 flex flex-col items-center">
                     <div className="text-center space-y-1 z-10 mb-8 sm:mb-14">
@@ -131,46 +171,6 @@ export default function Home() {
                         </motion.div>
                     </div>
                 </section>
-                             {/* 2.5 INFINITE ADS LOGOS CAROUSEL */}
-                <section className="w-full overflow-hidden py-10 bg-[#020202]/30 flex mt-12">
-                    <motion.div 
-                        className="flex flex-nowrap"
-                        animate={{ x: ["0%", "-50%"] }}
-                        transition={{
-                            ease: "linear",
-                            duration: 25,
-                            repeat: Infinity
-                        }}
-                    >
-                        <div className="flex gap-16 items-center flex-shrink-0 pr-16">
-                            <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
-                            <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain" />
-                            <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain" />
-                            <img src="/imagenes/logotipo/linkedin.svg" alt="LinkedIn Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain" />
-                            <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
-                            <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
-                            <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
-                            <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
-                            <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
-                            <img src="/imagenes/logotipo/anthropic-1.svg" alt="Anthropic" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
-                            <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
-                        </div>
-                        <div className="flex gap-16 items-center flex-shrink-0 pr-16">
-                            <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
-                            <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain" />
-                            <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain" />
-                            <img src="/imagenes/logotipo/linkedin.svg" alt="LinkedIn Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain" />
-                            <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
-                            <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
-                            <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
-                            <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
-                            <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
-                            <img src="/imagenes/logotipo/anthropic-1.svg" alt="Anthropic" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
-                            <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
-                        </div>
-                    </motion.div>
-                </section>
-
                 {/* 3. SERVICIOS ESPECIALIZADOS */}
                 <section className="w-full space-y-12 pt-4 md:pt-8 mt-4 md:mt-8">
                     <div className="text-center space-y-1">
