@@ -211,11 +211,43 @@ export default function Home() {
                         </motion.div>
                     </div>
                 </section>
-                {/* 3. SERVICIOS ESPECIALIZADOS */}
+
+                {/* 3. ECOSISTEMA 360 - EL CEREBRO OPERATIVO */}
+                <section className="w-full pt-20 md:pt-32 max-w-6xl mx-auto px-6">
+                    <div className="text-center space-y-4 mb-12 sm:mb-16">
+                        <div className="inline-block border border-mercenario-danger/30 bg-mercenario-danger/5 px-4 py-1.5 rounded-full mb-2">
+                            <span className="text-[9px] font-mono text-mercenario-danger font-bold uppercase tracking-[0.2em]">Operación Bandera</span>
+                        </div>
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-black font-mono tracking-wider uppercase text-white">ECOSISTEMA_360_</h2>
+                        <p className="font-mono text-sm sm:text-base text-neutral-400 max-w-2xl mx-auto leading-relaxed">
+                            No solo ejecutamos tareas; instalamos un <strong className="text-white">Cerebro Operativo</strong> en tu empresa. Un flujo continuo pilotado por Inteligencia Artificial y automatización diseñado para dominar todo el ciclo de vida del cliente.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                        {[
+                            { step: "01", title: "Atracción", desc: "Minería de leads y pauta inteligente y autónoma." },
+                            { step: "02", title: "Intercepción", desc: "Agentes SDR 24/7 y perfilamiento algorítmico." },
+                            { step: "03", title: "Ingeniería", desc: "Integración de Cómputo API y automatización CRM." },
+                            { step: "04", title: "Cierre", desc: "Redacción dinámica e hiper-personalización." },
+                            { step: "05", title: "Retención", desc: "LTV, gestión de reputación y recompra automática." }
+                        ].map((s, i) => (
+                            <div key={i} className="bg-[#050505] border border-white/[0.05] p-6 rounded-lg relative overflow-hidden group hover:border-mercenario-danger/40 transition-colors">
+                                <div className="text-white/5 font-black text-5xl lg:text-5xl font-mono absolute -top-4 -right-2 group-hover:text-mercenario-danger/10 transition-colors">{s.step}</div>
+                                <h3 className="text-white font-mono font-bold text-sm sm:text-base mb-2 relative z-10">{s.title}_</h3>
+                                <p className="text-neutral-500 font-mono text-[10px] leading-relaxed relative z-10">{s.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* 3.1 VECTORES DE ATAQUE (SERVICIOS INDIVIDUALES) */}
                 <section className="w-full space-y-6 md:space-y-10 pt-20 md:pt-32 mt-12 md:mt-20">
-                    <div className="text-center space-y-1">
-                        <h2 className="text-xl sm:text-2xl font-black font-mono tracking-wider uppercase text-white">SERVICIOS_ESPECIALIZADOS_</h2>
-                        <p className="text-[10px] sm:text-[11px] text-neutral-600 font-mono">Respuesta directa bajo arquitectura propia y ejecución quirúrgica</p>
+                    <div className="text-center space-y-2 px-4 border-t border-white/[0.05] pt-12 md:pt-20">
+                        <h2 className="text-xl sm:text-2xl font-black font-mono tracking-wider uppercase text-white">INTERVENCIONES_TÁCTICAS_</h2>
+                        <p className="text-[10px] sm:text-[11px] text-neutral-500 font-mono max-w-xl mx-auto leading-relaxed">
+                            Respuesta directa bajo arquitectura propia. Contrata el Ecosistema 360 completo o despliega nuestros "Caballos de Troya" para resolver fallas críticas en tu maquinaria actual de ventas.
+                        </p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
