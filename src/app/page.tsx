@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ArrowRight, Crosshair, Target, Cpu, MessageSquare, Database, ChevronRight, Zap, Palette, Video, Mail, Search, Globe, TrendingUp, BarChart, ExternalLink, Quote } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
@@ -10,6 +10,13 @@ export default function Home() {
     const [currentProject, setCurrentProject] = useState(0);
     const [formData, setFormData] = useState({ name: "", email: "", challenge: "", budget: "" });
     const [formStatus, setFormStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.play().catch(e => console.log("Autoplay blocked:", e));
+        }
+    }, []);
 
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -86,7 +93,7 @@ export default function Home() {
 
                 {/* 1. HERO - IMPACTO TÁCTICO */}
                 <section className="text-center max-w-3xl pt-14 md:pt-24 pb-16 space-y-5 flex flex-col items-center relative w-full rounded-2xl overflow-hidden mt-6 border border-white/[0.03]">
-                    <video src="/imagenes/Bala_Rodando_Sobre_Mesa_Oscura.mp4" autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover scale-[1.20] translate-x-[4%] md:translate-x-[3%] opacity-60 -z-10" />
+                    <video ref={videoRef} src="/imagenes/Bala_Rodando_Sobre_Mesa_Oscura.mp4" autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover scale-[1.20] translate-x-[4%] md:translate-x-[3%] opacity-60 -z-10" />
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#010101]/40 to-[#010101] -z-10" />
 
                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="inline-flex items-center gap-1.5 border border-mercenario-danger/30 px-4 py-1.5 bg-mercenario-danger/10 rounded text-[10px] sm:text-[11px] font-bold text-mercenario-danger tracking-widest uppercase mb-2 font-mono relative z-10">
