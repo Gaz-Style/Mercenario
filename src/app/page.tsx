@@ -2,12 +2,12 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { ArrowRight, Crosshair, Target, Cpu, MessageSquare, Database, ChevronRight, Zap, Palette, Video, Mail, Search, Globe, TrendingUp, BarChart, ExternalLink } from "lucide-react";
+import { ArrowRight, Crosshair, Target, Cpu, MessageSquare, Database, ChevronRight, Zap, Palette, Video, Mail, Search, Globe, TrendingUp, BarChart, ExternalLink, Quote } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
 export default function Home() {
     const [currentProject, setCurrentProject] = useState(0);
-    const [formData, setFormData] = useState({ name: "", email: "", challenge: "" });
+    const [formData, setFormData] = useState({ name: "", email: "", challenge: "", budget: "" });
     const [formStatus, setFormStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
     const handleFormSubmit = async (e: React.FormEvent) => {
@@ -19,7 +19,8 @@ export default function Home() {
             .insert([{ 
                 name: formData.name, 
                 email: formData.email, 
-                challenge: formData.challenge 
+                challenge: formData.challenge,
+                budget: formData.budget 
             }]);
 
         if (error) {
@@ -28,7 +29,7 @@ export default function Home() {
             setTimeout(() => setFormStatus("idle"), 4000);
         } else {
             setFormStatus("success");
-            setFormData({ name: "", email: "", challenge: "" });
+            setFormData({ name: "", email: "", challenge: "", budget: "" });
             setTimeout(() => setFormStatus("idle"), 5000);
         }
     };
@@ -146,6 +147,17 @@ export default function Home() {
                             <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
                         </div>
                     </motion.div>
+                </section>
+
+                {/* 1.7 PROTOCOLO Y ESCALA CLASIFICADA (Manifiesto) */}
+                <section className="w-full max-w-4xl mx-auto px-6 py-16 md:py-24 text-center space-y-6">
+                    <div className="inline-block border border-mercenario-danger/30 bg-mercenario-danger/5 px-4 py-1.5 rounded-full mb-2">
+                        <span className="text-[9px] font-mono text-mercenario-danger font-bold uppercase tracking-[0.2em]">Acceso Restringido</span>
+                    </div>
+                    <h2 className="text-2xl md:text-4xl font-black font-mono uppercase text-white leading-tight">No somos una agencia creativa.<br/>Somos una <span className="text-mercenario-danger">fuerza de escalabilidad</span>.</h2>
+                    <p className="font-mono text-sm md:text-base text-neutral-400 max-w-2xl mx-auto leading-relaxed">
+                        Solo aceptamos proyectos donde exista viabilidad matemática y técnica para multiplicar tu facturación. Diseñamos infraestructura, inyectamos tráfico cualificado y automatizamos el cierre de ventas bajo un protocolo de ejecución hiper-rentable.
+                    </p>
                 </section>
 
                 {/* 2. PROYECTOS DESTACADOS - CARRUSEL INFINITO FORMATO MÓVIL */}
@@ -293,33 +305,48 @@ export default function Home() {
                         <p className="text-[10px] text-neutral-500 font-mono">Iniciando protocolo de auditoría técnica</p>
                     </div>
 
-                    <form onSubmit={handleFormSubmit} className="w-full bg-[#060606] border border-white/[0.04] p-5 space-y-4 rounded shadow-2xl relative">
+                    <form onSubmit={handleFormSubmit} className="w-full bg-[#060606] border border-white/[0.04] p-5 sm:p-7 space-y-4 rounded shadow-2xl relative">
                         <div>
-                            <label className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest font-mono">Nombre / Empresa</label>
-                            <input type="text" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-[#020202] border border-white/5 rounded px-3 py-2 text-xs mt-1 focus:outline-none focus:border-mercenario-danger/50 text-gray-300 font-mono transition-colors" required disabled={formStatus === "loading" || formStatus === "success"} />
+                            <label className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest font-mono">Nombre / Empresa _</label>
+                            <input type="text" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-[#020202] border border-white/5 rounded px-3 py-2.5 text-xs mt-1 focus:outline-none focus:border-mercenario-danger/50 text-gray-300 font-mono transition-colors" required disabled={formStatus === "loading" || formStatus === "success"} />
                         </div>
                         <div>
-                            <label className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest font-mono">Correo Corporativo</label>
-                            <input type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-[#020202] border border-white/5 rounded px-3 py-2 text-xs mt-1 focus:outline-none focus:border-mercenario-danger/50 text-gray-300 font-mono transition-colors" required disabled={formStatus === "loading" || formStatus === "success"} />
+                            <label className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest font-mono">Correo Corporativo _</label>
+                            <input type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-[#020202] border border-white/5 rounded px-3 py-2.5 text-xs mt-1 focus:outline-none focus:border-mercenario-danger/50 text-gray-300 font-mono transition-colors" required disabled={formStatus === "loading" || formStatus === "success"} />
                         </div>
-                        <div>
-                            <label className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest font-mono">Principal Desafío Comercial</label>
-                            <input type="text" value={formData.challenge} onChange={(e) => setFormData({...formData, challenge: e.target.value})} className="w-full bg-[#020202] border border-white/5 rounded px-3 py-2 text-xs mt-1 focus:outline-none focus:border-mercenario-danger/50 text-gray-300 font-mono placeholder:text-neutral-800 placeholder:italic transition-colors" placeholder="Ej: Escala de pauta" disabled={formStatus === "loading" || formStatus === "success"} />
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest font-mono">Inversión Publicitaria / Mes _</label>
+                                <select value={formData.budget} onChange={(e) => setFormData({...formData, budget: e.target.value})} className="w-full bg-[#020202] border border-white/5 rounded px-3 py-2.5 text-xs mt-1 focus:outline-none focus:border-mercenario-danger/50 text-gray-400 font-mono transition-colors appearance-none" required disabled={formStatus === "loading" || formStatus === "success"}>
+                                    <option value="" disabled selected>Seleccionar rango...</option>
+                                    <option value="Menos de $2.000 USD">&lt; $2.000 USD / mes</option>
+                                    <option value="$2.000 a $10.000 USD">$2.000 - $10.000 USD / mes</option>
+                                    <option value="$10.000 a $50.000 USD">$10.000 - $50.000 USD / mes</option>
+                                    <option value="Más de $50.000 USD">+ $50.000 USD / mes</option>
+                                    <option value="Solo Busco Desarrollo/SaaS">Solo Busco Desarrollo/Software</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest font-mono">Objetivo Principal _</label>
+                                <input type="text" value={formData.challenge} onChange={(e) => setFormData({...formData, challenge: e.target.value})} className="w-full bg-[#020202] border border-white/5 rounded px-3 py-2.5 text-xs mt-1 focus:outline-none focus:border-mercenario-danger/50 text-gray-300 font-mono placeholder:text-neutral-800 placeholder:italic transition-colors" placeholder="Ej: Escala de pauta o Sistema a medida" required disabled={formStatus === "loading" || formStatus === "success"} />
+                            </div>
                         </div>
                         
                         {formStatus === "error" && (
-                            <p className="text-mercenario-danger text-[10px] font-mono mt-2 text-center">Fallo en la comunicación. Intenta nuevamente.</p>
+                            <p className="text-mercenario-danger text-[10px] font-mono mt-2 text-center p-2 border border-mercenario-danger/20 bg-mercenario-danger/5 rounded">Fallo en la comunicación encriptada. Intenta nuevamente.</p>
                         )}
                         {formStatus === "success" && (
-                            <p className="text-green-500 text-[10px] font-mono mt-2 text-center font-bold">CONTACTO RECIBIDO. INICIANDO PROTOCOLO.</p>
+                            <p className="text-emerald-500 text-[10px] font-mono mt-2 text-center font-bold p-2 border border-emerald-500/20 bg-emerald-500/5 rounded">CONTACTO RECIBIDO. INICIANDO PROTOCOLO.</p>
                         )}
 
                         <button 
                             type="submit" 
                             disabled={formStatus === "loading" || formStatus === "success"}
-                            className="w-full bg-mercenario-danger hover:bg-red-700 disabled:bg-neutral-800 disabled:text-neutral-500 text-white font-black py-3 px-4 rounded text-[10px] uppercase tracking-widest transition-all mt-4 pt-4 shadow-lg hover:shadow-mercenario-danger/20 font-mono flex items-center justify-center gap-2"
+                            className="w-full bg-mercenario-danger hover:bg-red-700 disabled:bg-neutral-800 disabled:text-neutral-500 text-white font-black py-4 px-4 rounded text-[11px] uppercase tracking-widest transition-all mt-6 shadow-lg hover:shadow-mercenario-danger/20 font-mono flex items-center justify-center gap-2 group/btn"
                         >
-                            {formStatus === "loading" ? "Procesando..." : formStatus === "success" ? "Completado_" : "ENVIAR_SOLICITUD_"}
+                            {formStatus === "loading" ? "Procesando Datos..." : formStatus === "success" ? "Auditoría Solicitada_" : (
+                                <><span>ENVIAR SOLICITUD CLASIFICADA_</span><ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" /></>
+                            )}
                         </button>
                     </form>
                 </motion.section>
