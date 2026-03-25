@@ -125,7 +125,7 @@ export default function Home() {
                 {/* 2. PROYECTOS DESTACADOS - CARRUSEL INFINITO FORMATO MÓVIL */}
                 <section className="w-full pt-10 md:pt-16 flex flex-col items-center">
                     <div className="text-center space-y-1 z-10 mb-4 sm:mb-8">
-                        <h2 className="text-xl sm:text-2xl font-black font-mono tracking-wider uppercase text-white">MISIONES_EJECUTADAS_</h2>
+                        <h2 className="text-xl sm:text-2xl font-black font-mono tracking-wider uppercase text-white">MISIONES_COMPLETADAS_</h2>
                         <p className="text-[10px] sm:text-[11px] text-neutral-600 font-mono">Bitácora de despliegues y experiencia móvil</p>
                     </div>
 
@@ -238,7 +238,7 @@ export default function Home() {
                 {/* 4. PORTAFOLIO - CASOS DE ÉXITO */}
                 <section className="w-full space-y-12 mt-12">
                     <div className="text-center space-y-1">
-                        <h2 className="text-xl sm:text-2xl font-black font-mono tracking-wider uppercase text-white">MISIONES_COMPLETADAS_</h2>
+                        <h2 className="text-xl sm:text-2xl font-black font-mono tracking-wider uppercase text-white">MISIONES_EJECUTADAS_</h2>
                         <p className="text-[10px] sm:text-[11px] text-neutral-600 font-mono">Registro de operaciones y retornos asegurados</p>
                     </div>
 
