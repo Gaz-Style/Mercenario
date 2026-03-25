@@ -239,6 +239,13 @@ export default function Home() {
                             </div>
                         ))}
                     </div>
+
+                    <div className="mt-12 text-center">
+                        <Link href="/ecosistema-360" className="inline-flex items-center gap-2 text-[10px] font-mono font-bold text-mercenario-danger uppercase tracking-widest hover:text-white transition-colors group">
+                            <span className="border-b border-mercenario-danger/30 group-hover:border-white/30 pb-0.5 transition-colors">Ver Documentación Desclasificada del Sistema</span>
+                            <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                    </div>
                 </section>
 
                 {/* 3.1 VECTORES DE ATAQUE (SERVICIOS INDIVIDUALES) */}
