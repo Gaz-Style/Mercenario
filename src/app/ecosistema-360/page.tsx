@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft, Cpu, Target, Crosshair, Network, GitMerge, Database, Zap, RefreshCw, BarChart, FileText, ChevronRight } from "lucide-react";
+import { ArrowLeft, Cpu, Target, Crosshair, Network, GitMerge, Database, Zap, RefreshCw, BarChart, FileText, ChevronRight, MessageSquare } from "lucide-react";
 import Link from "next/link";
 
 export default function Ecosistema360() {

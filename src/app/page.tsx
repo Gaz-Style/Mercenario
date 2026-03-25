@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { ArrowRight, Crosshair, Target, Cpu, MessageSquare, Database, ChevronRight, Zap, Palette, Video, Mail, Search, Globe, TrendingUp, BarChart, ExternalLink, Quote } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import Link from "next/link";
 
 export default function Home() {
     const [currentProject, setCurrentProject] = useState(0);
