@@ -1,0 +1,299 @@
+"use client";
+
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { ArrowRight, Crosshair, Target, Cpu, MessageSquare, Database, ChevronRight, Zap, Palette, Video, Mail, Search, Globe, TrendingUp, BarChart, ExternalLink } from "lucide-react";
+
+export default function Home() {
+    const [currentProject, setCurrentProject] = useState(0);
+
+    const projects = [
+        { title: "NeuroV", cat: "Inteligencia Artificial & UX", desc: "SaaS médico automatizado para clínicas estéticas.", link: "https://neuro-v.vercel.app/", bg: "bg-neutral-950 border-mercenario-danger/20", image: "/imagenes/neurov_preview.png" },
+        { title: "SocialMotors", cat: "E-commerce & Estrategia", desc: "Plataforma de ventas y embudo de conversión automotriz.", link: "https://www.socialmotors.cl/", bg: "bg-neutral-950 border-white/[0.03]", image: "/imagenes/socialmotors_preview.png" },
+        { title: "Valet PRT", cat: "SaaS & Operaciones", desc: "Sistema de gestión y recepción automatizada de vehículos.", link: "https://socialmotors.cl/valet", bg: "bg-neutral-950 border-white/[0.03]", image: "/imagenes/valet_preview.png" },
+        { title: "PaseaLove", cat: "E-commerce & Servicios", desc: "Plataforma de reserva y cuidado de mascotas con rastreo.", link: "https://www.pasealove.cl/", bg: "bg-neutral-950 border-white/[0.03]", image: "/imagenes/pasealove_preview.png" }
+    ];
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentProject((prev) => (prev + 1) % projects.length);
+        }, 5000);
+        return () => clearInterval(interval);
+    }, [projects.length]);
+
+    return (
+        <div className="min-h-screen bg-[#010101] text-white font-sans antialiased flex flex-col items-center relative overflow-hidden selection:bg-mercenario-danger selection:text-white">
+            
+            {/* Ambient Tactical Lights */}
+            <div className="absolute top-[-10%] left-[50%] translate-x-[-50%] w-[1000px] h-[350px] bg-mercenario-danger/5 blur-[120px] rounded-full pointer-events-none -z-10" />
+
+            {/* Float CTA Button */}
+            <div className="fixed bottom-6 right-6 z-50">
+                <a 
+                    href="#contacto" 
+                    className="flex items-center gap-2 px-4 py-2.5 bg-mercenario-danger text-white font-bold text-[10px] uppercase tracking-widest rounded-full shadow-[0_0_30px_rgba(255,17,34,0.3)] hover:scale-105 transition-all duration-300 backdrop-blur-md"
+                >
+                    <div className="w-1.5 h-1.5 bg-white rounded-full animate-ping" />
+                    Iniciar Auditoría_
+                </a>
+            </div>
+
+            {/* Header / Navbar */}
+            <header className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-6 flex justify-between items-center z-50 border-b border-white/[0.03]">
+                <div className="flex items-center gap-1.5">
+                    <Crosshair className="w-5 h-5 text-mercenario-danger animate-pulse" />
+                    <span className="text-sm font-black font-mono tracking-wider text-white uppercase flex items-center gap-1">
+                        MERCENARIO <span className="text-gray-600 hidden sm:inline">|</span> <span className="text-[9px] text-gray-400 font-normal hidden sm:inline">OPERACIONES_</span>
+                    </span>
+                </div>
+                <a 
+                    href="#contacto" 
+                    className="px-4 py-2 border border-white/10 hover:border-mercenario-danger/40 text-white font-bold text-[9px] sm:text-[10px] uppercase tracking-widest rounded hover:bg-white/5 transition-all duration-300 font-mono"
+                >
+                    CONTACTO_
+                </a>
+            </header>
+
+            <main className="w-full max-w-6xl mx-auto px-4 sm:px-6 pb-32 z-10 flex flex-col items-center">
+
+                {/* 1. HERO - IMPACTO TÁCTICO */}
+                <section className="text-center max-w-3xl pt-14 md:pt-24 pb-16 space-y-5 flex flex-col items-center relative w-full rounded-2xl overflow-hidden mt-6 border border-white/[0.03]">
+                    <video src="/imagenes/Bala_Rodando_Sobre_Mesa_Oscura.mp4" autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-60 -z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#010101]/40 to-[#010101] -z-10" />
+
+                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="inline-flex items-center gap-1.5 border border-mercenario-danger/30 px-4 py-1.5 bg-mercenario-danger/10 rounded text-[10px] sm:text-[11px] font-bold text-mercenario-danger tracking-widest uppercase mb-2 font-mono relative z-10">
+                        | EJECUCIÓN TÁCTICA 360 |
+                    </motion.div>
+
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter sm:tracking-tight leading-[1.05] text-white font-mono uppercase z-10 mt-10 sm:mt-14">
+                        Automatizamos tu <br />
+                        <span className="text-mercenario-danger">Crecimiento_</span>
+                    </h1>
+
+                    <p className="text-neutral-400 text-xs sm:text-sm max-w-md mx-auto leading-relaxed px-2 font-mono z-10 mt-3 sm:mt-4">
+                        Diseñamos y escalamos toda tu cadena de ventas con pauta de respuesta directa y arquitectura técnica_
+                    </p>
+
+                    <div className="pt-8 sm:pt-10 z-10">
+                        <a href="#contacto" className="inline-flex items-center gap-3 px-6 py-4 bg-white text-black font-black text-[10px] sm:text-xs uppercase tracking-widest hover:bg-mercenario-danger hover:text-white transition-all group rounded shadow-lg font-mono">
+                            <span>EVALUAR_PROYECTO_</span>
+                            <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </a>
+                    </div>
+                </section>
+
+                {/* 2. PROYECTOS DESTACADOS - GALERÍA VISUAL */}
+                <section className="w-full space-y-12 pt-28 md:pt-40">
+                    <div className="text-center space-y-1">
+                        <h2 className="text-xl sm:text-2xl font-black font-mono tracking-wider uppercase text-white">MISIONES_EJECUTADAS_</h2>
+                        <p className="text-[10px] sm:text-[11px] text-neutral-600 font-mono">Bitácora de despliegues y arquitectura de software de alto rendimiento</p>
+                    </div>
+
+                    <div className="relative w-full max-w-4xl mx-auto group">
+                        <AnimatePresence mode="wait">
+                            <motion.div 
+                                key={currentProject}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.4, ease: "easeInOut" }}
+                                className="w-full flex flex-col space-y-4"
+                            >
+                                {/* 1. IMAGE BOX */}
+                                <a 
+                                    href={projects[currentProject].link} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer" 
+                                    className="relative w-full aspect-[16/9] overflow-hidden rounded-xl border border-white/[0.03] cursor-pointer block group"
+                                >
+                                    {projects[currentProject].image ? (
+                                        <div className="absolute inset-0">
+                                            <img src={projects[currentProject].image} alt={projects[currentProject].title} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" />
+                                            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#010101]/20" />
+                                        </div>
+                                    ) : (
+                                        <div className="absolute inset-0 bg-neutral-1000 border-white/[0.03]" />
+                                    )}
+                                </a>
+
+                                {/* 2. INFO DESCRIPTION OUTSIDE */}
+                                <div className="px-1 py-1 flex justify-between items-start w-full">
+                                    <div className="space-y-1">
+                                        <p className="text-[10px] font-bold font-mono text-mercenario-danger tracking-widest uppercase">{projects[currentProject].cat}</p>
+                                        <h3 className="text-sm sm:text-base md:text-lg font-black font-mono text-white group-hover:text-mercenario-danger transition-colors">{projects[currentProject].title}_</h3>
+                                        <p className="text-[10px] sm:text-sm text-neutral-400 font-mono leading-relaxed max-w-2xl mt-1">{projects[currentProject].desc}</p>
+                                    </div>
+                                    <a 
+                                        href={projects[currentProject].link} 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        className="p-1.5 bg-white text-black rounded hover:bg-mercenario-danger hover:text-white transition-colors duration-300 flex-shrink-0"
+                                    >
+                                        <ExternalLink className="w-4 h-4" />
+                                    </a>
+                                </div>
+                            </motion.div>
+                        </AnimatePresence>
+
+                        {/* Pagination Dots (Positioned under info) */}
+                        <div className="flex gap-2 justify-center mt-3 z-20">
+                            {projects.map((_, dotIdx) => (
+                                <button 
+                                    key={dotIdx} 
+                                    onClick={(e) => { e.preventDefault(); setCurrentProject(dotIdx); }} 
+                                    className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${dotIdx === currentProject ? 'bg-mercenario-danger w-4' : 'bg-white/20'}`} 
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </section>
+                             {/* 2.5 INFINITE ADS LOGOS CAROUSEL */}
+                <section className="w-full overflow-hidden py-10 bg-[#020202]/30 flex mt-12">
+                    <motion.div 
+                        className="flex flex-nowrap"
+                        animate={{ x: ["0%", "-50%"] }}
+                        transition={{
+                            ease: "linear",
+                            duration: 25,
+                            repeat: Infinity
+                        }}
+                    >
+                        <div className="flex gap-16 items-center flex-shrink-0 pr-16">
+                            <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/linkedin.svg" alt="LinkedIn Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/anthropic-1.svg" alt="Anthropic" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                        </div>
+                        <div className="flex gap-16 items-center flex-shrink-0 pr-16">
+                            <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/linkedin.svg" alt="LinkedIn Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/anthropic-1.svg" alt="Anthropic" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                            <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
+                        </div>
+                    </motion.div>
+                </section>
+
+                {/* 3. SERVICIOS 360 (Arsenal Operativo) */}
+                <section className="w-full space-y-12 pt-4 md:pt-8 mt-4 md:mt-8">
+                    <div className="text-center space-y-1">
+                        <h2 className="text-xl sm:text-2xl font-black font-mono tracking-wider uppercase text-white">ARSENAL_OPERATIVO_360_</h2>
+                        <p className="text-[10px] sm:text-[11px] text-neutral-600 font-mono">Respuesta directa bajo arquitectura propia y ejecución quirúrgica</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+                        {[
+                            { num: "01", icon: Target, title: "Pauta Táctica Integral", desc: "Campañas de respuesta directa multiplataforma en Meta, Google y TikTok Ads.", items: ["CPA & Retorno Directo", "Estructura de Escalabilidad", "Modelado de Atribución"] },
+                            { num: "02", icon: Database, title: "Arquitectura SaaS & Sistemas_", desc: "Diseño y desarrollo de backends escalables, dashboards operativos y CRM a medida.", items: ["Node.js / Python / SQL", "Automatización de Procesos", "Infraestructura Cloud"] },
+                            { num: "03", icon: Globe, title: "Ingeniería Frontend (Next.js)_", desc: "Construcción de plataformas y aplicativos web de carga ultra-rápida.", items: ["Next.js / TypeScript", "Core Web Vitals", "Flujos de Conversión"] },
+                            { num: "04", icon: Palette, title: "UX/UI & Diseño de Producto_", desc: "Interfaces comerciales y prototipado que proyectan autoridad y conversión.", items: ["Diseño de Producto", "Branding Técnico", "Activos Digitales"] },
+                            { num: "05", icon: Video, title: "Producción Audiovisual_", desc: "Grabación y edición de video de alta retención para Ads y Reels tácticos.", items: ["Corte Dinámico", "Post-producción", "Formatos Verticales"] },
+                            { num: "06", icon: MessageSquare, title: "Creación de Contenido_", desc: "Estrategia para posicionar marca sin depender solo de tráfico pagado.", items: ["Copywriting Directo", "Parrillas Estratégicas", "Guiones de Conversión"] },
+                            { num: "07", icon: Mail, title: "Automations & Email Marketing_", desc: "Automatización de flujos de nutrición y CRM para cerrar ventas latentes.", items: ["Automatización de Envíos", "Integración CRM", "Flujos de Reserva"] },
+                            { num: "08", icon: Cpu, title: "Integración IA & Automations_", desc: "Entrenamiento e integración de modelos de lenguaje para workflows automatizados.", items: ["Agentes de IA", "Automatización Workflows", "API Integrations"] }
+                        ].map((serv, i) => (
+                            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.3, delay: i * 0.05 }} className="bg-[#060606] border border-white/[0.03] p-5 rounded relative overflow-hidden group hover:border-white/10 transition-all duration-300 flex flex-col justify-between">
+                                <div className="absolute top-[-5px] right-2 text-5xl font-black font-mono text-white/[0.01] group-hover:text-mercenario-danger/[0.02] transition-colors pointer-events-none">{serv.num}</div>
+                                <div className="space-y-4 z-10"><div className="p-1.5 border border-white/10 w-fit backdrop-blur-md rounded group-hover:border-mercenario-danger/40 transition-colors"><serv.icon className="w-4 h-4 text-mercenario-danger" /></div><div className="space-y-1"><h3 className="text-xs font-black tracking-tight uppercase font-mono text-white group-hover:text-mercenario-danger transition-colors">{serv.title}_</h3><p className="text-[10px] text-neutral-500 leading-relaxed font-mono">{serv.desc}</p></div></div>
+                                <ul className="text-[9px] text-neutral-400 space-y-1 list-none pt-3 mt-4 border-t border-white/[0.03] flex-grow font-mono z-10">{serv.items.map((it, j) => (<li key={j} className="flex items-center gap-1"><div className="w-1 h-1 bg-mercenario-danger/60 rounded-full" />{it}</li>))}</ul>
+                            </motion.div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* 3.5 INFINITE METRICS STRIP (Framer Motion Marquee) - Reubicado Aquí */}
+                <section className="w-full overflow-hidden py-10 mt-12 bg-[#020202] flex">
+                    <motion.div 
+                        className="flex gap-8 whitespace-nowrap"
+                        animate={{ x: ["0%", "-50%"] }}
+                        transition={{
+                            ease: "linear",
+                            duration: 20,
+                            repeat: Infinity
+                        }}
+                    >
+                        <div className="flex gap-8 items-center">
+                            {[
+                                "ROAS: 4.8X [E-COMMERCE]_", "CPA: -35% [SaaS]_", "LEADS: +180% [FINANZAS]_",
+                                "VENTAS: +220% [RETAIL]_", "ROI: 520% [B2B]_", "INDEXACIÓN: 100% [IA]_"
+                            ].map((met, i) => (
+                                <span key={i} className="text-[10px] font-black font-mono tracking-widest text-neutral-500 flex items-center gap-2">
+                                    <div className="w-1.5 h-1.5 bg-mercenario-danger rounded-full" />
+                                    {met}
+                                </span>
+                            ))}
+                        </div>
+                        <div className="flex gap-8 items-center">
+                            {[
+                                "ROAS: 4.8X [E-COMMERCE]_", "CPA: -35% [SaaS]_", "LEADS: +180% [FINANZAS]_",
+                                "VENTAS: +220% [RETAIL]_", "ROI: 520% [B2B]_", "INDEXACIÓN: 100% [IA]_"
+                            ].map((met, i) => (
+                                <span key={i} className="text-[10px] font-black font-mono tracking-widest text-neutral-500 flex items-center gap-2">
+                                    <div className="w-1.5 h-1.5 bg-mercenario-danger rounded-full" />
+                                    {met}
+                                </span>
+                            ))}
+                        </div>
+                    </motion.div>
+                </section>
+
+                {/* 4. PORTAFOLIO - CASOS DE ÉXITO */}
+                <section className="w-full space-y-12 mt-12">
+                    <div className="text-center space-y-1">
+                        <h2 className="text-xl sm:text-2xl font-black font-mono tracking-wider uppercase text-white">MISIONES_COMPLETADAS_</h2>
+                        <p className="text-[10px] sm:text-[11px] text-neutral-600 font-mono">Registro de operaciones y retornos asegurados</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                        {[
+                            { title: "Operación: Escala E-commerce", client: "Retail Moda", mainMetric: "+250%", metricLabel: "Incremento en Ventas", items: ["Paid Media Multicanal", "Embudo de Alta Conversión", "Atribución en Tiempo Real"], icon: TrendingUp },
+                            { title: "Operación: Captura B2B", client: "Servicios SaaS", mainMetric: "-35%", metricLabel: "Reducción de CPL", items: ["LinkedIn Ads de Autoridad", "Automatización CRM", "AI Bots de Seguimiento"], icon: BarChart },
+                            { title: "Operación: Visibilidad Total", client: "Salud / Clínicas", mainMetric: "+180%", metricLabel: "Leads Orgánicos", items: ["SEO Local & Maps", "Búsqueda Generativa IA", "Indexación Automatizada"], icon: Zap }
+                        ].map((caso, i) => (
+                            <motion.div key={i} initial={{ opacity: 0, scale: 0.98 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.1 }} className="bg-[#040404] border border-white/[0.02] rounded-xl p-6 relative overflow-hidden group hover:border-mercenario-danger/20 transition-all duration-300">
+                                <div className="absolute top-0 right-0 w-24 h-24 bg-mercenario-danger/5 blur-xl rounded-full pointer-events-none group-hover:bg-mercenario-danger/10 transition-colors" />
+                                <div className="space-y-4">
+                                    <div className="flex justify-between items-start"><div className="space-y-1"><p className="text-[8px] font-bold font-mono text-mercenario-danger tracking-widest uppercase">{caso.client}</p><h3 className="text-xs sm:text-sm font-black font-mono text-white group-hover:text-mercenario-danger transition-colors">{caso.title}_</h3></div><caso.icon className="w-5 h-5 text-neutral-700 group-hover:text-mercenario-danger transition-colors" /></div>
+                                    <div className="py-4 border-y border-white/[0.03] my-4"><p className="text-4xl font-extrabold font-mono text-white tracking-tighter">{caso.mainMetric}</p><p className="text-[9px] font-mono text-neutral-500 uppercase tracking-widest">{caso.metricLabel}</p></div>
+                                    <ul className="text-[9px] text-neutral-400 space-y-1 font-mono">{caso.items.map((it, j) => (<li key={j} className="flex items-center gap-1.5"><div className="w-1 h-1 bg-mercenario-danger/40 rounded-full" />{it}</li>))}</ul>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* 5. CONTACTO */}
+                <motion.section id="contacto" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="w-full pt-16 max-w-md mx-auto space-y-6 flex flex-col items-center mt-24">
+                    <div className="text-center space-y-1">
+                        <h2 className="text-lg font-black font-mono uppercase tracking-wider text-white">EVALUACIÓN_PROYECTO_</h2>
+                        <p className="text-[10px] text-neutral-500 font-mono">Iniciando protocolo de auditoría técnica</p>
+                    </div>
+
+                    <form className="w-full bg-[#060606] border border-white/[0.04] p-5 space-y-4 rounded shadow-2xl relative">
+                        <div><label className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest font-mono">Nombre / Empresa</label><input type="text" className="w-full bg-[#020202] border border-white/5 rounded px-3 py-2 text-xs mt-1 focus:outline-none focus:border-mercenario-danger/50 text-gray-300 font-mono transition-colors" required /></div>
+                        <div><label className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest font-mono">Correo Corporativo</label><input type="email" className="w-full bg-[#020202] border border-white/5 rounded px-3 py-2 text-xs mt-1 focus:outline-none focus:border-mercenario-danger/50 text-gray-300 font-mono transition-colors" required /></div>
+                        <div><label className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest font-mono">Principal Desafío Comercial</label><input type="text" className="w-full bg-[#020202] border border-white/5 rounded px-3 py-2 text-xs mt-1 focus:outline-none focus:border-mercenario-danger/50 text-gray-300 font-mono placeholder:text-neutral-800 placeholder:italic transition-colors" placeholder="Ej: Escala de pauta" /></div>
+                        <button type="submit" className="w-full bg-mercenario-danger hover:bg-red-700 text-white font-black py-3 px-4 rounded text-[10px] uppercase tracking-widest transition-all mt-2 shadow-lg hover:shadow-mercenario-danger/20 font-mono">ENVIAR_SOLICITUD_</button>
+                    </form>
+                </motion.section>
+
+            </main>
+
+            <footer className="w-full border-t border-white/[0.03] py-8 text-center text-[9px] text-neutral-600 font-mono z-10">&copy; {new Date().getFullYear()} Mercenario. Operaciones Especiales Clasificadas_</footer>
+
+        </div>
+    );
+}
