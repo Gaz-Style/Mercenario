@@ -83,7 +83,7 @@ export default function Home() {
                 </section>
 
                 {/* 1.5 INFINITE ADS LOGOS CAROUSEL */}
-                <section className="w-full overflow-hidden py-10 bg-[#020202]/30 flex mt-12 mb-12">
+                <section className="w-full overflow-hidden py-8 bg-[#020202]/30 flex mt-12 mb-6">
                     <motion.div 
                         className="flex flex-nowrap"
                         animate={{ x: ["0%", "-50%"] }}
@@ -123,7 +123,7 @@ export default function Home() {
                 </section>
 
                 {/* 2. PROYECTOS DESTACADOS - CARRUSEL INFINITO FORMATO MÓVIL */}
-                <section className="w-full pt-28 md:pt-40 flex flex-col items-center">
+                <section className="w-full pt-10 md:pt-16 flex flex-col items-center">
                     <div className="text-center space-y-1 z-10 mb-8 sm:mb-14">
                         <h2 className="text-xl sm:text-2xl font-black font-mono tracking-wider uppercase text-white">MISIONES_EJECUTADAS_</h2>
                         <p className="text-[10px] sm:text-[11px] text-neutral-600 font-mono">Bitácora de despliegues y experiencia móvil</p>
