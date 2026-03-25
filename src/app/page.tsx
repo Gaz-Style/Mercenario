@@ -133,10 +133,48 @@ export default function Home() {
                     </div>
                 </section>
 
-                {/* 1.5 INFINITE ADS LOGOS CAROUSEL (Minimalista / Foco de Luz) */}
-                <section className="w-full bg-[#000] border-y border-white/[0.02] overflow-hidden relative mt-8 md:mt-16 min-h-[100px] sm:min-h-[120px] flex items-center justify-center">
+                {/* 1.5 INFINITE ADS LOGOS CAROUSEL (Cilindro 3D + Glass Lujoso) */}
+                <section className="w-full bg-[#000] border-y border-white/[0.02] overflow-hidden relative mt-8 md:mt-16 min-h-[140px] sm:min-h-[160px] flex items-center justify-center">
 
-                    {/* Capa Única: Monocromática, enmascarada en el centro */}
+                    {/* Capa Trasera (Back): Gira al revés, más pequeña, desenfocada, gris oscura */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-40 blur-[2px] z-0">
+                        <div className="w-full scale-[0.65] sm:scale-[0.75] origin-center -translate-y-2 sm:-translate-y-4">
+                            <motion.div 
+                                className="flex flex-nowrap"
+                                animate={{ x: ["-50%", "0%"] }}
+                                transition={{ repeat: Infinity, ease: "linear", duration: 35 }}
+                            >
+                                <div className="flex gap-10 sm:gap-16 items-center flex-shrink-0 pr-10 sm:pr-16">
+                                    <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                    <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                    <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                    <img src="/imagenes/logotipo/linkedin.svg" alt="LinkedIn Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                    <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                    <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                    <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                    <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                    <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                    <img src="/imagenes/logotipo/anthropic-1.svg" alt="Anthropic" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                    <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                </div>
+                                <div className="flex gap-10 sm:gap-16 items-center flex-shrink-0 pr-10 sm:pr-16">
+                                    <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                    <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                    <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                    <img src="/imagenes/logotipo/linkedin.svg" alt="LinkedIn Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                    <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                    <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                    <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                    <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                    <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                    <img src="/imagenes/logotipo/anthropic-1.svg" alt="Anthropic" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                    <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-20" />
+                                </div>
+                            </motion.div>
+                        </div>
+                    </div>
+
+                    {/* Capa Frontal (Front): Cristales Oscuros brillantes, enmascarada en el centro */}
                     <div 
                         className="absolute inset-0 flex items-center overflow-hidden z-10"
                         style={{ maskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)' }}
@@ -146,38 +184,36 @@ export default function Home() {
                             animate={{ x: ["0%", "-50%"] }}
                             transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
                         >
-                            {/* Grupo 1 */}
-                            <div className="flex gap-10 sm:gap-16 items-center flex-shrink-0 pr-10 sm:pr-16">
-                                <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
-                                <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
-                                <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
-                                <img src="/imagenes/logotipo/linkedin.svg" alt="LinkedIn Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
-                                <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
-                                <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
-                                <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
-                                <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
-                                <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
-                                <img src="/imagenes/logotipo/anthropic-1.svg" alt="Anthropic" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
-                                <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                            <div className="flex gap-10 sm:gap-16 items-center flex-shrink-0 pr-10 sm:pr-16 filter drop-shadow-[0_0_15px_rgba(255,255,255,0.4)] drop-shadow-[0_-1px_1px_rgba(255,255,255,0.8)]">
+                                <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
+                                <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
+                                <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
+                                <img src="/imagenes/logotipo/linkedin.svg" alt="LinkedIn Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
+                                <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
+                                <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
+                                <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
+                                <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
+                                <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
+                                <img src="/imagenes/logotipo/anthropic-1.svg" alt="Anthropic" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
+                                <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
                             </div>
-                            {/* Grupo 2 (Clon) */}
-                            <div className="flex gap-10 sm:gap-16 items-center flex-shrink-0 pr-10 sm:pr-16">
-                                <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
-                                <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
-                                <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
-                                <img src="/imagenes/logotipo/linkedin.svg" alt="LinkedIn Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
-                                <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
-                                <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
-                                <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
-                                <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
-                                <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
-                                <img src="/imagenes/logotipo/anthropic-1.svg" alt="Anthropic" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
-                                <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                            <div className="flex gap-10 sm:gap-16 items-center flex-shrink-0 pr-10 sm:pr-16 filter drop-shadow-[0_0_15px_rgba(255,255,255,0.4)] drop-shadow-[0_-1px_1px_rgba(255,255,255,0.8)]">
+                                <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
+                                <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
+                                <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
+                                <img src="/imagenes/logotipo/linkedin.svg" alt="LinkedIn Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
+                                <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
+                                <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
+                                <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
+                                <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
+                                <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
+                                <img src="/imagenes/logotipo/anthropic-1.svg" alt="Anthropic" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
+                                <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-[0.35] hover:opacity-100 transition-opacity" />
                             </div>
                         </motion.div>
                     </div>
 
-                    {/* Gradientes puros a los bordes para ocultar el "corte" del carrusel */}
+                    {/* Gradientes puros a los bordes para ocultar el "corte" del cilindro y darle profundidad circular */}
                     <div className="absolute top-0 bottom-0 left-0 w-8 sm:w-32 bg-gradient-to-r from-black via-black/80 to-transparent z-20 pointer-events-none" />
                     <div className="absolute top-0 bottom-0 right-0 w-8 sm:w-32 bg-gradient-to-l from-black via-black/80 to-transparent z-20 pointer-events-none" />
                 </section>
