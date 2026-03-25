@@ -6,43 +6,6 @@ import { ArrowRight, Crosshair, Target, Cpu, MessageSquare, Database, ChevronRig
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 
-const TACTICAL_LOGOS = [
-    { src: "/imagenes/logotipo/google_ads.svg", alt: "Google Ads" },
-    { src: "/imagenes/logotipo/instagram.svg", alt: "Instagram Ads" },
-    { src: "/imagenes/logotipo/tiktok.svg", alt: "TikTok Ads" },
-    { src: "/imagenes/logotipo/linkedin.svg", alt: "LinkedIn Ads" },
-    { src: "/imagenes/logotipo/descarga (1).png", alt: "Meta Ads" },
-    { src: "/imagenes/logotipo/antigravity-color.png", alt: "Antigravity" },
-    { src: "/imagenes/logotipo/gemini_star.svg", alt: "Gemini" },
-    { src: "/imagenes/logotipo/DeepSeek.png", alt: "DeepSeek" },
-    { src: "/imagenes/logotipo/chat gpt.png", alt: "ChatGPT" },
-    { src: "/imagenes/logotipo/anthropic-1.svg", alt: "Anthropic" },
-    { src: "/imagenes/logotipo/whatsapp_business.svg", alt: "WhatsApp Business" },
-];
-
-const GlassOverlayLogo = ({ src, alt }: { src: string, alt: string }) => (
-    <div className="relative group w-[65px] h-[65px] sm:w-[85px] sm:h-[85px] p-[1.5px] rounded-[20px] shadow-[0_20px_40px_rgba(0,0,0,0.8)] transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_30px_50px_rgba(0,0,0,1)] cursor-pointer">
-        
-        {/* Chromatic Glass Rim (Simula aberración cromática en el borde biselado del cristal) */}
-        <div className="absolute inset-0 rounded-[20px] bg-[linear-gradient(225deg,rgba(255,255,255,0.5)_0%,rgba(255,255,255,0.1)_30%,rgba(255,0,128,0.6)_70%,rgba(0,255,255,0.8)_100%)] opacity-70 group-hover:opacity-100 transition-opacity duration-500 blur-[2px]" />
-        <div className="absolute inset-0 rounded-[20px] bg-[linear-gradient(225deg,rgba(255,255,255,0.8)_0%,rgba(255,255,255,0.1)_30%,rgba(255,0,128,0.8)_70%,rgba(0,255,255,1)_100%)]" />
-        
-        {/* Inner Black Glass Core */}
-        <div className="relative w-full h-full rounded-[18.5px] bg-gradient-to-br from-[#16161c] to-[#010101] flex items-center justify-center overflow-hidden shadow-[inset_0_0_20px_rgba(0,0,0,1),_inset_1px_1px_2px_rgba(255,255,255,0.1)]">
-            
-            {/* Thick Glass Specular Arch (Reflejo brillante curvo superior) */}
-            <div className="absolute -top-[20%] -left-[20%] w-[140%] h-[70%] bg-gradient-to-b from-white/[0.12] to-transparent rotate-[-15deg] pointer-events-none rounded-b-[40%]" />
-            
-            {/* 3D Embossed Logo (Relieve tallado en cristal) */}
-            <img 
-                src={src} 
-                alt={alt} 
-                className="w-8 h-8 sm:w-11 sm:h-11 object-contain transform-gpu grayscale brightness-0 invert opacity-[0.25] drop-shadow-[1px_1px_0px_rgba(255,255,255,0.7)] drop-shadow-[-1px_-1px_1px_rgba(0,0,0,0.9)] transition-all duration-500 group-hover:opacity-[0.5] group-hover:scale-110 group-hover:drop-shadow-[1px_1px_1px_rgba(255,255,255,0.9)] relative z-10" 
-            />
-        </div>
-    </div>
-);
-
 export default function Home() {
     const [currentProject, setCurrentProject] = useState(0);
     const [formData, setFormData] = useState({ name: "", email: "", challenge: "", budget: "" });
@@ -170,10 +133,10 @@ export default function Home() {
                     </div>
                 </section>
 
-                {/* 1.5 INFINITE ADS LOGOS CAROUSEL (Cilindro 3D + Glass Lujoso) */}
-                <section className="w-full bg-[#000] border-y border-white/[0.02] overflow-hidden relative mt-8 md:mt-16 min-h-[140px] sm:min-h-[160px] flex items-center justify-center">
+                {/* 1.5 INFINITE ADS LOGOS CAROUSEL (Minimalista / Foco de Luz) */}
+                <section className="w-full bg-[#000] border-y border-white/[0.02] overflow-hidden relative mt-8 md:mt-16 min-h-[100px] sm:min-h-[120px] flex items-center justify-center">
 
-                    {/* Capa Única Frontal: Cristales Oscuros brillantes, enmascarada en el centro */}
+                    {/* Capa Única: Monocromática, enmascarada en el centro */}
                     <div 
                         className="absolute inset-0 flex items-center overflow-hidden z-10"
                         style={{ maskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)' }}
@@ -184,17 +147,37 @@ export default function Home() {
                             transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
                         >
                             {/* Grupo 1 */}
-                            <div className="flex gap-4 sm:gap-6 items-center flex-shrink-0 pr-4 sm:pr-6 py-4">
-                                {TACTICAL_LOGOS.map((logo, idx) => <GlassOverlayLogo key={`g1-${idx}`} src={logo.src} alt={logo.alt} />)}
+                            <div className="flex gap-10 sm:gap-16 items-center flex-shrink-0 pr-10 sm:pr-16">
+                                <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                                <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                                <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                                <img src="/imagenes/logotipo/linkedin.svg" alt="LinkedIn Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                                <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                                <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                                <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                                <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                                <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                                <img src="/imagenes/logotipo/anthropic-1.svg" alt="Anthropic" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                                <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
                             </div>
                             {/* Grupo 2 (Clon) */}
-                            <div className="flex gap-4 sm:gap-6 items-center flex-shrink-0 pr-4 sm:pr-6 py-4">
-                                {TACTICAL_LOGOS.map((logo, idx) => <GlassOverlayLogo key={`g2-${idx}`} src={logo.src} alt={logo.alt} />)}
+                            <div className="flex gap-10 sm:gap-16 items-center flex-shrink-0 pr-10 sm:pr-16">
+                                <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                                <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                                <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                                <img src="/imagenes/logotipo/linkedin.svg" alt="LinkedIn Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                                <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                                <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                                <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                                <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                                <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                                <img src="/imagenes/logotipo/anthropic-1.svg" alt="Anthropic" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
+                                <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu grayscale brightness-0 invert opacity-30 hover:opacity-80 transition-opacity" />
                             </div>
                         </motion.div>
                     </div>
 
-                    {/* Gradientes puros a los bordes para ocultar el "corte" del cilindro y darle profundidad circular */}
+                    {/* Gradientes puros a los bordes para ocultar el "corte" del carrusel */}
                     <div className="absolute top-0 bottom-0 left-0 w-8 sm:w-32 bg-gradient-to-r from-black via-black/80 to-transparent z-20 pointer-events-none" />
                     <div className="absolute top-0 bottom-0 right-0 w-8 sm:w-32 bg-gradient-to-l from-black via-black/80 to-transparent z-20 pointer-events-none" />
                 </section>
