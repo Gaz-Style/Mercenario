@@ -150,21 +150,22 @@ export default function Home() {
                                     href={project.link}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="relative flex-shrink-0 w-[200px] sm:w-[260px] md:w-[300px] aspect-[9/16] rounded-xl overflow-hidden border border-white/[0.05] group/card hover:border-mercenario-danger/40 hover:shadow-[0_0_30px_rgba(255,17,34,0.15)] transition-all duration-500 cursor-pointer"
+                                    className="flex flex-col flex-shrink-0 w-[200px] sm:w-[260px] md:w-[300px] group/card cursor-pointer"
                                 >
-                                    <img src={project.image} alt={project.title} className="w-full h-full object-cover object-top opacity-70 group-hover/card:opacity-100 group-hover/card:scale-105 transition-all duration-700" />
+                                    {/* Imagen */}
+                                    <div className="relative w-full aspect-[9/16] rounded-xl overflow-hidden border border-white/[0.05] group-hover/card:border-mercenario-danger/40 group-hover/card:shadow-[0_0_30px_rgba(255,17,34,0.15)] transition-all duration-500 mb-4 sm:mb-5">
+                                        <img src={project.image} alt={project.title} className="w-full h-full object-cover object-top opacity-70 group-hover/card:opacity-100 group-hover/card:scale-105 transition-all duration-700" />
+                                        <div className="absolute inset-0 bg-[#010101]/20 group-hover/card:bg-transparent transition-colors duration-500 pointer-events-none" />
+                                    </div>
                                     
-                                    {/* Overlay con viñeta */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#010101] via-transparent to-transparent opacity-90 group-hover/card:opacity-100 transition-opacity duration-300" />
-                                    
-                                    {/* Contenido en hover */}
-                                    <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 flex flex-col justify-end translate-y-3 sm:translate-y-4 group-hover/card:translate-y-0 transition-transform duration-500">
-                                        <div className="flex justify-between items-end mb-1 sm:mb-2">
+                                    {/* Contenido (Info siempre visible abajo) */}
+                                    <div className="flex flex-col px-1">
+                                        <div className="flex justify-between items-start mb-1 sm:mb-2">
                                             <p className="text-[8px] sm:text-[9px] font-bold font-mono text-mercenario-danger tracking-widest uppercase">{project.cat}</p>
-                                            <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 text-white opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
+                                            <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 text-white opacity-50 group-hover/card:opacity-100 transition-opacity duration-300" />
                                         </div>
-                                        <h3 className="text-sm sm:text-base md:text-lg font-black font-mono text-white leading-tight">{project.title}_</h3>
-                                        <p className="text-[9px] sm:text-[10px] text-neutral-400 font-mono mt-1 sm:mt-2 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 line-clamp-2 sm:line-clamp-3">{project.desc}</p>
+                                        <h3 className="text-sm sm:text-base md:text-lg font-black font-mono text-white group-hover/card:text-mercenario-danger transition-colors duration-300 leading-tight">{project.title}_</h3>
+                                        <p className="text-[9px] sm:text-[10px] text-neutral-400 font-mono mt-1 sm:mt-2 line-clamp-2 sm:line-clamp-3">{project.desc}</p>
                                     </div>
                                 </a>
                             ))}
