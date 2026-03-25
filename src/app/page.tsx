@@ -8,10 +8,10 @@ export default function Home() {
     const [currentProject, setCurrentProject] = useState(0);
 
     const projects = [
-        { title: "NeuroV", cat: "Inteligencia Artificial & UX", desc: "SaaS médico automatizado para clínicas estéticas.", link: "https://neuro-v.vercel.app/", bg: "bg-neutral-950 border-mercenario-danger/20", image: "/imagenes/neurov_preview.png" },
-        { title: "SocialMotors", cat: "E-commerce & Estrategia", desc: "Plataforma de ventas y embudo de conversión automotriz.", link: "https://www.socialmotors.cl/", bg: "bg-neutral-950 border-white/[0.03]", image: "/imagenes/socialmotors_preview.png" },
-        { title: "Valet PRT", cat: "SaaS & Operaciones", desc: "Sistema de gestión y recepción automatizada de vehículos.", link: "https://socialmotors.cl/valet", bg: "bg-neutral-950 border-white/[0.03]", image: "/imagenes/valet_preview.png" },
-        { title: "PaseaLove", cat: "E-commerce & Servicios", desc: "Plataforma de reserva y cuidado de mascotas con rastreo.", link: "https://www.pasealove.cl/", bg: "bg-neutral-950 border-white/[0.03]", image: "/imagenes/pasealove_preview.png" }
+        { title: "NeuroV", cat: "Inteligencia Artificial & UX", desc: "SaaS médico automatizado para clínicas estéticas.", link: "https://neuro-v.vercel.app/", bg: "bg-neutral-950 border-mercenario-danger/20", image: "/imagenes/ejecutados/neuroV.jpeg" },
+        { title: "SocialMotors", cat: "E-commerce & Estrategia", desc: "Plataforma de ventas y embudo de conversión automotriz.", link: "https://www.socialmotors.cl/", bg: "bg-neutral-950 border-white/[0.03]", image: "/imagenes/ejecutados/socialmotors.jpeg" },
+        { title: "Valet PRT", cat: "SaaS & Operaciones", desc: "Sistema de gestión y recepción automatizada de vehículos.", link: "https://socialmotors.cl/valet", bg: "bg-neutral-950 border-white/[0.03]", image: "/imagenes/ejecutados/valetPRT.jpeg" },
+        { title: "PaseaLove", cat: "E-commerce & Servicios", desc: "Plataforma de reserva y cuidado de mascotas con rastreo.", link: "https://www.pasealove.cl/", bg: "bg-neutral-950 border-white/[0.03]", image: "/imagenes/ejecutados/PaseaLove.jpeg" }
     ];
 
     useEffect(() => {
@@ -82,69 +82,53 @@ export default function Home() {
                     </div>
                 </section>
 
-                {/* 2. PROYECTOS DESTACADOS - GALERÍA VISUAL */}
-                <section className="w-full space-y-12 pt-28 md:pt-40">
-                    <div className="text-center space-y-1">
+                {/* 2. PROYECTOS DESTACADOS - CARRUSEL INFINITO FORMATO MÓVIL */}
+                <section className="w-full pt-28 md:pt-40 flex flex-col items-center">
+                    <div className="text-center space-y-1 z-10 mb-8 sm:mb-14">
                         <h2 className="text-xl sm:text-2xl font-black font-mono tracking-wider uppercase text-white">MISIONES_EJECUTADAS_</h2>
-                        <p className="text-[10px] sm:text-[11px] text-neutral-600 font-mono">Bitácora de despliegues y arquitectura de software de alto rendimiento</p>
+                        <p className="text-[10px] sm:text-[11px] text-neutral-600 font-mono">Bitácora de despliegues y experiencia móvil</p>
                     </div>
 
-                    <div className="relative w-full max-w-4xl mx-auto group">
-                        <AnimatePresence mode="wait">
-                            <motion.div 
-                                key={currentProject}
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -10 }}
-                                transition={{ duration: 0.4, ease: "easeInOut" }}
-                                className="w-full flex flex-col space-y-4"
-                            >
-                                {/* 1. IMAGE BOX */}
+                    <div className="relative w-full flex overflow-hidden border-y border-white/[0.02] bg-[#020202]/50 py-10">
+                        {/* Gradientes laterales para difuminar */}
+                        <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-48 bg-gradient-to-r from-[#010101] to-transparent z-20 pointer-events-none" />
+                        <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-48 bg-gradient-to-l from-[#010101] to-transparent z-20 pointer-events-none" />
+
+                        <motion.div 
+                            className="flex gap-4 sm:gap-8 px-4"
+                            animate={{ x: ["0%", "-50%"] }}
+                            transition={{
+                                ease: "linear",
+                                duration: 40,
+                                repeat: Infinity
+                            }}
+                        >
+                            {/* Repetimos 4 veces para asegurar un loop continuo sin saltos */}
+                            {[...projects, ...projects, ...projects, ...projects].map((project, idx) => (
                                 <a 
-                                    href={projects[currentProject].link} 
-                                    target="_blank" 
-                                    rel="noopener noreferrer" 
-                                    className="relative w-full aspect-[16/9] overflow-hidden rounded-xl border border-white/[0.03] cursor-pointer block group"
+                                    key={idx}
+                                    href={project.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="relative flex-shrink-0 w-[200px] sm:w-[260px] md:w-[300px] aspect-[9/16] rounded-xl overflow-hidden border border-white/[0.05] group/card hover:border-mercenario-danger/40 hover:shadow-[0_0_30px_rgba(255,17,34,0.15)] transition-all duration-500 cursor-pointer"
                                 >
-                                    {projects[currentProject].image ? (
-                                        <div className="absolute inset-0">
-                                            <img src={projects[currentProject].image} alt={projects[currentProject].title} className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" />
-                                            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#010101]/20" />
+                                    <img src={project.image} alt={project.title} className="w-full h-full object-cover object-top opacity-70 group-hover/card:opacity-100 group-hover/card:scale-105 transition-all duration-700" />
+                                    
+                                    {/* Overlay con viñeta */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-[#010101] via-transparent to-transparent opacity-90 group-hover/card:opacity-100 transition-opacity duration-300" />
+                                    
+                                    {/* Contenido en hover */}
+                                    <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 flex flex-col justify-end translate-y-3 sm:translate-y-4 group-hover/card:translate-y-0 transition-transform duration-500">
+                                        <div className="flex justify-between items-end mb-1 sm:mb-2">
+                                            <p className="text-[8px] sm:text-[9px] font-bold font-mono text-mercenario-danger tracking-widest uppercase">{project.cat}</p>
+                                            <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 text-white opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
                                         </div>
-                                    ) : (
-                                        <div className="absolute inset-0 bg-neutral-1000 border-white/[0.03]" />
-                                    )}
-                                </a>
-
-                                {/* 2. INFO DESCRIPTION OUTSIDE */}
-                                <div className="px-1 py-1 flex justify-between items-start w-full">
-                                    <div className="space-y-1">
-                                        <p className="text-[10px] font-bold font-mono text-mercenario-danger tracking-widest uppercase">{projects[currentProject].cat}</p>
-                                        <h3 className="text-sm sm:text-base md:text-lg font-black font-mono text-white group-hover:text-mercenario-danger transition-colors">{projects[currentProject].title}_</h3>
-                                        <p className="text-[10px] sm:text-sm text-neutral-400 font-mono leading-relaxed max-w-2xl mt-1">{projects[currentProject].desc}</p>
+                                        <h3 className="text-sm sm:text-base md:text-lg font-black font-mono text-white leading-tight">{project.title}_</h3>
+                                        <p className="text-[9px] sm:text-[10px] text-neutral-400 font-mono mt-1 sm:mt-2 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 line-clamp-2 sm:line-clamp-3">{project.desc}</p>
                                     </div>
-                                    <a 
-                                        href={projects[currentProject].link} 
-                                        target="_blank" 
-                                        rel="noopener noreferrer" 
-                                        className="p-1.5 bg-white text-black rounded hover:bg-mercenario-danger hover:text-white transition-colors duration-300 flex-shrink-0"
-                                    >
-                                        <ExternalLink className="w-4 h-4" />
-                                    </a>
-                                </div>
-                            </motion.div>
-                        </AnimatePresence>
-
-                        {/* Pagination Dots (Positioned under info) */}
-                        <div className="flex gap-2 justify-center mt-3 z-20">
-                            {projects.map((_, dotIdx) => (
-                                <button 
-                                    key={dotIdx} 
-                                    onClick={(e) => { e.preventDefault(); setCurrentProject(dotIdx); }} 
-                                    className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${dotIdx === currentProject ? 'bg-mercenario-danger w-4' : 'bg-white/20'}`} 
-                                />
+                                </a>
                             ))}
-                        </div>
+                        </motion.div>
                     </div>
                 </section>
                              {/* 2.5 INFINITE ADS LOGOS CAROUSEL */}
