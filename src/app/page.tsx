@@ -87,23 +87,25 @@ export default function Home() {
             </div>
             */}
 
-            {/* Header / Navbar */}
-            <header className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-6 flex justify-between items-center z-50 border-b border-white/[0.03]">
-                <div className="flex items-center gap-1.5">
-                    <Crosshair className="w-5 h-5 text-mercenario-danger animate-pulse" />
-                    <span className="text-sm font-black font-mono tracking-wider text-white uppercase flex items-center gap-1">
-                        MERCENARIO <span className="text-gray-600 hidden sm:inline">|</span> <span className="text-[9px] text-gray-400 font-normal hidden sm:inline">OPERACIONES_</span>
-                    </span>
+            {/* Header / Navbar (Sticky Glassmorphism) */}
+            <header className="fixed top-0 inset-x-0 w-full z-[100] border-b border-white/[0.05] bg-[#010101]/60 backdrop-blur-xl">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+                    <div className="flex items-center gap-1.5">
+                        <Crosshair className="w-5 h-5 text-mercenario-danger animate-pulse" />
+                        <span className="text-sm font-black font-mono tracking-wider text-white uppercase flex items-center gap-1">
+                            MERCENARIO <span className="text-gray-600 hidden sm:inline">|</span> <span className="text-[9px] text-gray-400 font-normal hidden sm:inline">OPERACIONES_</span>
+                        </span>
+                    </div>
+                    <a 
+                        href="#contacto" 
+                        className="px-4 py-2 border border-white/10 hover:border-mercenario-danger/40 text-white font-bold text-[9px] sm:text-[10px] uppercase tracking-widest rounded hover:bg-white/5 transition-all duration-300 font-mono"
+                    >
+                        CONTACTO_
+                    </a>
                 </div>
-                <a 
-                    href="#contacto" 
-                    className="px-4 py-2 border border-white/10 hover:border-mercenario-danger/40 text-white font-bold text-[9px] sm:text-[10px] uppercase tracking-widest rounded hover:bg-white/5 transition-all duration-300 font-mono"
-                >
-                    CONTACTO_
-                </a>
             </header>
 
-            <main className="w-full max-w-6xl mx-auto px-4 sm:px-6 pb-32 z-10 flex flex-col items-center">
+            <main className="w-full max-w-6xl mx-auto px-4 sm:px-6 pt-24 sm:pt-28 pb-32 z-10 flex flex-col items-center">
 
                 {/* 1. HERO - IMPACTO TÁCTICO */}
                 <section className="text-center max-w-3xl pt-14 md:pt-24 pb-16 space-y-5 flex flex-col items-center relative w-full rounded-2xl overflow-hidden mt-6 border border-white/[0.03]">
