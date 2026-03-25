@@ -21,15 +21,25 @@ const TACTICAL_LOGOS = [
 ];
 
 const GlassOverlayLogo = ({ src, alt }: { src: string, alt: string }) => (
-    <div className="relative group w-[55px] h-[55px] sm:w-[75px] sm:h-[75px] flex flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#1a1a24] to-[#010101] border border-white/5 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.15),_inset_-1px_-1px_3px_rgba(0,0,0,0.8),_0_10px_20px_rgba(0,0,0,0.8)] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(255,17,34,0.1)] cursor-pointer">
-        {/* Specular Top Reflection */}
-        <div className="absolute top-0 left-0 w-full h-[45%] bg-gradient-to-b from-white/[0.08] to-transparent pointer-events-none" />
-        {/* Embossed Logo treatment */}
-        <img 
-            src={src} 
-            alt={alt} 
-            className="w-7 h-7 sm:w-9 sm:h-9 object-contain transform-gpu grayscale brightness-0 opacity-40 drop-shadow-[-1px_-1px_0px_rgba(255,255,255,0.4)] drop-shadow-[1px_1px_2px_rgba(0,0,0,0.8)] transition-all duration-500 group-hover:opacity-[0.85] group-hover:scale-110 relative z-10" 
-        />
+    <div className="relative group w-[65px] h-[65px] sm:w-[85px] sm:h-[85px] p-[1.5px] rounded-[20px] shadow-[0_20px_40px_rgba(0,0,0,0.8)] transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_30px_50px_rgba(0,0,0,1)] cursor-pointer">
+        
+        {/* Chromatic Glass Rim (Simula aberración cromática en el borde biselado del cristal) */}
+        <div className="absolute inset-0 rounded-[20px] bg-[linear-gradient(225deg,rgba(255,255,255,0.5)_0%,rgba(255,255,255,0.1)_30%,rgba(255,0,128,0.6)_70%,rgba(0,255,255,0.8)_100%)] opacity-70 group-hover:opacity-100 transition-opacity duration-500 blur-[2px]" />
+        <div className="absolute inset-0 rounded-[20px] bg-[linear-gradient(225deg,rgba(255,255,255,0.8)_0%,rgba(255,255,255,0.1)_30%,rgba(255,0,128,0.8)_70%,rgba(0,255,255,1)_100%)]" />
+        
+        {/* Inner Black Glass Core */}
+        <div className="relative w-full h-full rounded-[18.5px] bg-gradient-to-br from-[#16161c] to-[#010101] flex items-center justify-center overflow-hidden shadow-[inset_0_0_20px_rgba(0,0,0,1),_inset_1px_1px_2px_rgba(255,255,255,0.1)]">
+            
+            {/* Thick Glass Specular Arch (Reflejo brillante curvo superior) */}
+            <div className="absolute -top-[20%] -left-[20%] w-[140%] h-[70%] bg-gradient-to-b from-white/[0.12] to-transparent rotate-[-15deg] pointer-events-none rounded-b-[40%]" />
+            
+            {/* 3D Embossed Logo (Relieve tallado en cristal) */}
+            <img 
+                src={src} 
+                alt={alt} 
+                className="w-8 h-8 sm:w-11 sm:h-11 object-contain transform-gpu grayscale brightness-0 invert opacity-[0.25] drop-shadow-[1px_1px_0px_rgba(255,255,255,0.7)] drop-shadow-[-1px_-1px_1px_rgba(0,0,0,0.9)] transition-all duration-500 group-hover:opacity-[0.5] group-hover:scale-110 group-hover:drop-shadow-[1px_1px_1px_rgba(255,255,255,0.9)] relative z-10" 
+            />
+        </div>
     </div>
 );
 
