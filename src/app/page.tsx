@@ -75,7 +75,7 @@ export default function Home() {
             {/* Ambient Tactical Lights */}
             <div className="absolute top-[-10%] left-[50%] translate-x-[-50%] w-[1000px] h-[350px] bg-mercenario-danger/5 blur-[120px] rounded-full pointer-events-none -z-10" />
 
-            {/* Float CTA Button */}
+            {/* Float CTA Button (Oculto temporalmente)
             <div className="fixed bottom-6 right-6 z-50">
                 <a 
                     href="#contacto" 
@@ -85,6 +85,7 @@ export default function Home() {
                     Iniciar Auditoría_
                 </a>
             </div>
+            */}
 
             {/* Header / Navbar */}
             <header className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-6 flex justify-between items-center z-50 border-b border-white/[0.03]">
