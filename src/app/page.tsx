@@ -124,12 +124,12 @@ export default function Home() {
 
                 {/* 2. PROYECTOS DESTACADOS - CARRUSEL INFINITO FORMATO MÓVIL */}
                 <section className="w-full pt-10 md:pt-16 flex flex-col items-center">
-                    <div className="text-center space-y-1 z-10 mb-8 sm:mb-14">
+                    <div className="text-center space-y-1 z-10 mb-4 sm:mb-8">
                         <h2 className="text-xl sm:text-2xl font-black font-mono tracking-wider uppercase text-white">MISIONES_EJECUTADAS_</h2>
                         <p className="text-[10px] sm:text-[11px] text-neutral-600 font-mono">Bitácora de despliegues y experiencia móvil</p>
                     </div>
 
-                    <div className="relative w-full flex overflow-hidden border-y border-white/[0.02] bg-[#020202]/50 py-10">
+                    <div className="relative w-full flex overflow-hidden border-y border-white/[0.02] bg-[#020202]/50 py-4 sm:py-10">
                         {/* Gradientes laterales para difuminar */}
                         <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-48 bg-gradient-to-r from-[#010101] to-transparent z-20 pointer-events-none" />
                         <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-48 bg-gradient-to-l from-[#010101] to-transparent z-20 pointer-events-none" />
