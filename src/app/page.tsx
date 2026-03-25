@@ -151,8 +151,9 @@ export default function Home() {
 
                 {/* 1.7 PROTOCOLO Y ESCALA CLASIFICADA (Manifiesto) */}
                 <section className="w-full max-w-4xl mx-auto px-6 py-16 md:py-24 text-center space-y-6">
-                    <div className="inline-block border border-mercenario-danger/30 bg-mercenario-danger/5 px-4 py-1.5 rounded-full mb-2">
-                        <span className="text-[9px] font-mono text-mercenario-danger font-bold uppercase tracking-[0.2em]">Acceso Restringido</span>
+                    <div className="inline-flex items-center gap-2 border border-mercenario-danger/30 bg-mercenario-danger/10 px-3 py-1 rounded-full mb-2">
+                        <div className="w-2 h-2 rounded-full bg-mercenario-danger animate-pulse"></div>
+                        <span className="text-[10px] font-mono text-mercenario-danger uppercase tracking-widest font-bold">Acceso Restringido</span>
                     </div>
                     <h2 className="text-2xl md:text-4xl font-black font-mono uppercase text-white leading-tight">No somos una agencia creativa.<br/>Somos una <span className="text-mercenario-danger">fuerza de escalabilidad</span>.</h2>
                     <p className="font-mono text-sm md:text-base text-neutral-400 max-w-2xl mx-auto leading-relaxed">
