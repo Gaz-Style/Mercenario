@@ -109,18 +109,6 @@ export default function Home() {
                         </a>
                     </div>
                 </section>
-
-                {/* 1.5 INFINITE ADS LOGOS CAROUSEL */}
-                <section className="w-full overflow-hidden py-8 bg-[#020202]/30 flex mt-12 mb-6">
-                    <motion.div 
-                        className="flex flex-nowrap"
-                        animate={{ x: ["0%", "-50%"] }}
-                        transition={{
-                            ease: "linear",
-                            duration: 25,
-                            repeat: Infinity
-                        }}
-                    >
                         <div className="flex gap-16 items-center flex-shrink-0 pr-16">
                             <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain" />
                             <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain" />
