@@ -154,9 +154,9 @@ export default function Home() {
                     <div className="inline-block border border-mercenario-danger/30 bg-mercenario-danger/5 px-4 py-1.5 rounded-full mb-2">
                         <span className="text-[9px] font-mono text-mercenario-danger font-bold uppercase tracking-[0.2em]">Acceso Restringido</span>
                     </div>
-                    <h2 className="text-2xl md:text-4xl font-black font-mono uppercase text-white leading-tight">Creatividad estratega.<br/>Ejecución <span className="text-mercenario-danger">quirúrgica</span>.</h2>
+                    <h2 className="text-2xl md:text-4xl font-black font-mono uppercase text-white leading-tight">No somos una agencia creativa.<br/>Somos una <span className="text-mercenario-danger">fuerza de escalabilidad</span>.</h2>
                     <p className="font-mono text-sm md:text-base text-neutral-400 max-w-2xl mx-auto leading-relaxed">
-                        Nuestro escuadrón fusiona diseño disruptivo con infraestructura técnica y pauta de respuesta directa. No creamos solo campañas "bonitas"; desplegamos activos creativos de alto impacto diseñados matemáticamente para posicionar tu marca y multiplicar tu facturación.
+                        Solo aceptamos proyectos donde exista viabilidad matemática y técnica para multiplicar tu facturación. Diseñamos infraestructura, inyectamos tráfico cualificado y automatizamos el cierre de ventas bajo un protocolo de ejecución hiper-rentable.
                     </p>
                 </section>
 
