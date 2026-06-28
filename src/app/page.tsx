@@ -74,7 +74,7 @@ export default function Home() {
                     <div className="flex items-center gap-1.5">
                         <Crosshair className="w-5 h-5 text-mercenario-danger animate-pulse" />
                         <span className="text-sm font-black font-mono tracking-wider text-white uppercase flex items-center gap-1">
-                            MERCENARIO <span className="text-gray-600">|</span> <span className="text-[9px] text-gray-400 font-normal">INTELLIGENT OS_</span>
+                            MERCENARIO <span className="text-gray-600">|</span> <span className="text-[9px] text-gray-400 font-normal">INFRASTRUCTURE_</span>
                         </span>
                     </div>
                     <Link href="#contacto" className="px-4 py-2 bg-mercenario-danger text-white font-bold text-[9px] sm:text-[10px] uppercase tracking-widest rounded hover:bg-red-700 transition-all duration-300 font-mono">
@@ -85,13 +85,13 @@ export default function Home() {
 
             <main className="w-full max-w-6xl mx-auto px-4 sm:px-6 pt-24 sm:pt-28 pb-32 z-10 flex flex-col items-center">
 
-                {/* HERO - NIVEL 1 */}
+                {/* 1. HERO - LA PROMESA */}
                 <section className="text-center max-w-4xl pt-14 md:pt-24 pb-16 space-y-5 flex flex-col items-center relative w-full rounded-2xl overflow-hidden mt-6 border border-white/[0.03]">
                     <video ref={videoRef} src="/imagenes/Bala_Rodando_Sobre_Mesa_Oscura.mp4" autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover scale-[1.20] translate-x-[4%] opacity-40 -z-10" />
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#010101]/60 to-[#010101] -z-10" />
 
                     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="inline-flex items-center gap-1.5 border border-mercenario-danger/30 px-4 py-1.5 bg-mercenario-danger/10 rounded text-[10px] sm:text-[11px] font-bold text-mercenario-danger tracking-widest uppercase mb-2 font-mono relative z-10">
-                        | SISTEMA OPERATIVO INTELIGENTE DE NEGOCIOS |
+                        | CATEGORÍA: INFRAESTRUCTURA OPERATIVA |
                     </motion.div>
 
                     <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter leading-[1.05] text-white font-mono uppercase z-10 mt-10">
@@ -100,7 +100,7 @@ export default function Home() {
                     </h1>
 
                     <p className="text-neutral-400 text-sm max-w-2xl mx-auto leading-relaxed px-2 font-mono z-10 mt-6">
-                        Una sola plataforma. Un solo flujo de datos. Una sola fuente de verdad. Centralizamos toda tu operación, ventas, finanzas e inteligencia artificial sobre un único núcleo operativo estable y escalable: Mercenario OS.
+                        Una sola plataforma. Un solo flujo de datos. Una sola fuente de verdad. Centralizamos toda tu operación, ventas, finanzas e inteligencia artificial sobre un único núcleo operativo estable y escalable.
                     </p>
 
                     <div className="pt-6 z-10">
@@ -111,124 +111,61 @@ export default function Home() {
                     </div>
                 </section>
 
-                {/* 3D LOGO CAROUSEL - NIVEL 4 (HERRAMIENTAS E INTEGRACIONES) */}
-                <section className="w-full bg-[#000] border-y border-white/[0.02] overflow-hidden relative mt-8 md:mt-16 min-h-[140px] sm:min-h-[160px] flex items-center justify-center">
-                    <div className="absolute inset-0 flex items-center justify-center opacity-30 grayscale blur-[1px]">
-                        <div className="w-full scale-[0.65] sm:scale-[0.75] origin-center -translate-y-2 sm:-translate-y-4">
-                            <motion.div 
-                                className="flex flex-nowrap"
-                                animate={{ x: ["-50%", "0%"] }}
-                                transition={{ repeat: Infinity, ease: "linear", duration: 35 }}
-                            >
-                                <div className="flex gap-10 sm:gap-16 items-center flex-shrink-0 pr-10 sm:pr-16">
-                                    <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                    <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                    <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                    <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                    <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                    <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                    <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                    <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                    <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                </div>
-                                <div className="flex gap-10 sm:gap-16 items-center flex-shrink-0 pr-10 sm:pr-16">
-                                    <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                    <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                    <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                    <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                    <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                    <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                    <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                    <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                    <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                </div>
-                            </motion.div>
+                {/* 2. EL PROBLEMA & 3. LA SOLUCIÓN */}
+                <section className="w-full max-w-4xl mx-auto px-6 py-16 md:py-24 space-y-16">
+                    <div className="text-center space-y-6">
+                        <div className="inline-flex items-center justify-center p-3 rounded-full bg-neutral-900/50 border border-neutral-800 mb-2">
+                            <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest font-bold">El Problema</span>
                         </div>
+                        <h2 className="text-2xl md:text-4xl font-black font-mono uppercase text-white leading-tight">
+                            Las empresas no fallan por falta de software.
+                        </h2>
+                        <p className="font-mono text-sm text-neutral-400 max-w-3xl mx-auto leading-relaxed">
+                            Fallan porque cada área opera sobre sistemas distintos. Durante años, la solución fue comprar más aplicaciones: un CRM para vender, un ERP para administrar, otro sistema para facturar y otro para automatizar. El resultado nunca fue una empresa más eficiente; fue una empresa más compleja, donde los datos se duplican, las decisiones llegan tarde y la operación pierde sincronía.
+                        </p>
                     </div>
 
-                    <div 
-                        className="absolute inset-0 flex items-center overflow-hidden z-10"
-                        style={{ maskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)' }}
-                    >
-                        <motion.div 
-                            className="flex flex-nowrap"
-                            animate={{ x: ["0%", "-50%"] }}
-                            transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
-                        >
-                            <div className="flex gap-10 sm:gap-16 items-center flex-shrink-0 pr-10 sm:pr-16 filter drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-                                <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                            </div>
-                            <div className="flex gap-10 sm:gap-16 items-center flex-shrink-0 pr-10 sm:pr-16 filter drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-                                <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                                <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
-                            </div>
-                        </motion.div>
+                    <div className="text-center space-y-6 pt-10 border-t border-white/[0.03]">
+                        <div className="inline-flex items-center gap-2 border border-mercenario-danger/30 bg-mercenario-danger/10 px-3 py-1 rounded-full mb-2">
+                            <div className="w-2 h-2 rounded-full bg-mercenario-danger animate-pulse"></div>
+                            <span className="text-[10px] font-mono text-mercenario-danger uppercase tracking-widest font-bold">La Solución</span>
+                        </div>
+                        <h2 className="text-2xl md:text-4xl font-black font-mono uppercase text-mercenario-danger leading-tight">
+                            Mercenario OS.
+                        </h2>
+                        <p className="font-mono text-sm text-white max-w-3xl mx-auto leading-relaxed">
+                            Un único núcleo operativo. Mercenario no es otro software, ni desarrollamos aplicaciones aisladas. Construimos y configuramos la infraestructura operativa central de tu empresa, unificando clientes, finanzas, automatización e inteligencia artificial sobre un mismo flujo.
+                        </p>
                     </div>
-
-                    <div className="absolute top-0 bottom-0 left-0 w-8 sm:w-32 bg-gradient-to-r from-black via-black/80 to-transparent z-20 pointer-events-none" />
-                    <div className="absolute top-0 bottom-0 right-0 w-8 sm:w-32 bg-gradient-to-l from-black via-black/80 to-transparent z-20 pointer-events-none" />
                 </section>
 
-                {/* EL MANIFIESTO OPERATIVO - NIVEL 1.5 */}
-                <section className="w-full max-w-4xl mx-auto px-6 py-16 md:py-24 text-center space-y-6">
-                    <div className="inline-flex items-center gap-2 border border-mercenario-danger/30 bg-mercenario-danger/10 px-3 py-1 rounded-full mb-2">
-                        <div className="w-2 h-2 rounded-full bg-mercenario-danger animate-pulse"></div>
-                        <span className="text-[10px] font-mono text-mercenario-danger uppercase tracking-widest font-bold">Mercenario iOS</span>
-                    </div>
-                    <h2 className="text-2xl md:text-4xl font-black font-mono uppercase text-white leading-tight">
-                        Mercenario no es otro software.
-                    </h2>
-                    <p className="font-mono text-xs sm:text-sm text-neutral-400 max-w-3xl mx-auto leading-relaxed space-y-4">
-                        Las empresas no dejan de crecer porque les falten herramientas. Dejan de crecer porque cada área trabaja sobre sistemas distintos, los datos se duplican, las decisiones llegan tarde y la operación pierde sincronía.
-                        <br /><br />
-                        Durante años, la solución fue comprar más software. Un CRM para vender. Un ERP para administrar. Un sistema para facturar. Otro para automatizar. El resultado nunca fue una empresa más eficiente; fue una empresa más compleja.
-                        <br /><br />
-                        Mercenario iOS nace para cambiar ese paradigma. No construimos aplicaciones aisladas ni integraciones frágiles. Construimos la infraestructura donde opera tu empresa, unificando clientes, finanzas, automatización e inteligencia artificial sobre un único núcleo operativo estable.
-                    </p>
-                </section>
-
-                {/* LAS 7 CAPAS DEL SISTEMA - NIVEL 2 & 3 */}
+                {/* 4. LA ARQUITECTURA (LAS 7 CAPAS DEL SISTEMA) */}
                 <section className="w-full mt-12 space-y-16">
                     <div className="text-center space-y-2">
-                        <h2 className="text-2xl md:text-4xl font-black font-mono tracking-wider uppercase text-white">LAS 7 CAPAS OPERATIVAS_</h2>
+                        <h2 className="text-2xl md:text-4xl font-black font-mono tracking-wider uppercase text-white">LA ARQUITECTURA_</h2>
                         <p className="text-xs sm:text-sm text-neutral-400 font-mono max-w-2xl mx-auto">
-                            Toda empresa que escala necesita siete sistemas fundamentales trabajando sincronizados como un solo ecosistema.
+                            Toda empresa que escala necesita siete capacidades fundamentales trabajando sincronizadas como un solo sistema.
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                         {[
                             { 
-                                n: "01", title: "Adquisición (Capa de Crecimiento)", 
+                                n: "01", title: "Adquisición (Capa Comercial)", 
                                 icon: TrendingUp,
-                                content: "SEO local, pauta en Meta/Google, embudos de conversión y campañas de referidos integradas.",
+                                content: "SEO local, pauta publicitaria en Meta/Google, embudos de conversión y campañas integradas.",
                                 purpose: "Generar demanda predecible y atraer prospectos calificados directo al núcleo." 
                             },
                             { 
                                 n: "02", title: "Inteligencia (Capa Autónoma)", 
                                 icon: Cpu,
-                                content: "Agentes autónomos de atención en WhatsApp y flujos de pre-calificación basados en IA.",
-                                purpose: "Responder al instante, pre-calificar prospectos e inyectar leads listos al CRM sin intervención humana." 
+                                content: "Agentes autónomos en WhatsApp y flujos de pre-calificación basados en IA.",
+                                purpose: "Responder al instante, calificar prospectos e inyectar leads listos al CRM sin intervención humana." 
                             },
                             { 
                                 n: "03", title: "Operación (Capa de Datos Central)", 
                                 icon: Database,
-                                content: "Ficha única digital de clientes, control de inventarios, gestión de proyectos e historial unificado.",
+                                content: "Ficha única digital de clientes, inventarios, gestión de proyectos e historial unificado.",
                                 purpose: "Centralizar la información operativa para eliminar silos de datos y duplicidad de tareas." 
                             },
                             { 
@@ -240,13 +177,13 @@ export default function Home() {
                             { 
                                 n: "05", title: "Finanzas (Capa Transaccional)", 
                                 icon: CreditCard,
-                                content: "Integración directa de facturación SII, pasarelas de pago (Stripe/Transbank) y links de cobro.",
+                                content: "Integración directa de facturación (SII), pasarelas de pago y links de cobro automatizados.",
                                 purpose: "Cobrar sin fricciones y asegurar que toda transacción emita la documentación legal de inmediato." 
                             },
                             { 
                                 n: "06", title: "Inteligencia de Negocio (Capa Analítica)", 
                                 icon: BarChart3,
-                                content: "Dashboards unificados en tiempo real, métricas de rendimiento y conversión del equipo.",
+                                content: "Dashboards unificados en tiempo real, KPIs y métricas de rendimiento del equipo.",
                                 purpose: "Visualizar el comportamiento de tu negocio de forma consolidada desde cualquier dispositivo." 
                             },
                         ].map((pilar, i) => (
@@ -283,7 +220,7 @@ export default function Home() {
                         <div className="flex-1 space-y-3 w-full">
                             <div className="border-b border-emerald-500/20 pb-3">
                                 <span className="text-xs font-black font-mono text-emerald-500/30 block">07_</span>
-                                <h3 className="font-mono font-bold text-emerald-500 uppercase text-lg">Dirección (Capa de Control Gerencial / P&L)</h3>
+                                <h3 className="font-mono font-bold text-emerald-500 uppercase text-lg">Dirección (Capa de Control Gerencial)</h3>
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
                                 <div>
@@ -292,51 +229,136 @@ export default function Home() {
                                 </div>
                                 <div>
                                     <p className="text-[9px] text-emerald-500 font-bold uppercase tracking-widest mb-1">Impacto:</p>
-                                    <p className="font-mono text-xs text-neutral-300 leading-relaxed">Entregar visibilidad absoluta del negocio al tomador de decisiones para guiar el crecimiento con datos reales.</p>
+                                    <p className="font-mono text-xs text-neutral-300 leading-relaxed">Entregar visibilidad absoluta del negocio al tomador de decisiones para guiar la escalabilidad con datos reales.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                {/* CONFIGURACIONES OPERATIVAS - NIVEL 3 */}
+                {/* 5. LAS CONFIGURACIONES (POR INDUSTRIA) */}
                 <section className="w-full mt-32 space-y-12">
                     <div className="text-center space-y-2">
-                        <h2 className="text-2xl md:text-3xl font-black font-mono tracking-wider uppercase text-white">¿CÓMO OPERA TU EMPRESA?_</h2>
+                        <h2 className="text-2xl md:text-3xl font-black font-mono tracking-wider uppercase text-white">¿CÓMO SE ADAPTA A TI?_</h2>
                         <p className="text-xs text-neutral-500 font-mono max-w-2xl mx-auto">
-                            Una sola infraestructura. Múltiples operaciones. Activamos configuraciones (Stacks) prediseñadas sobre el mismo núcleo de Mercenario iOS para tu modelo de negocio.
+                            Una sola infraestructura. Múltiples operaciones. Activamos configuraciones prediseñadas sobre el mismo núcleo de Mercenario OS según tu modelo de negocio.
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                         {[
-                            { icon: Activity, color: "text-blue-500", bg: "bg-blue-500/5", hover: "group-hover:bg-blue-500/10", borderHover: "hover:border-blue-500/50", title: "Health Stack", desc: "Configuración para salud. Agendamiento, fichas clínicas integradas e historial médico digital.", os: "HEALTH OS" },
-                            { icon: ShoppingCart, color: "text-purple-500", bg: "bg-purple-500/5", hover: "group-hover:bg-purple-500/10", borderHover: "hover:border-purple-500/50", title: "Commerce Stack", desc: "Configuración comercial. Control de omni-inventarios, POS físico y boleta SII automatizada.", os: "COMMERCE OS" },
-                            { icon: Truck, color: "text-emerald-500", bg: "bg-emerald-500/5", hover: "group-hover:bg-emerald-500/10", borderHover: "hover:border-emerald-500/50", title: "Field Stack", desc: "Configuración operativa móvil. Hojas de ruta, firma digital en terreno y control logístico.", os: "FIELD OS" },
-                            { icon: Coffee, color: "text-orange-500", bg: "bg-orange-500/5", hover: "group-hover:bg-orange-500/10", borderHover: "hover:border-orange-500/50", title: "Gastro Stack", desc: "Configuración para gastronomía. Comandas digitales, control de mesas y POS integrado.", os: "GASTRO OS" },
-                            { icon: Dog, color: "text-teal-500", bg: "bg-teal-500/5", hover: "group-hover:bg-teal-500/10", borderHover: "hover:border-teal-500/50", title: "Pet Stack", desc: "Configuración veterinaria. Agenda de control, ficha única por mascota y recordatorios inteligentes.", os: "PET OS" },
-                            { icon: Dumbbell, color: "text-red-500", bg: "bg-red-500/5", hover: "group-hover:bg-red-500/10", borderHover: "hover:border-red-500/50", title: "Fit Stack", desc: "Configuración recurrente. Cobro automático de membresías, control de aforo y alertas.", os: "FIT OS" },
-                            { icon: Wrench, color: "text-yellow-500", bg: "bg-yellow-500/5", hover: "group-hover:bg-yellow-500/10", borderHover: "hover:border-yellow-500/50", title: "Technical Stack", desc: "Configuración de servicios. Órdenes de trabajo, asignación de técnicos e incidencias.", os: "TECH OS" },
-                            { icon: Cpu, color: "text-neutral-400", bg: "bg-neutral-500/5", hover: "group-hover:bg-neutral-500/10", borderHover: "hover:border-neutral-500/50", title: "Custom Stack", desc: "Arquitectura a la medida de tu modelo de negocio si requieres flujos y sistemas altamente complejos.", os: "CUSTOM OS" },
+                            { icon: Activity, color: "text-blue-500", bg: "bg-blue-500/5", hover: "group-hover:bg-blue-500/10", borderHover: "hover:border-blue-500/50", title: "Health OS", desc: "Toda la operación clínica y médica funcionando sobre un único sistema sincronizado.", tools: "Agenda · IMED · Ficha · Facturación · IA" },
+                            { icon: ShoppingCart, color: "text-purple-500", bg: "bg-purple-500/5", hover: "group-hover:bg-purple-500/10", borderHover: "hover:border-purple-500/50", title: "Commerce OS", desc: "Todo tu negocio comercial y de ventas sincronizado en tiempo real.", tools: "POS · Inventario · Facturación · E-commerce" },
+                            { icon: Truck, color: "text-emerald-500", bg: "bg-emerald-500/5", hover: "group-hover:bg-emerald-500/10", borderHover: "hover:border-emerald-500/50", title: "Field OS", desc: "Tus operaciones en terreno, despachos y técnicos controlados en una sola pantalla.", tools: "Rutas · Firma · Cobro In-situ · Logística" },
+                            { icon: Coffee, color: "text-orange-500", bg: "bg-orange-500/5", hover: "group-hover:bg-orange-500/10", borderHover: "hover:border-orange-500/50", title: "Gastro OS", desc: "La administración, cocina y sala de tu restaurante operando a la misma velocidad.", tools: "Comandas · Mesas · POS · Costos" },
+                            { icon: Dog, color: "text-teal-500", bg: "bg-teal-500/5", hover: "group-hover:bg-teal-500/10", borderHover: "hover:border-teal-500/50", title: "Pet OS", desc: "El historial, agenda y finanzas de cada paciente veterinario en un solo lugar.", tools: "Fichas · Vacunas · Agenda · Recordatorios" },
+                            { icon: Dumbbell, color: "text-red-500", bg: "bg-red-500/5", hover: "group-hover:bg-red-500/10", borderHover: "hover:border-red-500/50", title: "Fit OS", desc: "Control total de tu centro deportivo, desde el acceso hasta la retención automatizada.", tools: "Membresías · Aforo · Pagos Recurrentes" },
+                            { icon: Wrench, color: "text-yellow-500", bg: "bg-yellow-500/5", hover: "group-hover:bg-yellow-500/10", borderHover: "hover:border-yellow-500/50", title: "Tech OS", desc: "Gestión de tickets, técnicos, tiempos de respuesta y facturación unificada.", titleTools: "Capacidades:", tools: "Tickets · Tareas · Asignación · Soporte" },
+                            { icon: Cpu, color: "text-neutral-400", bg: "bg-neutral-500/5", hover: "group-hover:bg-neutral-500/10", borderHover: "hover:border-neutral-500/50", title: "Custom OS", desc: "La infraestructura configurada a la medida de los flujos únicos de tu organización.", tools: "Arquitectura y Desarrollo a Medida" },
                         ].map((ind, i) => (
                             <div key={i} className={`group p-6 bg-[#040404] border border-white/[0.05] rounded-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between ${ind.borderHover}`}>
                                 <div className={`absolute top-0 right-0 w-24 h-24 blur-3xl rounded-full transition-colors ${ind.bg} ${ind.hover}`} />
                                 <div>
                                     <ind.icon className={`w-8 h-8 mb-4 ${ind.color}`} />
-                                    <h3 className="font-mono text-sm font-black text-white uppercase mb-2">{ind.title}</h3>
-                                    <p className="font-mono text-[10px] text-neutral-400 leading-relaxed mb-6">{ind.desc}</p>
+                                    <h3 className="font-mono text-lg font-black text-white uppercase mb-2">{ind.title}</h3>
+                                    <p className="font-mono text-[11px] text-neutral-300 leading-relaxed mb-6 font-bold">{ind.desc}</p>
                                 </div>
-                                <span className={`font-mono text-[9px] font-bold uppercase tracking-widest flex items-center gap-1 group-hover:translate-x-1 transition-transform ${ind.color}`}>CONFIGURACIÓN: {ind.os} <ChevronRight className="w-3 h-3" /></span>
+                                <div className="border-t border-white/[0.05] pt-4 mt-auto">
+                                    <p className={`font-mono text-[9px] font-bold uppercase tracking-widest mb-1 ${ind.color}`}>INCLUYE:</p>
+                                    <p className="font-mono text-[10px] text-neutral-500 uppercase">{ind.tools}</p>
+                                </div>
                             </div>
                         ))}
                     </div>
                 </section>
 
-                {/* CARRUSEL DE CASOS REALES / MISIONES */}
+                {/* 6. LAS INTEGRACIONES (CARRUSEL 3D LOGOS) */}
+                <section className="w-full mt-32 text-center space-y-6">
+                    <div className="space-y-2">
+                        <h2 className="text-2xl md:text-3xl font-black font-mono tracking-wider uppercase text-white">LAS INTEGRACIONES_</h2>
+                        <p className="text-xs text-neutral-500 font-mono max-w-2xl mx-auto">
+                            Nuestra infraestructura no te aísla. Se conecta nativamente con las herramientas que tu empresa ya utiliza en el día a día.
+                        </p>
+                    </div>
+
+                    <div className="w-full bg-[#000] border-y border-white/[0.02] overflow-hidden relative min-h-[140px] sm:min-h-[160px] flex items-center justify-center mt-8">
+                        <div className="absolute inset-0 flex items-center justify-center opacity-30 grayscale blur-[1px]">
+                            <div className="w-full scale-[0.65] sm:scale-[0.75] origin-center -translate-y-2 sm:-translate-y-4">
+                                <motion.div 
+                                    className="flex flex-nowrap"
+                                    animate={{ x: ["-50%", "0%"] }}
+                                    transition={{ repeat: Infinity, ease: "linear", duration: 35 }}
+                                >
+                                    <div className="flex gap-10 sm:gap-16 items-center flex-shrink-0 pr-10 sm:pr-16">
+                                        <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                        <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                        <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                        <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                        <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                        <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                        <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                        <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                        <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                    </div>
+                                    <div className="flex gap-10 sm:gap-16 items-center flex-shrink-0 pr-10 sm:pr-16">
+                                        <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                        <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                        <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                        <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                        <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                        <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                        <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                        <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                        <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                    </div>
+                                </motion.div>
+                            </div>
+                        </div>
+
+                        <div 
+                            className="absolute inset-0 flex items-center overflow-hidden z-10"
+                            style={{ maskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)' }}
+                        >
+                            <motion.div 
+                                className="flex flex-nowrap"
+                                animate={{ x: ["0%", "-50%"] }}
+                                transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
+                            >
+                                <div className="flex gap-10 sm:gap-16 items-center flex-shrink-0 pr-10 sm:pr-16 filter drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+                                    <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                    <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                    <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                    <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                    <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                    <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                    <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                    <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                    <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                </div>
+                                <div className="flex gap-10 sm:gap-16 items-center flex-shrink-0 pr-10 sm:pr-16 filter drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+                                    <img src="/imagenes/logotipo/google_ads.svg" alt="Google Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                    <img src="/imagenes/logotipo/instagram.svg" alt="Instagram Ads" className="h-9 sm:h-11 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                    <img src="/imagenes/logotipo/tiktok.svg" alt="TikTok Ads" className="h-11 sm:h-13 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                    <img src="/imagenes/logotipo/descarga (1).png" alt="Meta Ads" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                    <img src="/imagenes/logotipo/antigravity-color.png" alt="Antigravity" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                    <img src="/imagenes/logotipo/gemini_star.svg" alt="Gemini" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                    <img src="/imagenes/logotipo/DeepSeek.png" alt="DeepSeek" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                    <img src="/imagenes/logotipo/chat gpt.png" alt="ChatGPT" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                    <img src="/imagenes/logotipo/whatsapp_business.svg" alt="WhatsApp Business" className="h-10 sm:h-12 max-w-[50px] sm:max-w-[70px] object-contain transform-gpu" />
+                                </div>
+                            </motion.div>
+                        </div>
+
+                        <div className="absolute top-0 bottom-0 left-0 w-8 sm:w-32 bg-gradient-to-r from-black via-black/80 to-transparent z-20 pointer-events-none" />
+                        <div className="absolute top-0 bottom-0 right-0 w-8 sm:w-32 bg-gradient-to-l from-black via-black/80 to-transparent z-20 pointer-events-none" />
+                    </div>
+                </section>
+
+                {/* 7. CARRUSEL DE CASOS REALES */}
                 <section className="w-full pt-20 md:pt-32 flex flex-col items-center">
                     <div className="text-center space-y-1 z-10 mb-4 sm:mb-8">
                         <h2 className="text-xl sm:text-2xl font-black font-mono tracking-wider uppercase text-white">SISTEMAS_EN_MARCHA_</h2>
-                        <p className="text-[10px] sm:text-[11px] text-neutral-600 font-mono">Bitácora de despliegues y experiencia de uso en producción</p>
+                        <p className="text-[10px] sm:text-[11px] text-neutral-600 font-mono">Bitácora de despliegues y casos de éxito en producción</p>
                     </div>
 
                     <div className="relative w-full flex overflow-hidden border-y border-white/[0.02] bg-[#020202]/50 py-4 sm:py-10">
@@ -378,7 +400,7 @@ export default function Home() {
                     </div>
                 </section>
 
-                {/* FORMULARIO DE DIAGNÓSTICO */}
+                {/* 8. FORMULARIO DE DIAGNÓSTICO */}
                 <motion.section id="contacto" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="w-full pt-16 max-w-md mx-auto space-y-6 flex flex-col items-center mt-24">
                     <div className="text-center space-y-1">
                         <h2 className="text-lg font-black font-mono uppercase tracking-wider text-white">EVALUACIÓN_DE_INFRAESTRUCTURA_</h2>
