@@ -74,7 +74,7 @@ export default function Home() {
                     <div className="flex items-center gap-1.5">
                         <Crosshair className="w-5 h-5 text-mercenario-danger animate-pulse" />
                         <span className="text-sm font-black font-mono tracking-wider text-white uppercase flex items-center gap-1">
-                            MERCENARIO <span className="text-gray-600">|</span> <span className="text-[9px] text-gray-400 font-normal">INFRASTRUCTURE_</span>
+                            MERCENARIO <span className="text-gray-600">|</span> <span className="text-[9px] text-gray-400 font-normal">IOS_</span>
                         </span>
                     </div>
                     <Link href="#contacto" className="px-4 py-2 bg-mercenario-danger text-white font-bold text-[9px] sm:text-[10px] uppercase tracking-widest rounded hover:bg-red-700 transition-all duration-300 font-mono">
@@ -131,10 +131,10 @@ export default function Home() {
                             <span className="text-[10px] font-mono text-mercenario-danger uppercase tracking-widest font-bold">La Solución</span>
                         </div>
                         <h2 className="text-2xl md:text-4xl font-black font-mono uppercase text-mercenario-danger leading-tight">
-                            Mercenario OS.
+                            Mercenario IOS.
                         </h2>
                         <p className="font-mono text-sm text-white max-w-3xl mx-auto leading-relaxed">
-                            Un único núcleo operativo. Mercenario no es otro software, ni desarrollamos aplicaciones aisladas. Construimos y configuramos la infraestructura operativa central de tu empresa, unificando clientes, finanzas, automatización e inteligencia artificial sobre un mismo flujo.
+                            El Sistema Inteligente de Operaciones para Empresas. Mercenario no es otro software, ni desarrollamos aplicaciones aisladas. Construimos y configuramos la infraestructura operativa central de tu empresa, unificando clientes, finanzas, automatización e inteligencia artificial sobre un mismo flujo.
                         </p>
                     </div>
                 </section>
@@ -241,20 +241,20 @@ export default function Home() {
                     <div className="text-center space-y-2">
                         <h2 className="text-2xl md:text-3xl font-black font-mono tracking-wider uppercase text-white">¿CÓMO SE ADAPTA A TI?_</h2>
                         <p className="text-xs text-neutral-500 font-mono max-w-2xl mx-auto">
-                            Una sola infraestructura. Múltiples operaciones. Activamos configuraciones prediseñadas sobre el mismo núcleo de Mercenario OS según tu modelo de negocio.
+                            Una sola infraestructura. Múltiples operaciones. Activamos configuraciones prediseñadas sobre el mismo núcleo de Mercenario IOS según tu modelo de negocio.
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                         {[
-                            { icon: Activity, color: "text-blue-500", bg: "bg-blue-500/5", hover: "group-hover:bg-blue-500/10", borderHover: "hover:border-blue-500/50", title: "Health OS", desc: "Toda la operación clínica y médica funcionando sobre un único sistema sincronizado.", tools: "Agenda · IMED · Ficha · Facturación · IA" },
-                            { icon: ShoppingCart, color: "text-purple-500", bg: "bg-purple-500/5", hover: "group-hover:bg-purple-500/10", borderHover: "hover:border-purple-500/50", title: "Commerce OS", desc: "Todo tu negocio comercial y de ventas sincronizado en tiempo real.", tools: "POS · Inventario · Facturación · E-commerce" },
-                            { icon: Truck, color: "text-emerald-500", bg: "bg-emerald-500/5", hover: "group-hover:bg-emerald-500/10", borderHover: "hover:border-emerald-500/50", title: "Field OS", desc: "Tus operaciones en terreno, despachos y técnicos controlados en una sola pantalla.", tools: "Rutas · Firma · Cobro In-situ · Logística" },
-                            { icon: Coffee, color: "text-orange-500", bg: "bg-orange-500/5", hover: "group-hover:bg-orange-500/10", borderHover: "hover:border-orange-500/50", title: "Gastro OS", desc: "La administración, cocina y sala de tu restaurante operando a la misma velocidad.", tools: "Comandas · Mesas · POS · Costos" },
-                            { icon: Dog, color: "text-teal-500", bg: "bg-teal-500/5", hover: "group-hover:bg-teal-500/10", borderHover: "hover:border-teal-500/50", title: "Pet OS", desc: "El historial, agenda y finanzas de cada paciente veterinario en un solo lugar.", tools: "Fichas · Vacunas · Agenda · Recordatorios" },
-                            { icon: Dumbbell, color: "text-red-500", bg: "bg-red-500/5", hover: "group-hover:bg-red-500/10", borderHover: "hover:border-red-500/50", title: "Fit OS", desc: "Control total de tu centro deportivo, desde el acceso hasta la retención automatizada.", tools: "Membresías · Aforo · Pagos Recurrentes" },
-                            { icon: Wrench, color: "text-yellow-500", bg: "bg-yellow-500/5", hover: "group-hover:bg-yellow-500/10", borderHover: "hover:border-yellow-500/50", title: "Tech OS", desc: "Gestión de tickets, técnicos, tiempos de respuesta y facturación unificada.", titleTools: "Capacidades:", tools: "Tickets · Tareas · Asignación · Soporte" },
-                            { icon: Cpu, color: "text-neutral-400", bg: "bg-neutral-500/5", hover: "group-hover:bg-neutral-500/10", borderHover: "hover:border-neutral-500/50", title: "Custom OS", desc: "La infraestructura configurada a la medida de los flujos únicos de tu organización.", tools: "Arquitectura y Desarrollo a Medida" },
+                            { icon: Activity, color: "text-blue-500", bg: "bg-blue-500/5", hover: "group-hover:bg-blue-500/10", borderHover: "hover:border-blue-500/50", title: "Health", desc: "Toda la operación clínica y médica funcionando sobre un único sistema sincronizado.", tools: "Agenda · IMED · Ficha · Facturación · IA" },
+                            { icon: ShoppingCart, color: "text-purple-500", bg: "bg-purple-500/5", hover: "group-hover:bg-purple-500/10", borderHover: "hover:border-purple-500/50", title: "Commerce", desc: "Todo tu negocio comercial y de ventas sincronizado en tiempo real.", tools: "POS · Inventario · Facturación · E-commerce" },
+                            { icon: Truck, color: "text-emerald-500", bg: "bg-emerald-500/5", hover: "group-hover:bg-emerald-500/10", borderHover: "hover:border-emerald-500/50", title: "Field", desc: "Tus operaciones en terreno, despachos y técnicos controlados en una sola pantalla.", tools: "Rutas · Firma · Cobro In-situ · Logística" },
+                            { icon: Coffee, color: "text-orange-500", bg: "bg-orange-500/5", hover: "group-hover:bg-orange-500/10", borderHover: "hover:border-orange-500/50", title: "Gastro", desc: "La administración, cocina y sala de tu restaurante operando a la misma velocidad.", tools: "Comandas · Mesas · POS · Costos" },
+                            { icon: Dog, color: "text-teal-500", bg: "bg-teal-500/5", hover: "group-hover:bg-teal-500/10", borderHover: "hover:border-teal-500/50", title: "Pet", desc: "El historial, agenda y finanzas de cada paciente veterinario en un solo lugar.", tools: "Fichas · Vacunas · Agenda · Recordatorios" },
+                            { icon: Dumbbell, color: "text-red-500", bg: "bg-red-500/5", hover: "group-hover:bg-red-500/10", borderHover: "hover:border-red-500/50", title: "Fit", desc: "Control total de tu centro deportivo, desde el acceso hasta la retención automatizada.", tools: "Membresías · Aforo · Pagos Recurrentes" },
+                            { icon: Wrench, color: "text-yellow-500", bg: "bg-yellow-500/5", hover: "group-hover:bg-yellow-500/10", borderHover: "hover:border-yellow-500/50", title: "Tech", desc: "Gestión de tickets, técnicos, tiempos de respuesta y facturación unificada.", titleTools: "Capacidades:", tools: "Tickets · Tareas · Asignación · Soporte" },
+                            { icon: Cpu, color: "text-neutral-400", bg: "bg-neutral-500/5", hover: "group-hover:bg-neutral-500/10", borderHover: "hover:border-neutral-500/50", title: "Custom", desc: "La infraestructura configurada a la medida de los flujos únicos de tu organización.", tools: "Arquitectura y Desarrollo a Medida" },
                         ].map((ind, i) => (
                             <div key={i} className={`group p-6 bg-[#040404] border border-white/[0.05] rounded-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between ${ind.borderHover}`}>
                                 <div className={`absolute top-0 right-0 w-24 h-24 blur-3xl rounded-full transition-colors ${ind.bg} ${ind.hover}`} />
@@ -455,7 +455,7 @@ export default function Home() {
 
             </main>
 
-            <footer className="w-full border-t border-white/[0.03] py-8 text-center text-[9px] text-neutral-600 font-mono z-10">&copy; {new Date().getFullYear()} Mercenario OS. Todos los derechos reservados.</footer>
+            <footer className="w-full border-t border-white/[0.03] py-8 text-center text-[9px] text-neutral-600 font-mono z-10">&copy; {new Date().getFullYear()} Mercenario IOS. Todos los derechos reservados.</footer>
 
         </div>
     );
