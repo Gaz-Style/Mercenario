@@ -1,11 +1,15 @@
 import Link from "next/link";
 import { ArrowLeft, ChevronRight } from "lucide-react";
+import type { Metadata } from "next";
 
-export default function NoNecesitasComenzarDeCeroPage() {
+export const metadata: Metadata = {
+    title: "¿Puedo seguir usando mis herramientas? — Mercenario IOS",
+    description: "No necesitas comenzar de cero. Lo que ya funciona también puede formar parte de una mejor operación.",
+};
+
+export default function HerramientasPage() {
     return (
         <div className="min-h-screen bg-[#FCFCFC] text-black font-sans antialiased flex flex-col items-center selection:bg-black selection:text-white">
-            
-            {/* Header */}
             <header className="fixed top-0 inset-x-0 w-full z-[100] border-b border-neutral-100 bg-[#FCFCFC]/80 backdrop-blur-md">
                 <div className="max-w-4xl mx-auto px-6 py-5 flex justify-between items-center">
                     <Link href="/" className="flex items-center gap-2 group text-[11px] font-semibold tracking-wider text-neutral-500 hover:text-black uppercase transition-colors">
@@ -18,156 +22,104 @@ export default function NoNecesitasComenzarDeCeroPage() {
                 </div>
             </header>
 
-            <main className="w-full max-w-3xl mx-auto px-6 pt-40 pb-32 flex flex-col justify-start">
-                
-                {/* HERO */}
-                <section className="space-y-8 mb-24 max-w-3xl">
-                    <span className="text-[10px] font-mono tracking-widest text-neutral-400 uppercase">Capítulo 07 // Integraciones</span>
-                    <h1 className="text-4xl sm:text-6xl font-bold tracking-tighter text-black leading-[1.05]">
-                        No necesitas comenzar de cero.<br />
-                        <span className="text-neutral-400 font-semibold">La mejor empresa no es la que cambia todas sus herramientas. Es la que logra que todas trabajen juntas.</span>
+            <main className="w-full max-w-3xl mx-auto px-6 pt-40 pb-32 flex flex-col">
+                <section className="space-y-10 mb-24">
+                    <span className="text-[10px] font-mono tracking-widest text-neutral-400 uppercase">Integraciones</span>
+                    <h1 className="text-5xl sm:text-7xl font-bold tracking-tighter text-black leading-[1.02]">
+                        No necesitas comenzar de cero. <span className="text-neutral-400 font-semibold">Lo que ya funciona también puede formar parte de una mejor operación.</span>
                     </h1>
-                    <p className="text-neutral-500 text-lg font-light leading-relaxed pt-4">
-                        Existe una idea muy común cuando una empresa decide modernizarse: "Vamos a tener que cambiar todo". La realidad suele ser exactamente la contraria.
+                    <p className="text-neutral-500 text-lg font-light leading-relaxed max-w-2xl">
+                        Una de las primeras preguntas que recibimos es también una de las más importantes: <strong>¿Voy a tener que cambiar todo lo que ya uso?</strong>
                     </p>
-                    <p className="text-black font-semibold text-lg leading-relaxed">
-                        La mayoría de las empresas ya tiene herramientas que funcionan bien. Una agenda, WhatsApp, correo, facturación, contabilidad, calendarios. El problema no suele ser ninguna de ellas: el problema es que trabajan aisladas.
+                    <p className="text-black font-semibold text-lg leading-relaxed pt-2">
+                        La respuesta es simple. No. Porque el problema rara vez son las herramientas. El problema es que trabajan aisladas.
                     </p>
                 </section>
 
-                {/* Section 2: Tu empresa ya hizo una inversión */}
                 <section className="py-20 border-t border-neutral-100 space-y-6">
-                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-black">
-                        Tu empresa ya hizo una inversión.
-                    </h2>
+                    <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-black leading-tight">La mayoría de las empresas ya construyó parte de su operación.</h2>
+                    <ul className="space-y-4 pt-4 border-l border-neutral-200 ml-1 pl-6">
+                        <li className="relative"><div className="absolute -left-[29px] top-[7px] w-2 h-2 rounded-full bg-neutral-300" /><p className="text-sm text-neutral-600">Utilizan WhatsApp para comunicarse.</p></li>
+                        <li className="relative"><div className="absolute -left-[29px] top-[7px] w-2 h-2 rounded-full bg-neutral-300" /><p className="text-sm text-neutral-600">Google Calendar para organizar reuniones.</p></li>
+                        <li className="relative"><div className="absolute -left-[29px] top-[7px] w-2 h-2 rounded-full bg-neutral-300" /><p className="text-sm text-neutral-600">Un sistema para emitir documentos.</p></li>
+                        <li className="relative"><div className="absolute -left-[29px] top-[7px] w-2 h-2 rounded-full bg-neutral-300" /><p className="text-sm text-neutral-600">Otro para administrar pagos.</p></li>
+                        <li className="relative"><div className="absolute -left-[29px] top-[7px] w-2 h-2 rounded-full bg-neutral-300" /><p className="text-sm text-neutral-600">Planillas para controlar información.</p></li>
+                        <li className="relative"><div className="absolute -left-[29px] top-[7px] w-2 h-2 rounded-full bg-neutral-300" /><p className="text-sm text-neutral-600">Aplicaciones especializadas para su industria.</p></li>
+                    </ul>
+                    <p className="text-neutral-500 font-light pt-4">Cada una cumple una función. Pero ninguna conoce lo que ocurre en la otra.</p>
+                </section>
+
+                <section className="py-20 border-t border-neutral-100 space-y-6">
+                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-black">Cambiar todo rara vez es una buena idea.</h2>
                     <p className="text-neutral-500 font-light leading-relaxed">
-                        No tendría sentido comenzar desde cero si aquello que utilizas sigue siendo útil. Por eso nuestro trabajo comienza respetando la operación que ya existe. Primero entendemos cómo funciona, luego decidimos qué vale la pena conservar, y finalmente unimos todas las piezas.
+                        Las personas ya aprendieron a trabajar. Los procesos ya existen. La información ya tiene una historia. Reemplazarlo todo implica detener la operación, volver a capacitar al equipo y comenzar nuevamente.
                     </p>
-                    <p className="text-black font-semibold leading-relaxed">
-                        Conectar no significa reemplazar. Significa permitir que la información viaje.
-                    </p>
+                    <p className="text-black font-semibold">En la mayoría de los casos, ese no es el camino.</p>
+                </section>
+
+                <section className="py-20 border-t border-neutral-100 space-y-6">
+                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-black">Una empresa conectada piensa diferente. <span className="text-neutral-400 font-semibold">En lugar de reemplazar herramientas... las conecta.</span></h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm font-medium pt-4">
+                        <div className="p-6 border border-neutral-100 rounded-2xl bg-neutral-50/50"><p className="text-black mb-1 font-bold">La agenda</p><p className="text-neutral-500 font-light">comparte información con el CRM.</p></div>
+                        <div className="p-6 border border-neutral-100 rounded-2xl bg-neutral-50/50"><p className="text-black mb-1 font-bold">Los pagos</p><p className="text-neutral-500 font-light">actualizan la administración.</p></div>
+                        <div className="p-6 border border-neutral-100 rounded-2xl bg-neutral-50/50"><p className="text-black mb-1 font-bold">La facturación</p><p className="text-neutral-500 font-light">alimenta los reportes.</p></div>
+                        <div className="p-6 border border-neutral-100 rounded-2xl bg-neutral-50/50"><p className="text-black mb-1 font-bold">El marketing</p><p className="text-neutral-500 font-light">conoce la actividad de los clientes.</p></div>
+                    </div>
+                    <p className="text-neutral-500 font-light pt-4">La información comienza a circular. Cada herramienta sigue haciendo aquello para lo que fue creada. Pero ahora deja de trabajar sola.</p>
+                </section>
+
+                <section className="py-20 border-t border-neutral-100 space-y-6">
+                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-black">La verdadera transformación ocurre entre los sistemas. <span className="text-neutral-400 font-semibold">No dentro de ellos.</span></h2>
                     <p className="text-neutral-500 font-light leading-relaxed">
-                        Cuando un cliente agenda una cita... no importa si utilizó una página web, WhatsApp, Google o una secretaria. Lo importante es que esa información llegue automáticamente donde debe llegar.
+                        Muchas empresas creen que necesitan comprar una plataforma más grande. Cuando en realidad solo necesitan que las plataformas que ya tienen comiencen a colaborar. Ahí es donde aparece el mayor cambio.
                     </p>
                 </section>
 
-                {/* Grid of Connections */}
-                <section className="py-20 border-t border-neutral-100 space-y-12">
-                    <div className="space-y-2">
-                        <span className="text-[10px] font-mono tracking-widest text-neutral-400 uppercase">El Ecosistema</span>
-                        <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-black">
-                            Algunas de las conexiones más habituales.
-                        </h2>
+                <section className="py-20 border-t border-neutral-100 space-y-6">
+                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-black">Algunas herramientas seguirán contigo durante muchos años. <span className="text-neutral-400 font-semibold">Otras serán reemplazadas.</span></h2>
+                    <p className="text-neutral-500 font-light leading-relaxed">
+                        Y eso está bien. Una operación moderna debe poder evolucionar. Agregar nuevas capacidades. Incorporar nuevas tecnologías. Cambiar proveedores cuando sea necesario.
+                    </p>
+                    <p className="text-black font-semibold pt-2">Sin obligar a reconstruir toda la empresa cada vez que algo cambia.</p>
+                </section>
+
+                <section className="py-20 border-t border-neutral-100 space-y-6">
+                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-black">La tecnología debería darte libertad. <span className="text-neutral-400 font-semibold">No dependencia.</span></h2>
+                    <div className="flex flex-wrap gap-3 pt-2">
+                        {["Abrir nuevas sucursales.", "Incorporar nuevos servicios.", "Conectar nuevas plataformas.", "Automatizar nuevos procesos."].map((item, i) => (
+                            <span key={i} className="px-4 py-2 border border-neutral-200 rounded-full text-xs font-semibold text-neutral-600 bg-white">{item}</span>
+                        ))}
                     </div>
+                    <p className="text-neutral-500 font-light pt-4">Todo sin romper lo que ya funciona.</p>
+                </section>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs font-semibold text-neutral-500">
-                        
-                        <div className="p-6 border border-neutral-100 rounded-xl bg-neutral-50/50 space-y-3">
-                            <h3 className="text-sm font-bold text-black">Comunicación</h3>
-                            <ul className="space-y-1 font-light leading-relaxed">
-                                <li>· WhatsApp Business</li>
-                                <li>· Correo electrónico</li>
-                                <li>· SMS</li>
-                                <li>· Google Calendar</li>
-                                <li>· Outlook</li>
-                            </ul>
-                        </div>
-
-                        <div className="p-6 border border-neutral-100 rounded-xl bg-neutral-50/50 space-y-3">
-                            <h3 className="text-sm font-bold text-black">Administración</h3>
-                            <ul className="space-y-1 font-light leading-relaxed">
-                                <li>· SII (Servicio de Impuestos Internos)</li>
-                                <li>· Facturación electrónica</li>
-                                <li>· Boletas</li>
-                                <li>· Conciliación bancaria</li>
-                                <li>· Reportes financieros</li>
-                            </ul>
-                        </div>
-
-                        <div className="p-6 border border-neutral-100 rounded-xl bg-neutral-50/50 space-y-3">
-                            <h3 className="text-sm font-bold text-black">Salud</h3>
-                            <ul className="space-y-1 font-light leading-relaxed">
-                                <li>· IMED</li>
-                                <li>· Fonasa</li>
-                                <li>· Ficha clínica</li>
-                                <li>· Agenda médica</li>
-                                <li>· Consentimientos</li>
-                            </ul>
-                        </div>
-
-                        <div className="p-6 border border-neutral-100 rounded-xl bg-neutral-50/50 space-y-3">
-                            <h3 className="text-sm font-bold text-black">Recursos Humanos</h3>
-                            <ul className="space-y-1 font-light leading-relaxed">
-                                <li>· Previred</li>
-                                <li>· Remuneraciones</li>
-                                <li>· Liquidaciones</li>
-                                <li>· Documentación</li>
-                            </ul>
-                        </div>
-
-                        <div className="p-6 border border-neutral-100 rounded-xl bg-neutral-50/50 space-y-3">
-                            <h3 className="text-sm font-bold text-black">Marketing</h3>
-                            <ul className="space-y-1 font-light leading-relaxed">
-                                <li>· Meta (Facebook/Instagram)</li>
-                                <li>· Google Ads / Search</li>
-                                <li>· Google Reviews automáticas</li>
-                                <li>· Correo automático de fidelización</li>
-                                <li>· Seguimiento de clientes inactivos</li>
-                            </ul>
-                        </div>
-
-                        <div className="p-6 border border-neutral-100 rounded-xl bg-neutral-50/50 space-y-3">
-                            <h3 className="text-sm font-bold text-black">Pagos</h3>
-                            <ul className="space-y-1 font-light leading-relaxed">
-                                <li>· Mercado Pago</li>
-                                <li>· Transbank (Webpay)</li>
-                                <li>· Flow</li>
-                                <li>· Stripe</li>
-                                <li>· Transferencias automáticas</li>
-                            </ul>
-                        </div>
-
+                <section className="py-20 border-t border-neutral-100">
+                    <div className="bg-neutral-950 text-white p-12 rounded-3xl space-y-4 text-center">
+                        <span className="text-[9px] font-mono tracking-[0.25em] text-neutral-500 uppercase block">El Propósito</span>
+                        <blockquote className="text-xl md:text-3xl font-bold tracking-tighter leading-snug">
+                            "No importa cuántas herramientas utilices. Lo importante es que todas compartan el mismo propósito."
+                        </blockquote>
+                        <p className="text-sm text-neutral-400 font-light leading-relaxed pt-4 max-w-md mx-auto">
+                            Ayudar a que tu empresa entregue una mejor experiencia. Y que tú puedas administrarla con tranquilidad.
+                        </p>
                     </div>
                 </section>
 
-                {/* Section 4: Y cuando una herramienta no existe */}
-                <section className="py-20 border-t border-neutral-100 space-y-6">
-                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-black">
-                        Y cuando una herramienta no existe... la construimos.
-                    </h2>
-                    <p className="text-neutral-500 font-light leading-relaxed">
-                        Cada empresa tiene procesos únicos. Muchas veces ninguna plataforma ofrece exactamente lo que necesitas. En esos casos desarrollamos soluciones específicas para esa operación, porque el objetivo nunca es vender un sistema: el objetivo es resolver un problema.
-                    </p>
-                </section>
-
-                {/* Section 5: La tecnología cambia */}
-                <section className="py-20 border-t border-neutral-100 space-y-6">
-                    <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-black">
-                        La tecnología cambia. La operación permanece.
-                    </h2>
-                    <p className="text-neutral-500 font-light leading-relaxed">
-                        Dentro de algunos años aparecerán nuevas herramientas. Nuevas plataformas. Nuevas formas de trabajar. Pero una empresa bien diseñada podrá adaptarse sin volver a comenzar desde cero, porque las conexiones seguirán existiendo.
-                    </p>
-                    <p className="text-black font-semibold leading-relaxed">
-                        En Mercenario no compras una plataforma. Construyes una operación preparada para evolucionar.
-                    </p>
-                </section>
-
-                {/* CTA */}
-                <div className="mt-20 pt-12 border-t border-neutral-100 flex flex-col items-center gap-6">
-                    <div className="text-center space-y-2">
-                        <h4 className="text-lg font-bold text-black">Descubre todas las integraciones disponibles.</h4>
+                <div className="mt-16 pt-12 border-t border-neutral-100 flex flex-col items-center gap-6 text-center">
+                    <div className="space-y-2 max-w-xl">
+                        <h4 className="text-xl font-bold text-black">Tu empresa ya tiene una forma de trabajar.</h4>
+                        <p className="text-neutral-500 text-sm leading-relaxed">Descubramos cómo conectar todo lo que ya funciona para construir una operación más simple, más eficiente y preparada para crecer.</p>
                     </div>
-                    <Link href="/centro-de-conocimiento/que-es-una-api" className="inline-flex items-center gap-2 px-8 py-4.5 bg-black text-white font-semibold text-[11px] uppercase tracking-widest hover:bg-neutral-800 transition-colors rounded-full">
-                        <span>Explorar conexiones</span>
+                    <Link href="/#contacto" className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white font-semibold text-[11px] uppercase tracking-widest hover:bg-neutral-800 transition-colors rounded-full">
+                        <span>Conversemos sobre tu empresa</span>
                         <ChevronRight className="w-4 h-4" />
                     </Link>
                 </div>
-
             </main>
 
-            <footer className="w-full py-16 border-t border-neutral-100 text-center text-[10px] text-neutral-400 tracking-wider uppercase bg-white">&copy; {new Date().getFullYear()} Mercenario IOS. All rights reserved.</footer>
-
+            <footer className="w-full py-16 border-t border-neutral-100 text-center text-[10px] text-neutral-400 tracking-wider uppercase bg-white">
+                &copy; {new Date().getFullYear()} Mercenario IOS. All rights reserved.
+            </footer>
         </div>
     );
 }
