@@ -1,13 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { 
     ChevronRight, 
     ArrowRight,
     ArrowUpRight,
     Play,
-    RotateCcw
+    RotateCcw,
+    ChevronDown
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
@@ -20,16 +21,71 @@ export default function Home() {
     const [currentStep, setCurrentStep] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
 
+    // Navigation Menu States
+    const [activeMenu, setActiveMenu] = useState<"soluciones" | "operacion" | "integraciones" | "conocimiento" | null>(null);
+
+    const menuItems = {
+        soluciones: [
+            { label: "Salud", href: "/soluciones/health" },
+            { label: "Estética", href: "/soluciones/health" },
+            { label: "Retail", href: "/soluciones/commerce" },
+            { label: "Servicios", href: "/soluciones/tech" },
+            { label: "Educación", href: "/soluciones/custom" },
+            { label: "Industria", href: "/soluciones/field" },
+            { label: "Empresas", href: "/soluciones/custom" }
+        ],
+        operacion: [
+            { label: "Marketing", href: "/operacion/marketing" },
+            { label: "CRM", href: "/operacion/crm" },
+            { label: "Agenda", href: "/operacion/agenda" },
+            { label: "Pagos", href: "/operacion/pagos" },
+            { label: "Facturación", href: "/operacion/facturacion" },
+            { label: "ERP", href: "/operacion/erp" },
+            { label: "Reportes", href: "/operacion/reportes" },
+            { label: "Caja", href: "/operacion/caja" },
+            { label: "Inventario", href: "/operacion/inventario" },
+            { label: "IA", href: "/operacion/ia" },
+            { label: "Multiagentes", href: "/operacion/multiagentes" },
+            { label: "Automatizaciones", href: "/operacion/automatizaciones" }
+        ],
+        integraciones: [
+            { label: "SII", href: "#" },
+            { label: "IMED", href: "#" },
+            { label: "Fonasa", href: "#" },
+            { label: "Previred", href: "#" },
+            { label: "WhatsApp", href: "#" },
+            { label: "Meta", href: "#" },
+            { label: "Google", href: "#" },
+            { label: "Outlook", href: "#" },
+            { label: "Mercado Pago", href: "#" },
+            { label: "Transbank", href: "#" },
+            { label: "API", href: "#" },
+            { label: "Webhooks", href: "#" }
+        ],
+        conocimiento: [
+            { label: "¿Qué es un ERP?", href: "/centro-de-conocimiento/que-es-un-erp" },
+            { label: "¿Qué es un CRM?", href: "/centro-de-conocimiento/que-es-un-crm" },
+            { label: "¿Qué es una API?", href: "/centro-de-conocimiento/que-es-una-api" },
+            { label: "¿Qué es IMED?", href: "/centro-de-conocimiento/que-es-imed" },
+            { label: "¿Qué es Fonasa?", href: "/centro-de-conocimiento/que-es-fonasa" },
+            { label: "¿Qué es un webhook?", href: "/centro-de-conocimiento/que-es-un-webhook" },
+            { label: "¿Qué es conciliación bancaria?", href: "/centro-de-conocimiento/que-es-conciliacion-bancaria" },
+            { label: "¿Qué es SEO?", href: "/centro-de-conocimiento/que-es-seo" },
+            { label: "¿Qué es CX?", href: "/centro-de-conocimiento/que-es-experiencia-de-cliente" },
+            { label: "Operación fragmentada", href: "/centro-de-conocimiento/que-es-una-operacion-fragmentada" }
+        ]
+    };
+
     const operationalSteps = [
-        { label: "Cliente reserva cita", area: "Demanda", desc: "El cliente agenda en línea de forma autónoma." },
-        { label: "Pago confirmado", area: "Finanzas", desc: "Transacción procesada y link de cobro conciliado." },
-        { label: "Agenda coordinada", area: "Sincronización", desc: "El calendario global se actualiza sin duplicarse." },
-        { label: "Trabajador digital notificado", area: "Inteligencia", desc: "La IA asigna recursos y prepara la pauta." },
-        { label: "Registro único actualizado", area: "Operaciones", desc: "Se actualiza el historial y ficha del cliente." },
-        { label: "Factura SII generada", area: "Transaccional", desc: "Emisión y envío automático de la documentación legal." },
-        { label: "Conciliación bancaria", area: "Control", desc: "El flujo de caja se cuadra con la cuenta corriente." },
-        { label: "Reporte de rentabilidad", area: "Dirección", desc: "Métricas financieras actualizadas en tiempo real." },
-        { label: "Reactivación automática", area: "Crecimiento", desc: "El sistema detecta inactividad e invita a retornar." }
+        { label: "Un cliente agenda una cita", area: "Agenda", desc: "El profesional recibe la información de forma instantánea." },
+        { label: "El cliente recibe su confirmación", area: "Comunicación", desc: "Notificación automatizada enviada por correo y WhatsApp." },
+        { label: "Se procesa el pago", area: "Finanzas", desc: "La pasarela de pago liquida y confirma la transacción." },
+        { label: "Se emite la boleta", area: "Facturación", desc: "Emisión directa con el SII sin pasos manuales." },
+        { label: "Se actualiza la caja", area: "Caja", desc: "El arqueo contable computa la entrada de dinero en tiempo real." },
+        { label: "Se registra la atención", area: "Historial", desc: "La ficha única del cliente almacena el evento." },
+        { label: "Se agenda el seguimiento", area: "Coordinación", desc: "Se programa una tarea de control para el equipo." },
+        { label: "Se solicita una reseña", area: "Calidad", desc: "Encuesta automática enviada al finalizar la experiencia." },
+        { label: "Se genera una oportunidad de venta", area: "Crecimiento", desc: "El sistema proyecta la próxima fecha de interacción óptima." }
     ];
 
     useEffect(() => {
@@ -58,13 +114,6 @@ export default function Home() {
         setCurrentStep(0);
     };
 
-    const projects = [
-        { title: "NeuroV", cat: "Inteligencia & UI", desc: "Clínica estética operando sobre un único sistema.", link: "https://neuro-v.vercel.app/", image: "/imagenes/ejecutados/neuroV.jpeg" },
-        { title: "SocialMotors", cat: "Ventas & Operación", desc: "Embudo comercial y control de inventario unificado.", link: "https://www.socialmotors.cl/", image: "/imagenes/ejecutados/socialmotors.jpeg" },
-        { title: "Valet PRT", cat: "Terreno & Gestión", desc: "Recepción y control de vehículos centralizado.", link: "https://socialmotors.cl/valet", image: "/imagenes/ejecutados/valetPRT.jpeg" },
-        { title: "PaseaLove", cat: "Servicios & Rastreo", desc: "Reservas, logística y operaciones en una sola vista.", link: "https://www.pasealove.cl/", image: "/imagenes/ejecutados/PaseaLove.jpeg" }
-    ];
-
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setFormStatus("loading");
@@ -83,61 +132,133 @@ export default function Home() {
     };
 
     return (
-        <div className="min-h-screen bg-[#FCFCFC] text-black font-sans antialiased flex flex-col items-center selection:bg-black selection:text-white">
+        <div className="min-h-screen bg-[#FCFCFC] text-black font-sans antialiased flex flex-col items-center selection:bg-black selection:text-white" onMouseLeave={() => setActiveMenu(null)}>
             
-            {/* Header: Ultra minimal, stark white */}
-            <header className="fixed top-0 inset-x-0 w-full z-[100] border-b border-neutral-100 bg-[#FCFCFC]/80 backdrop-blur-md">
-                <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-                    <div className="flex items-center gap-2.5">
-                        <div className="w-1.5 h-1.5 bg-mercenario-danger rounded-full" />
-                        <span className="text-[11px] font-semibold tracking-[0.2em] text-black uppercase flex items-center gap-2">
-                            MERCENARIO <span className="text-neutral-200">|</span> <span className="text-neutral-500 font-medium">IOS</span>
-                        </span>
+            {/* Header: Ultra minimal, stark white with Mega Menu */}
+            <header className="fixed top-0 inset-x-0 w-full z-[100] border-b border-neutral-100 bg-[#FCFCFC] backdrop-blur-md">
+                <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center relative z-50 bg-[#FCFCFC]">
+                    <div className="flex items-center gap-6">
+                        <Link href="/" className="flex items-center gap-2.5">
+                            <div className="w-1.5 h-1.5 bg-mercenario-danger rounded-full" />
+                            <span className="text-[11px] font-semibold tracking-[0.2em] text-black uppercase flex items-center gap-2">
+                                MERCENARIO <span className="text-neutral-200">|</span> <span className="text-neutral-500 font-medium">IOS</span>
+                            </span>
+                        </Link>
+
+                        {/* Navigation Mega Links */}
+                        <nav className="hidden lg:flex items-center gap-6 text-[10px] font-semibold tracking-wider text-neutral-400 uppercase select-none">
+                            <div className="relative cursor-pointer py-2 hover:text-black transition-colors flex items-center gap-1" onMouseEnter={() => setActiveMenu("soluciones")}>
+                                <span>Soluciones</span>
+                                <ChevronDown className="w-3 h-3" />
+                            </div>
+                            <div className="relative cursor-pointer py-2 hover:text-black transition-colors flex items-center gap-1" onMouseEnter={() => setActiveMenu("operacion")}>
+                                <span>Operación</span>
+                                <ChevronDown className="w-3 h-3" />
+                            </div>
+                            <div className="relative cursor-pointer py-2 hover:text-black transition-colors flex items-center gap-1" onMouseEnter={() => setActiveMenu("integraciones")}>
+                                <span>Integraciones</span>
+                                <ChevronDown className="w-3 h-3" />
+                            </div>
+                            <div className="relative cursor-pointer py-2 hover:text-black transition-colors flex items-center gap-1" onMouseEnter={() => setActiveMenu("conocimiento")}>
+                                <span>Centro de Conocimiento</span>
+                                <ChevronDown className="w-3 h-3" />
+                            </div>
+                        </nav>
                     </div>
+
                     <Link href="#contacto" className="text-[11px] font-semibold tracking-wider text-neutral-500 hover:text-black uppercase transition-colors">
                         Iniciar Diagnóstico
                     </Link>
                 </div>
+
+                {/* Dropdown panel */}
+                <AnimatePresence>
+                    {activeMenu && (
+                        <motion.div 
+                            initial={{ opacity: 0, y: -10 }} 
+                            animate={{ opacity: 1, y: 0 }} 
+                            exit={{ opacity: 0, y: -10 }} 
+                            transition={{ duration: 0.25, ease: "easeOut" }}
+                            className="absolute top-full inset-x-0 bg-[#FCFCFC] border-b border-neutral-100 shadow-sm z-40 py-10 px-6 max-h-[400px] overflow-y-auto"
+                        >
+                            <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                                {menuItems[activeMenu].map((item, idx) => (
+                                    <Link 
+                                        key={idx} 
+                                        href={item.href}
+                                        onClick={() => setActiveMenu(null)}
+                                        className="group text-[11px] tracking-wide text-neutral-500 hover:text-black transition-colors py-2 block font-medium"
+                                    >
+                                        <span className="flex items-center justify-between border-b border-neutral-100 pb-1 group-hover:border-black transition-colors">
+                                            {item.label}
+                                            <ChevronRight className="w-3 h-3 text-neutral-300 group-hover:text-black transition-colors -translate-x-1 group-hover:translate-x-0" />
+                                        </span>
+                                    </Link>
+                                ))}
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </header>
 
             <main className="w-full max-w-7xl mx-auto px-6 pt-40 sm:pt-56 pb-32 z-10 flex flex-col items-center">
 
-                {/* 1. HERO - La gran idea. Espacio y tipografía. */}
+                {/* 1. HERO - Título y Subtítulo exactos */}
                 <section className="text-center max-w-5xl pb-40 md:pb-56 space-y-8 flex flex-col items-center w-full">
                     <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }} className="flex flex-col items-center gap-8">
                         
-                        <div className="inline-flex items-center gap-2 border border-neutral-200 px-4 py-1.5 rounded-full text-[10px] font-semibold text-neutral-500 tracking-wider uppercase">
-                            <span className="w-1 h-1 bg-mercenario-danger rounded-full"></span>
-                            Infraestructura de Operaciones
-                        </div>
-
                         <h1 className="text-5xl sm:text-7xl md:text-[5.5rem] lg:text-[6.5rem] font-bold tracking-tighter leading-[1] text-black">
-                            La infraestructura operativa <br className="hidden md:block" />
-                            <span className="text-neutral-400 font-semibold">donde funciona tu empresa.</span>
+                            Una nueva forma de operar<br />
+                            <span className="text-neutral-400 font-semibold">pequeñas empresas.</span>
                         </h1>
 
-                        <p className="text-neutral-500 text-base md:text-xl max-w-2xl mx-auto leading-relaxed font-light tracking-wide mt-4">
-                            Una sola plataforma. Un solo flujo de datos. Una sola fuente de verdad. Centralizamos toda la operación de tu negocio sobre un núcleo operativo diseñado para el orden absoluto.
-                        </p>
+                        <div className="max-w-2xl mx-auto space-y-4 text-neutral-500 text-base md:text-lg leading-relaxed font-light tracking-wide mt-4">
+                            <p>La mayoría de las empresas trabaja con herramientas separadas.</p>
+                            <p className="text-xs uppercase tracking-widest text-neutral-400 font-medium">
+                                Agenda por un lado · Pagos por otro · WhatsApp · Correo · Facturación · Planillas · Recordatorios
+                            </p>
+                            <p className="pt-2 font-normal text-black">
+                                Cuando ninguna conversa entre sí, la operación depende de las personas. Mercenario conecta toda la operación para que tu empresa funcione como una sola.
+                            </p>
+                        </div>
 
                         <div className="pt-8">
                             <a href="#contacto" className="inline-flex items-center gap-2 px-8 py-4.5 bg-black text-white font-semibold text-[11px] uppercase tracking-widest hover:bg-neutral-800 transition-colors rounded-full">
-                                <span>Recuperar el Control</span>
+                                <span>Conversemos</span>
                                 <ChevronRight className="w-4 h-4" />
                             </a>
                         </div>
                     </motion.div>
                 </section>
 
-                {/* 2. LA OPERACIÓN - El Mapa Interactivo */}
+                {/* 2. SECCIÓN 2 - No necesitas más herramientas */}
+                <section className="w-full max-w-4xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100 space-y-8 text-center md:text-left">
+                    <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">El Enfoque</span>
+                    <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
+                        No necesitas más herramientas. <br />
+                        <span className="text-neutral-400 font-semibold">Necesitas que trabajen juntas.</span>
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-neutral-500 font-light text-sm md:text-base leading-relaxed pt-8 text-left">
+                        <div className="space-y-4">
+                            <p>Hoy probablemente tu empresa ya utiliza varias soluciones.</p>
+                            <p>Una para agendar. Otra para cobrar. Otra para emitir documentos. Otra para comunicarte con tus clientes.</p>
+                        </div>
+                        <div className="space-y-4">
+                            <p>El problema nunca fueron las herramientas.</p>
+                            <p className="font-semibold text-black">El problema es que ninguna trabaja con las demás. Cuando comienzan a comunicarse, la operación cambia por completo.</p>
+                        </div>
+                    </div>
+                </section>
+
+                {/* 3. SECCIÓN 3 - El Mapa Interactivo (Imagina que cada acción desencadena la siguiente) */}
                 <section className="w-full max-w-5xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100 flex flex-col items-center">
                     <div className="text-center max-w-2xl mb-20 space-y-4">
-                        <h2 className="text-sm font-semibold tracking-widest uppercase text-neutral-400">El Centro de Operaciones</h2>
+                        <h2 className="text-sm font-semibold tracking-widest uppercase text-neutral-400">Coordinación Total</h2>
                         <p className="text-2xl md:text-4xl font-bold tracking-tight text-black leading-tight">
-                            Observa cómo opera una empresa coordinada en tiempo real.
+                            Imagina que cada acción desencadena la siguiente.
                         </p>
                         <p className="text-sm text-neutral-500 font-light">
-                            Una sola acción del cliente activa una cadena de eventos autónomos entre todas las áreas del negocio.
+                            Sin copiar información. Sin repetir tareas. Sin depender de que alguien recuerde hacerlo.
                         </p>
                     </div>
 
@@ -145,10 +266,10 @@ export default function Home() {
                         {/* Panel de control de simulación */}
                         <div className="lg:col-span-1 space-y-6 bg-neutral-50 border border-neutral-100 p-8 rounded-2xl">
                             <div className="space-y-2">
-                                <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Simulación Operativa</span>
-                                <h3 className="text-xl font-bold text-black">Flujo Orgánico</h3>
+                                <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Simulador de Eventos</span>
+                                <h3 className="text-xl font-bold text-black">El Flujo Continuo</h3>
                                 <p className="text-xs text-neutral-500 leading-relaxed font-light">
-                                    Haz click en ejecutar para ver cómo viajan los datos a través del sistema nervioso de Mercenario IOS.
+                                    Haz click para observar la reacción en cadena de una operación completamente conectada.
                                 </p>
                             </div>
 
@@ -159,7 +280,7 @@ export default function Home() {
                                         className="flex-1 flex items-center justify-center gap-2 py-3.5 px-4 bg-black text-white text-[11px] font-semibold uppercase tracking-wider rounded-lg hover:bg-neutral-800 transition-all"
                                     >
                                         <Play className="w-3.5 h-3.5 fill-current" />
-                                        <span>Ejecutar Flujo</span>
+                                        <span>Ejecutar</span>
                                     </button>
                                 ) : (
                                     <div className="flex-1 flex items-center justify-center gap-2 py-3.5 px-4 bg-neutral-200 text-neutral-500 text-[11px] font-semibold uppercase tracking-wider rounded-lg cursor-not-allowed">
@@ -170,7 +291,6 @@ export default function Home() {
                                 <button 
                                     onClick={resetSimulation}
                                     className="p-3.5 border border-neutral-200 text-neutral-500 rounded-lg hover:bg-neutral-100 transition-all"
-                                    aria-label="Reiniciar flujo"
                                 >
                                     <RotateCcw className="w-4 h-4" />
                                 </button>
@@ -221,149 +341,124 @@ export default function Home() {
                     </div>
                 </section>
 
-                {/* 3. EL PROBLEMA - Caos y fragmentación */}
+                {/* 4. SECCIÓN 4 - Tu empresa ya tiene todo lo necesario (Integraciones) */}
                 <section className="w-full max-w-4xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100 space-y-12">
-                    <div className="space-y-8">
-                        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-[1.1]">
-                            Las empresas no dejan de crecer por falta de talento.
+                    <div className="space-y-4">
+                        <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Conectividad Nata</span>
+                        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
+                            Tu empresa ya tiene todo lo necesario. <br />
+                            <span className="text-neutral-400 font-semibold">Solo necesita empezar a trabajar como una.</span>
                         </h2>
-                        <h3 className="text-2xl md:text-4xl font-semibold tracking-tight text-neutral-400 leading-[1.1]">
-                            Dejan de crecer porque operan sobre sistemas fragmentados.
-                        </h3>
-                        <p className="text-base md:text-lg text-neutral-500 max-w-2xl leading-relaxed font-light pt-8">
-                            Durante años, la respuesta al crecimiento fue comprar más aplicaciones aisladas. Un sistema para vender, otro para administrar, otro para facturar. El resultado nunca fue eficiencia; fue un ecosistema caótico donde la información se duplica, las decisiones son lentas y se pierde el control.
-                        </p>
-                    </div>
-                </section>
-
-                {/* 4. LAS CONEXIONES (Las 7 Capacidades de la Arquitectura) */}
-                <section className="w-full max-w-4xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100">
-                    <div className="mb-24 space-y-4">
-                        <h2 className="text-sm font-semibold tracking-widest uppercase text-neutral-400">Arquitectura Base</h2>
-                        <p className="text-2xl md:text-4xl font-bold tracking-tight text-black max-w-2xl leading-tight">
-                            Siete capacidades fundamentales organizadas como un solo organismo.
+                        <p className="text-base text-neutral-500 max-w-2xl leading-relaxed font-light pt-4">
+                            Conectamos las herramientas que ya utilizas. No necesitas cambiar la forma en que trabajas. Necesitas que todo comience a conversar.
                         </p>
                     </div>
 
-                    <div className="relative border-l border-neutral-200 ml-2 space-y-20 py-4">
-                        {[
-                            { n: "01", title: "Adquisición", desc: "Control total del flujo de prospectos. Desde la atracción hasta la entrada al sistema central, generando demanda predecible." },
-                            { n: "02", title: "Inteligencia", desc: "Capacidad autónoma de respuesta y pre-calificación. Procesamiento de interacciones sin necesidad de intervención humana inmediata." },
-                            { n: "03", title: "Operación", desc: "El centro de gravedad de los datos. Registro único de clientes, inventario e historial para eliminar cualquier duplicidad." },
-                            { n: "04", title: "Coordinación", desc: "Sincronía de procesos lógicos. Aseguramos que la información fluya de un estado a otro sin tareas repetitivas o manuales." },
-                            { n: "05", title: "Finanzas", desc: "Capa transaccional integrada. Ejecución de cobros y emisión de documentación legal de manera invisible y fluida." },
-                            { n: "06", title: "Análisis", desc: "Visibilidad consolidada del rendimiento. Extracción de métricas clave del sistema para entender el comportamiento real del negocio." },
-                            { n: "07", title: "Dirección", desc: "Control gerencial absoluto. Visibilidad de rentabilidad, márgenes y costos de operación para guiar decisiones con certeza matemática." },
-                        ].map((cap, i) => (
-                            <div key={i} className="relative pl-8 md:pl-12 group">
-                                {/* Conector */}
-                                <div className="absolute -left-[4.5px] top-1.5 w-2 h-2 bg-neutral-200 rounded-full group-hover:bg-mercenario-danger transition-colors duration-500" />
-                                
-                                <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8">
-                                    <span className="text-[10px] font-mono tracking-widest text-neutral-400 md:w-8">{cap.n}</span>
-                                    <div>
-                                        <h3 className="text-lg md:text-xl font-bold text-black tracking-tight">{cap.title}</h3>
-                                        <p className="text-sm md:text-base text-neutral-500 leading-relaxed font-light mt-2 max-w-xl">{cap.desc}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+                    {/* Logos Grid */}
+                    <div className="grid grid-cols-3 md:grid-cols-6 gap-8 pt-8 grayscale opacity-45">
+                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">WhatsApp</div>
+                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">Google</div>
+                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">SII</div>
+                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">IMED</div>
+                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">Fonasa</div>
+                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">Previred</div>
+                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">Mercado Pago</div>
+                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">Transbank</div>
+                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">Meta</div>
+                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">Stripe</div>
+                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">Outlook</div>
+                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">APIs</div>
                     </div>
+
+                    <p className="text-xs text-neutral-400 font-medium italic pt-4">
+                        Cada empresa es distinta. Por eso cada operación se diseña de forma personalizada.
+                    </p>
                 </section>
 
-                {/* 5. LA SOLUCIÓN */}
-                <section className="w-full max-w-4xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100">
-                    <div className="space-y-8">
-                        <div className="w-1.5 h-1.5 bg-mercenario-danger rounded-full" />
-                        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-[1.1]">
-                            Mercenario IOS.
-                        </h2>
-                        <h3 className="text-2xl md:text-4xl font-semibold tracking-tight text-neutral-400 leading-[1.1]">
-                            El Sistema Inteligente de Operaciones para Empresas.
-                        </h3>
-                        <p className="text-base md:text-lg text-neutral-500 max-w-2xl leading-relaxed font-light pt-8">
-                            No es otro software. Construimos y configuramos la infraestructura operativa central de tu negocio, conectando a tus clientes, finanzas y operaciones sobre una misma red, eliminando el caos para siempre.
-                        </p>
-                    </div>
-                </section>
-
-                {/* 6. CONFIGURACIONES (Cómo se adapta) */}
+                {/* 5. SECCIÓN 5 - Una solución para cada operación */}
                 <section className="w-full max-w-6xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100">
                     <div className="mb-24 space-y-4">
-                        <h2 className="text-sm font-semibold tracking-widest uppercase text-neutral-400">Adaptación Estructural</h2>
-                        <p className="text-2xl md:text-4xl font-bold tracking-tight text-black max-w-3xl leading-tight">
-                            Una misma infraestructura. Diferentes configuraciones según los flujos exactos de tu industria.
-                        </p>
+                        <span className="text-[10px] font-semibold tracking-widest uppercase text-neutral-400">Sistemas de Trabajo</span>
+                        <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-black max-w-3xl leading-tight">
+                            Una solución para cada operación.
+                        </h2>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {[
-                            { title: "Health", desc: "La operación clínica funcionando de forma sincronizada." },
-                            { title: "Commerce", desc: "Negocio comercial e inventario centralizado en tiempo real." },
-                            { title: "Field", desc: "Operaciones en terreno, despachos y logística en una sola vista." },
-                            { title: "Gastro", desc: "Salón, cocina y administración operando a la misma velocidad." },
-                            { title: "Pet", desc: "Historial de pacientes y control financiero en el mismo núcleo." },
-                            { title: "Fit", desc: "Control de acceso y gestión de membresías consolidadas." },
-                            { title: "Tech", desc: "Gestión de soporte, asignaciones y tiempos de respuesta unificados." },
-                            { title: "Custom", desc: "La infraestructura esculpida para los procesos únicos de tu corporación." },
-                        ].map((conf, i) => (
-                            <div key={i} className="group border-t border-neutral-200 pt-6 flex flex-col hover:border-black transition-colors duration-500">
-                                <h3 className="text-lg font-bold text-black tracking-tight flex items-center justify-between">
-                                    {conf.title}
-                                    <ArrowUpRight className="w-4 h-4 text-neutral-300 group-hover:text-black transition-all duration-300 -translate-x-1 translate-y-1 group-hover:translate-x-0 group-hover:translate-y-0" />
-                                </h3>
-                                <p className="text-sm text-neutral-500 leading-relaxed font-light mt-2">{conf.desc}</p>
+                            { title: "Clínicas", capabilities: ["Agenda", "Pagos", "Ficha clínica", "Bonos", "Seguimiento", "Reportes"] },
+                            { title: "Centros estéticos", capabilities: ["Reservas", "Recordatorios", "Cobros", "Marketing", "Fidelización"] },
+                            { title: "Retail", capabilities: ["Ventas", "Inventario", "Clientes", "Facturación", "Automatizaciones"] },
+                            { title: "Empresas de servicios", capabilities: ["Clientes", "Proyectos", "Cobranza", "Administración", "Seguimiento"] }
+                        ].map((sector, i) => (
+                            <div key={i} className="border-t border-neutral-200 pt-6 flex flex-col justify-between min-h-[220px]">
+                                <h3 className="text-lg font-bold text-black tracking-tight">{sector.title}</h3>
+                                <ul className="text-xs text-neutral-500 font-medium tracking-wide space-y-2 mt-4 mb-auto">
+                                    {sector.capabilities.map((cap, cIdx) => (
+                                        <li key={cIdx} className="flex items-center gap-2">
+                                            <div className="w-1 h-1 bg-neutral-300 rounded-full" />
+                                            <span>{cap}</span>
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
                         ))}
                     </div>
                 </section>
 
-                {/* 7. EVIDENCIA (Proyectos Reales) */}
-                <section className="w-full pt-32 md:pt-48 flex flex-col items-center border-t border-neutral-100">
-                    <div className="text-center space-y-4 z-10 mb-16">
-                        <h2 className="text-sm font-semibold tracking-widest uppercase text-neutral-400">Despliegues</h2>
-                        <p className="text-2xl md:text-4xl font-bold tracking-tight text-black max-w-xl mx-auto leading-tight">
-                            Sistemas operando con éxito en entornos reales.
-                        </p>
+                {/* 6. SECCIÓN 6 - Mucho más que una buena experiencia */}
+                <section className="w-full max-w-4xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100 space-y-8">
+                    <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Impacto de Negocio</span>
+                    <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
+                        Mucho más que una buena experiencia para tus clientes. <br />
+                        <span className="text-neutral-400 font-semibold">Una mejor experiencia también significa una mejor empresa.</span>
+                    </h2>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-neutral-100 text-center md:text-left">
+                        <div>
+                            <span className="text-lg font-bold text-black">Más información.</span>
+                        </div>
+                        <div>
+                            <span className="text-lg font-bold text-black">Más control.</span>
+                        </div>
+                        <div>
+                            <span className="text-lg font-bold text-black">Más tiempo.</span>
+                        </div>
+                        <div>
+                            <span className="text-lg font-bold text-black">Mejores decisiones.</span>
+                        </div>
                     </div>
+                    <p className="text-sm md:text-base text-neutral-500 leading-relaxed font-light pt-4">
+                        Porque cuando toda la operación trabaja conectada, el crecimiento deja de depender de la improvisación.
+                    </p>
+                </section>
 
-                    <div className="relative w-full flex overflow-hidden py-10">
-                        {/* Gradientes laterales para difuminar */}
-                        <div className="absolute top-0 bottom-0 left-0 w-32 md:w-64 bg-gradient-to-r from-[#FCFCFC] to-transparent z-20 pointer-events-none" />
-                        <div className="absolute top-0 bottom-0 right-0 w-32 md:w-64 bg-gradient-to-l from-[#FCFCFC] to-transparent z-20 pointer-events-none" />
-
-                        <motion.div 
-                            className="flex gap-8 px-4"
-                            animate={{ x: ["0%", "-50%"] }}
-                            transition={{ ease: "linear", duration: 50, repeat: Infinity }}
+                {/* 7. SECCIÓN 7 - Explora cómo funciona una empresa conectada */}
+                <section className="w-full max-w-4xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100 text-center space-y-8 flex flex-col items-center">
+                    <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Centro de Conocimiento</span>
+                    <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-black max-w-2xl leading-tight">
+                        Explora cómo funciona una empresa conectada.
+                    </h2>
+                    <p className="text-sm md:text-base text-neutral-500 leading-relaxed font-light max-w-xl mx-auto">
+                        No importa si buscas mejorar tu clínica, tu centro estético o tu empresa. En Mercenario encontrarás una explicación clara de cada proceso, cada integración y cada herramienta que forma parte de una operación moderna.
+                    </p>
+                    <div className="pt-4">
+                        <button 
+                            onClick={() => setActiveMenu("conocimiento")}
+                            className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white font-semibold text-[11px] uppercase tracking-widest hover:bg-neutral-800 transition-colors rounded-full"
                         >
-                            {[...projects, ...projects, ...projects].map((project, idx) => (
-                                <a 
-                                    key={idx}
-                                    href={project.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex flex-col flex-shrink-0 w-[280px] md:w-[400px] group cursor-pointer"
-                                >
-                                    <div className="w-full aspect-[4/3] overflow-hidden bg-neutral-100 border border-neutral-200/60 mb-6 rounded-lg">
-                                        <img src={project.image} alt={project.title} className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" />
-                                    </div>
-                                    <div className="flex flex-col px-2">
-                                        <p className="text-[10px] font-semibold text-neutral-400 tracking-wider uppercase mb-2">{project.cat}</p>
-                                        <h3 className="text-lg font-bold text-black tracking-tight">{project.title}</h3>
-                                        <p className="text-sm text-neutral-500 font-light mt-1">{project.desc}</p>
-                                    </div>
-                                </a>
-                            ))}
-                        </motion.div>
+                            <span>Explorar el centro de conocimiento</span>
+                            <ChevronRight className="w-4 h-4" />
+                        </button>
                     </div>
                 </section>
 
-                {/* 8. DIAGNÓSTICO (Formulario Minimalista) */}
+                {/* Última Sección: Hablemos de tu empresa */}
                 <motion.section id="contacto" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="w-full py-32 md:py-48 max-w-2xl mx-auto space-y-12 flex flex-col items-center border-t border-neutral-100 mt-24">
                     <div className="text-center space-y-4">
-                        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-black">Recuperar el control.</h2>
-                        <p className="text-sm text-neutral-500 font-light">Comienza el proceso de diagnóstico de tu infraestructura.</p>
+                        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-black">Hablemos de tu empresa.</h2>
+                        <p className="text-sm text-neutral-500 font-light max-w-md mx-auto">
+                            Cada empresa opera de forma distinta. Por eso cada implementación comienza entendiendo cómo funciona hoy tu operación. Agenda una reunión y conversemos sobre cómo podría funcionar mañana.
+                        </p>
                     </div>
 
                     <form onSubmit={handleFormSubmit} className="w-full space-y-8">
@@ -380,14 +475,14 @@ export default function Home() {
                         
                         <div className="space-y-2 pt-4">
                             <label className="text-[10px] font-semibold text-neutral-400 uppercase tracking-widest">Situación Operativa</label>
-                            <input type="text" value={formData.challenge} onChange={(e) => setFormData({...formData, challenge: e.target.value})} className="w-full bg-transparent border-b border-neutral-200 py-3.5 text-sm focus:outline-none focus:border-black text-black placeholder:text-neutral-300 transition-colors" placeholder="Ej: Necesitamos centralizar la operación..." required disabled={formStatus === "loading" || formStatus === "success"} />
+                            <input type="text" value={formData.challenge} onChange={(e) => setFormData({...formData, challenge: e.target.value})} className="w-full bg-transparent border-b border-neutral-200 py-3.5 text-sm focus:outline-none focus:border-black text-black placeholder:text-neutral-300 transition-colors" placeholder="Ej: Necesitamos conectar las agendas con la facturación..." required disabled={formStatus === "loading" || formStatus === "success"} />
                         </div>
                         
                         {formStatus === "error" && (
                             <p className="text-mercenario-danger text-xs mt-4 text-center">No se pudo procesar la solicitud. Intente más tarde.</p>
                         )}
                         {formStatus === "success" && (
-                            <p className="text-emerald-600 text-xs mt-4 text-center font-semibold">Diagnóstico solicitado con éxito. Nos comunicaremos en breve.</p>
+                            <p className="text-emerald-600 text-xs mt-4 text-center font-semibold">Solicitud recibida. Nos pondremos en contacto en breve.</p>
                         )}
 
                         <div className="pt-8 flex justify-center">
@@ -397,7 +492,7 @@ export default function Home() {
                                 className="inline-flex items-center gap-2 px-8 py-4.5 bg-black text-white font-semibold text-[11px] uppercase tracking-widest hover:bg-neutral-800 disabled:bg-neutral-200 disabled:text-neutral-400 transition-colors rounded-full"
                             >
                                 {formStatus === "loading" ? "Procesando..." : formStatus === "success" ? "Completado" : (
-                                    <><span>Iniciar Diagnóstico</span><ArrowRight className="w-4 h-4" /></>
+                                    <><span>Agendar reunión</span><ArrowRight className="w-4 h-4" /></>
                                 )}
                             </button>
                         </div>
@@ -406,8 +501,41 @@ export default function Home() {
 
             </main>
 
-            {/* Stark footer */}
-            <footer className="w-full py-16 border-t border-neutral-100 text-center text-[10px] text-neutral-400 tracking-wider uppercase bg-white">&copy; {new Date().getFullYear()} Mercenario IOS. All rights reserved.</footer>
+            {/* Stark footer with all Sitemap sections */}
+            <footer className="w-full py-16 border-t border-neutral-100 bg-white flex flex-col items-center">
+                <div className="max-w-7xl w-full px-6 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 text-[11px] text-neutral-500 font-medium">
+                    <div className="space-y-4">
+                        <span className="font-bold text-black">MERCENARIO</span>
+                        <p className="font-light text-neutral-400 leading-relaxed">Una nueva forma de operar pequeñas empresas.</p>
+                    </div>
+                    <div className="space-y-2 flex flex-col">
+                        <span className="font-bold text-black uppercase tracking-wider mb-2">Soluciones</span>
+                        <Link href="/soluciones/health" className="hover:text-black transition-colors">Salud</Link>
+                        <Link href="/soluciones/health" className="hover:text-black transition-colors">Estética</Link>
+                        <Link href="/soluciones/commerce" className="hover:text-black transition-colors">Retail</Link>
+                        <Link href="/soluciones/tech" className="hover:text-black transition-colors">Servicios</Link>
+                    </div>
+                    <div className="space-y-2 flex flex-col">
+                        <span className="font-bold text-black uppercase tracking-wider mb-2">Conocimiento</span>
+                        <Link href="/centro-de-conocimiento/que-es-un-erp" className="hover:text-black transition-colors">¿Qué es un ERP?</Link>
+                        <Link href="/centro-de-conocimiento/que-es-un-crm" className="hover:text-black transition-colors">¿Qué es un CRM?</Link>
+                        <Link href="/centro-de-conocimiento/que-es-una-api" className="hover:text-black transition-colors">¿Qué es una API?</Link>
+                        <Link href="/centro-de-conocimiento/que-es-un-webhook" className="hover:text-black transition-colors">¿Qué es un webhook?</Link>
+                    </div>
+                    <div className="space-y-2 flex flex-col">
+                        <span className="font-bold text-black uppercase tracking-wider mb-2">Integraciones</span>
+                        <span className="text-neutral-400 select-none">SII / IMED / Fonasa</span>
+                        <span className="text-neutral-400 select-none">WhatsApp / Mercado Pago</span>
+                        <span className="text-neutral-400 select-none">Transbank / Stripe</span>
+                    </div>
+                    <div className="space-y-2 flex flex-col">
+                        <span className="font-bold text-black uppercase tracking-wider mb-2">Empresa</span>
+                        <Link href="/#contacto" className="hover:text-black transition-colors">Contacto</Link>
+                        <Link href="/#contacto" className="hover:text-black transition-colors">Agenda una reunión</Link>
+                    </div>
+                </div>
+                <div className="w-full text-center text-[9px] text-neutral-400 tracking-wider uppercase mt-16">&copy; {new Date().getFullYear()} Mercenario IOS. All rights reserved.</div>
+            </footer>
 
         </div>
     );
