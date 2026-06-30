@@ -22,9 +22,14 @@ export default function Home() {
     const [isPlaying, setIsPlaying] = useState(false);
 
     // Navigation Menu States
-    const [activeMenu, setActiveMenu] = useState<"soluciones" | "operacion" | "integraciones" | "conocimiento" | null>(null);
+    const [activeMenu, setActiveMenu] = useState<"experiencia" | "soluciones" | "operacion" | "integraciones" | "conocimiento" | null>(null);
 
     const menuItems = {
+        experiencia: [
+            { label: "¿Qué es la experiencia de cliente?", href: "/centro-de-conocimiento/que-es-experiencia-de-cliente" },
+            { label: "Vive la experiencia", href: "/experiencia/vive-la-experiencia" },
+            { label: "Casos reales", href: "#" }
+        ],
         soluciones: [
             { label: "Salud", href: "/soluciones/health" },
             { label: "Estética", href: "/soluciones/health" },
@@ -35,6 +40,7 @@ export default function Home() {
             { label: "Empresas", href: "/soluciones/custom" }
         ],
         operacion: [
+            { label: "¿Qué es una operación conectada?", href: "/operacion/operacion-conectada" },
             { label: "Marketing", href: "/operacion/marketing" },
             { label: "CRM", href: "/operacion/crm" },
             { label: "Agenda", href: "/operacion/agenda" },
@@ -147,6 +153,10 @@ export default function Home() {
 
                         {/* Navigation Mega Links */}
                         <nav className="hidden lg:flex items-center gap-6 text-[10px] font-semibold tracking-wider text-neutral-400 uppercase select-none">
+                            <div className="relative cursor-pointer py-2 hover:text-black transition-colors flex items-center gap-1" onMouseEnter={() => setActiveMenu("experiencia")}>
+                                <span>Experiencia</span>
+                                <ChevronDown className="w-3 h-3" />
+                            </div>
                             <div className="relative cursor-pointer py-2 hover:text-black transition-colors flex items-center gap-1" onMouseEnter={() => setActiveMenu("soluciones")}>
                                 <span>Soluciones</span>
                                 <ChevronDown className="w-3 h-3" />
