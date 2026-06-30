@@ -8,7 +8,9 @@ import {
     ArrowUpRight,
     Play,
     RotateCcw,
-    ChevronDown
+    ChevronDown,
+    Menu,
+    X
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
@@ -23,6 +25,17 @@ export default function Home() {
 
     // Navigation Menu States
     const [activeMenu, setActiveMenu] = useState<"experiencia" | "soluciones" | "operacion" | "integraciones" | "conocimiento" | null>(null);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (isMobileMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => { document.body.style.overflow = 'unset'; };
+    }, [isMobileMenuOpen]);
 
     const menuItems = {
         experiencia: [
@@ -185,10 +198,76 @@ export default function Home() {
                         </nav>
                     </div>
 
-                    <Link href="#contacto" className="text-[11px] font-semibold tracking-wider text-neutral-500 hover:text-black uppercase transition-colors">
+                    <Link href="#contacto" className="hidden lg:block text-[11px] font-semibold tracking-wider text-neutral-500 hover:text-black uppercase transition-colors">
                         Iniciar Diagnóstico
                     </Link>
+
+                    <button 
+                        className="lg:hidden p-2 -mr-2 text-black"
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    >
+                        {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                    </button>
                 </div>
+
+                {/* Mobile Menu Overlay */}
+                <AnimatePresence>
+                    {isMobileMenuOpen && (
+                        <motion.div 
+                            initial={{ opacity: 0, y: -10 }} 
+                            animate={{ opacity: 1, y: 0 }} 
+                            exit={{ opacity: 0, y: -10 }} 
+                            transition={{ duration: 0.2 }}
+                            className="absolute top-full left-0 w-full h-[calc(100vh-60px)] bg-[#FCFCFC] border-t border-neutral-100 z-50 overflow-y-auto lg:hidden flex flex-col"
+                        >
+                            <div className="px-6 py-8 flex flex-col space-y-6">
+                                {Object.entries(menuItems).map(([categoryKey, items]) => (
+                                    <div key={categoryKey} className="border-b border-neutral-100 pb-4">
+                                        <button 
+                                            onClick={() => setExpandedCategory(expandedCategory === categoryKey ? null : categoryKey)}
+                                            className="w-full flex items-center justify-between py-2 text-[13px] font-bold tracking-widest text-black uppercase"
+                                        >
+                                            {categoryKey === "conocimiento" ? "Centro de Conocimiento" : categoryKey}
+                                            <ChevronDown className={`w-4 h-4 transition-transform ${expandedCategory === categoryKey ? "rotate-180" : ""}`} />
+                                        </button>
+                                        
+                                        <AnimatePresence>
+                                            {expandedCategory === categoryKey && (
+                                                <motion.div
+                                                    initial={{ height: 0, opacity: 0 }}
+                                                    animate={{ height: "auto", opacity: 1 }}
+                                                    exit={{ height: 0, opacity: 0 }}
+                                                    className="overflow-hidden"
+                                                >
+                                                    <div className="flex flex-col space-y-3 pt-4 pl-2">
+                                                        {items.map((item, idx) => (
+                                                            <Link 
+                                                                key={idx} 
+                                                                href={item.href}
+                                                                onClick={() => setIsMobileMenuOpen(false)}
+                                                                className="text-sm font-medium text-neutral-500 hover:text-black flex items-center gap-2"
+                                                            >
+                                                                <div className="w-1.5 h-1.5 rounded-full bg-neutral-300" />
+                                                                {item.label}
+                                                            </Link>
+                                                        ))}
+                                                    </div>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+                                    </div>
+                                ))}
+                                <Link 
+                                    href="#contacto" 
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="w-full mt-6 py-4 bg-black text-white text-center text-[11px] font-semibold tracking-widest uppercase rounded-full"
+                                >
+                                    Iniciar Diagnóstico
+                                </Link>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
                 {/* Dropdown panel */}
                 <AnimatePresence>
