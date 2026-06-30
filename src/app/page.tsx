@@ -41,7 +41,10 @@ export default function Home() {
         ],
         operacion: [
             { label: "¿Qué es una operación conectada?", href: "/operacion/operacion-conectada" },
+            { label: "El flujo de información", href: "/operacion/informacion" },
+            { label: "Centro de Operaciones", href: "/operacion/centro-de-operaciones" },
             { label: "Marketing", href: "/operacion/marketing" },
+            { label: "Comunicación y Chats", href: "/operacion/comunicacion" },
             { label: "CRM", href: "/operacion/crm" },
             { label: "Agenda", href: "/operacion/agenda" },
             { label: "Pagos", href: "/operacion/pagos" },
@@ -55,6 +58,7 @@ export default function Home() {
             { label: "Automatizaciones", href: "/operacion/automatizaciones" }
         ],
         integraciones: [
+            { label: "¿Puedo usar mis herramientas?", href: "/integraciones/no-necesitas-comenzar-de-cero" },
             { label: "SII", href: "#" },
             { label: "IMED", href: "#" },
             { label: "Fonasa", href: "#" },

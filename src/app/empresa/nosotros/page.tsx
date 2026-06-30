@@ -136,7 +136,7 @@ export default function NosotrosPage() {
                         <h4 className="text-lg font-bold text-black">Cuéntanos cómo funciona hoy tu empresa.</h4>
                         <p className="text-sm text-neutral-500 font-light">Nosotros te mostraremos cómo podría funcionar mañana.</p>
                     </div>
-                    <Link href="/#contacto" className="inline-flex items-center gap-2 px-8 py-4.5 bg-black text-white font-semibold text-[11px] uppercase tracking-widest hover:bg-neutral-800 transition-colors rounded-full">
+                    <Link href="/operacion/informacion" className="inline-flex items-center gap-2 px-8 py-4.5 bg-black text-white font-semibold text-[11px] uppercase tracking-widest hover:bg-neutral-800 transition-colors rounded-full">
                         <span>Agendar una reunión</span>
                         <ChevronRight className="w-4 h-4" />
                     </Link>
