@@ -16,7 +16,7 @@ import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 
 export default function Home() {
-    const [formData, setFormData] = useState({ name: "", email: "", challenge: "", budget: "" });
+    const [formData, setFormData] = useState({ name: "", email: "", challenge: "", budget: "", _honeypot: "" });
     const [formStatus, setFormStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
     
     // Interactive Map state
@@ -144,6 +144,15 @@ export default function Home() {
 
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        
+        // Honeypot anti-spam check
+        if (formData._honeypot) {
+            setFormStatus("success");
+            setFormData({ name: "", email: "", challenge: "", budget: "", _honeypot: "" });
+            setTimeout(() => setFormStatus("idle"), 5000);
+            return;
+        }
+
         setFormStatus("loading");
         const { error } = await supabase
             .from("leads")
@@ -154,7 +163,7 @@ export default function Home() {
             setTimeout(() => setFormStatus("idle"), 4000);
         } else {
             setFormStatus("success");
-            setFormData({ name: "", email: "", challenge: "", budget: "" });
+            setFormData({ name: "", email: "", challenge: "", budget: "", _honeypot: "" });
             setTimeout(() => setFormStatus("idle"), 5000);
         }
     };
@@ -560,6 +569,20 @@ export default function Home() {
                     </div>
 
                     <form onSubmit={handleFormSubmit} className="w-full space-y-8">
+                        {/* Honeypot field - hidden from users, visible to bots */}
+                        <div className="absolute left-[-9999px] top-[-9999px]" aria-hidden="true">
+                            <label htmlFor="_honeypot">Leave this field empty</label>
+                            <input 
+                                type="text" 
+                                id="_honeypot" 
+                                name="_honeypot" 
+                                tabIndex={-1} 
+                                autoComplete="off"
+                                value={formData._honeypot} 
+                                onChange={(e) => setFormData({...formData, _honeypot: e.target.value})} 
+                            />
+                        </div>
+
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div className="space-y-2">
                                 <label className="text-[10px] font-semibold text-neutral-400 uppercase tracking-widest">Empresa</label>

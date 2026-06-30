@@ -13,12 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mercenario | Operaciones Tácticas de Growth & Automatización",
-  description: "Automatizamos tu crecimiento con pautas de respuesta directa, embudos de conversión y arquitectura SaaS. Ejecución táctica 360 para escalar ventas.",
-  keywords: ["marketing digital", "automatización de ventas", "SaaS", "growth hacking", "pauta digital", "Mercenario"],
+  title: "Mercenario IOS | Una nueva forma de operar pequeñas empresas",
+  description: "Mercenario conecta toda la operación para que tu empresa funcione como una sola. Agenda, facturación, pagos, CRM, ERP y más en una operación conectada.",
+  keywords: ["operación conectada", "SaaS", "automatización de empresas", "Mercenario IOS", "sistema operativo empresarial", "ERP", "CRM"],
   openGraph: {
-    title: "Mercenario | Operaciones Tácticas de Growth",
-    description: "Diseñamos y escalamos toda tu cadena de ventas con arquitectura técnica.",
+    title: "Mercenario IOS | Operación Conectada",
+    description: "Una nueva forma de operar pequeñas empresas. Conectamos todas las herramientas para que funcionen como una sola.",
     url: "https://mercenario.io",
     siteName: "Mercenario",
     images: [
@@ -40,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="es"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
