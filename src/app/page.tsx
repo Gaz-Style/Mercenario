@@ -45,12 +45,14 @@ export default function Home() {
         ],
         soluciones: [
             { label: "Salud", href: "/soluciones/health" },
-            { label: "Estética", href: "/soluciones/health" },
-            { label: "Retail", href: "/soluciones/commerce" },
-            { label: "Servicios", href: "/soluciones/tech" },
-            { label: "Educación", href: "/soluciones/custom" },
-            { label: "Industria", href: "/soluciones/field" },
-            { label: "Empresas", href: "/soluciones/custom" }
+            { label: "Comercio", href: "/soluciones/comercio" },
+            { label: "Gastronomía", href: "/soluciones/gastronomia" },
+            { label: "Servicios", href: "/soluciones/servicios" },
+            { label: "Terreno", href: "/soluciones/terreno" },
+            { label: "Gimnasios", href: "/soluciones/gimnasios" },
+            { label: "Veterinarias", href: "/soluciones/veterinarias" },
+            { label: "Tecnología", href: "/soluciones/tecnologia" },
+            { label: "Personalizado", href: "/soluciones/personalizadas" }
         ],
         operacion: [
             { label: "¿Cómo funciona una empresa?", href: "/operacion/como-funciona-una-empresa" },
@@ -632,9 +634,14 @@ export default function Home() {
                     <div className="space-y-2 flex flex-col">
                         <span className="font-bold text-black uppercase tracking-wider mb-2">Soluciones</span>
                         <Link href="/soluciones/health" className="hover:text-black transition-colors">Salud</Link>
-                        <Link href="/soluciones/health" className="hover:text-black transition-colors">Estética</Link>
-                        <Link href="/soluciones/commerce" className="hover:text-black transition-colors">Retail</Link>
-                        <Link href="/soluciones/tech" className="hover:text-black transition-colors">Servicios</Link>
+                        <Link href="/soluciones/comercio" className="hover:text-black transition-colors">Comercio</Link>
+                        <Link href="/soluciones/gastronomia" className="hover:text-black transition-colors">Gastronomía</Link>
+                        <Link href="/soluciones/servicios" className="hover:text-black transition-colors">Servicios</Link>
+                        <Link href="/soluciones/terreno" className="hover:text-black transition-colors">Terreno</Link>
+                        <Link href="/soluciones/gimnasios" className="hover:text-black transition-colors">Gimnasios</Link>
+                        <Link href="/soluciones/veterinarias" className="hover:text-black transition-colors">Veterinarias</Link>
+                        <Link href="/soluciones/tecnologia" className="hover:text-black transition-colors">Tecnología</Link>
+                        <Link href="/soluciones/personalizadas" className="hover:text-black transition-colors">Personalizado</Link>
                     </div>
                     <div className="space-y-2 flex flex-col">
                         <span className="font-bold text-black uppercase tracking-wider mb-2">Conocimiento</span>

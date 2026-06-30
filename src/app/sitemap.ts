@@ -42,7 +42,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/operacion/por-que-existe',
     '/operacion/reportes',
     '/operacion/todas-empresas',
-    '/soluciones/health'
+    '/soluciones/health',
+    '/soluciones/comercio',
+    '/soluciones/gastronomia',
+    '/soluciones/veterinarias',
+    '/soluciones/gimnasios',
+    '/soluciones/servicios',
+    '/soluciones/terreno',
+    '/soluciones/tecnologia',
+    '/soluciones/personalizadas'
   ];
 
   return routes.map((route) => ({
