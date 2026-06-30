@@ -40,11 +40,16 @@ export default function Home() {
             { label: "Empresas", href: "/soluciones/custom" }
         ],
         operacion: [
+            { label: "¿Cómo funciona una empresa?", href: "/operacion/como-funciona-una-empresa" },
             { label: "¿Qué es una operación conectada?", href: "/operacion/operacion-conectada" },
             { label: "El flujo de información", href: "/operacion/informacion" },
             { label: "Centro de Operaciones", href: "/operacion/centro-de-operaciones" },
             { label: "Marketing", href: "/operacion/marketing" },
             { label: "Comunicación y Chats", href: "/operacion/comunicacion" },
+            { label: "Administración", href: "/operacion/administracion" },
+            { label: "Acto Médico", href: "/operacion/acto-medico" },
+            { label: "Todas las empresas", href: "/operacion/todas-empresas" },
+            { label: "Así comienza una implementación", href: "/operacion/como-se-soluciona" },
             { label: "CRM", href: "/operacion/crm" },
             { label: "Agenda", href: "/operacion/agenda" },
             { label: "Pagos", href: "/operacion/pagos" },
@@ -60,8 +65,8 @@ export default function Home() {
         integraciones: [
             { label: "¿Puedo usar mis herramientas?", href: "/integraciones/no-necesitas-comenzar-de-cero" },
             { label: "SII", href: "#" },
-            { label: "IMED", href: "#" },
-            { label: "Fonasa", href: "#" },
+            { label: "IMED", href: "/centro-de-conocimiento/que-es-imed" },
+            { label: "Fonasa", href: "/centro-de-conocimiento/que-es-fonasa" },
             { label: "Previred", href: "#" },
             { label: "WhatsApp", href: "#" },
             { label: "Meta", href: "#" },
