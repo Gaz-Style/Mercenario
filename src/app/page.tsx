@@ -281,6 +281,17 @@ export default function Home() {
                 <div className="w-full max-w-7xl mx-auto px-6 pb-32 relative z-20 flex flex-col items-center">
 
                 {/* 3. SECCIÓN 3 - La Operación Viva (Mapa de Metro) */}
+                <div className="w-full max-w-5xl mx-auto px-4 pt-32 md:pt-48 flex flex-col items-center">
+                    <div className="text-center max-w-2xl mb-20 space-y-4">
+                        <h2 className="text-sm font-semibold tracking-widest uppercase text-neutral-400">Coordinación Total</h2>
+                        <p className="text-2xl md:text-4xl font-bold tracking-tight text-black leading-tight">
+                            Imagina que cada acción desencadena la siguiente.
+                        </p>
+                        <p className="text-sm text-neutral-500 font-light">
+                            Sin copiar información. Sin repetir tareas. Sin depender de que alguien recuerde hacerlo.
+                        </p>
+                    </div>
+                </div>
                 <OperationMap />
 
                 {/* 4. SECCIÓN 4 - Tu empresa ya tiene todo lo necesario (Integraciones) */}
