@@ -74,17 +74,17 @@ export default function HeroV2() {
     const brandOpacity = useTransform(smoothProgress, [0.65, 0.75, 1], [0, 1, 1]);
     const brandY = useTransform(smoothProgress, [0.65, 0.75], [20, 0]);
 
-    // 5. Parallax Exit Effect (Stays perfectly still and full size, just fades out while next section overlaps)
-    const exitOpacity = useTransform(smoothProgress, [0.85, 1], [1, 0]); // Fade entire hero out to reveal white
-    const exitScale = useTransform(smoothProgress, [0.85, 1], [1, 1]); // Keeps it full width, no borders
-    const exitY = useTransform(smoothProgress, [0.85, 1], [0, 0]); // Does not move up or down
+    // 5. Fade to White (Covers everything, including the video and previous texts)
+    const fadeToWhite = useTransform(smoothProgress, [0.8, 0.85], [0, 1]);
+
+    // 6. Act 6: The Approach (New Section 2, mapped to scroll)
+    const act6Opacity = useTransform(smoothProgress, [0.85, 0.95], [0, 1]);
 
     return (
-        <section ref={containerRef} className="relative w-full h-[150dvh] bg-white">
+        <section ref={containerRef} className="relative w-full h-[200dvh] bg-white">
             
             {/* The Sticky Viewport */}
             <motion.div 
-                style={{ opacity: exitOpacity, scale: exitScale, y: exitY }} 
                 className="sticky top-0 w-full h-[100dvh] overflow-hidden bg-black flex items-center justify-center origin-bottom"
             >
                 
@@ -93,6 +93,7 @@ export default function HeroV2() {
                     <video
                         ref={videoRef}
                         src="/videos/hero-scrub5.mp4" 
+                        autoPlay
                         playsInline
                         muted
                         preload="auto"
@@ -146,6 +147,29 @@ export default function HeroV2() {
                     </div>
                 </motion.div>
 
+                {/* Fade to White Cover */}
+                <motion.div style={{ opacity: fadeToWhite }} className="absolute inset-0 z-50 bg-white pointer-events-none" />
+
+                {/* Act 6: The Approach (Previously Section 2) */}
+                <motion.div style={{ opacity: act6Opacity }} className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-white pointer-events-none">
+                    <div className="w-full max-w-4xl mx-auto px-4 space-y-8 text-center md:text-left pointer-events-auto">
+                        <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">El Enfoque</span>
+                        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
+                            No necesitas más herramientas. <br />
+                            <span className="text-neutral-400 font-semibold">Necesitas que trabajen juntas.</span>
+                        </h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-neutral-500 font-light text-sm md:text-base leading-relaxed pt-8 text-left">
+                            <div className="space-y-4">
+                                <p>Hoy probablemente tu empresa ya utiliza varias soluciones.</p>
+                                <p>Una para agendar. Otra para cobrar. Otra para emitir documentos. Otra para comunicarte con tus clientes.</p>
+                            </div>
+                            <div className="space-y-4">
+                                <p>El problema nunca fueron las herramientas.</p>
+                                <p className="font-semibold text-black">El problema es que ninguna trabaja con las demás. Cuando comienzan a comunicarse, la operación cambia por completo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
 
             </motion.div>
         </section>

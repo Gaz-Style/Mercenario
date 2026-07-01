@@ -316,27 +316,8 @@ export default function Home() {
                 {/* 1. HERO V2 - El Punto de Quiebre */}
                 <HeroV2 />
 
-                {/* Contenido posterior al Hero, superpuesto para transición sin hueco blanco */}
-                <div className="w-full max-w-7xl mx-auto px-6 pt-12 pb-32 relative z-20 -mt-[25dvh] flex flex-col items-center">
-
-                {/* 2. SECCIÓN 2 - No necesitas más herramientas */}
-                <section className="w-full max-w-4xl mx-auto px-4 py-32 md:py-48 space-y-8 text-center md:text-left">
-                    <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">El Enfoque</span>
-                    <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
-                        No necesitas más herramientas. <br />
-                        <span className="text-neutral-400 font-semibold">Necesitas que trabajen juntas.</span>
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-neutral-500 font-light text-sm md:text-base leading-relaxed pt-8 text-left">
-                        <div className="space-y-4">
-                            <p>Hoy probablemente tu empresa ya utiliza varias soluciones.</p>
-                            <p>Una para agendar. Otra para cobrar. Otra para emitir documentos. Otra para comunicarte con tus clientes.</p>
-                        </div>
-                        <div className="space-y-4">
-                            <p>El problema nunca fueron las herramientas.</p>
-                            <p className="font-semibold text-black">El problema es que ninguna trabaja con las demás. Cuando comienzan a comunicarse, la operación cambia por completo.</p>
-                        </div>
-                    </div>
-                </section>
+                {/* Contenido posterior al Hero */}
+                <div className="w-full max-w-7xl mx-auto px-6 pb-32 relative z-20 flex flex-col items-center">
 
                 {/* 3. SECCIÓN 3 - El Mapa Interactivo */}
                 <section className="w-full max-w-5xl mx-auto px-4 py-32 md:py-48 flex flex-col items-center">
