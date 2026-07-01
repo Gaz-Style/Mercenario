@@ -7,12 +7,12 @@ import Image from "next/image";
 
 export default function HeroV2() {
     const containerRef = useRef<HTMLDivElement>(null);
-    const videoRef = useRef<HTMLVideoElement>(null);
+    const videoContainerRef = useRef<HTMLDivElement>(null);
     const [videoLoaded, setVideoLoaded] = useState(false);
 
     // CRITICAL iOS FIX: Force iOS Safari to unlock the video without showing a play button
     useEffect(() => {
-        const video = videoRef.current;
+        const video = videoContainerRef.current?.querySelector('video');
         if (!video) return;
 
         // Force native attributes that React sometimes misses
@@ -53,20 +53,21 @@ export default function HeroV2() {
 
         // We listen to the smoothed progress to update the video frame
         const unsubscribe = smoothProgress.on("change", (latestProgress) => {
-            if (videoRef.current && videoRef.current.readyState >= 2) { 
+            const video = videoContainerRef.current?.querySelector('video');
+            if (video && video.readyState >= 2) { 
                 // CRITICAL FIX: Clamp progress to prevent iOS bounce scroll (negative values) from breaking the video currentTime
                 const clampedProgress = Math.max(0, Math.min(latestProgress, 1));
                 
                 const END_TRIM_SECONDS = 1.5; 
-                const maxDuration = Math.max(0, videoRef.current.duration - END_TRIM_SECONDS);
+                const maxDuration = Math.max(0, video.duration - END_TRIM_SECONDS);
                 
                 const videoProgress = Math.min(clampedProgress / 0.75, 1);
                 const targetTime = videoProgress * maxDuration;
                 
                 cancelAnimationFrame(animationFrameId);
                 animationFrameId = requestAnimationFrame(() => {
-                    if (videoRef.current) {
-                        videoRef.current.currentTime = targetTime;
+                    if (video) {
+                        video.currentTime = targetTime;
                     }
                 });
             }
@@ -80,9 +81,10 @@ export default function HeroV2() {
 
     // Handle initial video load directly in JSX now
     const handleVideoLoad = () => {
-        if (videoRef.current) {
+        const video = videoContainerRef.current?.querySelector('video');
+        if (video) {
             setVideoLoaded(true);
-            videoRef.current.pause();
+            video.pause();
         }
     };
 
@@ -113,27 +115,27 @@ export default function HeroV2() {
     const act6Opacity = useTransform(smoothProgress, [0.85, 0.95], [0, 1]);
 
     return (
-        <section ref={containerRef} className="relative w-full h-[300vh] bg-white">
+        <section ref={containerRef} className="relative w-full h-[300svh] bg-white">
             
             {/* The Sticky Viewport */}
             <motion.div 
-                className="sticky top-0 w-full h-screen overflow-hidden bg-black flex items-center justify-center origin-bottom"
+                className="sticky top-0 w-full h-[100svh] overflow-hidden bg-black flex items-center justify-center origin-bottom"
             >
                 
                 {/* --- VIDEO LAYER --- */}
-                <div className="absolute inset-0 z-0 bg-black">
-                    <video
-                        ref={videoRef}
-                        src="/videos/hero-scrub5.mp4" 
-                        autoPlay
-                        playsInline
-                        muted
-                        preload="auto"
-                        onLoadedMetadata={handleVideoLoad}
-                        onCanPlay={handleVideoLoad}
-                        className="object-cover object-center w-full h-full"
-                        style={{ pointerEvents: "none" }} // Ensure it doesn't capture touches
-                    />
+                <div className="absolute inset-0 z-0 bg-black" ref={videoContainerRef}>
+                    <div dangerouslySetInnerHTML={{ __html: `
+                        <video
+                            src="/videos/hero-scrub5.mp4"
+                            autoplay
+                            loop
+                            muted
+                            playsinline
+                            preload="auto"
+                            class="object-cover object-center w-full h-full"
+                            style="pointer-events: none;"
+                        ></video>
+                    `}} className="w-full h-full" />
                     {/* Cinematic Dark Overlay for Text Legibility */}
                     <motion.div style={{ opacity: overlayOpacity }} className="absolute inset-0 bg-black/60 pointer-events-none" />
                 </div>
