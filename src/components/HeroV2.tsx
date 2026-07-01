@@ -16,38 +16,37 @@ export default function HeroV2() {
         offset: ["start start", "end end"]
     });
 
-    // Bypass useSpring completely for 1:1 direct native scroll tracking.
-    // This eliminates any artificial delay or "rubber-banding" (lag/accelerate).
-    const smoothProgress = scrollYProgress;
+    // We restore a balanced spring to smooth out touch input without causing lag.
+    const smoothProgress = useSpring(scrollYProgress, {
+        stiffness: 300,
+        damping: 40,
+        restDelta: 0.001
+    });
 
     // --------------------------------------------------------
-    // VIDEO SCRUBBING LOGIC (Optimized for Main Thread)
+    // VIDEO SCRUBBING LOGIC (Optimized for Main Thread & iOS Bounce)
     // --------------------------------------------------------
     useEffect(() => {
         let animationFrameId: number;
-        let lastTargetTime = -1;
 
-        // We listen to the raw scroll progress to update the video frame
+        // We listen to the smoothed progress to update the video frame
         const unsubscribe = smoothProgress.on("change", (latestProgress) => {
             if (videoRef.current && videoRef.current.readyState >= 2) { 
+                // CRITICAL FIX: Clamp progress to prevent iOS bounce scroll (negative values) from breaking the video currentTime
+                const clampedProgress = Math.max(0, Math.min(latestProgress, 1));
+                
                 const END_TRIM_SECONDS = 1.5; 
                 const maxDuration = Math.max(0, videoRef.current.duration - END_TRIM_SECONDS);
                 
-                const videoProgress = Math.min(latestProgress / 0.75, 1);
+                const videoProgress = Math.min(clampedProgress / 0.75, 1);
                 const targetTime = videoProgress * maxDuration;
                 
-                // Only assign if the difference is meaningful, and use requestAnimationFrame 
-                // to prevent blocking the main thread (which causes the scroll to freeze/stutter).
-                if (Math.abs(targetTime - lastTargetTime) > 0.01) {
-                    lastTargetTime = targetTime;
-                    
-                    cancelAnimationFrame(animationFrameId);
-                    animationFrameId = requestAnimationFrame(() => {
-                        if (videoRef.current) {
-                            videoRef.current.currentTime = targetTime;
-                        }
-                    });
-                }
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = requestAnimationFrame(() => {
+                    if (videoRef.current) {
+                        videoRef.current.currentTime = targetTime;
+                    }
+                });
             }
         });
         
