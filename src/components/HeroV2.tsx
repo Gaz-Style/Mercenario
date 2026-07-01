@@ -16,34 +16,45 @@ export default function HeroV2() {
         offset: ["start start", "end end"]
     });
 
-    // We use a stiff spring to eliminate the 'stuck and accelerate' lag (rubber banding).
-    const smoothProgress = useSpring(scrollYProgress, {
-        stiffness: 400,
-        damping: 40,
-        restDelta: 0.001
-    });
+    // Bypass useSpring completely for 1:1 direct native scroll tracking.
+    // This eliminates any artificial delay or "rubber-banding" (lag/accelerate).
+    const smoothProgress = scrollYProgress;
 
     // --------------------------------------------------------
-    // VIDEO SCRUBBING LOGIC
+    // VIDEO SCRUBBING LOGIC (Optimized for Main Thread)
     // --------------------------------------------------------
     useEffect(() => {
-        // We listen to the smoothed progress to update the video frame
+        let animationFrameId: number;
+        let lastTargetTime = -1;
+
+        // We listen to the raw scroll progress to update the video frame
         const unsubscribe = smoothProgress.on("change", (latestProgress) => {
-            if (videoRef.current && videoRef.current.readyState >= 2) { // HAVE_CURRENT_DATA
-                // If video is loaded, map progress to a safe duration (cutting the end text)
-                const END_TRIM_SECONDS = 1.5; // Cut off the last 1.5 seconds where text might appear
+            if (videoRef.current && videoRef.current.readyState >= 2) { 
+                const END_TRIM_SECONDS = 1.5; 
                 const maxDuration = Math.max(0, videoRef.current.duration - END_TRIM_SECONDS);
                 
-                // We use 75% of the scroll for the video to finish earlier, leaving room for the final text reveal
                 const videoProgress = Math.min(latestProgress / 0.75, 1);
                 const targetTime = videoProgress * maxDuration;
                 
-                // Update the frame
-                videoRef.current.currentTime = targetTime || 0;
+                // Only assign if the difference is meaningful, and use requestAnimationFrame 
+                // to prevent blocking the main thread (which causes the scroll to freeze/stutter).
+                if (Math.abs(targetTime - lastTargetTime) > 0.01) {
+                    lastTargetTime = targetTime;
+                    
+                    cancelAnimationFrame(animationFrameId);
+                    animationFrameId = requestAnimationFrame(() => {
+                        if (videoRef.current) {
+                            videoRef.current.currentTime = targetTime;
+                        }
+                    });
+                }
             }
         });
         
-        return () => unsubscribe();
+        return () => {
+            unsubscribe();
+            cancelAnimationFrame(animationFrameId);
+        };
     }, [smoothProgress]);
 
     // Handle initial video load directly in JSX now
