@@ -113,11 +113,11 @@ export default function HeroV2() {
     const act6Opacity = useTransform(smoothProgress, [0.85, 0.95], [0, 1]);
 
     return (
-        <section ref={containerRef} className="relative w-full h-[300dvh] bg-white">
+        <section ref={containerRef} className="relative w-full h-[300vh] bg-white">
             
             {/* The Sticky Viewport */}
             <motion.div 
-                className="sticky top-0 w-full h-[100dvh] overflow-hidden bg-black flex items-center justify-center origin-bottom"
+                className="sticky top-0 w-full h-screen overflow-hidden bg-black flex items-center justify-center origin-bottom"
             >
                 
                 {/* --- VIDEO LAYER --- */}
