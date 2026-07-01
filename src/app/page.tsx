@@ -281,7 +281,7 @@ export default function Home() {
                 <div className="w-full bg-white text-black relative z-20 flex flex-col items-center">
 
                 {/* 3. SECCIÓN 3 - La Operación Viva (Mapa de Metro) */}
-                <div className="w-full max-w-5xl mx-auto px-4 pt-32 md:pt-48 flex flex-col items-center">
+                <div className="w-full max-w-5xl mx-auto px-4 pt-8 md:pt-16 flex flex-col items-center">
                     <div className="text-center max-w-2xl mb-4 md:mb-8 space-y-4">
                         <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Operación Viva</span>
                         <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
