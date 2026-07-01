@@ -24,11 +24,11 @@ function StationRow({ stage }: { stage: typeof STAGES[0] }) {
                     active: { backgroundColor: "#000000", scale: 2.5 }
                 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                className="absolute left-6 md:left-1/2 w-1.5 h-1.5 rounded-full -translate-x-1/2 z-10"
+                className="absolute left-6 md:left-12 w-1.5 h-1.5 rounded-full -translate-x-1/2 z-10"
             />
 
-            {/* Left Column: Story */}
-            <div className="pl-16 pr-4 md:w-1/2 md:pr-20 text-left md:text-right w-full">
+            {/* Single Column: Story */}
+            <div className="pl-16 md:pl-28 pr-4 w-full">
                 <motion.p 
                     variants={{
                         inactive: { color: "#d4d4d8" }, // CSS color transition is cheap if triggered discreetly
@@ -38,32 +38,6 @@ function StationRow({ stage }: { stage: typeof STAGES[0] }) {
                     className="text-lg md:text-3xl font-light leading-snug"
                 >
                     {stage.text}
-                </motion.p>
-                
-                {/* Mobile Only Capability */}
-                <motion.p 
-                    variants={{
-                        inactive: { color: "#d4d4d8" },
-                        active: { color: "#000000" }
-                    }}
-                    transition={{ duration: 0.5 }}
-                    className="md:hidden mt-2 text-[10px] font-mono tracking-widest uppercase"
-                >
-                    {stage.cap}
-                </motion.p>
-            </div>
-            
-            {/* Right Column: Capability (Desktop) */}
-            <div className="hidden md:block md:w-1/2 md:pl-20 text-left">
-                <motion.p 
-                    variants={{
-                        inactive: { color: "#d4d4d8" },
-                        active: { color: "#000000" }
-                    }}
-                    transition={{ duration: 0.5 }}
-                    className="text-sm font-mono tracking-widest uppercase"
-                >
-                    {stage.cap}
                 </motion.p>
             </div>
             
@@ -80,7 +54,7 @@ export default function OperationMap() {
                 <div className="relative w-full flex flex-col">
                     
                     {/* The Thin Vertical Line */}
-                    <div className="absolute top-0 bottom-0 left-6 md:left-1/2 w-[1px] bg-neutral-100 -translate-x-1/2" />
+                    <div className="absolute top-0 bottom-0 left-6 md:left-12 w-[1px] bg-neutral-100 -translate-x-1/2" />
 
                     {/* The Stations (Driven purely by IntersectionObserver) */}
                     {STAGES.map((stage, i) => (
