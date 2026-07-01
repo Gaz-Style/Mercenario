@@ -1,12 +1,12 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from "framer-motion";
+import { useRef, useEffect } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 export default function HeroV2() {
     const containerRef = useRef<HTMLDivElement>(null);
-    const videoRef = useRef<HTMLVideoElement>(null);
+    const videoContainerRef = useRef<HTMLDivElement>(null);
 
     // Track overall scroll progress for the whole section (0 to 1)
     const { scrollYProgress } = useScroll({
@@ -21,7 +21,79 @@ export default function HeroV2() {
         restDelta: 0.001
     });
 
-    // No scrubbing logic needed - the video plays naturally.
+    // --------------------------------------------------------
+    // VIDEO INITIALIZATION (Fake Pause for iOS Safari)
+    // --------------------------------------------------------
+    useEffect(() => {
+        const video = videoContainerRef.current?.querySelector('video');
+        if (!video) return;
+
+        const fakePause = () => {
+            // CRITICAL: Instead of .pause(), we set playback speed to 0.
+            // iOS shows the play button if a video is officially paused.
+            // By keeping it "playing" at 0 speed, iOS leaves it alone!
+            video.playbackRate = 0;
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {});
+            }
+        };
+
+        video.addEventListener('canplay', fakePause);
+        video.addEventListener('loadedmetadata', fakePause);
+        
+        // If it starts playing, force speed back to 0
+        const handlePlay = () => { video.playbackRate = 0; };
+        video.addEventListener('play', handlePlay); 
+        
+        fakePause(); // Try immediately
+
+        return () => {
+            video.removeEventListener('canplay', fakePause);
+            video.removeEventListener('loadedmetadata', fakePause);
+            video.removeEventListener('play', handlePlay);
+        };
+    }, []);
+
+    // --------------------------------------------------------
+    // VIDEO SCRUBBING LOGIC (Optimized for Main Thread & iOS Bounce)
+    // --------------------------------------------------------
+    useEffect(() => {
+        let animationFrameId: number;
+
+        // We listen to the smoothed progress to update the video frame
+        const unsubscribe = smoothProgress.on("change", (latestProgress) => {
+            const video = videoContainerRef.current?.querySelector('video');
+            if (video && video.readyState >= 2) { 
+                // Ensure it's in our fake "playing at 0 speed" state
+                video.playbackRate = 0;
+                if (video.paused) {
+                    video.play().catch(() => {});
+                }
+
+                // CRITICAL FIX: Clamp progress to prevent iOS bounce scroll (negative values) from breaking the video currentTime
+                const clampedProgress = Math.max(0, Math.min(latestProgress, 1));
+                
+                const END_TRIM_SECONDS = 1.5; 
+                const maxDuration = Math.max(0, video.duration - END_TRIM_SECONDS);
+                
+                const videoProgress = Math.min(clampedProgress / 0.75, 1);
+                const targetTime = videoProgress * maxDuration;
+                
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = requestAnimationFrame(() => {
+                    if (video) {
+                        video.currentTime = targetTime;
+                    }
+                });
+            }
+        });
+        
+        return () => {
+            unsubscribe();
+            cancelAnimationFrame(animationFrameId);
+        };
+    }, [smoothProgress]);
 
     // --------------------------------------------------------
     // NARRATIVE TIMELINE (Opacity mappings based on scroll)
@@ -56,19 +128,20 @@ export default function HeroV2() {
                 className="sticky top-0 w-full h-[100svh] overflow-hidden flex items-center justify-center origin-bottom bg-black"
             >
                 
-                {/* --- CLEAN VIDEO LAYER --- */}
-                <div className="absolute inset-0 z-0 bg-black">
-                    <video
-                        ref={videoRef}
-                        src="/videos/hero-scrub6.mp4"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        preload="auto"
-                        className="object-cover object-center w-full h-full"
-                        style={{ pointerEvents: 'none' }}
-                    />
+                {/* --- VIDEO LAYER --- */}
+                <div className="absolute inset-0 z-0 bg-black" ref={videoContainerRef}>
+                    <div dangerouslySetInnerHTML={{ __html: `
+                        <video
+                            src="/videos/hero-scrub6.mp4"
+                            autoplay
+                            loop
+                            muted
+                            playsinline
+                            preload="auto"
+                            class="object-cover object-center w-full h-full"
+                            style="pointer-events: none;"
+                        ></video>
+                    `}} className="w-full h-full" />
                     {/* Cinematic Dark Overlay for Text Legibility (Constant 50% opacity) */}
                     <div className="absolute inset-0 bg-black/50 pointer-events-none" />
                 </div>
