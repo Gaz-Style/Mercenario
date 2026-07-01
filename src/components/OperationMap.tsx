@@ -70,8 +70,8 @@ export default function OperationMap() {
                     transition={{ duration: 0.8 }}
                     className="mt-24 md:mt-32 max-w-3xl mx-auto text-center px-4"
                 >
-                    <p className="text-2xl md:text-4xl font-semibold tracking-tight text-black leading-snug">
-                        Desde la reserva hasta la reseña final, toda la operación se ejecutó en segundo plano sin que tocaras un solo botón.
+                    <p className="text-base md:text-xl font-light text-neutral-500 leading-relaxed max-w-2xl mx-auto">
+                        Desde la reserva hasta la reseña final, toda la operación se ejecutó en segundo plano <span className="font-semibold text-black">sin que tocaras un solo botón.</span>
                     </p>
                 </motion.div>
                 
