@@ -62,6 +62,19 @@ export default function OperationMap() {
                     ))}
                 </div>
                 
+                {/* Conclusion */}
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-20% 0px" }}
+                    transition={{ duration: 0.8 }}
+                    className="mt-24 md:mt-32 max-w-3xl mx-auto text-center px-4"
+                >
+                    <p className="text-2xl md:text-4xl font-semibold tracking-tight text-black leading-snug">
+                        Mientras atendías a tu cliente, al interior se realizaron decenas de operaciones sin que tocaras un solo botón.
+                    </p>
+                </motion.div>
+                
             </div>
         </section>
     );
