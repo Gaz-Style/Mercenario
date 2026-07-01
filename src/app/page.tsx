@@ -278,7 +278,7 @@ export default function Home() {
                 <HeroV2 />
 
                 {/* Contenido posterior al Hero */}
-                <div className="w-full max-w-7xl mx-auto px-6 pb-32 relative z-20 flex flex-col items-center">
+                <div className="w-full bg-white text-black relative z-20 flex flex-col items-center">
 
                 {/* 3. SECCIÓN 3 - La Operación Viva (Mapa de Metro) */}
                 <div className="w-full max-w-5xl mx-auto px-4 pt-32 md:pt-48 flex flex-col items-center">
