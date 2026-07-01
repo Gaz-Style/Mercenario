@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
+import HeroV2 from "@/components/HeroV2";
 
 export default function Home() {
     const [formData, setFormData] = useState({ name: "", email: "", challenge: "", budget: "", _honeypot: "" });
@@ -310,38 +311,16 @@ export default function Home() {
                 </AnimatePresence>
             </header>
 
-            <main className="w-full max-w-7xl mx-auto px-6 pt-40 sm:pt-56 pb-32 z-10 flex flex-col items-center">
+            <main className="w-full flex flex-col items-center">
+                
+                {/* 1. HERO V2 - El Punto de Quiebre */}
+                <HeroV2 />
 
-                {/* 1. HERO - Título y Subtítulo exactos */}
-                <section className="text-center max-w-5xl pb-40 md:pb-56 space-y-8 flex flex-col items-center w-full">
-                    <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }} className="flex flex-col items-center gap-8">
-                        
-                        <h1 className="text-5xl sm:text-7xl md:text-[5.5rem] lg:text-[6.5rem] font-bold tracking-tighter leading-[1] text-black">
-                            Una nueva forma de operar<br />
-                            <span className="text-neutral-400 font-semibold">pequeñas empresas.</span>
-                        </h1>
-
-                        <div className="max-w-2xl mx-auto space-y-4 text-neutral-500 text-base md:text-lg leading-relaxed font-light tracking-wide mt-4">
-                            <p>La mayoría de las empresas trabaja con herramientas separadas.</p>
-                            <p className="text-xs uppercase tracking-widest text-neutral-400 font-medium">
-                                Agenda por un lado · Pagos por otro · WhatsApp · Correo · Facturación · Planillas · Recordatorios
-                            </p>
-                            <p className="pt-2 font-normal text-black">
-                                Cuando ninguna conversa entre sí, la operación depende de las personas. Mercenario conecta toda la operación para que tu empresa funcione como una sola.
-                            </p>
-                        </div>
-
-                        <div className="pt-8">
-                            <a href="#contacto" className="inline-flex items-center gap-2 px-8 py-4.5 bg-black text-white font-semibold text-[11px] uppercase tracking-widest hover:bg-neutral-800 transition-colors rounded-full">
-                                <span>Conversemos</span>
-                                <ChevronRight className="w-4 h-4" />
-                            </a>
-                        </div>
-                    </motion.div>
-                </section>
+                {/* Contenido posterior al Hero, superpuesto para transición sin hueco blanco */}
+                <div className="w-full max-w-7xl mx-auto px-6 pt-12 pb-32 relative z-20 -mt-[25dvh] flex flex-col items-center">
 
                 {/* 2. SECCIÓN 2 - No necesitas más herramientas */}
-                <section className="w-full max-w-4xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100 space-y-8 text-center md:text-left">
+                <section className="w-full max-w-4xl mx-auto px-4 py-32 md:py-48 space-y-8 text-center md:text-left">
                     <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">El Enfoque</span>
                     <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
                         No necesitas más herramientas. <br />
@@ -359,8 +338,8 @@ export default function Home() {
                     </div>
                 </section>
 
-                {/* 3. SECCIÓN 3 - El Mapa Interactivo (Imagina que cada acción desencadena la siguiente) */}
-                <section className="w-full max-w-5xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100 flex flex-col items-center">
+                {/* 3. SECCIÓN 3 - El Mapa Interactivo */}
+                <section className="w-full max-w-5xl mx-auto px-4 py-32 md:py-48 flex flex-col items-center">
                     <div className="text-center max-w-2xl mb-20 space-y-4">
                         <h2 className="text-sm font-semibold tracking-widest uppercase text-neutral-400">Coordinación Total</h2>
                         <p className="text-2xl md:text-4xl font-bold tracking-tight text-black leading-tight">
@@ -451,7 +430,7 @@ export default function Home() {
                 </section>
 
                 {/* 4. SECCIÓN 4 - Tu empresa ya tiene todo lo necesario (Integraciones) */}
-                <section className="w-full max-w-4xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100 space-y-12">
+                <section className="w-full max-w-4xl mx-auto px-4 py-32 md:py-48 space-y-12">
                     <div className="space-y-4">
                         <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Conectividad Nata</span>
                         <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
@@ -622,6 +601,7 @@ export default function Home() {
                     </form>
                 </motion.section>
 
+                </div>
             </main>
 
             {/* Stark footer with all Sitemap sections */}
