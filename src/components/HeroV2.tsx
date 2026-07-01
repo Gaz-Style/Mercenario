@@ -29,10 +29,10 @@ export default function HeroV2() {
         if (!video) return;
 
         const fakePause = () => {
-            // CRITICAL: Instead of .pause(), we set playback speed to 0.
-            // iOS shows the play button if a video is officially paused.
-            // By keeping it "playing" at 0 speed, iOS leaves it alone!
-            video.playbackRate = 0;
+            // CRITICAL: Instead of .pause() or speed 0, we set playback speed to 0.01.
+            // 0 completely freezes the Safari rendering pipeline on some iOS versions, 
+            // breaking the scroll scrubbing. 0.01 keeps the engine alive without noticeable playback.
+            video.playbackRate = 0.01;
             const playPromise = video.play();
             if (playPromise !== undefined) {
                 playPromise.catch(() => {});
@@ -42,8 +42,8 @@ export default function HeroV2() {
         video.addEventListener('canplay', fakePause);
         video.addEventListener('loadedmetadata', fakePause);
         
-        // If it starts playing, force speed back to 0
-        const handlePlay = () => { video.playbackRate = 0; };
+        // If it starts playing naturally, force speed back to 0.01
+        const handlePlay = () => { video.playbackRate = 0.01; };
         video.addEventListener('play', handlePlay); 
         
         fakePause(); // Try immediately
@@ -65,8 +65,8 @@ export default function HeroV2() {
         const unsubscribe = smoothProgress.on("change", (latestProgress) => {
             const video = videoContainerRef.current?.querySelector('video');
             if (video && video.readyState >= 2) { 
-                // Ensure it's in our fake "playing at 0 speed" state
-                video.playbackRate = 0;
+                // Ensure it's in our fake "playing at 0.01 speed" state to prevent frame freezing
+                video.playbackRate = 0.01;
                 if (video.paused) {
                     video.play().catch(() => {});
                 }
