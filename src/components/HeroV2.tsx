@@ -16,10 +16,10 @@ export default function HeroV2() {
         offset: ["start start", "end end"]
     });
 
-    // We use a softer spring to ensure PC mouse wheel (discrete ticks) interpolate smoothly instead of skipping video frames.
+    // We use a stiff spring to eliminate the 'stuck and accelerate' lag (rubber banding).
     const smoothProgress = useSpring(scrollYProgress, {
-        stiffness: 100,
-        damping: 25,
+        stiffness: 400,
+        damping: 40,
         restDelta: 0.001
     });
 
@@ -81,7 +81,7 @@ export default function HeroV2() {
     const act6Opacity = useTransform(smoothProgress, [0.85, 0.95], [0, 1]);
 
     return (
-        <section ref={containerRef} className="relative w-full h-[200dvh] bg-white">
+        <section ref={containerRef} className="relative w-full h-[300dvh] bg-white">
             
             {/* The Sticky Viewport */}
             <motion.div 
