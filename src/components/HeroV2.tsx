@@ -21,16 +21,24 @@ export default function HeroV2() {
     });
 
     // --------------------------------------------------------
-    // DYNAMIC BACKGROUND COLOR (Clean Digital Aesthetics)
+    // MESH GRADIENT ANIMATIONS (Digital Illustration Style)
     // --------------------------------------------------------
-    // Transitions smoothly from a deep indigo/slate (chaos/saturation) 
-    // to a darker neutral (break point) 
-    // to pure pitch black (brand clarity).
-    const backgroundColor = useTransform(
-        smoothProgress,
-        [0, 0.4, 0.7],
-        ["#0f172a", "#18181b", "#000000"] 
-    );
+    // These orbs will float and shift colors as the user scrolls, 
+    // creating a vibrant, dynamic digital canvas behind the text.
+    
+    // Orb 1: Violet/Blue (Top Left to Center)
+    const orb1X = useTransform(smoothProgress, [0, 1], ["-20%", "30%"]);
+    const orb1Y = useTransform(smoothProgress, [0, 1], ["-10%", "40%"]);
+    const orb1Scale = useTransform(smoothProgress, [0, 0.5, 1], [1, 1.5, 1.2]);
+
+    // Orb 2: Mercenario Red (Bottom Right to Top Left)
+    const orb2X = useTransform(smoothProgress, [0, 1], ["20%", "-30%"]);
+    const orb2Y = useTransform(smoothProgress, [0, 1], ["20%", "-40%"]);
+    const orb2Scale = useTransform(smoothProgress, [0, 0.5, 1], [1, 1.3, 0.9]);
+
+    // Orb 3: Deep Blue (Center moving around)
+    const orb3X = useTransform(smoothProgress, [0, 1], ["0%", "-20%"]);
+    const orb3Y = useTransform(smoothProgress, [0, 1], ["0%", "30%"]);
 
     // --------------------------------------------------------
     // NARRATIVE TIMELINE (Opacity mappings based on scroll)
@@ -58,14 +66,34 @@ export default function HeroV2() {
     const act6Opacity = useTransform(smoothProgress, [0.85, 0.95], [0, 1]);
 
     return (
-        <section ref={containerRef} className="relative w-full h-[300svh] bg-white">
+        <section ref={containerRef} className="relative w-full h-[300svh] bg-[#050505]">
             
             {/* The Sticky Viewport */}
             <motion.div 
-                style={{ backgroundColor }}
-                className="sticky top-0 w-full h-[100svh] overflow-hidden flex items-center justify-center origin-bottom transition-colors duration-0"
+                className="sticky top-0 w-full h-[100svh] overflow-hidden flex items-center justify-center origin-bottom bg-[#030303]"
             >
                 
+                {/* --- MESH GRADIENT BACKGROUND --- */}
+                <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                    {/* Orb 1: Violet */}
+                    <motion.div 
+                        style={{ x: orb1X, y: orb1Y, scale: orb1Scale }}
+                        className="absolute -top-[20%] -left-[10%] w-[60vw] h-[60vw] md:w-[40vw] md:h-[40vw] bg-violet-600/40 rounded-full mix-blend-screen blur-[80px] md:blur-[120px]"
+                    />
+                    {/* Orb 2: Mercenario Red */}
+                    <motion.div 
+                        style={{ x: orb2X, y: orb2Y, scale: orb2Scale }}
+                        className="absolute -bottom-[20%] -right-[10%] w-[70vw] h-[70vw] md:w-[50vw] md:h-[50vw] bg-mercenario-danger/30 rounded-full mix-blend-screen blur-[80px] md:blur-[120px]"
+                    />
+                    {/* Orb 3: Royal Blue */}
+                    <motion.div 
+                        style={{ x: orb3X, y: orb3Y }}
+                        className="absolute top-[30%] left-[20%] w-[50vw] h-[50vw] md:w-[35vw] md:h-[35vw] bg-blue-600/30 rounded-full mix-blend-screen blur-[80px] md:blur-[120px]"
+                    />
+                    {/* Dark overlay to ensure white text remains extremely readable */}
+                    <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
+                </div>
+
                 {/* --- NARRATIVE OVERLAYS --- */}
 
                 {/* Initial Instruction */}
