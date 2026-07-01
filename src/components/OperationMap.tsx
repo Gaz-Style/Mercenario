@@ -68,7 +68,7 @@ export default function OperationMap() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-20% 0px" }}
                     transition={{ duration: 0.8 }}
-                    className="mt-24 md:mt-32 max-w-3xl mx-auto text-center px-4"
+                    className="mt-8 md:mt-12 max-w-3xl mx-auto text-center px-4"
                 >
                     <p className="text-base md:text-xl font-light text-neutral-500 leading-relaxed max-w-2xl mx-auto">
                         Desde la reserva hasta la reseña final, toda la operación se ejecutó en segundo plano <span className="font-semibold text-black">sin que tocaras un solo botón.</span>
