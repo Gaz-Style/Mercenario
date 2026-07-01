@@ -99,9 +99,6 @@ export default function HeroV2() {
     // NARRATIVE TIMELINE (Opacity mappings based on scroll)
     // --------------------------------------------------------
     
-    // 0. Dark overlay to make white text readable against the video
-    const overlayOpacity = useTransform(smoothProgress, [0, 0.35], [0.5, 0]);
-    
     // 1. Initial Prompt "Desliza para avanzar"
     const promptOpacity = useTransform(smoothProgress, [0, 0.1], [1, 0]);
     
@@ -145,48 +142,48 @@ export default function HeroV2() {
                             style="pointer-events: none;"
                         ></video>
                     `}} className="w-full h-full" />
-                    {/* Cinematic Dark Overlay for Text Legibility */}
-                    <motion.div style={{ opacity: overlayOpacity }} className="absolute inset-0 bg-black/60 pointer-events-none" />
+                    {/* Cinematic Dark Overlay for Text Legibility (Constant 50% opacity) */}
+                    <div className="absolute inset-0 bg-black/50 pointer-events-none" />
                 </div>
 
                 {/* --- NARRATIVE OVERLAYS --- */}
 
                 {/* Initial Instruction */}
                 <motion.div style={{ opacity: promptOpacity }} className="absolute bottom-16 inset-x-0 z-10 flex flex-col items-center gap-2 pointer-events-none">
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400">Desliza para avanzar</span>
-                    <div className="w-[1px] h-8 bg-neutral-600 animate-pulse" />
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-300 drop-shadow-md">Desliza para avanzar</span>
+                    <div className="w-[1px] h-8 bg-neutral-400 animate-pulse" />
                 </motion.div>
 
                 {/* Act 3: Question */}
                 <motion.div style={{ opacity: questionOpacity, y: questionY }} className="absolute inset-0 z-20 flex flex-col items-center justify-center px-4 pointer-events-none">
-                    <h3 className="text-2xl md:text-4xl font-light text-white tracking-wide text-center drop-shadow-md">
+                    <h3 className="text-2xl md:text-4xl font-light text-white tracking-wide text-center drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
                         ¿En qué ocupaste realmente tu tiempo?
                     </h3>
                 </motion.div>
 
                 {/* Act 4: The Break */}
                 <motion.div style={{ opacity: breakOpacity, scale: breakScale }} className="absolute inset-0 z-30 flex flex-col items-center justify-start pt-[32vh] md:pt-[25vh] px-4 pointer-events-none">
-                    <span className="text-xs md:text-base font-semibold tracking-[0.2em] uppercase text-neutral-400 mb-4 md:mb-6">
+                    <span className="text-xs md:text-base font-semibold tracking-[0.2em] uppercase text-neutral-300 mb-4 md:mb-6 drop-shadow-md">
                         No falta talento.
                     </span>
-                    <h2 className="text-[8vw] sm:text-5xl md:text-7xl lg:text-[6.5rem] font-bold tracking-tighter text-white text-center leading-[1.1]">
+                    <h2 className="text-[8vw] sm:text-5xl md:text-7xl lg:text-[6.5rem] font-bold tracking-tighter text-white text-center leading-[1.1] drop-shadow-[0_6px_20px_rgba(0,0,0,0.8)]">
                         FALTA OPERACIÓN.
                     </h2>
                 </motion.div>
 
                 {/* Act 5: Brand Reveal */}
                 <motion.div style={{ opacity: brandOpacity, y: brandY }} className="absolute inset-0 z-40 flex flex-col items-center justify-start pt-[26vh] md:pt-[22vh] px-4 pointer-events-none w-full">
-                    <h1 className="text-[9vw] sm:text-6xl md:text-8xl lg:text-[8rem] font-bold tracking-[0.1em] text-white uppercase leading-none whitespace-nowrap">
+                    <h1 className="text-[9vw] sm:text-6xl md:text-8xl lg:text-[8rem] font-bold tracking-[0.1em] text-white uppercase leading-none whitespace-nowrap drop-shadow-[0_6px_20px_rgba(0,0,0,0.8)]">
                         MERCENARIO<span className="text-mercenario-danger">.</span>
                     </h1>
-                    <div className="w-8 md:w-12 h-[2px] bg-white my-6 md:my-8" />
-                    <p className="text-sm md:text-2xl font-medium text-white tracking-wide text-center">
+                    <div className="w-8 md:w-12 h-[2px] bg-white my-6 md:my-8 drop-shadow-md" />
+                    <p className="text-sm md:text-2xl font-medium text-white tracking-wide text-center drop-shadow-md">
                         Concéntrate en tu talento. <br className="md:hidden" />
-                        <span className="text-neutral-400 font-light">Nosotros conectamos la operación.</span>
+                        <span className="text-neutral-300 font-light">Nosotros conectamos la operación.</span>
                     </p>
                     
                     <div className="absolute bottom-12 animate-bounce">
-                        <ChevronDown className="w-6 h-6 text-neutral-600" />
+                        <ChevronDown className="w-6 h-6 text-neutral-400 drop-shadow-md" />
                     </div>
                 </motion.div>
 
