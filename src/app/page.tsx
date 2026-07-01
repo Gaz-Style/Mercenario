@@ -295,7 +295,7 @@ export default function Home() {
                 <OperationMap />
 
                 {/* 4. SECCIÓN 4 - Tu empresa ya tiene todo lo necesario (Integraciones) */}
-                <section className="w-full max-w-4xl mx-auto px-4 py-32 md:py-48 space-y-12">
+                <section className="w-full max-w-4xl mx-auto px-4 pt-16 md:pt-24 pb-32 md:pb-48 space-y-12">
                     <div className="space-y-4">
                         <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Conectividad Nata</span>
                         <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">

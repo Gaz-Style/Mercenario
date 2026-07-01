@@ -47,7 +47,7 @@ function StationRow({ stage }: { stage: typeof STAGES[0] }) {
 
 export default function OperationMap() {
     return (
-        <section className="w-full bg-white pb-32 md:pb-48 pt-8 md:pt-16 font-sans selection:bg-black selection:text-white">
+        <section className="w-full bg-white pb-16 md:pb-24 pt-8 md:pt-16 font-sans selection:bg-black selection:text-white">
             <div className="max-w-5xl mx-auto px-4 md:px-8">
                 
                 {/* Track Container */}
