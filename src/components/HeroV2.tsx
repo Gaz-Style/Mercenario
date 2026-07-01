@@ -22,30 +22,36 @@ export default function HeroV2() {
     });
 
     // --------------------------------------------------------
-    // VIDEO INITIALIZATION (Force Pause for Scrubbing)
+    // VIDEO INITIALIZATION (Fake Pause for iOS Safari)
     // --------------------------------------------------------
     useEffect(() => {
         const video = videoContainerRef.current?.querySelector('video');
         if (!video) return;
 
-        const forcePause = () => {
-            if (!video.paused) {
-                video.pause();
+        const fakePause = () => {
+            // CRITICAL: Instead of .pause(), we set playback speed to 0.
+            // iOS shows the play button if a video is officially paused.
+            // By keeping it "playing" at 0 speed, iOS leaves it alone!
+            video.playbackRate = 0;
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {});
             }
         };
 
-        // We MUST use autoplay in the HTML for iOS to bypass the play button,
-        // but we want to instantly pause it as soon as it's ready so we can scrub it.
-        video.addEventListener('canplay', forcePause);
-        video.addEventListener('loadedmetadata', forcePause);
-        video.addEventListener('play', forcePause); // If it ever tries to play, stop it.
+        video.addEventListener('canplay', fakePause);
+        video.addEventListener('loadedmetadata', fakePause);
         
-        forcePause(); // Try immediately just in case
+        // If it starts playing, force speed back to 0
+        const handlePlay = () => { video.playbackRate = 0; };
+        video.addEventListener('play', handlePlay); 
+        
+        fakePause(); // Try immediately
 
         return () => {
-            video.removeEventListener('canplay', forcePause);
-            video.removeEventListener('loadedmetadata', forcePause);
-            video.removeEventListener('play', forcePause);
+            video.removeEventListener('canplay', fakePause);
+            video.removeEventListener('loadedmetadata', fakePause);
+            video.removeEventListener('play', handlePlay);
         };
     }, []);
 
@@ -59,8 +65,11 @@ export default function HeroV2() {
         const unsubscribe = smoothProgress.on("change", (latestProgress) => {
             const video = videoContainerRef.current?.querySelector('video');
             if (video && video.readyState >= 2) { 
-                // Ensure it's not playing independently
-                if (!video.paused) video.pause();
+                // Ensure it's in our fake "playing at 0 speed" state
+                video.playbackRate = 0;
+                if (video.paused) {
+                    video.play().catch(() => {});
+                }
 
                 // CRITICAL FIX: Clamp progress to prevent iOS bounce scroll (negative values) from breaking the video currentTime
                 const clampedProgress = Math.max(0, Math.min(latestProgress, 1));
