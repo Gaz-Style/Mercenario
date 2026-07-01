@@ -14,14 +14,14 @@ function StationRow({ stage }: { stage: typeof STAGES[0] }) {
         <motion.div 
             initial="inactive"
             whileInView="active"
-            viewport={{ margin: "-45% 0px -45% 0px" }} // Only active exactly in the center 10% of the screen
-            className="relative w-full flex items-center group py-8 md:py-12"
+            viewport={{ margin: "-49% 0px -49% 0px" }} // Only active exactly in the center 2% of the screen
+            className="relative w-full flex items-center group py-4 md:py-6"
         >
             {/* The Dot */}
             <motion.div 
                 variants={{
                     inactive: { backgroundColor: "#d4d4d8", scale: 1 },
-                    active: { backgroundColor: "#000000", scale: 2.5 }
+                    active: { backgroundColor: "#000000", scale: 1.5 }
                 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
                 className="absolute left-6 md:left-12 w-1.5 h-1.5 rounded-full -translate-x-1/2 z-10"
@@ -35,7 +35,7 @@ function StationRow({ stage }: { stage: typeof STAGES[0] }) {
                         active: { color: "#000000" }
                     }}
                     transition={{ duration: 0.5 }}
-                    className="text-lg md:text-3xl font-light leading-snug"
+                    className="text-base md:text-2xl font-light leading-snug"
                 >
                     {stage.text}
                 </motion.p>
