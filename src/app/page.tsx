@@ -15,15 +15,12 @@ import {
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 import HeroV2 from "@/components/HeroV2";
+import OperationMap from "@/components/OperationMap";
 
 export default function Home() {
     const [formData, setFormData] = useState({ name: "", email: "", challenge: "", budget: "", _honeypot: "" });
     const [formStatus, setFormStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
     
-    // Interactive Map state
-    const [currentStep, setCurrentStep] = useState(0);
-    const [isPlaying, setIsPlaying] = useState(false);
-
     // Navigation Menu States
     const [activeMenu, setActiveMenu] = useState<"experiencia" | "soluciones" | "operacion" | "integraciones" | "conocimiento" | null>(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -107,43 +104,7 @@ export default function Home() {
         ]
     };
 
-    const operationalSteps = [
-        { label: "Un cliente agenda una cita", area: "Agenda", desc: "El profesional recibe la información de forma instantánea." },
-        { label: "El cliente recibe su confirmación", area: "Comunicación", desc: "Notificación automatizada enviada por correo y WhatsApp." },
-        { label: "Se procesa el pago", area: "Finanzas", desc: "La pasarela de pago liquida y confirma la transacción." },
-        { label: "Se emite la boleta", area: "Facturación", desc: "Emisión directa con el SII sin pasos manuales." },
-        { label: "Se actualiza la caja", area: "Caja", desc: "El arqueo contable computa la entrada de dinero en tiempo real." },
-        { label: "Se registra la atención", area: "Historial", desc: "La ficha única del cliente almacena el evento." },
-        { label: "Se agenda el seguimiento", area: "Coordinación", desc: "Se programa una tarea de control para el equipo." },
-        { label: "Se solicita una reseña", area: "Calidad", desc: "Encuesta automática enviada al finalizar la experiencia." },
-        { label: "Se genera una oportunidad de venta", area: "Crecimiento", desc: "El sistema proyecta la próxima fecha de interacción óptima." }
-    ];
 
-    useEffect(() => {
-        let interval: NodeJS.Timeout;
-        if (isPlaying) {
-            interval = setInterval(() => {
-                setCurrentStep((prev) => {
-                    if (prev >= operationalSteps.length - 1) {
-                        setIsPlaying(false);
-                        return prev;
-                    }
-                    return prev + 1;
-                });
-            }, 1800);
-        }
-        return () => clearInterval(interval);
-    }, [isPlaying]);
-
-    const startSimulation = () => {
-        setCurrentStep(0);
-        setIsPlaying(true);
-    };
-
-    const resetSimulation = () => {
-        setIsPlaying(false);
-        setCurrentStep(0);
-    };
 
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -319,96 +280,8 @@ export default function Home() {
                 {/* Contenido posterior al Hero */}
                 <div className="w-full max-w-7xl mx-auto px-6 pb-32 relative z-20 flex flex-col items-center">
 
-                {/* 3. SECCIÓN 3 - El Mapa Interactivo */}
-                <section className="w-full max-w-5xl mx-auto px-4 py-32 md:py-48 flex flex-col items-center">
-                    <div className="text-center max-w-2xl mb-20 space-y-4">
-                        <h2 className="text-sm font-semibold tracking-widest uppercase text-neutral-400">Coordinación Total</h2>
-                        <p className="text-2xl md:text-4xl font-bold tracking-tight text-black leading-tight">
-                            Imagina que cada acción desencadena la siguiente.
-                        </p>
-                        <p className="text-sm text-neutral-500 font-light">
-                            Sin copiar información. Sin repetir tareas. Sin depender de que alguien recuerde hacerlo.
-                        </p>
-                    </div>
-
-                    <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
-                        {/* Panel de control de simulación */}
-                        <div className="lg:col-span-1 space-y-6 bg-neutral-50 border border-neutral-100 p-8 rounded-2xl">
-                            <div className="space-y-2">
-                                <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Simulador de Eventos</span>
-                                <h3 className="text-xl font-bold text-black">El Flujo Continuo</h3>
-                                <p className="text-xs text-neutral-500 leading-relaxed font-light">
-                                    Haz click para observar la reacción en cadena de una operación completamente conectada.
-                                </p>
-                            </div>
-
-                            <div className="flex gap-3 pt-2">
-                                {!isPlaying ? (
-                                    <button 
-                                        onClick={startSimulation}
-                                        className="flex-1 flex items-center justify-center gap-2 py-3.5 px-4 bg-black text-white text-[11px] font-semibold uppercase tracking-wider rounded-lg hover:bg-neutral-800 transition-all"
-                                    >
-                                        <Play className="w-3.5 h-3.5 fill-current" />
-                                        <span>Ejecutar</span>
-                                    </button>
-                                ) : (
-                                    <div className="flex-1 flex items-center justify-center gap-2 py-3.5 px-4 bg-neutral-200 text-neutral-500 text-[11px] font-semibold uppercase tracking-wider rounded-lg cursor-not-allowed">
-                                        <div className="w-1.5 h-1.5 bg-mercenario-danger rounded-full animate-ping" />
-                                        <span>Procesando...</span>
-                                    </div>
-                                )}
-                                <button 
-                                    onClick={resetSimulation}
-                                    className="p-3.5 border border-neutral-200 text-neutral-500 rounded-lg hover:bg-neutral-100 transition-all"
-                                >
-                                    <RotateCcw className="w-4 h-4" />
-                                </button>
-                            </div>
-
-                            {/* Mostrar detalles del paso activo */}
-                            <div className="border-t border-neutral-200/60 pt-6 space-y-2 min-h-[100px]">
-                                <span className="text-[9px] font-mono tracking-widest uppercase text-neutral-400">Área: {operationalSteps[currentStep].area}</span>
-                                <h4 className="text-sm font-bold text-black">{operationalSteps[currentStep].label}</h4>
-                                <p className="text-xs text-neutral-500 leading-relaxed font-light">{operationalSteps[currentStep].desc}</p>
-                            </div>
-                        </div>
-
-                        {/* Visualizador de Nodos */}
-                        <div className="lg:col-span-2 space-y-3">
-                            {operationalSteps.map((step, index) => {
-                                const isActive = index === currentStep;
-                                const isCompleted = index < currentStep;
-                                return (
-                                    <div 
-                                        key={index}
-                                        onClick={() => { setIsPlaying(false); setCurrentStep(index); }}
-                                        className={`flex items-center gap-4 p-4 border rounded-xl transition-all duration-300 cursor-pointer ${
-                                            isActive 
-                                                ? "bg-black border-black text-white shadow-md translate-x-2" 
-                                                : isCompleted
-                                                    ? "bg-neutral-50/50 border-neutral-100 text-neutral-400"
-                                                    : "bg-white border-neutral-100 text-neutral-600 hover:border-neutral-200"
-                                        }`}
-                                    >
-                                        <div className="flex items-center justify-center w-6 h-6 rounded-full border text-[9px] font-mono font-bold shrink-0">
-                                            {isActive ? (
-                                                <div className="w-1.5 h-1.5 bg-mercenario-danger rounded-full animate-pulse" />
-                                            ) : (
-                                                <span>{index + 1}</span>
-                                            )}
-                                        </div>
-                                        <div className="flex-1 min-w-0">
-                                            <div className="flex justify-between items-baseline gap-2">
-                                                <p className="text-xs font-semibold truncate tracking-tight">{step.label}</p>
-                                                <span className={`text-[8px] font-mono tracking-wider uppercase shrink-0 ${isActive ? "text-neutral-400" : "text-neutral-400"}`}>{step.area}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-                </section>
+                {/* 3. SECCIÓN 3 - La Operación Viva (Mapa de Metro) */}
+                <OperationMap />
 
                 {/* 4. SECCIÓN 4 - Tu empresa ya tiene todo lo necesario (Integraciones) */}
                 <section className="w-full max-w-4xl mx-auto px-4 py-32 md:py-48 space-y-12">
