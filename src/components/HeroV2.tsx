@@ -1,11 +1,12 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 export default function HeroV2() {
     const containerRef = useRef<HTMLDivElement>(null);
+    const videoContainerRef = useRef<HTMLDivElement>(null);
 
     // Track overall scroll progress for the whole section (0 to 1)
     const { scrollYProgress } = useScroll({
@@ -21,8 +22,45 @@ export default function HeroV2() {
     });
 
     // --------------------------------------------------------
+    // VIDEO SCRUBBING LOGIC (Optimized for Main Thread & iOS Bounce)
+    // --------------------------------------------------------
+    useEffect(() => {
+        let animationFrameId: number;
+
+        // We listen to the smoothed progress to update the video frame
+        const unsubscribe = smoothProgress.on("change", (latestProgress) => {
+            const video = videoContainerRef.current?.querySelector('video');
+            if (video && video.readyState >= 2) { 
+                // CRITICAL FIX: Clamp progress to prevent iOS bounce scroll (negative values) from breaking the video currentTime
+                const clampedProgress = Math.max(0, Math.min(latestProgress, 1));
+                
+                const END_TRIM_SECONDS = 1.5; 
+                const maxDuration = Math.max(0, video.duration - END_TRIM_SECONDS);
+                
+                const videoProgress = Math.min(clampedProgress / 0.75, 1);
+                const targetTime = videoProgress * maxDuration;
+                
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = requestAnimationFrame(() => {
+                    if (video) {
+                        video.currentTime = targetTime;
+                    }
+                });
+            }
+        });
+        
+        return () => {
+            unsubscribe();
+            cancelAnimationFrame(animationFrameId);
+        };
+    }, [smoothProgress]);
+
+    // --------------------------------------------------------
     // NARRATIVE TIMELINE (Opacity mappings based on scroll)
     // --------------------------------------------------------
+    
+    // 0. Dark overlay to make white text readable against the video
+    const overlayOpacity = useTransform(smoothProgress, [0, 0.35], [0.5, 0]);
     
     // 1. Initial Prompt "Desliza para avanzar"
     const promptOpacity = useTransform(smoothProgress, [0, 0.1], [1, 0]);
@@ -53,6 +91,24 @@ export default function HeroV2() {
                 className="sticky top-0 w-full h-[100svh] overflow-hidden flex items-center justify-center origin-bottom bg-black"
             >
                 
+                {/* --- VIDEO LAYER --- */}
+                <div className="absolute inset-0 z-0 bg-black" ref={videoContainerRef}>
+                    <div dangerouslySetInnerHTML={{ __html: `
+                        <video
+                            src="/videos/hero-scrub6.mp4"
+                            autoplay
+                            loop
+                            muted
+                            playsinline
+                            preload="auto"
+                            class="object-cover object-center w-full h-full"
+                            style="pointer-events: none;"
+                        ></video>
+                    `}} className="w-full h-full" />
+                    {/* Cinematic Dark Overlay for Text Legibility */}
+                    <motion.div style={{ opacity: overlayOpacity }} className="absolute inset-0 bg-black/60 pointer-events-none" />
+                </div>
+
                 {/* --- NARRATIVE OVERLAYS --- */}
 
                 {/* Initial Instruction */}
