@@ -21,18 +21,7 @@ export default function HeroV2() {
         restDelta: 0.001
     });
 
-    // CLEAN, NEW VIDEO SCRUBBING LOGIC
-    // We simply map the scroll progress to the video's currentTime using Framer Motion natively.
-    useMotionValueEvent(smoothProgress, "change", (latest) => {
-        if (videoRef.current && videoRef.current.readyState >= 2) {
-            const END_TRIM_SECONDS = 1.5; 
-            const maxDuration = Math.max(0, videoRef.current.duration - END_TRIM_SECONDS);
-            
-            // Limit video scrubbing to the first 75% of the scroll so it finishes before the fade
-            const videoProgress = Math.min(Math.max(latest, 0) / 0.75, 1);
-            videoRef.current.currentTime = videoProgress * maxDuration;
-        }
-    });
+    // No scrubbing logic needed - the video plays naturally.
 
     // --------------------------------------------------------
     // NARRATIVE TIMELINE (Opacity mappings based on scroll)
@@ -72,6 +61,8 @@ export default function HeroV2() {
                     <video
                         ref={videoRef}
                         src="/videos/hero-scrub6.mp4"
+                        autoPlay
+                        loop
                         muted
                         playsInline
                         preload="auto"
