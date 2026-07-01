@@ -69,7 +69,7 @@ export default function OperationMap() {
                         <div 
                             key={node.id} 
                             className="absolute left-1/2 flex items-center w-full"
-                            style={{ top: \`\${node.progress * 100}%\`, transform: 'translate(-50%, -50%)' }}
+                            style={{ top: `${node.progress * 100}%`, transform: 'translate(-50%, -50%)' }}
                         >
                             {/* Branch Left */}
                             {node.branchLeft && (
