@@ -10,6 +10,28 @@ export default function HeroV2() {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [videoLoaded, setVideoLoaded] = useState(false);
 
+    // CRITICAL iOS FIX: Force iOS Safari to unlock the video without showing a play button
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+
+        // Force native attributes that React sometimes misses
+        video.defaultMuted = true;
+        video.muted = true;
+        video.setAttribute('playsinline', '');
+
+        // Attempt a micro-play to unlock the video engine for scrubbing
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                video.pause();
+            }).catch(() => {
+                // Autoplay was prevented (e.g. Low Power Mode). 
+                // We just swallow the error so it doesn't crash.
+            });
+        }
+    }, []);
+
     // Track overall scroll progress for the whole section (0 to 1)
     const { scrollYProgress } = useScroll({
         target: containerRef,

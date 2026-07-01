@@ -44,3 +44,9 @@ body {
 .violet-glow {
   box-shadow: 0 0 40px rgba(109, 40, 217, 0.1);
 }
+
+/* Ocultar el botón nativo de Play en iOS Safari para videos de fondo */
+video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
