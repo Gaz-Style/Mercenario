@@ -1,7 +1,110 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+
+// --- Subcomponents to respect React Rules of Hooks & improve performance ---
+
+const NodeItem = ({ 
+    node, 
+    progressValue 
+}: { 
+    node: any; 
+    progressValue: MotionValue<number>;
+}) => {
+    // Activate node when dot passes its progress
+    const isActive = useTransform(progressValue, (p) => p >= node.progress);
+    
+    // Premium Animations
+    const color = useTransform(isActive, (active) => active ? "#000000" : "#d4d4d4");
+    const scale = useTransform(isActive, (active) => active ? 1.05 : 1);
+    const branchWidth = useTransform(isActive, (active) => active ? "100%" : "0%");
+    const branchOpacity = useTransform(isActive, (active) => active ? 1 : 0);
+    const branchTranslateL = useTransform(isActive, (active) => active ? 0 : 10);
+    const branchTranslateR = useTransform(isActive, (active) => active ? 0 : -10);
+    
+    return (
+        <div 
+            className="absolute left-1/2 flex items-center w-full z-10"
+            style={{ top: `${node.progress * 100}%`, transform: 'translate(-50%, -50%)' }}
+        >
+            {/* Branch Left */}
+            {node.branchLeft && (
+                <div className="absolute right-1/2 top-1/2 -translate-y-1/2 w-[15vw] md:w-[10vw] flex items-center justify-end pr-4 md:pr-6">
+                    <motion.span 
+                        style={{ opacity: branchOpacity, x: branchTranslateL }}
+                        className="text-[9px] md:text-10px font-mono uppercase tracking-widest text-neutral-400 mr-2 md:mr-4 transition-all duration-700 ease-out"
+                    >
+                        {node.branchLeft}
+                    </motion.span>
+                    <div className="w-full max-w-[40px] md:max-w-[80px] h-[1px] bg-transparent flex justify-end">
+                        <motion.div 
+                            style={{ width: branchWidth }}
+                            className="h-full bg-neutral-200 transition-all duration-700 ease-out origin-right" 
+                        />
+                    </div>
+                </div>
+            )}
+
+            {/* Node Label (Right side of trunk) */}
+            <motion.span 
+                style={{ color, scale }}
+                className="absolute left-1/2 pl-6 md:pl-10 text-base md:text-3xl font-bold tracking-tight transition-all duration-500 ease-out origin-left"
+            >
+                {node.label}
+            </motion.span>
+
+            {/* Branch Right (further right than the label) */}
+            {node.branchRight && (
+                <div className="absolute left-1/2 top-1/2 -translate-y-1/2 w-[35vw] flex items-center pl-[160px] md:pl-[240px]">
+                    <div className="w-full max-w-[40px] md:max-w-[80px] h-[1px] bg-transparent flex justify-start">
+                        <motion.div 
+                            style={{ width: branchWidth }}
+                            className="h-full bg-neutral-200 transition-all duration-700 ease-out origin-left" 
+                        />
+                    </div>
+                    <motion.span 
+                        style={{ opacity: branchOpacity, x: branchTranslateR }}
+                        className="text-[9px] md:text-[10px] font-mono uppercase tracking-widest text-neutral-400 ml-2 md:ml-4 transition-all duration-700 ease-out"
+                    >
+                        {node.branchRight}
+                    </motion.span>
+                </div>
+            )}
+        </div>
+    );
+};
+
+const PhraseItem = ({ 
+    phrase, 
+    progressValue 
+}: { 
+    phrase: any; 
+    progressValue: MotionValue<number>;
+}) => {
+    const opacity = useTransform(
+        progressValue, 
+        [phrase.start - 0.03, phrase.start, phrase.end, phrase.end + 0.03], 
+        [0, 1, 1, 0]
+    );
+    const yOffset = useTransform(
+        progressValue, 
+        [phrase.start - 0.03, phrase.start, phrase.end, phrase.end + 0.03], 
+        [30, 0, 0, -30]
+    );
+
+    return (
+        <motion.div
+            style={{ opacity, y: yOffset }}
+            className="absolute left-[5%] md:left-[15%] top-1/2 -translate-y-1/2 w-[35%] md:w-[25%] pointer-events-none"
+        >
+            <p className="text-xl md:text-4xl lg:text-5xl font-light text-black leading-tight tracking-tight selection:bg-black selection:text-white">
+                {phrase.text}
+            </p>
+        </motion.div>
+    );
+};
+
 
 export default function OperationMap() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -12,17 +115,14 @@ export default function OperationMap() {
         offset: ["start start", "end end"]
     });
 
-    // Smooth out the scroll input slightly for a more organic feel
-    const smoothProgress = useSpring(scrollYProgress, {
-        stiffness: 400,
-        damping: 90,
-        restDelta: 0.001
-    });
+    // We removed useSpring to completely eliminate scroll resistance/lag.
+    // By using scrollYProgress directly, the animations perfectly match 1:1 with the native scroll momentum.
+    const progressValue = scrollYProgress;
 
     // Red dot vertical movement (from 10% to 90% of screen height)
-    const dotY = useTransform(smoothProgress, [0, 1], ["10%", "90%"]);
+    const dotY = useTransform(progressValue, [0, 1], ["10%", "90%"]);
     // The main black line that draws itself to follow the dot
-    const trunkHeight = useTransform(smoothProgress, [0, 1], ["0%", "80%"]);
+    const trunkHeight = useTransform(progressValue, [0, 1], ["0%", "80%"]);
 
     // Nodes definition
     const nodes = [
@@ -65,96 +165,14 @@ export default function OperationMap() {
                 />
 
                 {/* Nodes & Branches */}
-                {nodes.map((node, i) => {
-                    // Activate node when dot passes its progress
-                    const isActive = useTransform(smoothProgress, (p) => p >= node.progress);
-                    
-                    // Premium Animations
-                    const color = useTransform(isActive, (active) => active ? "#000000" : "#d4d4d4");
-                    const scale = useTransform(isActive, (active) => active ? 1.05 : 1);
-                    const branchWidth = useTransform(isActive, (active) => active ? "100%" : "0%");
-                    const branchOpacity = useTransform(isActive, (active) => active ? 1 : 0);
-                    const branchTranslateL = useTransform(isActive, (active) => active ? 0 : 10);
-                    const branchTranslateR = useTransform(isActive, (active) => active ? 0 : -10);
-                    
-                    return (
-                        <div 
-                            key={node.id} 
-                            className="absolute left-1/2 flex items-center w-full z-10"
-                            style={{ top: `${node.progress * 100}%`, transform: 'translate(-50%, -50%)' }}
-                        >
-                            {/* Branch Left */}
-                            {node.branchLeft && (
-                                <div className="absolute right-1/2 top-1/2 -translate-y-1/2 w-[15vw] md:w-[10vw] flex items-center justify-end pr-4 md:pr-6">
-                                    <motion.span 
-                                        style={{ opacity: branchOpacity, x: branchTranslateL }}
-                                        className="text-[9px] md:text-10px font-mono uppercase tracking-widest text-neutral-400 mr-2 md:mr-4 transition-all duration-700 ease-out"
-                                    >
-                                        {node.branchLeft}
-                                    </motion.span>
-                                    <div className="w-full max-w-[40px] md:max-w-[80px] h-[1px] bg-transparent flex justify-end">
-                                        <motion.div 
-                                            style={{ width: branchWidth }}
-                                            className="h-full bg-neutral-200 transition-all duration-700 ease-out origin-right" 
-                                        />
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Node Label (Right side of trunk) */}
-                            <motion.span 
-                                style={{ color, scale }}
-                                className="absolute left-1/2 pl-6 md:pl-10 text-base md:text-3xl font-bold tracking-tight transition-all duration-500 ease-out origin-left"
-                            >
-                                {node.label}
-                            </motion.span>
-
-                            {/* Branch Right (further right than the label) */}
-                            {node.branchRight && (
-                                <div className="absolute left-1/2 top-1/2 -translate-y-1/2 w-[35vw] flex items-center pl-[160px] md:pl-[240px]">
-                                    <div className="w-full max-w-[40px] md:max-w-[80px] h-[1px] bg-transparent flex justify-start">
-                                        <motion.div 
-                                            style={{ width: branchWidth }}
-                                            className="h-full bg-neutral-200 transition-all duration-700 ease-out origin-left" 
-                                        />
-                                    </div>
-                                    <motion.span 
-                                        style={{ opacity: branchOpacity, x: branchTranslateR }}
-                                        className="text-[9px] md:text-[10px] font-mono uppercase tracking-widest text-neutral-400 ml-2 md:ml-4 transition-all duration-700 ease-out"
-                                    >
-                                        {node.branchRight}
-                                    </motion.span>
-                                </div>
-                            )}
-                        </div>
-                    );
-                })}
+                {nodes.map((node) => (
+                    <NodeItem key={node.id} node={node} progressValue={progressValue} />
+                ))}
 
                 {/* Dynamic Phrases (Premium fade & slide) */}
-                {phrases.map((phrase, i) => {
-                    const opacity = useTransform(
-                        smoothProgress, 
-                        [phrase.start - 0.03, phrase.start, phrase.end, phrase.end + 0.03], 
-                        [0, 1, 1, 0]
-                    );
-                    const yOffset = useTransform(
-                        smoothProgress, 
-                        [phrase.start - 0.03, phrase.start, phrase.end, phrase.end + 0.03], 
-                        [30, 0, 0, -30]
-                    );
-
-                    return (
-                        <motion.div
-                            key={i}
-                            style={{ opacity, y: yOffset }}
-                            className="absolute left-[5%] md:left-[15%] top-1/2 -translate-y-1/2 w-[35%] md:w-[25%] pointer-events-none"
-                        >
-                            <p className="text-xl md:text-4xl lg:text-5xl font-light text-black leading-tight tracking-tight selection:bg-black selection:text-white">
-                                {phrase.text}
-                            </p>
-                        </motion.div>
-                    );
-                })}
+                {phrases.map((phrase, i) => (
+                    <PhraseItem key={i} phrase={phrase} progressValue={progressValue} />
+                ))}
 
                 {/* The Red Dot (The Operation) */}
                 <motion.div 
