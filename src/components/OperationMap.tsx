@@ -12,16 +12,17 @@ const NodeItem = ({
     node: any; 
     progressValue: MotionValue<number>;
 }) => {
-    // Activate node when dot passes its progress
-    const isActive = useTransform(progressValue, (p) => p >= node.progress);
-    
-    // Premium Animations
-    const color = useTransform(isActive, (active) => active ? "#000000" : "#d4d4d4");
-    const scale = useTransform(isActive, (active) => active ? 1.05 : 1);
-    const branchWidth = useTransform(isActive, (active) => active ? "100%" : "0%");
-    const branchOpacity = useTransform(isActive, (active) => active ? 1 : 0);
-    const branchTranslateL = useTransform(isActive, (active) => active ? 0 : 10);
-    const branchTranslateR = useTransform(isActive, (active) => active ? 0 : -10);
+    // Map animations strictly to a scroll range just before hitting the node for a smooth mathematical transition
+    const rangeStart = node.progress - 0.05;
+    const rangeEnd = node.progress;
+
+    // Premium GPU-Accelerated Animations
+    const color = useTransform(progressValue, [rangeStart, rangeEnd], ["#d4d4d4", "#000000"]);
+    const scale = useTransform(progressValue, [rangeStart, rangeEnd], [1, 1.05]);
+    const branchScaleX = useTransform(progressValue, [rangeStart, rangeEnd], [0, 1]);
+    const branchOpacity = useTransform(progressValue, [rangeStart, rangeEnd], [0, 1]);
+    const branchTranslateL = useTransform(progressValue, [rangeStart, rangeEnd], [10, 0]);
+    const branchTranslateR = useTransform(progressValue, [rangeStart, rangeEnd], [-10, 0]);
     
     return (
         <div 
@@ -33,14 +34,14 @@ const NodeItem = ({
                 <div className="absolute right-1/2 top-1/2 -translate-y-1/2 w-[15vw] md:w-[10vw] flex items-center justify-end pr-4 md:pr-6">
                     <motion.span 
                         style={{ opacity: branchOpacity, x: branchTranslateL }}
-                        className="text-[9px] md:text-10px font-mono uppercase tracking-widest text-neutral-400 mr-2 md:mr-4 transition-all duration-700 ease-out"
+                        className="text-[9px] md:text-10px font-mono uppercase tracking-widest text-neutral-400 mr-2 md:mr-4"
                     >
                         {node.branchLeft}
                     </motion.span>
                     <div className="w-full max-w-[40px] md:max-w-[80px] h-[1px] bg-transparent flex justify-end">
                         <motion.div 
-                            style={{ width: branchWidth }}
-                            className="h-full bg-neutral-200 transition-all duration-700 ease-out origin-right" 
+                            style={{ scaleX: branchScaleX }}
+                            className="h-full w-full bg-neutral-200 origin-right" 
                         />
                     </div>
                 </div>
@@ -49,7 +50,7 @@ const NodeItem = ({
             {/* Node Label (Right side of trunk) */}
             <motion.span 
                 style={{ color, scale }}
-                className="absolute left-1/2 pl-6 md:pl-10 text-base md:text-3xl font-bold tracking-tight transition-all duration-500 ease-out origin-left"
+                className="absolute left-1/2 pl-6 md:pl-10 text-base md:text-3xl font-bold tracking-tight origin-left"
             >
                 {node.label}
             </motion.span>
@@ -59,13 +60,13 @@ const NodeItem = ({
                 <div className="absolute left-1/2 top-1/2 -translate-y-1/2 w-[35vw] flex items-center pl-[160px] md:pl-[240px]">
                     <div className="w-full max-w-[40px] md:max-w-[80px] h-[1px] bg-transparent flex justify-start">
                         <motion.div 
-                            style={{ width: branchWidth }}
-                            className="h-full bg-neutral-200 transition-all duration-700 ease-out origin-left" 
+                            style={{ scaleX: branchScaleX }}
+                            className="h-full w-full bg-neutral-200 origin-left" 
                         />
                     </div>
                     <motion.span 
                         style={{ opacity: branchOpacity, x: branchTranslateR }}
-                        className="text-[9px] md:text-[10px] font-mono uppercase tracking-widest text-neutral-400 ml-2 md:ml-4 transition-all duration-700 ease-out"
+                        className="text-[9px] md:text-[10px] font-mono uppercase tracking-widest text-neutral-400 ml-2 md:ml-4"
                     >
                         {node.branchRight}
                     </motion.span>
@@ -115,14 +116,13 @@ export default function OperationMap() {
         offset: ["start start", "end end"]
     });
 
-    // We removed useSpring to completely eliminate scroll resistance/lag.
-    // By using scrollYProgress directly, the animations perfectly match 1:1 with the native scroll momentum.
+    // Directly bind to scroll
     const progressValue = scrollYProgress;
 
     // Red dot vertical movement (from 10% to 90% of screen height)
     const dotY = useTransform(progressValue, [0, 1], ["10%", "90%"]);
-    // The main black line that draws itself to follow the dot
-    const trunkHeight = useTransform(progressValue, [0, 1], ["0%", "80%"]);
+    // The main black line that draws itself to follow the dot using scaleY (GPU accelerated)
+    const trunkScaleY = useTransform(progressValue, [0, 1], [0, 1]);
 
     // Nodes definition
     const nodes = [
@@ -158,10 +158,10 @@ export default function OperationMap() {
                 {/* Center Background Line */}
                 <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[1px] bg-neutral-100" style={{ height: '80%' }} />
                 
-                {/* Animated Black Trunk Line */}
+                {/* Animated Black Trunk Line (GPU Accelerated via scaleY) */}
                 <motion.div 
                     className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[1px] bg-black origin-top" 
-                    style={{ height: trunkHeight }} 
+                    style={{ height: '80%', scaleY: trunkScaleY }} 
                 />
 
                 {/* Nodes & Branches */}
