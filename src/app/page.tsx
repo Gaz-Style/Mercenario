@@ -280,22 +280,70 @@ export default function Home() {
                 {/* Contenido posterior al Hero */}
                 <div className="w-full bg-white text-black relative z-20 flex flex-col items-center">
 
-                {/* 3. SECCIÓN 3 - La Operación Viva (Mapa de Metro) */}
-                <div className="w-full max-w-5xl mx-auto px-4 pt-8 md:pt-16 flex flex-col items-start">
-                    <div className="text-left max-w-2xl mb-4 md:mb-8 space-y-4">
-                        <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Operación Viva</span>
+                {/* SECCIÓN: El Problema y La Solución (Comparación) */}
+                <section className="w-full max-w-5xl mx-auto px-4 pt-24 md:pt-32 pb-16 md:pb-24 space-y-12">
+                    <div className="space-y-4 max-w-3xl">
+                        <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">El Diagnóstico</span>
                         <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
-                            Imagina que cada acción desencadena la siguiente.
+                            Dos formas de operar.<br />
+                            <span className="text-neutral-400 font-semibold">Solo una escala.</span>
                         </h2>
-                        <p className="text-base text-neutral-500 max-w-2xl leading-relaxed font-light pt-4">
-                            Sin copiar información. Sin repetir tareas. Sin depender de que alguien recuerde hacerlo.
+                        <p className="text-base text-neutral-500 leading-relaxed font-light pt-2 max-w-2xl">
+                            La mayoría de las empresas no tienen un problema de talento. Tienen un problema de operación. La información vive atrapada en herramientas que no se hablan entre sí.
                         </p>
                     </div>
-                </div>
-                <OperationMap />
 
-                {/* 4. SECCIÓN 4 - Tu empresa ya tiene todo lo necesario (Integraciones) */}
-                <section className="w-full max-w-5xl mx-auto px-4 pt-16 md:pt-24 pb-32 md:pb-48 space-y-12">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/* Lado A: Sin Mercenario */}
+                        <div className="bg-neutral-50 p-8 rounded-2xl border border-neutral-100 space-y-5">
+                            <div className="flex items-center gap-3 border-b border-neutral-200 pb-4">
+                                <div className="w-2 h-2 rounded-full bg-mercenario-danger" />
+                                <h3 className="text-sm font-bold text-black">La operación fragmentada</h3>
+                            </div>
+                            <ul className="text-xs text-neutral-500 space-y-3 font-medium">
+                                <li className="flex items-start gap-2"><span className="mt-0.5 text-neutral-300">·</span>El cliente agenda por teléfono. Alguien lo anota en un cuaderno.</li>
+                                <li className="flex items-start gap-2"><span className="mt-0.5 text-neutral-300">·</span>El cobro se hace en otro sistema. Nadie registra el historial.</li>
+                                <li className="flex items-start gap-2"><span className="mt-0.5 text-neutral-300">·</span>El recordatorio depende de que alguien lo recuerde enviar.</li>
+                                <li className="flex items-start gap-2"><span className="mt-0.5 text-neutral-300">·</span>El mes cierra y nadie sabe exactamente cuánto se generó.</li>
+                            </ul>
+                            <p className="text-xs text-mercenario-danger font-semibold pt-2">Tiempo del dueño ocupado en tareas operativas, no en crecer.</p>
+                        </div>
+
+                        {/* Lado B: Con Mercenario */}
+                        <div className="bg-black p-8 rounded-2xl border border-black space-y-5">
+                            <div className="flex items-center gap-3 border-b border-white/10 pb-4">
+                                <div className="w-2 h-2 rounded-full bg-emerald-400" />
+                                <h3 className="text-sm font-bold text-white">La operación conectada</h3>
+                            </div>
+                            <ul className="text-xs text-neutral-400 space-y-3 font-medium">
+                                <li className="flex items-start gap-2"><span className="mt-0.5 text-neutral-600">·</span>El cliente agenda online. El sistema confirma, registra y notifica.</li>
+                                <li className="flex items-start gap-2"><span className="mt-0.5 text-neutral-600">·</span>El pago activa la factura automáticamente.</li>
+                                <li className="flex items-start gap-2"><span className="mt-0.5 text-neutral-600">·</span>El recordatorio llega por WhatsApp sin que nadie lo envíe.</li>
+                                <li className="flex items-start gap-2"><span className="mt-0.5 text-neutral-600">·</span>Al cierre del mes, el dashboard refleja cada número en tiempo real.</li>
+                            </ul>
+                            <p className="text-xs text-emerald-400 font-semibold pt-2">El dueño se concentra en el negocio. La operación se ejecuta sola.</p>
+                        </div>
+                    </div>
+                </section>
+
+                {/* SECCIÓN: La Operación Viva (Mapa de Metro) */}
+                <section className="w-full border-t border-neutral-100">
+                    <div className="w-full max-w-5xl mx-auto px-4 pt-16 md:pt-24 pb-4 flex flex-col items-start">
+                        <div className="text-left max-w-2xl mb-4 md:mb-8 space-y-4">
+                            <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Operación Viva</span>
+                            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
+                                Imagina que cada acción desencadena la siguiente.
+                            </h2>
+                            <p className="text-base text-neutral-500 max-w-2xl leading-relaxed font-light pt-2">
+                                Sin copiar información. Sin repetir tareas. Sin depender de que alguien recuerde hacerlo.
+                            </p>
+                        </div>
+                    </div>
+                    <OperationMap />
+                </section>
+
+                {/* SECCIÓN: Conectividad (Integraciones + Logos) */}
+                <section className="w-full max-w-5xl mx-auto px-4 pt-16 md:pt-24 pb-32 md:pb-48 space-y-12 border-t border-neutral-100">
                     <div className="space-y-4">
                         <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Conectividad Nata</span>
                         <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
@@ -335,80 +383,147 @@ export default function Home() {
                     </p>
                 </section>
 
-                {/* 5. SECCIÓN 5 - Una solución para cada operación */}
-                <section className="w-full max-w-5xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100">
-                    <div className="mb-24 space-y-4">
+                {/* SECCIÓN: Soluciones por Industria */}
+                <section className="w-full max-w-5xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100 space-y-16">
+                    <div className="space-y-4 max-w-3xl">
                         <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Sistemas de Trabajo</span>
-                        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black max-w-3xl leading-tight">
+                        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
                             Una solución para cada operación.
                         </h2>
+                        <p className="text-base text-neutral-500 leading-relaxed font-light pt-2 max-w-2xl">
+                            No existe una solución universal porque no existe una empresa universal. Cada implementación parte desde cómo funciona tu negocio hoy.
+                        </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {[
-                            { title: "Clínicas", capabilities: ["Agenda", "Pagos", "Ficha clínica", "Bonos", "Seguimiento", "Reportes"] },
-                            { title: "Centros estéticos", capabilities: ["Reservas", "Recordatorios", "Cobros", "Marketing", "Fidelización"] },
-                            { title: "Retail", capabilities: ["Ventas", "Inventario", "Clientes", "Facturación", "Automatizaciones"] },
-                            { title: "Empresas de servicios", capabilities: ["Clientes", "Proyectos", "Cobranza", "Administración", "Seguimiento"] }
+                            {
+                                title: "Clínicas y Salud",
+                                href: "/soluciones/health",
+                                tag: "Sector salud",
+                                description: "Desde la agenda médica hasta la emisión de bonos Fonasa e Isapre. El historial clínico, los recordatorios y los cobros funcionan como una sola unidad.",
+                                capabilities: ["Agenda", "Bonos", "Ficha clínica", "Pagos", "Recordatorios", "Reportes"]
+                            },
+                            {
+                                title: "Centros Estéticos",
+                                href: "/soluciones/health",
+                                tag: "Estética y bienestar",
+                                description: "Gestión de paquetes de sesiones, seguimiento de clientes, fidelización automática y marketing integrado con WhatsApp y correo.",
+                                capabilities: ["Reservas", "Paquetes", "Recordatorios", "Cobros", "Marketing", "Fidelización"]
+                            },
+                            {
+                                title: "Retail y Comercio",
+                                href: "/soluciones/comercio",
+                                tag: "Comercio",
+                                description: "Control de inventario en tiempo real, punto de venta integrado con facturación SII y gestión de clientes recurrentes.",
+                                capabilities: ["Ventas", "Inventario", "Facturación SII", "Clientes", "Automatizaciones"]
+                            },
+                            {
+                                title: "Empresas de Servicios",
+                                href: "/soluciones/servicios",
+                                tag: "Servicios B2B",
+                                description: "Pipeline de cotizaciones, gestión de proyectos activos, alertas de cobranza y renovaciones de contratos. Todo conectado.",
+                                capabilities: ["Cotizaciones", "Proyectos", "Cobranza", "CRM", "Seguimiento"]
+                            }
                         ].map((sector, i) => (
-                            <div key={i} className="border-t border-neutral-200 pt-6 flex flex-col justify-between min-h-[220px]">
-                                <h3 className="text-lg font-bold text-black tracking-tight">{sector.title}</h3>
-                                <ul className="text-xs text-neutral-500 font-medium tracking-wide space-y-2 mt-4 mb-auto">
+                            <Link key={i} href={sector.href} className="group bg-neutral-50 hover:bg-neutral-100 border border-neutral-100 hover:border-neutral-200 rounded-2xl p-8 space-y-5 transition-all duration-300 flex flex-col">
+                                <div className="flex items-start justify-between">
+                                    <div>
+                                        <span className="text-[9px] font-mono tracking-widest uppercase text-neutral-400">{sector.tag}</span>
+                                        <h3 className="text-lg font-bold text-black tracking-tight mt-1">{sector.title}</h3>
+                                    </div>
+                                    <ArrowUpRight className="w-4 h-4 text-neutral-300 group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 mt-1 shrink-0" />
+                                </div>
+                                <p className="text-xs text-neutral-500 font-light leading-relaxed flex-1">{sector.description}</p>
+                                <div className="flex flex-wrap gap-2 pt-2 border-t border-neutral-200">
                                     {sector.capabilities.map((cap, cIdx) => (
-                                        <li key={cIdx} className="flex items-center gap-2">
-                                            <div className="w-1 h-1 bg-neutral-300 rounded-full" />
-                                            <span>{cap}</span>
-                                        </li>
+                                        <span key={cIdx} className="text-[10px] font-semibold tracking-wide text-neutral-500 bg-white border border-neutral-200 rounded-full px-2.5 py-1">{cap}</span>
                                     ))}
-                                </ul>
-                            </div>
+                                </div>
+                            </Link>
                         ))}
                     </div>
                 </section>
 
-                {/* 6. SECCIÓN 6 - Mucho más que una buena experiencia */}
-                <section className="w-full max-w-5xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100 space-y-8">
-                    <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Impacto de Negocio</span>
-                    <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
-                        Mucho más que una buena experiencia para tus clientes. <br />
-                        <span className="text-neutral-400 font-semibold">Una mejor experiencia también significa una mejor empresa.</span>
-                    </h2>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-neutral-100 text-center md:text-left">
-                        <div>
-                            <span className="text-lg font-bold text-black">Más información.</span>
-                        </div>
-                        <div>
-                            <span className="text-lg font-bold text-black">Más control.</span>
-                        </div>
-                        <div>
-                            <span className="text-lg font-bold text-black">Más tiempo.</span>
-                        </div>
-                        <div>
-                            <span className="text-lg font-bold text-black">Mejores decisiones.</span>
-                        </div>
+                {/* SECCIÓN: Impacto de Negocio con stat blocks */}
+                <section className="w-full max-w-5xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100 space-y-16">
+                    <div className="space-y-4 max-w-3xl">
+                        <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Impacto de Negocio</span>
+                        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
+                            Mucho más que una buena experiencia. <br />
+                            <span className="text-neutral-400 font-semibold">Una mejor empresa.</span>
+                        </h2>
                     </div>
-                    <p className="text-sm md:text-base text-neutral-500 leading-relaxed font-light pt-4">
-                        Porque cuando toda la operación trabaja conectada, el crecimiento deja de depender de la improvisación.
-                    </p>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {[
+                            { stat: "Más información.", detail: "Cada acción queda registrada. Al final del mes sabes exactamente qué pasó, quién lo hizo y cuánto generó.", icon: "01" },
+                            { stat: "Más control.", detail: "El dueño deja de depender de la memoria del equipo. Los procesos ocurren igual, sin importar quién esté trabajando.", icon: "02" },
+                            { stat: "Más tiempo.", detail: "Las tareas repetitivas se automatizan. El equipo se concentra en lo que realmente importa: atender bien.", icon: "03" },
+                            { stat: "Mejores decisiones.", detail: "Con datos reales en tiempo real, las decisiones dejan de basarse en intuición y comienzan a basarse en evidencia.", icon: "04" }
+                        ].map((item, i) => (
+                            <div key={i} className="p-8 border border-neutral-100 rounded-2xl space-y-4 hover:border-neutral-300 transition-colors">
+                                <div className="flex items-start justify-between">
+                                    <h3 className="text-xl font-bold text-black">{item.stat}</h3>
+                                    <span className="text-[10px] font-mono text-neutral-300">{item.icon}</span>
+                                </div>
+                                <p className="text-sm text-neutral-500 font-light leading-relaxed">{item.detail}</p>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="bg-black rounded-2xl p-10 md:p-14 space-y-4">
+                        <p className="text-white text-xl md:text-2xl font-light leading-relaxed max-w-3xl">
+                            Cuando toda la operación trabaja conectada, el crecimiento deja de depender de la improvisación.
+                        </p>
+                        <p className="text-neutral-400 text-sm font-semibold">
+                            Se convierte en el resultado natural de operar bien.
+                        </p>
+                    </div>
                 </section>
 
-                {/* 7. SECCIÓN 7 - Explora cómo funciona una empresa conectada */}
-                <section className="w-full max-w-5xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100 text-left space-y-8 flex flex-col items-start">
-                    <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Centro de Conocimiento</span>
-                    <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black max-w-2xl leading-tight">
-                        Explora cómo funciona una empresa conectada.
-                    </h2>
-                    <p className="text-sm md:text-base text-neutral-500 leading-relaxed font-light max-w-xl">
-                        No importa si buscas mejorar tu clínica, tu centro estético o tu empresa. En Mercenario encontrarás una explicación clara de cada proceso, cada integración y cada herramienta que forma parte de una operación moderna.
-                    </p>
-                    <div className="pt-4">
-                        <button 
+                {/* SECCIÓN: Centro de Conocimiento con artículos */}
+                <section className="w-full max-w-5xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100 space-y-16">
+                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                        <div className="space-y-4 max-w-2xl">
+                            <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Centro de Conocimiento</span>
+                            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
+                                Explora cómo funciona una empresa conectada.
+                            </h2>
+                            <p className="text-sm md:text-base text-neutral-500 leading-relaxed font-light">
+                                Cada concepto explicado con claridad. Sin tecnicismos innecesarios.
+                            </p>
+                        </div>
+                        <button
                             onClick={() => setActiveMenu("conocimiento")}
-                            className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white font-semibold text-[11px] uppercase tracking-widest hover:bg-neutral-800 transition-colors rounded-full"
+                            className="shrink-0 inline-flex items-center gap-2 px-6 py-3.5 border border-black text-black font-semibold text-[11px] uppercase tracking-widest hover:bg-black hover:text-white transition-colors rounded-full"
                         >
-                            <span>Explorar el centro de conocimiento</span>
+                            <span>Ver todos</span>
                             <ChevronRight className="w-4 h-4" />
                         </button>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {[
+                            { title: "¿Qué es un ERP?", description: "Entiende cómo un sistema centralizado puede reemplazar todas las planillas y archivos dispersos que hoy frenan tu operación.", href: "/centro-de-conocimiento/que-es-un-erp", tag: "Conceptos" },
+                            { title: "¿Qué es un CRM?", description: "Descubre cómo una empresa que recuerda a sus clientes genera más ingresos que una que simplemente les vende.", href: "/centro-de-conocimiento/que-es-un-crm", tag: "Conceptos" },
+                            { title: "¿Qué es una API?", description: "Aprende por qué la conexión entre tus herramientas es la diferencia entre una empresa que trabaja y una que escala.", href: "/centro-de-conocimiento/que-es-una-api", tag: "Tecnología" },
+                            { title: "¿Qué es Fonasa?", description: "Entender cómo funciona Fonasa te permite integrar cobros de bonos directamente en tu flujo de atención.", href: "/centro-de-conocimiento/que-es-fonasa", tag: "Salud" },
+                            { title: "¿Qué es IMED?", description: "Cómo funciona la validación electrónica de bonos y qué significa integrarla en tu punto de atención.", href: "/centro-de-conocimiento/que-es-imed", tag: "Salud" },
+                            { title: "¿Qué es una operación fragmentada?", description: "El diagnóstico que explica por qué muchas empresas trabajan más de lo necesario sin obtener mejores resultados.", href: "/centro-de-conocimiento/que-es-una-operacion-fragmentada", tag: "Operación" }
+                        ].map((article, i) => (
+                            <Link key={i} href={article.href} className="group border border-neutral-100 rounded-2xl p-6 space-y-4 hover:border-neutral-300 hover:shadow-sm transition-all duration-300 flex flex-col">
+                                <div>
+                                    <span className="text-[9px] font-mono tracking-widest uppercase text-neutral-400">{article.tag}</span>
+                                    <h3 className="text-sm font-bold text-black mt-1 group-hover:underline underline-offset-2 transition-all">{article.title}</h3>
+                                </div>
+                                <p className="text-xs text-neutral-500 font-light leading-relaxed flex-1">{article.description}</p>
+                                <div className="flex items-center gap-1 text-[10px] font-semibold tracking-wider text-neutral-400 group-hover:text-black transition-colors uppercase pt-2 border-t border-neutral-100">
+                                    <span>Leer artículo</span>
+                                    <ChevronRight className="w-3 h-3 -translate-x-0.5 group-hover:translate-x-0.5 transition-transform" />
+                                </div>
+                            </Link>
+                        ))}
                     </div>
                 </section>
 
