@@ -64,3 +64,20 @@ video::-webkit-media-controls-panel {
 video::-webkit-media-controls-play-button {
   display: none !important;
 }
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 75s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+

@@ -281,13 +281,13 @@ export default function Home() {
                 <div className="w-full bg-white text-black relative z-20 flex flex-col items-center">
 
                 {/* 3. SECCIÓN 3 - La Operación Viva (Mapa de Metro) */}
-                <div className="w-full max-w-5xl mx-auto px-4 pt-8 md:pt-16 flex flex-col items-center">
-                    <div className="text-center max-w-2xl mb-4 md:mb-8 space-y-4">
+                <div className="w-full max-w-5xl mx-auto px-4 pt-8 md:pt-16 flex flex-col items-start">
+                    <div className="text-left max-w-2xl mb-4 md:mb-8 space-y-4">
                         <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Operación Viva</span>
                         <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
                             Imagina que cada acción desencadena la siguiente.
                         </h2>
-                        <p className="text-base text-neutral-500 max-w-2xl mx-auto leading-relaxed font-light pt-4">
+                        <p className="text-base text-neutral-500 max-w-2xl leading-relaxed font-light pt-4">
                             Sin copiar información. Sin repetir tareas. Sin depender de que alguien recuerde hacerlo.
                         </p>
                     </div>
@@ -295,7 +295,7 @@ export default function Home() {
                 <OperationMap />
 
                 {/* 4. SECCIÓN 4 - Tu empresa ya tiene todo lo necesario (Integraciones) */}
-                <section className="w-full max-w-4xl mx-auto px-4 pt-16 md:pt-24 pb-32 md:pb-48 space-y-12">
+                <section className="w-full max-w-5xl mx-auto px-4 pt-16 md:pt-24 pb-32 md:pb-48 space-y-12">
                     <div className="space-y-4">
                         <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Conectividad Nata</span>
                         <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
@@ -307,20 +307,27 @@ export default function Home() {
                         </p>
                     </div>
 
-                    {/* Logos Grid */}
-                    <div className="grid grid-cols-3 md:grid-cols-6 gap-8 pt-8 grayscale opacity-45">
-                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">WhatsApp</div>
-                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">Google</div>
-                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">SII</div>
-                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">IMED</div>
-                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">Fonasa</div>
-                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">Previred</div>
-                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">Mercado Pago</div>
-                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">Transbank</div>
-                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">Meta</div>
-                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">Stripe</div>
-                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">Outlook</div>
-                        <div className="h-12 flex items-center justify-center font-mono font-bold text-xs border border-neutral-200 rounded">APIs</div>
+                    {/* Infinite Scrolling Marquee of Logos */}
+                    <div className="relative w-full overflow-hidden py-4" style={{ maskImage: "linear-gradient(to right, transparent, white 15%, white 85%, transparent)", WebkitMaskImage: "linear-gradient(to right, transparent, white 15%, white 85%, transparent)" }}>
+                        <div className="flex gap-3 w-max animate-marquee py-2">
+                            {Array.from({ length: 20 }, (_, i) => `/imagenes/logos herramientas con fondo/${i + 1}.png`)
+                                .concat(Array.from({ length: 20 }, (_, i) => `/imagenes/logos herramientas con fondo/${i + 1}.png`))
+                                .map((src, idx) => {
+                                    const isSpecial = src.endsWith("/10.png") || // Fonasa
+                                                      src.endsWith("/11.png") || // CENS
+                                                      src.endsWith("/12.png") || // Previred
+                                                      src.endsWith("/13.png") || // IMED
+                                                      src.endsWith("/17.png") || // LinkedIn
+                                                      src.endsWith("/4.png")  || // WhatsApp API
+                                                      src.endsWith("/1.png");    // HL7 FHIR
+                                    return (
+                                        <div key={idx} className={`w-32 h-18 md:w-40 md:h-22 flex items-center justify-center border border-neutral-100 rounded-xl bg-white/80 backdrop-blur-sm grayscale opacity-50 hover:grayscale-0 hover:opacity-100 hover:border-neutral-300 hover:shadow-sm transition-all duration-300 select-none ${isSpecial ? 'p-1.5' : 'p-3'}`}>
+                                            <img src={src} alt={`Logo ${idx + 1}`} className={`w-full h-full object-contain ${isSpecial ? 'scale-135' : ''}`} />
+                                        </div>
+                                    );
+                                })
+                            }
+                        </div>
                     </div>
 
                     <p className="text-xs text-neutral-400 font-medium italic pt-4">
@@ -329,10 +336,10 @@ export default function Home() {
                 </section>
 
                 {/* 5. SECCIÓN 5 - Una solución para cada operación */}
-                <section className="w-full max-w-6xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100">
+                <section className="w-full max-w-5xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100">
                     <div className="mb-24 space-y-4">
-                        <span className="text-[10px] font-semibold tracking-widest uppercase text-neutral-400">Sistemas de Trabajo</span>
-                        <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-black max-w-3xl leading-tight">
+                        <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Sistemas de Trabajo</span>
+                        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black max-w-3xl leading-tight">
                             Una solución para cada operación.
                         </h2>
                     </div>
@@ -360,7 +367,7 @@ export default function Home() {
                 </section>
 
                 {/* 6. SECCIÓN 6 - Mucho más que una buena experiencia */}
-                <section className="w-full max-w-4xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100 space-y-8">
+                <section className="w-full max-w-5xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100 space-y-8">
                     <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Impacto de Negocio</span>
                     <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
                         Mucho más que una buena experiencia para tus clientes. <br />
@@ -386,12 +393,12 @@ export default function Home() {
                 </section>
 
                 {/* 7. SECCIÓN 7 - Explora cómo funciona una empresa conectada */}
-                <section className="w-full max-w-4xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100 text-center space-y-8 flex flex-col items-center">
+                <section className="w-full max-w-5xl mx-auto px-4 py-32 md:py-48 border-t border-neutral-100 text-left space-y-8 flex flex-col items-start">
                     <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Centro de Conocimiento</span>
-                    <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-black max-w-2xl leading-tight">
+                    <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black max-w-2xl leading-tight">
                         Explora cómo funciona una empresa conectada.
                     </h2>
-                    <p className="text-sm md:text-base text-neutral-500 leading-relaxed font-light max-w-xl mx-auto">
+                    <p className="text-sm md:text-base text-neutral-500 leading-relaxed font-light max-w-xl">
                         No importa si buscas mejorar tu clínica, tu centro estético o tu empresa. En Mercenario encontrarás una explicación clara de cada proceso, cada integración y cada herramienta que forma parte de una operación moderna.
                     </p>
                     <div className="pt-4">
@@ -406,15 +413,16 @@ export default function Home() {
                 </section>
 
                 {/* Última Sección: Hablemos de tu empresa */}
-                <motion.section id="contacto" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="w-full py-32 md:py-48 max-w-2xl mx-auto space-y-12 flex flex-col items-center border-t border-neutral-100 mt-24">
-                    <div className="text-center space-y-4">
-                        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-black">Hablemos de tu empresa.</h2>
-                        <p className="text-sm text-neutral-500 font-light max-w-md mx-auto">
+                <motion.section id="contacto" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="w-full py-32 md:py-48 max-w-2xl mx-auto px-6 md:px-0 space-y-12 flex flex-col items-start border-t border-neutral-100">
+                    <div className="text-left space-y-4 w-full">
+                        <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">Diagnóstico Operativo</span>
+                        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black">Hablemos de tu empresa.</h2>
+                        <p className="text-sm text-neutral-500 font-light max-w-md">
                             Cada empresa opera de forma distinta. Por eso cada implementación comienza entendiendo cómo funciona hoy tu operación. Agenda una reunión y conversemos sobre cómo podría funcionar mañana.
                         </p>
                     </div>
 
-                    <form onSubmit={handleFormSubmit} className="w-full space-y-8">
+                    <form onSubmit={handleFormSubmit} className="w-full space-y-6">
                         {/* Honeypot field - hidden from users, visible to bots */}
                         <div className="absolute left-[-9999px] top-[-9999px]" aria-hidden="true">
                             <label htmlFor="_honeypot">Leave this field empty</label>
@@ -429,34 +437,34 @@ export default function Home() {
                             />
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-semibold text-neutral-400 uppercase tracking-widest">Empresa</label>
-                                <input type="text" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-transparent border-b border-neutral-200 py-3.5 text-sm focus:outline-none focus:border-black text-black transition-colors" required disabled={formStatus === "loading" || formStatus === "success"} />
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+                            <div className="flex flex-col gap-2">
+                                <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest pl-1">Empresa</label>
+                                <input type="text" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-neutral-50/50 border border-neutral-200 rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-black focus:bg-white text-black transition-all" required disabled={formStatus === "loading" || formStatus === "success"} />
                             </div>
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-semibold text-neutral-400 uppercase tracking-widest">Correo</label>
-                                <input type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-transparent border-b border-neutral-200 py-3.5 text-sm focus:outline-none focus:border-black text-black transition-colors" required disabled={formStatus === "loading" || formStatus === "success"} />
+                            <div className="flex flex-col gap-2">
+                                <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest pl-1">Correo</label>
+                                <input type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-neutral-50/50 border border-neutral-200 rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-black focus:bg-white text-black transition-all" required disabled={formStatus === "loading" || formStatus === "success"} />
                             </div>
                         </div>
                         
-                        <div className="space-y-2 pt-4">
-                            <label className="text-[10px] font-semibold text-neutral-400 uppercase tracking-widest">Situación Operativa</label>
-                            <input type="text" value={formData.challenge} onChange={(e) => setFormData({...formData, challenge: e.target.value})} className="w-full bg-transparent border-b border-neutral-200 py-3.5 text-sm focus:outline-none focus:border-black text-black placeholder:text-neutral-300 transition-colors" placeholder="Ej: Necesitamos conectar las agendas con la facturación..." required disabled={formStatus === "loading" || formStatus === "success"} />
+                        <div className="flex flex-col gap-2 w-full">
+                            <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest pl-1">Situación Operativa</label>
+                            <input type="text" value={formData.challenge} onChange={(e) => setFormData({...formData, challenge: e.target.value})} className="w-full bg-neutral-50/50 border border-neutral-200 rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-black focus:bg-white text-black placeholder:text-neutral-400 transition-all" placeholder="Ej: Necesitamos conectar las agendas con la facturación..." required disabled={formStatus === "loading" || formStatus === "success"} />
                         </div>
                         
                         {formStatus === "error" && (
-                            <p className="text-mercenario-danger text-xs mt-4 text-center">No se pudo procesar la solicitud. Intente más tarde.</p>
+                            <p className="text-mercenario-danger text-xs mt-2 text-left">No se pudo procesar la solicitud. Intente más tarde.</p>
                         )}
                         {formStatus === "success" && (
-                            <p className="text-emerald-600 text-xs mt-4 text-center font-semibold">Solicitud recibida. Nos pondremos en contacto en breve.</p>
+                            <p className="text-emerald-600 text-xs mt-2 text-left font-semibold">Solicitud recibida. Nos pondremos en contacto en breve.</p>
                         )}
 
-                        <div className="pt-8 flex justify-center">
+                        <div className="pt-4 flex justify-center md:justify-start w-full">
                             <button 
                                 type="submit" 
                                 disabled={formStatus === "loading" || formStatus === "success"}
-                                className="inline-flex items-center gap-2 px-8 py-4.5 bg-black text-white font-semibold text-[11px] uppercase tracking-widest hover:bg-neutral-800 disabled:bg-neutral-200 disabled:text-neutral-400 transition-colors rounded-full"
+                                className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-8 py-4.5 bg-black text-white font-semibold text-[11px] uppercase tracking-widest hover:bg-neutral-800 disabled:bg-neutral-200 disabled:text-neutral-400 transition-colors rounded-full"
                             >
                                 {formStatus === "loading" ? "Procesando..." : formStatus === "success" ? "Completado" : (
                                     <><span>Agendar reunión</span><ArrowRight className="w-4 h-4" /></>

@@ -191,8 +191,8 @@ export default function HeroV2() {
                 <motion.div style={{ opacity: fadeToWhite }} className="absolute inset-0 z-50 bg-white pointer-events-none" />
 
                 {/* Act 6: The Approach */}
-                <motion.div style={{ opacity: act6Opacity }} className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-white pointer-events-none">
-                    <div className="w-full max-w-4xl mx-auto px-4 space-y-8 text-center md:text-left pointer-events-auto">
+                <motion.div style={{ opacity: act6Opacity }} className="absolute inset-0 z-50 flex flex-col items-start justify-center bg-white pointer-events-none">
+                    <div className="w-full max-w-5xl mx-auto px-6 md:px-8 space-y-8 text-left pointer-events-auto">
                         <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">El Enfoque</span>
                         <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
                             No necesitas más herramientas. <br />
