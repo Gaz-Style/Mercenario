@@ -277,9 +277,6 @@ export default function Home() {
                 {/* 1. HERO V2 - El Punto de Quiebre */}
                 <HeroV2 />
 
-                {/* Contenido posterior al Hero */}
-                <div className="w-full bg-white text-black relative z-20 flex flex-col items-center">
-
                 {/* SECCIÓN: El Problema y La Solución (Comparación) */}
                 <section className="w-full max-w-5xl mx-auto px-4 pt-24 md:pt-32 pb-16 md:pb-24 space-y-12">
                     <div className="space-y-4 max-w-3xl">
@@ -589,7 +586,6 @@ export default function Home() {
                     </form>
                 </motion.section>
 
-                </div>
             </main>
 
             {/* Stark footer with all Sitemap sections */}
