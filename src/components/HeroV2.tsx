@@ -39,8 +39,19 @@ export default function HeroV2() {
             }
         };
 
+        // If iOS somehow pauses the video, immediately resume it (at 0 rate)
+        // This prevents the native iOS play button overlay from ever appearing
+        const handlePause = () => {
+            video.playbackRate = 0;
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {});
+            }
+        };
+
         video.addEventListener('canplay', fakePause);
         video.addEventListener('loadedmetadata', fakePause);
+        video.addEventListener('pause', handlePause);
         
         // If it starts playing, force speed back to 0
         const handlePlay = () => { video.playbackRate = 0; };
@@ -51,6 +62,7 @@ export default function HeroV2() {
         return () => {
             video.removeEventListener('canplay', fakePause);
             video.removeEventListener('loadedmetadata', fakePause);
+            video.removeEventListener('pause', handlePause);
             video.removeEventListener('play', handlePlay);
         };
     }, []);
@@ -137,9 +149,12 @@ export default function HeroV2() {
                             loop
                             muted
                             playsinline
+                            webkit-playsinline
+                            disablepictureinpicture
+                            disableremoteplayback
                             preload="auto"
                             class="object-cover object-center w-full h-full"
-                            style="pointer-events: none;"
+                            style="pointer-events: none; -webkit-media-controls-overlay-enclosure: none;"
                         ></video>
                     `}} className="w-full h-full" />
                     {/* Cinematic Dark Overlay for Text Legibility (Constant 50% opacity) */}
