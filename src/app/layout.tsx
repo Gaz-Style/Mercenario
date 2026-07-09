@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     siteName: "Mercenario",
     images: [
       {
-        url: "/imagenes/socialmotors_preview.png",
+        url: "/imagenes/mercenario_preview.png",
         width: 1200,
         height: 630,
       },

@@ -307,18 +307,18 @@ export default function Home() {
                         </div>
 
                         {/* Lado B: Con Mercenario */}
-                        <div className="bg-black p-8 rounded-2xl border border-black space-y-5">
-                            <div className="flex items-center gap-3 border-b border-white/10 pb-4">
-                                <div className="w-2 h-2 rounded-full bg-emerald-400" />
-                                <h3 className="text-sm font-bold text-white">La operación conectada</h3>
+                        <div className="bg-neutral-50 p-8 rounded-2xl border border-neutral-100 space-y-5 text-black">
+                            <div className="flex items-center gap-3 border-b border-neutral-200 pb-4">
+                                <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                                <h3 className="text-sm font-bold text-black">La operación conectada</h3>
                             </div>
-                            <ul className="text-xs text-neutral-400 space-y-3 font-medium">
-                                <li className="flex items-start gap-2"><span className="mt-0.5 text-neutral-600">·</span>El cliente agenda online. El sistema confirma, registra y notifica.</li>
-                                <li className="flex items-start gap-2"><span className="mt-0.5 text-neutral-600">·</span>El pago activa la factura automáticamente.</li>
-                                <li className="flex items-start gap-2"><span className="mt-0.5 text-neutral-600">·</span>El recordatorio llega por WhatsApp sin que nadie lo envíe.</li>
-                                <li className="flex items-start gap-2"><span className="mt-0.5 text-neutral-600">·</span>Al cierre del mes, el dashboard refleja cada número en tiempo real.</li>
+                            <ul className="text-xs text-neutral-500 space-y-3 font-medium">
+                                <li className="flex items-start gap-2"><span className="mt-0.5 text-neutral-300">·</span>El cliente agenda online. El sistema confirma, registra y notifica.</li>
+                                <li className="flex items-start gap-2"><span className="mt-0.5 text-neutral-300">·</span>El pago activa la factura automáticamente.</li>
+                                <li className="flex items-start gap-2"><span className="mt-0.5 text-neutral-300">·</span>El recordatorio llega por WhatsApp sin que nadie lo envíe.</li>
+                                <li className="flex items-start gap-2"><span className="mt-0.5 text-neutral-300">·</span>Al cierre del mes, el dashboard refleja cada número en tiempo real.</li>
                             </ul>
-                            <p className="text-xs text-emerald-400 font-semibold pt-2">El dueño se concentra en el negocio. La operación se ejecuta sola.</p>
+                            <p className="text-xs text-emerald-600 font-semibold pt-2">El dueño se concentra en el negocio. La operación se ejecuta sola.</p>
                         </div>
                     </div>
                 </section>

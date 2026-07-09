@@ -1,17 +1,18 @@
 'use client';
 
 import React, { useState, useTransition } from 'react';
-import { Plus, CheckCircle2, Loader2, ArrowRight, Server, Database, Code, Shield, MessageSquare, CreditCard, Rocket } from 'lucide-react';
+import { Plus, CheckCircle2, Loader2, ArrowRight, Server, Database, Code, Shield, MessageSquare, CreditCard, Rocket, Cpu } from 'lucide-react';
 import { createDeploymentAction, updateDeploymentStatusAction } from './actions';
 
 const DEPLOYMENT_STAGES = [
-    { id: 'pending', label: 'Pendiente', icon: Server, color: 'text-zinc-500' },
-    { id: 'db_provisioned', label: 'BD Creada', icon: Database, color: 'text-sky-500' },
-    { id: 'repo_deployed', label: 'Repo Vercel', icon: Code, color: 'text-purple-500' },
-    { id: 'env_configured', label: 'Variables Env', icon: Shield, color: 'text-amber-500' },
-    { id: 'whatsapp_linked', label: 'WhatsApp', icon: MessageSquare, color: 'text-emerald-500' },
-    { id: 'payments_linked', label: 'Pasarelas', icon: CreditCard, color: 'text-blue-500' },
-    { id: 'delivered', label: 'Entregado (Go Live)', icon: Rocket, color: 'text-rose-500' }
+    { id: 'pending', label: '1. Diagnóstico & Venta', icon: Server, color: 'text-zinc-500' },
+    { id: 'db_provisioned', label: '2. Aprovisionamiento BD', icon: Database, color: 'text-sky-500' },
+    { id: 'repo_deployed', label: '3. Repositorio Vercel', icon: Code, color: 'text-purple-500' },
+    { id: 'env_configured', label: '4. Canales & Config', icon: Shield, color: 'text-amber-500' },
+    { id: 'whatsapp_linked', label: '5. WhatsApp API', icon: MessageSquare, color: 'text-emerald-500' },
+    { id: 'payments_linked', label: '6. Pasarelas de Pago', icon: CreditCard, color: 'text-blue-500' },
+    { id: 'ai_trained', label: '7. Entrenamiento IA', icon: Cpu, color: 'text-indigo-500' },
+    { id: 'delivered', label: '8. Operación Activa (Live)', icon: Rocket, color: 'text-rose-500' }
 ];
 
 export default function DeploymentsClient({ initialDeployments, availableLicenses }: { initialDeployments: any[], availableLicenses: any[] }) {
