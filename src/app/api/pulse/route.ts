@@ -5,11 +5,17 @@ import { NextResponse } from "next/server";
 // Endpoint seguro de telemetría para Mercenario Admin
 // Retorna métricas de uso del sistema actual
 export async function GET(request: Request) {
-    // Validar el token secreto de Mercenario Admin
     const authHeader = request.headers.get("authorization");
     const token = authHeader?.replace("Bearer ", "");
 
-    if (!token || token !== process.env.PULSE_SECRET_TOKEN) {
+    const isVercelCron = request.headers.get("x-vercel-cron") === "1";
+    const vercelCronToken = process.env.CRON_SECRET;
+
+    const isValidToken = 
+        (token && token === process.env.PULSE_SECRET_TOKEN) || 
+        (isVercelCron && (!vercelCronToken || token === vercelCronToken));
+
+    if (!isValidToken) {
         return NextResponse.json(
             { error: "Unauthorized" },
             { status: 401 }
