@@ -52,7 +52,8 @@ interface EditableHTMLProps {
   tag?: string;
 }
 
-const EditableHTML: React.FC<EditableHTMLProps> = ({ html, onChange, className = "", tag: Tag = "span" }) => {
+const EditableHTML: React.FC<EditableHTMLProps> = ({ html, onChange, className = "", tag = "span" }) => {
+  const Tag = tag as any;
   const handleBlur = (e: React.FocusEvent<HTMLElement>) => {
     onChange(e.target.innerHTML);
   };
