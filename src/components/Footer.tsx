@@ -17,6 +17,10 @@ export default function Footer() {
           <Link href="/admin" className="hover:text-brand-sand transition-all duration-300">
             Admin Portal
           </Link>
+          <span className="text-white/20">|</span>
+          <Link href="/gaz-style" className="hover:text-brand-sand transition-all duration-300">
+            gaz_style
+          </Link>
         </div>
       </div>
     </footer>

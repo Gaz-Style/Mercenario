@@ -624,6 +624,7 @@ export default function Home() {
                         <span className="font-bold text-black uppercase tracking-wider mb-2">Empresa</span>
                         <Link href="/#contacto" className="hover:text-black transition-colors">Contacto</Link>
                         <Link href="/#contacto" className="hover:text-black transition-colors">Agenda una reunión</Link>
+                        <Link href="/gaz-style" className="hover:text-black transition-colors">gaz_style</Link>
                     </div>
                 </div>
                 <div className="w-full text-center text-[9px] text-neutral-400 tracking-wider uppercase mt-16">&copy; {new Date().getFullYear()} Mercenario IOS. All rights reserved.</div>
