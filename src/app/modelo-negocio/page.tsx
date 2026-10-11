@@ -8,41 +8,41 @@ import { ArrowLeft, RotateCcw, Save } from "lucide-react";
 const DEFAULT_CANVAS_DATA = {
   partners: [
     "<strong>Programa Emerge (Anglo American):</strong> Respaldo institucional, mentoría estratégica y red de negocios.",
-    "<strong>Gastronomía Local:</strong> Cafés y restaurantes de Lo Barnechea para experiencia de cierre.",
+    "<strong>Alianzas de Equipamiento:</strong> Proveedores para arriendo de bastones, zapatos técnicos y gear.",
     "<strong>Asociación Parque Cordillera / CONAF:</strong> Permisos y gestión de acceso a senderos."
   ],
   partnersFooter: "Anclaje territorial Lo Barnechea",
   activities: [
-    "Guiado en montaña seguro, contención física y mental de grupo.",
-    "Desarrollo y mantención de plataforma web y automatizaciones (Supabase/Next.js).",
-    "Coordinación comercial con locales gastronómicos de Lo Barnechea."
+    "Operación de logística 'Door-to-Mountain' y arriendo de equipo.",
+    "Desarrollo de ecosistema Web e-commerce con reservas de 'Fricción Cero'.",
+    "Guiado premium WFR enfocado en desconexión real, bienestar y educación ambiental."
   ],
   resources: [
-    "<strong>Marca Personal Gaz_Style:</strong> Alcance orgánico, credibilidad y tracción (7.6k vistas/mes).",
-    "<strong>Stack Tecnológico:</strong> Servidores, API propia y base de datos para reserva automática.",
-    "<strong>Equipamiento de Seguridad:</strong> Botiquín WFR y respuesta en terreno."
+    "<strong>Identidad de Marca Gaz_Style:</strong> Foco en wellness, credibilidad y tracción orgánica.",
+    "<strong>Stack Tecnológico:</strong> Plataforma propia (Next.js/Supabase) para automatización total.",
+    "<strong>Equipamiento de Seguridad:</strong> Botiquines WFR y convenios de arriendo de equipo técnico."
   ],
-  valueB2C: "Experiencia de <strong>desconexión urbana y recarga de energía</strong> en la montaña, combinada con la gastronomía local de Lo Barnechea. Guiado por un anfitrión auténtico con foco en mentalidad y bienestar.",
-  valueComuna: "Inyección económica directa a proveedores gastronómicos de Lo Barnechea mediante flujo de clientes de alto valor.",
-  valueQuote: "La montaña se vive y se disfruta",
+  valueB2C: "Experiencia outdoor enfocada en <strong>desconexión real, seguridad y bienestar</strong>. Eliminamos la carga logística para soltar el estrés. Incluye raciones de marcha locales y perfilamiento físico para grupos equilibrados.",
+  valueComuna: "Inyección económica directa a proveedores gastronómicos locales mediante flujo de clientes de alto valor adquisitivo.",
+  valueQuote: "La montaña, vivida con propósito.",
   relationships: [
-    "<strong>En Terreno:</strong> Cercana, empática, de alto liderazgo, contención y seguridad.",
-    "<strong>Digital:</strong> Confirmación automática de reserva, guías previas por correo y seguimiento post-evento."
+    "<strong>En Terreno:</strong> Servicio Boutique personalizado, contención y liderazgo adaptado al perfil del grupo.",
+    "<strong>Digital:</strong> Reservas automatizadas, perfilamiento previo por nivel físico y pagos online seguros."
   ],
   channels: [
-    "<strong>Atracción Orgánica:</strong> Instagram & TikTok (<code class=\"text-amber-300\">@gaz_style</code>) con $0 costo de adquisición (CAC).",
-    "<strong>Conversión Digital:</strong> Landing Page en <code class=\"text-amber-300\">gaz_style.cl</code> con checkout directo."
+    "<strong>Atracción Orgánica:</strong> Instagram & TikTok enfocados en desconexión urbana y wellness.",
+    "<strong>Conversión Digital:</strong> Plataforma Web propia con catálogo interactivo y checkout (Webpay/Stripe)."
   ],
   segmentsTarget: [
-    "Profesionales, ejecutivos y emprendedores de Santiago (28 a 45 años).",
-    "Saturados del estrés urbano que buscan bienestar auténtico al aire libre.",
-    "Seguidores motivados por el contenido de recarga de energía."
+    "<strong>Sunset Treks:</strong> Jóvenes profesionales que buscan recarga mental rápida (After Office).",
+    "<strong>Full Day Escapades:</strong> Personas que buscan wellness de fin de semana con logística resuelta.",
+    "<strong>VIP Hikes:</strong> Mercado corporativo B2B (Team Building) y turistas internacionales."
   ],
-  segmentsScale: "Canal Corporativo B2B (Empresas y Gerencias de Personas/RRHH).",
-  costFixed: "Servidores, dominios y base de datos: <strong>~$50.000 a $80.000 CLP/mes</strong> (Vercel, Supabase, Gaz_Style.cl).",
-  costVariable: "Consumo gastronómico en local aliado por cupo.<br />&bull; Seguro de accidentes, ración de marcha e insumos médicos.",
-  revenueTicket: "Cobro único por persona que incluye guiado de montaña + consumo en el restaurante/café aliado de Lo Barnechea.",
-  revenueMargin: "Diferencial negociado con proveedores locales por canalización directa de volumen de clientes."
+  segmentsScale: "Crecimiento del canal B2B (Empresas) y escalabilidad territorial a otras montañas de Chile.",
+  costFixed: "Servidores y BD (~$80.000 CLP/mes).<br/>&bull; Seguros anuales, branding corporativo y patentes.",
+  costVariable: "Arriendo de equipamiento por pasajero, honorarios de guías extra y raciones de marcha locales.",
+  revenueTicket: "<strong>Venta Directa de Catálogo:</strong><br/>&bull; Sunset Treks ($25.000)<br/>&bull; Full Day ($45.000)<br/>&bull; VIP Hikes (A cotizar, $80.000+).",
+  revenueMargin: "Ingresos adicionales por arriendo de equipo técnico y alianzas B2B."
 };
 
 interface EditableHTMLProps {

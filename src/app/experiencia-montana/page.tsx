@@ -2,15 +2,21 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { 
+  ArrowLeft, Mountain, Coffee, ShieldCheck, MapPin, Clock, Camera, 
+  CarFront, Check, ChevronDown, Ticket, HeartPulse, Compass 
+} from "lucide-react";
 
 export default function ExperienciaMontanaPage() {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [selectedRoute, setSelectedRoute] = useState("sunset");
   const [showModal, setShowModal] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [rut, setRut] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    rut: "",
+    experience: "principiante"
+  });
 
   const handleCheckout = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,499 +27,415 @@ export default function ExperienciaMontanaPage() {
     setShowModal(false);
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   return (
     <>
-      {/* FontAwesome & Google Fonts */}
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      />
       <style dangerouslySetInnerHTML={{
         __html: `
-          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+          @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
           
-          .experiencia-montana-body {
-            background-color: #090d16;
-            color: #f3f4f6;
+          .gaz-premium-body {
+            background-color: #050505;
+            color: #f8fafc;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
           }
-          .glow-amber {
-            box-shadow: 0 0 35px -5px rgba(245, 158, 11, 0.35);
+          .font-editorial {
+            font-family: 'Playfair Display', serif;
           }
-          .glow-subtle {
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+          .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
           }
-          .bg-grid-pattern {
-            background-image: radial-gradient(rgba(245, 158, 11, 0.1) 1px, transparent 1px);
-            background-size: 24px 24px;
+          .gold-gradient-text {
+            background: linear-gradient(to right, #f59e0b, #fbbf24, #fcd34d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
           }
         `
       }} />
 
-      <div className="experiencia-montana-body antialiased text-slate-100 min-h-screen flex flex-col">
-        {/* ANNOUNCEMENT / SCARCITY BAR */}
-        <div className="bg-amber-500 text-slate-950 font-black text-xs md:text-sm py-2 px-4 text-center sticky top-0 z-50 shadow-md flex items-center justify-center gap-2">
-          <span className="inline-block w-2.5 h-2.5 rounded-full bg-slate-950 animate-ping"></span>
-          <span>PILOTO B2C EXCLUSIVO — LO BARNECHEA:</span>
-          <span className="bg-slate-950 text-amber-400 px-2 py-0.5 rounded text-[11px] uppercase tracking-wider font-extrabold">Quedan 3 de 8 cupos</span>
-        </div>
-
-        {/* HEADER BRANDING */}
-        <header className="w-full border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-8 z-40">
-          <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-            <div className="flex items-center gap-4">
-              <Link
-                href="/"
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-white uppercase transition-colors"
-              >
-                <ArrowLeft className="w-3.5 h-3.5" />
-                <span>Inicio</span>
-              </Link>
-              <div className="flex items-center gap-2">
-                <div className="w-9 h-9 bg-gradient-to-tr from-amber-500 to-amber-300 text-slate-950 font-black rounded-xl flex items-center justify-center text-lg shadow-lg">
-                  <i className="fa-solid fa-mountain-sun"></i>
-                </div>
-                <span className="font-black text-lg md:text-xl tracking-tight text-white">GAZ<span className="text-amber-500">_STYLE</span></span>
-              </div>
+      <div className="gaz-premium-body min-h-screen flex flex-col antialiased selection:bg-amber-500/30">
+        
+        {/* HEADER */}
+        <header className="fixed w-full top-0 z-50 glass-panel border-b-0 border-white/10 transition-all duration-300">
+          <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <Link href="/" className="inline-flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-white uppercase tracking-widest transition-colors">
+              <ArrowLeft className="w-4 h-4" />
+              <span>Volver</span>
+            </Link>
+            
+            <div className="flex items-center gap-3">
+              <Compass className="w-6 h-6 text-amber-500" />
+              <span className="font-editorial font-bold text-2xl tracking-wider text-white">
+                GAZ<span className="text-amber-500 italic">_Style</span>
+              </span>
             </div>
-            <a href="#reservar" className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs md:text-sm px-4 py-2 rounded-xl transition-all shadow-md flex items-center gap-2">
-              <span>Reservar Cupo</span>
-              <i className="fa-solid fa-arrow-right text-xs"></i>
+
+            <a href="#reservar" className="hidden md:inline-flex bg-white hover:bg-slate-200 text-black px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-colors">
+              Reservar Aventura
             </a>
           </div>
         </header>
 
-        {/* HERO SECTION (VSL / HIGH CONVERSION) */}
-        <section className="relative pt-8 pb-12 md:pt-16 md:pb-20 bg-grid-pattern border-b border-slate-800/60 overflow-hidden">
-          <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-              
-              <div className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 rounded-full px-3.5 py-1 text-amber-400 text-xs font-semibold mb-6">
-                  <i className="fa-solid fa-bolt text-amber-400"></i>
-                  <span>Trekking de Mente & Experiencia Gastronómica</span>
-              </div>
+        {/* HERO SECTION */}
+        <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+          {/* Background Image / Overlay */}
+          <div className="absolute inset-0 z-0">
+            <img 
+              src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=2000&q=80" 
+              alt="Trekking en la cordillera" 
+              className="w-full h-full object-cover opacity-50 scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-stone-950/80 via-stone-950/60 to-stone-950"></div>
+          </div>
 
-              {/* Main Headline */}
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight mb-4">
-                  Reconecta, desafía tu mente y recarga la <span className="text-amber-400 underline decoration-amber-500 decoration-wavy underline-offset-8">fucking vibra</span> en la montaña.
-              </h1>
+          <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+            <div className="inline-flex items-center gap-2 border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 rounded-full mb-8">
+              <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+              <span className="text-xs font-medium tracking-widest uppercase text-amber-400">Turismo de Montaña Premium</span>
+            </div>
+            
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-editorial font-bold text-white leading-tight mb-6">
+              La montaña, <br />
+              <span className="italic font-light text-slate-300">vivida con </span>
+              <span className="gold-gradient-text">estilo.</span>
+            </h1>
+            
+            <p className="text-base md:text-xl text-slate-400 max-w-2xl mx-auto font-light leading-relaxed mb-12">
+              Aventura, desconexión y vitalidad en la montaña. 
+              Un liderazgo enérgico que te empuja a salir de la rutina, combinando lo salvaje de la naturaleza con una mentalidad de excelencia.
+            </p>
 
-              <p className="text-base md:text-xl text-slate-300 max-w-2xl mx-auto font-medium mb-8 leading-relaxed">
-                  Una jornada exclusiva que combina ascenso técnico en Parque Cordillera con alta gastronomía local en Lo Barnechea.
-              </p>
-
-              {/* VSL VIDEO PLAYER MOCKUP */}
-              <div className="relative w-full max-w-2xl mx-auto rounded-3xl overflow-hidden border-2 border-slate-700 bg-slate-900 shadow-2xl mb-8 group glow-subtle">
-                  <div className="relative aspect-video bg-slate-950 flex flex-col items-center justify-center p-6 text-center" id="video-container">
-                      {isPlaying ? (
-                        <iframe
-                          className="w-full h-full absolute inset-0"
-                          src="https://www.youtube-nocookie.com/embed/4wdXuIwjh8s?autoplay=1"
-                          title="VSL Video"
-                          frameBorder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                        ></iframe>
-                      ) : (
-                        <>
-                          <img
-                            src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80"
-                            alt="Montaña Lo Barnechea"
-                            className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
-                          
-                          <button
-                            onClick={() => setIsPlaying(true)}
-                            className="relative z-10 w-20 h-20 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-full flex items-center justify-center text-2xl font-black shadow-2xl transform group-hover:scale-110 transition-all cursor-pointer glow-amber"
-                          >
-                              <i className="fa-solid fa-play ml-1"></i>
-                          </button>
-                          
-                          <div className="relative z-10 mt-4">
-                              <p className="text-xs font-bold text-amber-400 uppercase tracking-widest mb-1">Video de 60 segundos</p>
-                              <p className="text-sm md:text-base font-semibold text-white">Mira de qué trata la experiencia con Mario Cruz</p>
-                          </div>
-                        </>
-                      )}
-                  </div>
-              </div>
-
-              {/* CTA BUTTON */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <a href="#reservar" className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-base md:text-lg px-8 py-4 rounded-2xl shadow-xl transition-all flex items-center justify-center gap-3 transform hover:-translate-y-0.5 glow-amber">
-                      <i className="fa-solid fa-ticket"></i>
-                      <span>ASEGURAR MI CUPO — $35.000 CLP</span>
-                  </a>
-              </div>
-
-              {/* TRUST BADGES */}
-              <div className="mt-8 pt-6 border-t border-slate-800/80 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400">
-                  <span className="flex items-center gap-2"><i className="fa-solid fa-shield-halved text-emerald-400"></i> Guiado Seguro & WFR</span>
-                  <span className="flex items-center gap-2"><i className="fa-solid fa-kit-medical text-amber-400"></i> Seguro de Accidentes Incluido</span>
-                  <span className="flex items-center gap-2"><i className="fa-solid fa-utensils text-sky-400"></i> Almuerzo Gastronómico Incluido</span>
-              </div>
-
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a href="#rutas" className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-black px-8 py-4 rounded-full text-sm font-bold uppercase tracking-widest transition-all hover:scale-105">
+                Explorar Rutas
+              </a>
+              <a href="#filosofia" className="w-full sm:w-auto glass-panel hover:bg-white/10 text-white px-8 py-4 rounded-full text-sm font-bold uppercase tracking-widest transition-all">
+                Nuestra Filosofía
+              </a>
+            </div>
           </div>
         </section>
 
-        {/* PROBLEM VS SOLUTION SECTION */}
-        <section className="py-12 md:py-16 bg-slate-950 border-b border-slate-800">
-            <div className="max-w-5xl mx-auto px-4">
-                
-                <div className="text-center mb-12">
-                    <h2 className="text-2xl md:text-4xl font-black text-white mb-3">¿RUTINA AGOTADORA O RESETEO REAL?</h2>
-                    <p className="text-sm md:text-base text-slate-400 max-w-xl mx-auto">No venimos a pasear ni a perder el tiempo. Compara lo que vives hoy con lo que logras en la montaña.</p>
-                </div>
+        {/* VALUE PROPOSITION: LA FILOSOFÍA GAZ_STYLE */}
+        <section id="filosofia" className="py-24 bg-stone-950 relative z-20">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-20">
+              <h2 className="font-editorial text-4xl md:text-5xl font-bold text-white mb-6">Aventura y Desconexión Real.</h2>
+              <p className="text-slate-400 max-w-2xl mx-auto font-light">
+                No vendemos tours, compartimos un estilo de vida. Creemos en el magnetismo orgánico: si nuestra vitalidad y mentalidad de superación te inspiran, sentirás la necesidad genuina de vivirlo.
+              </p>
+            </div>
 
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Prop 1 */}
+              <div className="glass-panel p-8 rounded-3xl hover:-translate-y-2 transition-transform duration-300">
+                <div className="w-12 h-12 rounded-full bg-amber-500/10 flex items-center justify-center mb-6">
+                  <HeartPulse className="w-6 h-6 text-amber-500" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">Liderazgo Inspirador</h3>
+                <p className="text-sm text-slate-400 font-light leading-relaxed">
+                  Un guiado enérgico, directo y motivador. No solo caminamos, te impulsamos a salir de tu zona de confort fomentando una mentalidad de excelencia y superación personal.
+                </p>
+              </div>
+
+              {/* Prop 2 */}
+              <div className="glass-panel p-8 rounded-3xl hover:-translate-y-2 transition-transform duration-300">
+                <div className="w-12 h-12 rounded-full bg-amber-500/10 flex items-center justify-center mb-6">
+                  <Compass className="w-6 h-6 text-amber-500" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">El Toque "Style"</h3>
+                <p className="text-sm text-slate-400 font-light leading-relaxed">
+                  El contraste perfecto entre lo salvaje de la naturaleza y el cuidado minucioso de los detalles. Desde la calidad del trato hasta los pequeños elementos de la experiencia.
+                </p>
+              </div>
+
+              {/* Prop 3 */}
+              <div className="glass-panel p-8 rounded-3xl hover:-translate-y-2 transition-transform duration-300">
+                <div className="w-12 h-12 rounded-full bg-amber-500/10 flex items-center justify-center mb-6">
+                  <Mountain className="w-6 h-6 text-amber-500" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">Aventura Segura</h3>
+                <p className="text-sm text-slate-400 font-light leading-relaxed">
+                  La montaña es el escenario para desconectar de la rutina. Entregamos un desafío físico real pero respaldado con certificación WFR, para que la aventura fluya con total seguridad.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CATALOGO DE RUTAS */}
+        <section id="rutas" className="py-24 bg-stone-900 relative z-20 border-t border-white/5">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="mb-16 md:flex justify-between items-end">
+              <div>
+                <span className="text-amber-500 font-bold tracking-widest uppercase text-xs mb-3 block">El Catálogo</span>
+                <h2 className="font-editorial text-4xl md:text-5xl font-bold text-white">Micro-aventuras a tu medida.</h2>
+              </div>
+              <p className="text-slate-400 mt-4 md:mt-0 max-w-sm text-sm font-light">
+                Selecciona la experiencia que mejor se adapte a tu nivel y tiempo disponible.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              
+              {/* RUTA 1 */}
+              <div className="group relative rounded-3xl overflow-hidden glass-panel flex flex-col">
+                <div className="aspect-[4/3] relative overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=800&q=80" 
+                    alt="Sunset Trek" 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent"></div>
+                  <span className="absolute top-4 right-4 bg-white/10 backdrop-blur px-3 py-1 text-[10px] uppercase tracking-widest font-bold rounded-full">After Office</span>
+                </div>
+                <div className="p-8 flex-1 flex flex-col justify-between relative z-10 -mt-10">
+                  <div>
+                    <h3 className="font-editorial text-2xl font-bold text-white mb-2">Sunset Treks</h3>
+                    <p className="text-sm text-slate-400 mb-6 font-light">Ascenso al Manquehuito o Pochoco para ver el atardecer cayendo sobre Santiago. Ideal para liberar el estrés laboral.</p>
+                    <ul className="space-y-3 mb-8">
+                      <li className="flex items-center text-xs text-slate-300"><Clock className="w-4 h-4 mr-3 text-amber-500" /> 3-4 horas totales</li>
+                      <li className="flex items-center text-xs text-slate-300"><HeartPulse className="w-4 h-4 mr-3 text-amber-500" /> Nivel: Principiante / Medio</li>
+                      <li className="flex items-center text-xs text-slate-300"><Compass className="w-4 h-4 mr-3 text-amber-500" /> Ración de marcha local al atardecer</li>
+                    </ul>
+                  </div>
+                  <div className="flex items-center justify-between mt-auto border-t border-white/10 pt-6">
+                    <div>
+                      <span className="text-[10px] text-slate-500 uppercase tracking-widest block mb-1">Desde</span>
+                      <span className="text-lg font-bold text-white">$25.000</span>
+                    </div>
+                    <button onClick={() => { setSelectedRoute("sunset"); document.getElementById('reservar')?.scrollIntoView({behavior: "smooth"})}} className="text-xs font-bold uppercase tracking-widest text-amber-500 hover:text-amber-400 transition-colors">
+                      Reservar &rarr;
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* RUTA 2 */}
+              <div className="group relative rounded-3xl overflow-hidden glass-panel border-amber-500/30 flex flex-col">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-amber-500 text-black text-[10px] font-bold uppercase tracking-widest px-4 py-1 rounded-b-lg z-20">
+                  La Más Solicitada
+                </div>
+                <div className="aspect-[4/3] relative overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1522163723043-478ef79a5bb4?auto=format&fit=crop&w=800&q=80" 
+                    alt="Full Day Escapade" 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent"></div>
+                  <span className="absolute top-4 right-4 bg-white/10 backdrop-blur px-3 py-1 text-[10px] uppercase tracking-widest font-bold rounded-full">Fin de Semana</span>
+                </div>
+                <div className="p-8 flex-1 flex flex-col justify-between relative z-10 -mt-10">
+                  <div>
+                    <h3 className="font-editorial text-2xl font-bold text-white mb-2">Full Day Escapades</h3>
+                    <p className="text-sm text-slate-400 mb-6 font-light">Exploración profunda en Cajón del Maipo (Ej: Mirador de Cóndores). Foco en wellness, respiración y educación ambiental.</p>
+                    <ul className="space-y-3 mb-8">
+                      <li className="flex items-center text-xs text-slate-300"><Clock className="w-4 h-4 mr-3 text-amber-500" /> 6-8 horas totales</li>
+                      <li className="flex items-center text-xs text-slate-300"><HeartPulse className="w-4 h-4 mr-3 text-amber-500" /> Nivel: Medio</li>
+                      <li className="flex items-center text-xs text-slate-300"><Ticket className="w-4 h-4 mr-3 text-amber-500" /> Cierre gastronómico local</li>
+                    </ul>
+                  </div>
+                  <div className="flex items-center justify-between mt-auto border-t border-white/10 pt-6">
+                    <div>
+                      <span className="text-[10px] text-slate-500 uppercase tracking-widest block mb-1">Desde</span>
+                      <span className="text-lg font-bold text-white">$45.000</span>
+                    </div>
+                    <button onClick={() => { setSelectedRoute("fullday"); document.getElementById('reservar')?.scrollIntoView({behavior: "smooth"})}} className="text-xs font-bold uppercase tracking-widest text-amber-500 hover:text-amber-400 transition-colors">
+                      Reservar &rarr;
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* RUTA 3 */}
+              <div className="group relative rounded-3xl overflow-hidden glass-panel flex flex-col">
+                <div className="aspect-[4/3] relative overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1546850259-219597a701fa?auto=format&fit=crop&w=800&q=80" 
+                    alt="Private VIP Hikes" 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent"></div>
+                  <span className="absolute top-4 right-4 bg-white/10 backdrop-blur px-3 py-1 text-[10px] uppercase tracking-widest font-bold rounded-full">Exclusivo</span>
+                </div>
+                <div className="p-8 flex-1 flex flex-col justify-between relative z-10 -mt-10">
+                  <div>
+                    <h3 className="font-editorial text-2xl font-bold text-white mb-2">Private VIP Hikes</h3>
+                    <p className="text-sm text-slate-400 mb-6 font-light">Diseñado para grupos cerrados, turistas internacionales o dinámicas corporativas (Team Building) de alto estándar.</p>
+                    <ul className="space-y-3 mb-8">
+                      <li className="flex items-center text-xs text-slate-300"><Clock className="w-4 h-4 mr-3 text-amber-500" /> Horario a convenir</li>
+                      <li className="flex items-center text-xs text-slate-300"><MapPin className="w-4 h-4 mr-3 text-amber-500" /> Ruta personalizada</li>
+                      <li className="flex items-center text-xs text-slate-300"><Compass className="w-4 h-4 mr-3 text-amber-500" /> Ritmo y enfoque exclusivo para tu grupo</li>
+                    </ul>
+                  </div>
+                  <div className="flex items-center justify-between mt-auto border-t border-white/10 pt-6">
+                    <div>
+                      <span className="text-[10px] text-slate-500 uppercase tracking-widest block mb-1">A cotizar</span>
+                      <span className="text-lg font-bold text-white">Custom</span>
+                    </div>
+                    <button onClick={() => { setSelectedRoute("vip"); document.getElementById('reservar')?.scrollIntoView({behavior: "smooth"})}} className="text-xs font-bold uppercase tracking-widest text-amber-500 hover:text-amber-400 transition-colors">
+                      Cotizar &rarr;
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        {/* RESERVATION / CHECKOUT SECTION */}
+        <section id="reservar" className="py-24 bg-stone-950 relative z-20">
+          <div className="max-w-4xl mx-auto px-6">
+            <div className="glass-panel rounded-[2.5rem] p-8 md:p-14 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-[80px] pointer-events-none"></div>
+              
+              <div className="text-center mb-12">
+                <h2 className="font-editorial text-4xl font-bold text-white mb-4">Asegura tu lugar en la montaña.</h2>
+                <p className="text-slate-400 text-sm font-light">Completa tu perfil para que podamos personalizar la experiencia. Transacción segura 100% digital.</p>
+              </div>
+
+              <form onSubmit={handleCheckout} className="space-y-6 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* THE OLD WAY */}
-                    <div className="bg-rose-950/20 border border-rose-900/40 p-6 md:p-8 rounded-3xl relative overflow-hidden">
-                        <div className="flex items-center gap-3 mb-4 text-rose-400">
-                            <i className="fa-solid fa-circle-xmark text-2xl"></i>
-                            <h3 className="font-extrabold text-lg text-white">El Ruido Urbano</h3>
-                        </div>
-                        <ul className="space-y-3 text-xs md:text-sm text-slate-300">
-                            <li className="flex items-start gap-2">
-                                <i className="fa-solid fa-minus text-rose-500 mt-1"></i>
-                                <span>Semanas cargadas de pantalla, sobrepensamiento y fatiga mental.</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <i className="fa-solid fa-minus text-rose-500 mt-1"></i>
-                                <span>Fin de semana en el mall o descansando sin recargar la energía de verdad.</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <i className="fa-solid fa-minus text-rose-500 mt-1"></i>
-                                <span>Desconexión vacía que te deja igual de cansado el domingo por la noche.</span>
-                            </li>
-                        </ul>
+                  {/* Select Route */}
+                  <div className="md:col-span-2">
+                    <label className="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Experiencia Seleccionada</label>
+                    <div className="relative">
+                      <select 
+                        value={selectedRoute}
+                        onChange={(e) => setSelectedRoute(e.target.value)}
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white appearance-none focus:outline-none focus:border-amber-500 transition-colors cursor-pointer"
+                      >
+                        <option value="sunset">Sunset Treks (After Office) - $25.000 CLP</option>
+                        <option value="fullday">Full Day Escapades (Fin de Semana) - $45.000 CLP</option>
+                        <option value="vip">Private VIP Hikes (A Cotizar)</option>
+                      </select>
+                      <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none" />
                     </div>
+                  </div>
 
-                    {/* THE GAZ STYLE WAY */}
-                    <div className="bg-amber-950/20 border-2 border-amber-500/50 p-6 md:p-8 rounded-3xl relative overflow-hidden glow-subtle">
-                        <div className="flex items-center gap-3 mb-4 text-amber-400">
-                            <i className="fa-solid fa-circle-check text-2xl"></i>
-                            <h3 className="font-extrabold text-lg text-white">La Experiencia Gaz_Style</h3>
-                        </div>
-                        <ul className="space-y-3 text-xs md:text-sm text-slate-200">
-                            <li className="flex items-start gap-2">
-                                <i className="fa-solid fa-check text-amber-400 mt-1"></i>
-                                <span><strong>Conexión & Enfoque:</strong> Ascenso técnico controlado con la mente presente.</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <i className="fa-solid fa-check text-amber-400 mt-1"></i>
-                                <span><strong>Energía Real:</strong> Salir de la zona de confort y volver con la vibra encendida.</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                                <i className="fa-solid fa-check text-amber-400 mt-1"></i>
-                                <span><strong>Cierre de Alto Nivel:</strong> Gastronomía local en Lo Barnechea para compartir el logro.</span>
-                            </li>
-                        </ul>
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Nombre Completo</label>
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="Ej: Laura Silva"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-amber-500 transition-colors placeholder:text-slate-600"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">RUT (Seguro Obligatorio)</label>
+                    <input
+                      type="text"
+                      name="rut"
+                      required
+                      value={formData.rut}
+                      onChange={handleInputChange}
+                      placeholder="12.345.678-9"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-amber-500 transition-colors placeholder:text-slate-600"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Correo Electrónico</label>
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="laura@ejemplo.cl"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-amber-500 transition-colors placeholder:text-slate-600"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Teléfono / WhatsApp</label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      required
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="+56 9 1234 5678"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-amber-500 transition-colors placeholder:text-slate-600"
+                    />
+                  </div>
+                  
+                  {/* Perfilamiento */}
+                  <div className="md:col-span-2">
+                    <label className="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Nivel de Experiencia Física</label>
+                    <div className="relative">
+                      <select 
+                        name="experience"
+                        value={formData.experience}
+                        onChange={handleInputChange}
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white appearance-none focus:outline-none focus:border-amber-500 transition-colors cursor-pointer"
+                      >
+                        <option value="principiante">Primera vez / Principiante (Quiero ir a mi ritmo)</option>
+                        <option value="medio">Medio (Hago deporte ocasionalmente)</option>
+                        <option value="avanzado">Avanzado (Subo cerros regularmente)</option>
+                      </select>
+                      <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none" />
                     </div>
+                    <p className="text-[10px] text-slate-500 mt-2 italic">* Utilizamos este dato para perfilar los grupos y asegurar que nadie se sienta presionado.</p>
+                  </div>
                 </div>
 
+                <div className="pt-6">
+                  <button type="submit" className="w-full bg-white hover:bg-slate-200 text-black font-bold uppercase tracking-widest text-sm py-5 rounded-xl transition-all hover:scale-[1.02] shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]">
+                    Proceder al Pago Seguro
+                  </button>
+                  <p className="text-center text-[11px] text-slate-500 mt-4 flex items-center justify-center gap-1">
+                    <ShieldCheck className="w-3 h-3" /> Transacción encriptada. Próximamente integración directa con Webpay/Stripe.
+                  </p>
+                </div>
+              </form>
             </div>
-        </section>
-
-        {/* ITINERARIO PASO A PASO */}
-        <section className="py-12 md:py-16 bg-slate-900 border-b border-slate-800">
-            <div className="max-w-4xl mx-auto px-4">
-                
-                <div className="text-center mb-12">
-                    <span className="text-amber-400 text-xs font-bold uppercase tracking-widest">Cronograma de la Jornada</span>
-                    <h2 className="text-2xl md:text-4xl font-black text-white mt-1">EL PASO A PASO DEL DÍA</h2>
-                </div>
-
-                <div className="space-y-6 relative before:absolute before:inset-0 before:left-4 md:before:left-1/2 before:-ml-px before:w-0.5 before:bg-slate-800">
-                    
-                    {/* Step 1 */}
-                    <div className="relative flex flex-col md:flex-row items-start md:items-center gap-4">
-                        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-amber-500 text-slate-950 font-black text-xs shrink-0 z-10 shadow-lg md:mx-auto">1</div>
-                        <div className="bg-slate-950 border border-slate-800 p-5 rounded-2xl w-full md:w-[calc(50%-2rem)] md:text-right">
-                            <span className="text-amber-400 font-bold text-xs">08:00 AM &bull; Lo Barnechea</span>
-                            <h3 className="font-extrabold text-white text-base mt-0.5">Encuentro & Briefing</h3>
-                            <p className="text-xs text-slate-400 mt-1">Punto de reunión, revisión de equipo técnico e instrucción de seguridad para el grupo.</p>
-                        </div>
-                    </div>
-
-                    {/* Step 2 */}
-                    <div className="relative flex flex-col md:flex-row-reverse items-start md:items-center gap-4">
-                        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-amber-500 text-slate-950 font-black text-xs shrink-0 z-10 shadow-lg md:mx-auto">2</div>
-                        <div className="bg-slate-950 border border-slate-800 p-5 rounded-2xl w-full md:w-[calc(50%-2rem)]">
-                            <span className="text-amber-400 font-bold text-xs">08:30 AM &bull; Parque Cordillera</span>
-                            <h3 className="font-extrabold text-white text-base mt-0.5">Ascenso & Ritmo de Montaña</h3>
-                            <p className="text-xs text-slate-400 mt-1">Trekking en senderos cordilleranos. Enfoque en respiración, cadencia y ritmo constante.</p>
-                        </div>
-                    </div>
-
-                    {/* Step 3 */}
-                    <div className="relative flex flex-col md:flex-row items-start md:items-center gap-4">
-                        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-amber-500 text-slate-950 font-black text-xs shrink-0 z-10 shadow-lg md:mx-auto">3</div>
-                        <div className="bg-slate-950 border border-slate-800 p-5 rounded-2xl w-full md:w-[calc(50%-2rem)] md:text-right">
-                            <span className="text-amber-400 font-bold text-xs">11:30 AM &bull; Cumbre / Mirador</span>
-                            <h3 className="font-extrabold text-white text-base mt-0.5">Recarga & Registro HD</h3>
-                            <p className="text-xs text-slate-400 mt-1">Pausa en la cumbre para hidratar, disfrutar la vista panorámica y capturar el recuerdo en fotos de alta calidad.</p>
-                        </div>
-                    </div>
-
-                    {/* Step 4 */}
-                    <div className="relative flex flex-col md:flex-row-reverse items-start md:items-center gap-4">
-                        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-500 text-slate-950 font-black text-xs shrink-0 z-10 shadow-lg md:mx-auto">4</div>
-                        <div className="bg-slate-950 border border-slate-800 p-5 rounded-2xl w-full md:w-[calc(50%-2rem)]">
-                            <span className="text-emerald-400 font-bold text-xs">02:00 PM &bull; Local Gastronómico Aliado</span>
-                            <h3 className="font-extrabold text-white text-base mt-0.5">Cierre Gastronómico</h3>
-                            <p className="text-xs text-slate-400 mt-1">Descenso y traslado al café/restaurante de Lo Barnechea para almorzar y recargar la vibra en grupo.</p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </section>
-
-        {/* ¿QUÉ INCLUYE EL TICKET? */}
-        <section className="py-12 md:py-16 bg-slate-950 border-b border-slate-800">
-            <div className="max-w-5xl mx-auto px-4">
-                
-                <div className="text-center mb-10">
-                    <h2 className="text-2xl md:text-4xl font-black text-white mb-2">TODO LO QUE INCLUYE TU EXPEDICIÓN</h2>
-                    <p className="text-sm text-slate-400">Una sola tarifa integral sin cobros sorpresas en el terreno.</p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                    
-                    <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col justify-between">
-                        <div>
-                            <div className="w-10 h-10 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-lg mb-4">
-                                <i className="fa-solid fa-user-shield"></i>
-                            </div>
-                            <h3 className="font-bold text-white text-base mb-1">Guiado & Seguridad WFR</h3>
-                            <p className="text-xs text-slate-400 leading-relaxed">Liderado directamente por Mario Cruz. Control de grupo, primeros auxilios en áreas remotas y asistencia continua.</p>
-                        </div>
-                    </div>
-
-                    <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col justify-between">
-                        <div>
-                            <div className="w-10 h-10 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-lg mb-4">
-                                <i className="fa-solid fa-utensils"></i>
-                            </div>
-                            <h3 className="font-bold text-white text-base mb-1">Menú Gastronómico</h3>
-                            <p className="text-xs text-slate-400 leading-relaxed">Almuerzo completo o consumo especial reservado en nuestro local gastronómico aliado de Lo Barnechea.</p>
-                        </div>
-                    </div>
-
-                    <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col justify-between">
-                        <div>
-                            <div className="w-10 h-10 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-lg mb-4">
-                                <i className="fa-solid fa-camera"></i>
-                            </div>
-                            <h3 className="font-bold text-white text-base mb-1">Registro Audiovisual</h3>
-                            <p className="text-xs text-slate-400 leading-relaxed">Fotografías y clips de alta calidad de tu jornada para que conserves el recuerdo de tu logro.</p>
-                        </div>
-                    </div>
-
-                    <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col justify-between">
-                        <div>
-                            <div className="w-10 h-10 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-lg mb-4">
-                                <i className="fa-solid fa-file-medical"></i>
-                            </div>
-                            <h3 className="font-bold text-white text-base mb-1">Seguro de Accidentes</h3>
-                            <p className="text-xs text-slate-400 leading-relaxed">Cobertura individual para actividades de trekking durante todo el desarrollo de la jornada.</p>
-                        </div>
-                    </div>
-
-                    <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col justify-between">
-                        <div>
-                            <div className="w-10 h-10 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-lg mb-4">
-                                <i className="fa-solid fa-apple-whole"></i>
-                            </div>
-                            <h3 className="font-bold text-white text-base mb-1">Ración de Marcha</h3>
-                            <p className="text-xs text-slate-400 leading-relaxed">Snack técnico de alta densidad calórica e hidratación complementaria durante la ruta.</p>
-                        </div>
-                    </div>
-
-                    <div className="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col justify-between">
-                        <div>
-                            <div className="w-10 h-10 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-lg mb-4">
-                                <i className="fa-solid fa-ticket"></i>
-                            </div>
-                            <h3 className="font-bold text-white text-base mb-1">Entradas a Parques</h3>
-                            <p className="text-xs text-slate-400 leading-relaxed">Tickets de acceso pagados a los recintos y senderos de la Asociación Parque Cordillera.</p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </section>
-
-        {/* SECCIÓN DE RESERVA Y CHECKOUT */}
-        <section id="reservar" className="py-12 md:py-20 bg-gradient-to-b from-slate-900 to-slate-950 border-b border-slate-800">
-            <div className="max-w-3xl mx-auto px-4">
-                
-                <div className="bg-slate-900 border-2 border-amber-500/80 rounded-3xl p-6 md:p-10 shadow-2xl relative glow-amber">
-                    
-                    <div className="text-center mb-8">
-                        <span className="bg-amber-500 text-slate-950 font-black text-[10px] uppercase px-3 py-1 rounded-full">Piloto B2C — Cupos Limitados</span>
-                        <h2 className="text-2xl md:text-4xl font-black text-white mt-3">RESERVA TU LUGAR EN EL PILOTO</h2>
-                        <p className="text-xs md:text-sm text-slate-300 mt-2">Próxima Fecha: <strong className="text-amber-400">Sábado 22 de Agosto &bull; Lo Barnechea</strong></p>
-                    </div>
-
-                    {/* SEAT COUNTER DYNAMIC */}
-                    <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 mb-8 flex items-center justify-between">
-                        <div>
-                            <p className="text-xs text-slate-400">Cupos Confirmados:</p>
-                            <p className="text-lg font-black text-white">5 de 8 Asientos</p>
-                        </div>
-                        <div className="text-right">
-                            <p className="text-xs text-amber-400 font-bold">Quedan solo 3 cupos</p>
-                            <div className="w-28 h-2.5 bg-slate-800 rounded-full mt-1 overflow-hidden">
-                                <div className="bg-amber-500 h-full w-[62.5%] rounded-full"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* REGISTRATION FORM */}
-                    <form onSubmit={handleCheckout} className="space-y-4">
-                        <div>
-                            <label className="block text-xs font-bold text-slate-300 mb-1">Nombre Completo *</label>
-                            <input
-                              type="text"
-                              value={name}
-                              onChange={(e) => setName(e.target.value)}
-                              required
-                              placeholder="Ej: Mario Cruz"
-                              className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500"
-                            />
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label className="block text-xs font-bold text-slate-300 mb-1">Correo Electrónico *</label>
-                                <input
-                                  type="email"
-                                  value={email}
-                                  onChange={(e) => setEmail(e.target.value)}
-                                  required
-                                  placeholder="mario@ejemplo.cl"
-                                  className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-xs font-bold text-slate-300 mb-1">WhatsApp / Teléfono *</label>
-                                <input
-                                  type="tel"
-                                  value={phone}
-                                  onChange={(e) => setPhone(e.target.value)}
-                                  required
-                                  placeholder="+56 9 1234 5678"
-                                  className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500"
-                                />
-                            </div>
-                        </div>
-
-                        <div>
-                            <label className="block text-xs font-bold text-slate-300 mb-1">RUT (Para Seguro de Accidentes) *</label>
-                            <input
-                              type="text"
-                              value={rut}
-                              onChange={(e) => setRut(e.target.value)}
-                              required
-                              placeholder="12.345.678-9"
-                              className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500"
-                            />
-                        </div>
-
-                        {/* PAYMENT SUMMARY */}
-                        <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 my-4 space-y-2 text-xs">
-                            <div className="flex justify-between text-slate-300">
-                                <span>Ticket Integral Experiencia (1 Cupo):</span>
-                                <span className="font-bold text-white">$35.000 CLP</span>
-                            </div>
-                            <div className="flex justify-between text-slate-300">
-                                <span>Seguro + Gastronomía Lo Barnechea:</span>
-                                <span className="text-emerald-400 font-bold">Incluido ($0)</span>
-                            </div>
-                            <div className="border-t border-slate-800 pt-2 flex justify-between text-sm font-black text-amber-400">
-                                <span>Total a Pagar:</span>
-                                <span>$35.000 CLP</span>
-                            </div>
-                        </div>
-
-                        <button type="submit" className="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-base py-4 rounded-2xl shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer glow-amber">
-                            <i className="fa-solid fa-lock"></i>
-                            <span>PAGAR Y CONFIRMAR MI CUPO</span>
-                        </button>
-
-                        <p className="text-[11px] text-slate-500 text-center mt-2">
-                            <i className="fa-solid fa-shield text-slate-400 mr-1"></i> Transacción directa y segura. Recibirás tu comprobante e instrucciones por e-mail de inmediato.
-                        </p>
-                    </form>
-
-                </div>
-
-            </div>
-        </section>
-
-        {/* PREGUNTAS FRECUENTES */}
-        <section className="py-12 bg-slate-950 border-b border-slate-800">
-            <div className="max-w-3xl mx-auto px-4">
-                
-                <h2 className="text-xl md:text-2xl font-black text-white text-center mb-6">PREGUNTAS FRECUENTES</h2>
-
-                <div className="space-y-3">
-                    <details className="bg-slate-900 border border-slate-800 rounded-xl p-4 cursor-pointer">
-                        <summary className="font-bold text-sm text-white">¿Cuál es el nivel de exigencia física?</summary>
-                        <p className="text-xs text-slate-400 mt-2 leading-relaxed">Es un nivel medio. No se requiere ser atleta profesional, pero sí contar con una condición física básica para caminar 3 a 4 horas con desnivel moderado.</p>
-                    </details>
-
-                    <details className="bg-slate-900 border border-slate-800 rounded-xl p-4 cursor-pointer">
-                        <summary className="font-bold text-sm text-white">¿Qué pasa si las condiciones del clima no acompañan?</summary>
-                        <p className="text-xs text-slate-400 mt-2 leading-relaxed">Por seguridad WFR, si hay tormenta o lluvia torrencial la fecha se reprograma para el fin de semana siguiente o se reembolsa el 100% de tu dinero.</p>
-                    </details>
-
-                    <details className="bg-slate-900 border border-slate-800 rounded-xl p-4 cursor-pointer">
-                        <summary className="font-bold text-sm text-white">¿Qué debo llevar al trekking?</summary>
-                        <p className="text-xs text-slate-400 mt-2 leading-relaxed">Mochila pequeña, mínimo 1.5L de agua, calzado con buen agarre (zapatillas de trail o botas) y ropa cómoda por capas. Te enviaremos la pauta exacta al confirmar.</p>
-                    </details>
-                </div>
-
-            </div>
+          </div>
         </section>
 
         {/* FOOTER */}
-        <footer className="py-8 bg-slate-950 text-slate-500 text-xs text-center border-t border-slate-900">
-            <div className="max-w-4xl mx-auto px-4 space-y-2">
-                <p className="font-bold text-slate-400">GAZ_STYLE &bull; Mario Cruz</p>
-                <p>Lo Barnechea, Santiago de Chile &bull; Programa Emerge (Anglo American)</p>
-                <p className="text-[10px] text-slate-600">&copy; 2026 Gaz_Style. Todos los derechos reservados.</p>
-            </div>
+        <footer className="py-12 bg-[#050505] border-t border-white/5 text-center relative z-20">
+          <div className="flex justify-center mb-6">
+             <span className="font-editorial font-bold text-xl text-white">
+                GAZ<span className="text-amber-500 italic">_Style</span>
+              </span>
+          </div>
+          <p className="text-slate-500 text-xs font-light mb-2">La experiencia outdoor enfocada en la desconexión real, seguridad y bienestar.</p>
+          <p className="text-slate-600 text-[10px] tracking-widest uppercase">
+            &copy; 2026 Gaz_Style Turismo Spa.
+          </p>
         </footer>
 
-        {/* SUCCESS MODAL */}
-        <div
-          className={`fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4 ${
-            showModal ? "" : "hidden"
-          }`}
-        >
-            <div className="bg-slate-900 border-2 border-amber-500 rounded-3xl p-6 md:p-8 max-w-md w-full text-center space-y-4 shadow-2xl">
-                <div className="w-16 h-16 bg-amber-500 text-slate-950 rounded-full flex items-center justify-center text-3xl font-black mx-auto">
-                    <i className="fa-solid fa-check"></i>
-                </div>
-                <h3 className="text-2xl font-black text-white">¡CUPO PRE-RESERVADO!</h3>
-                <p className="text-xs text-slate-300">Hemos registrado tu lugar para la experiencia en Lo Barnechea. Te enviamos la ficha de confirmación a tu correo.</p>
-                
-                <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 text-left text-xs space-y-1">
-                    <p><strong className="text-amber-400">Titular:</strong> <span>{name}</span></p>
-                    <p><strong className="text-amber-400">Fecha:</strong> Sábado 22 de Agosto</p>
-                    <p><strong className="text-amber-400">Lugar:</strong> Lo Barnechea</p>
-                </div>
-
-                <button onClick={closeModal} className="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3 rounded-xl text-sm transition-all cursor-pointer">
-                    ENTENDIDO, VOLVER AL SITIO
-                </button>
+        {/* MOCKUP MODAL */}
+        {showModal && (
+          <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-[100] flex items-center justify-center p-6">
+            <div className="glass-panel border-amber-500/50 p-10 rounded-3xl max-w-md w-full text-center relative">
+              <div className="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Check className="w-8 h-8 text-black" />
+              </div>
+              <h3 className="font-editorial text-3xl font-bold text-white mb-2">Reserva Iniciada</h3>
+              <p className="text-sm text-slate-300 font-light mb-8">
+                Hola {formData.name.split(' ')[0] || 'Aventurero'}, hemos registrado tus datos. En la versión final, esto te redigirá a Webpay/Stripe para completar el pago de tu {selectedRoute === 'sunset' ? 'Sunset Trek' : selectedRoute === 'fullday' ? 'Full Day' : 'VIP Hike'}.
+              </p>
+              <button onClick={closeModal} className="bg-white/10 hover:bg-white/20 text-white w-full py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-colors">
+                Cerrar Prueba
+              </button>
             </div>
-        </div>
+          </div>
+        )}
+
       </div>
     </>
   );

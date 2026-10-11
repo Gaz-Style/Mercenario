@@ -42,6 +42,7 @@ export default function Home() {
             { label: "Casos reales", href: "#" }
         ],
         soluciones: [
+            { label: "Growth 360 (Ecosistema)", href: "/growth360" },
             { label: "Salud", href: "/soluciones/health" },
             { label: "Comercio", href: "/soluciones/comercio" },
             { label: "Gastronomía", href: "/soluciones/gastronomia" },
@@ -597,6 +598,7 @@ export default function Home() {
                     </div>
                     <div className="space-y-2 flex flex-col">
                         <span className="font-bold text-black uppercase tracking-wider mb-2">Soluciones</span>
+                        <Link href="/growth360" className="text-black font-bold hover:underline transition-colors">Growth 360 (Ecosistema)</Link>
                         <Link href="/soluciones/health" className="hover:text-black transition-colors">Salud</Link>
                         <Link href="/soluciones/comercio" className="hover:text-black transition-colors">Comercio</Link>
                         <Link href="/soluciones/gastronomia" className="hover:text-black transition-colors">Gastronomía</Link>
