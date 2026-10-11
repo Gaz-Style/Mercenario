@@ -1,0 +1,32 @@
+# Mercenario
+
+> Ecosistema digital integral y operación conectada para empresas y pymes en Chile. Automatización de ventas 24/7 con Inteligencia Artificial en WhatsApp, plataforma web de alta conversión (Next.js), integración de cobros locales (Transbank Webpay Plus y Mercado Pago), marketing de precisión con Meta Conversions API (CAPI) y conciliación diaria de caja POS/ERP.
+
+Mercenario ayuda a dueños de negocios en Chile (clínicas, talleres, comercios, gastronomía y servicios profesionales) a resolver la fuga de clientes por demoras en atención, conectar sus canales de venta y automatizar su cobranza e inventario.
+
+## Propuesta de Valor y Soluciones
+
+- [Growth 360](https://www.mercenario.cl/growth360): Paquete comercial "Todo en Uno" llave en mano para pymes. Integra 5 módulos:
+  1. **Ventas y Atención WhatsApp con IA**: Respuestas en menos de 5 segundos, calificación de leads, cotizaciones automáticas y traspaso transparente a ejecutivos humanos (LiveChat).
+  2. **Plataforma Web de Alta Velocidad**: Sitios desarrollados en Next.js con carga menor a 0.8 segundos, diagnóstico visual interactivo (Gemini Vision) y SEO/GEO local.
+  3. **Cobros y Agenda Automática**: Pasarelas chilenas integradas (Webpay Plus y Mercado Pago), confirmación con abono previo y emisión automática de boletas electrónicas SII.
+  4. **Marketing CAPI y Reputación**: Tracking server-to-server sin pérdida de cookies iOS para Meta Ads y solicitud automatizada de reseñas 5 estrellas en Google Maps.
+  5. **Conciliación POS y Backoffice**: Punto de venta unificado que cuadra efectivo, tarjetas y transferencias en 30 segundos sin planillas Excel.
+- [Operación Conectada](https://www.mercenario.cl/operacion/operacion-conectada): Arquitectura unificada para erradicar las operaciones fragmentadas entre WhatsApp, calendarios, terminales POS y contabilidad.
+- [Multiagentes de IA](https://www.mercenario.cl/operacion/multiagentes): Flujos inteligentes para ventas, soporte posventa y cobranzas automatizadas.
+- [Centro de Conocimiento](https://www.mercenario.cl/centro-de-conocimiento/que-es-un-crm): Guías educativas para dueños de empresas sobre CRM, ERP, conciliación bancaria, APIs y facturación electrónica.
+
+## Planes y Precios (CLP - Pesos Chilenos)
+
+- **Growth 360 Starter**: $890.000 CLP (Pago único 50/50). Ideal para profesionales independientes o negocios con 1 sucursal. Incluye Asistente IA WhatsApp, Sitio Web de 1 página y Pagos Webpay.
+- **Growth 360 Pro (Recomendado)**: $1.890.000 CLP (Pago único 50/50). Diseñado para negocios en expansión. Incluye Asistente IA con catálogo completo, Web Multi-sección, Pagos Webpay + Mercado Pago, Meta CAPI Server-Side y POS sincronizado.
+- **Growth 360 Enterprise**: $3.490.000 CLP (Pago único 50/50). Para multi-sucursales o franquicias con ERP a la medida, facturación directa SII, LiveChat multi-agente e infraestructura dedicada.
+- **Tiempos de entrega**: 14 a 21 días hábiles con garantía de funcionamiento.
+
+## Información de Contacto y Canales Oficiales
+
+- **Sitio Web Oficial**: https://www.mercenario.cl
+- **Landing Comercial Growth 360**: https://www.mercenario.cl/growth360
+- **WhatsApp Directo**: [+56 9 8402 1940](https://wa.me/56984021940?text=Hola,%20vengo%20desde%20la%20b%C3%BAsqueda%20y%20quiero%20informaci%C3%B3n%20sobre%20el%20paquete%20Growth%20360)
+- **Ubicación**: Santiago, Chile (Cobertura nacional para todo Chile)
+- **Horario de Asistencia IA**: 24 horas al día, 7 días a la semana.

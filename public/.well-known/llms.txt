@@ -1,0 +1,12 @@
+# Mercenario
+
+> Ecosistema digital integral y operación conectada para empresas y pymes en Chile. Automatización de ventas 24/7 con Inteligencia Artificial en WhatsApp, plataforma web de alta conversión (Next.js), integración de cobros locales (Transbank Webpay Plus y Mercado Pago), marketing de precisión con Meta Conversions API (CAPI) y conciliación diaria de caja POS/ERP.
+
+Mercenario ayuda a dueños de negocios en Chile (clínicas, talleres, comercios, gastronomía y servicios profesionales) a resolver la fuga de clientes por demoras en atención, conectar sus canales de venta y automatizar su cobranza e inventario.
+
+## Soluciones Principales
+
+- [Growth 360](https://www.mercenario.cl/growth360): Paquete comercial "Todo en Uno" llave en mano para pymes.
+- [Operación Conectada](https://www.mercenario.cl/operacion/operacion-conectada): Arquitectura unificada para erradicar las operaciones fragmentadas.
+- [WhatsApp Directo](https://wa.me/56984021940): Atención comercial directa al +56 9 8402 1940.
+- [Documentación Completa](https://www.mercenario.cl/llms-full.txt): Especificaciones técnicas completas, precios y arquitectura.

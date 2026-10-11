@@ -60,6 +60,28 @@ export default function Growth360LandingPage() {
         setOpenCardIndex(openCardIndex === index ? null : index);
     };
 
+    // Estado FAQs para SEO y Conversion
+    const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+
+    const faqs = [
+        {
+            q: "¿Por qué las pequeñas empresas pierden ventas en WhatsApp?",
+            a: "Más del 60% de los clientes potenciales escriben fuera de horario comercial o fines de semana. Si un negocio tarda más de 5 minutos en responder, el prospecto compra a la competencia. Growth 360 responde y califica con IA en 5 segundos las 24 horas del día."
+        },
+        {
+            q: "¿Tengo que cambiar mi número de WhatsApp o software actual?",
+            a: "No. Mercenario integra el Asistente de IA directamente sobre tu número actual a través de la API Oficial de Meta Cloud WhatsApp sin interrumpir tus operaciones ni perder conversaciones previas."
+        },
+        {
+            q: "¿Qué pasarelas de pago se integran en Chile?",
+            a: "Integramos Transbank Webpay Plus (Débito, Crédito, Redcompra) y Mercado Pago Chile, facilitando el cobro de anticipos o venta directa con confirmación instantánea y emisión de boleta electrónica SII."
+        },
+        {
+            q: "¿Cuánto tarda la entrega e instalación de Growth 360?",
+            a: "El tiempo de desarrollo e integración completa es de 14 a 21 días hábiles, entregando el sistema 100% operativo con garantía y capacitando a tu equipo de trabajo."
+        }
+    ];
+
     const WHATSAPP_NUM = "56984021940";
 
     const handleFormSubmit = async (e: React.FormEvent) => {
@@ -510,6 +532,51 @@ export default function Growth360LandingPage() {
                                 Quiero Growth 360
                             </a>
                         </div>
+                    </div>
+                </section>
+
+                {/* SECCIÓN PREGUNTAS FRECUENTES (SEO & CONVERSIÓN) */}
+                <section className="w-full max-w-2xl mx-auto py-10 border-t border-neutral-200 space-y-4">
+                    <div className="text-center space-y-1">
+                        <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 font-bold">Dudas Habituales</span>
+                        <h2 className="text-xl sm:text-2xl font-extrabold text-black">Preguntas Frecuentes</h2>
+                    </div>
+
+                    <div className="space-y-2.5 pt-2">
+                        {faqs.map((faq, idx) => {
+                            const isOpen = openFaqIndex === idx;
+                            return (
+                                <div 
+                                    key={idx}
+                                    className="border border-neutral-200 bg-white rounded-2xl overflow-hidden shadow-xs transition-all"
+                                >
+                                    <button
+                                        type="button"
+                                        onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
+                                        className="w-full p-4 text-left flex items-center justify-between gap-4 font-semibold text-xs sm:text-sm text-neutral-900 hover:text-black transition-colors"
+                                    >
+                                        <span>{faq.q}</span>
+                                        <ChevronDown className={`w-4 h-4 text-neutral-400 shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180 text-black" : ""}`} />
+                                    </button>
+
+                                    <AnimatePresence>
+                                        {isOpen && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: "auto", opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.2 }}
+                                                className="overflow-hidden"
+                                            >
+                                                <div className="px-4 pb-4 pt-1 text-xs text-neutral-600 leading-relaxed border-t border-neutral-100">
+                                                    {faq.a}
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+                            );
+                        })}
                     </div>
                 </section>
 

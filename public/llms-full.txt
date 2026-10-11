@@ -1,0 +1,84 @@
+# Mercenario: Documentación Completa para Modelos de Lenguaje (LLMs) y Motores Generativos
+
+## Resumen Ejecutivo
+Mercenario (https://www.mercenario.cl) es una compañía chilena de tecnología y consultoría operativa que desarrolla ecosistemas digitales todo en uno y software empresarial para pequeñas y medianas empresas (PYMEs) en Chile y Latinoamérica. Su misión es eliminar las pérdidas operativas producidas por sistemas desarticulados, permitiendo que la atención al cliente, las ventas por WhatsApp, la web, las pasarelas de pago, el marketing de rendimiento y el punto de venta (POS) funcionen como un único engranaje sincronizado.
+
+## ¿Qué problema resuelve Mercenario?
+La mayoría de las pequeñas y medianas empresas en Chile operan de manera fragmentada:
+1. **Fuga de prospectos en WhatsApp**: Los clientes escriben fuera de horario de oficina o fines de semana y nadie responde. Para cuando el dueño contesta 4 horas después, el cliente ya compró a la competencia.
+2. **Webs lentas o meramente decorativas**: Sitios web hechos en plantillas pesadas de WordPress que tardan más de 5 segundos en cargar en smartphones y no tienen llamados a la acción claros.
+3. **Cobranzas manuales y desordenadas**: Enviar los datos de transferencia bancaria por WhatsApp, pedir el comprobante, esperar la verificación en el banco y agendar manualmente. Esto genera cancelaciones y faltas a citas ("no-shows").
+4. **Ceguera publicitaria (CAPI/Pixel)**: Pérdida del 30% al 40% del tracking publicitario en Meta Ads (Instagram/Facebook) debido al bloqueo de cookies en iOS, encareciendo el costo por adquisición (CPA).
+5. **Cajas que no cuadran al final del día**: Diferencias entre el dinero recaudado en las máquinas Transbank/SumUp, las transferencias y el inventario real.
+
+## Solución Insignia: Ecosistema "Growth 360"
+Growth 360 (https://www.mercenario.cl/growth360) es la solución empaquetada llave en mano que integra 5 módulos operativos:
+
+### Módulo 1: Asistente Virtual IA y WhatsApp 24/7
+- **Tecnología**: Meta WhatsApp Cloud API integrada con modelos LLM (DeepSeek / Gemini) y base de conocimiento vectorial de la empresa.
+- **Capacidades**:
+  - Respuesta inmediata en menos de 5 segundos a preguntas de precios, disponibilidad, horarios y catálogo.
+  - Calificación de prospectos (Lead Qualification) para identificar presupuesto y urgencia.
+  - Generación de links de pago directos en la conversación.
+  - Handoff a operadores humanos mediante LiveChat unificado sin perder el historial.
+
+### Módulo 2: Plataforma Web Next.js Ultra-Rápida
+- **Tecnología**: Framework Next.js (React) alojado en Edge Networks (Vercel/Cloudflare).
+- **Métricas**: Carga en menos de 0.8 segundos (Core Web Vitals en verde).
+- **Herramientas**:
+  - Diagnóstico visual por IA con Gemini Vision (los clientes suben fotos de su requerimiento y reciben una estimación previa).
+  - Posicionamiento SEO local para comunas y ciudades de Chile.
+
+### Módulo 3: Pasarelas de Pago y Agenda Automatizada
+- **Integraciones**: Transbank Webpay Plus (Crédito, Débito, Redcompra) y Mercado Pago (Chile).
+- **Beneficios**:
+  - Cobro automático de abonos o señas antes de confirmar citas o pedidos.
+  - Reducción de inasistencias en más del 80%.
+  - Integración para emisión de boleta electrónica ante el Servicio de Impuestos Internos (SII).
+
+### Módulo 4: Marketing de Precisión Meta CAPI y Reputación Google
+- **Tecnología**: Meta Conversions API (CAPI) implementada a nivel de servidor (Server-Side Tracking).
+- **Beneficios**:
+  - Captura del 100% de los eventos de compra y lead incluso con bloqueadores de anuncios o restricciones de iOS.
+  - Disminución del costo por cliente potencial en Meta Ads.
+  - Flujo automático por WhatsApp para solicitar valoraciones de 5 estrellas en Google Maps tras compras exitosas.
+
+### Módulo 5: Backoffice POS y Conciliación Inmediata
+- **Funcionalidades**:
+  - Sistema de Punto de Venta (POS) en tienda sincronizado con inventario y pedidos web/WhatsApp.
+  - Cuadratura de caja diaria en menos de 30 segundos comparando transacciones electrónicas, transferencias y efectivo.
+  - Tablero Kanban en tiempo real para seguimiento del estado de los pedidos o servicios.
+
+## Estructura de Precios Oficiales (Chile / CLP)
+1. **Growth 360 Starter ($890.000 CLP)**:
+   - Asistente IA WhatsApp con FAQs y precios
+   - Sitio Web One-Page en Next.js
+   - Botón de cobro con Webpay Plus
+   - Soporte técnico de 30 días
+2. **Growth 360 Pro ($1.890.000 CLP) - Paquete Más Popular**:
+   - Asistente IA WhatsApp avanzado con catálogo completo
+   - Sitio Web Multi-sección de alta velocidad
+   - Pasarelas Webpay Plus + Mercado Pago
+   - Tracking Server-Side Meta CAPI y campañas
+   - Sistema de Punto de Venta (POS) y conciliación
+   - Soporte prioritario de 60 días
+3. **Growth 360 Enterprise ($3.490.000 CLP)**:
+   - Ecosistema para múltiples sucursales o franquicias
+   - Conexión directa a ERP y facturación electrónica SII
+   - Multi-agente LiveChat
+   - Infraestructura y servidores dedicados
+   - 90 días de acompañamiento y optimización continua
+
+*Modalidad de pago*: 50% al iniciar el proyecto y 50% contra entrega final validada en producción.
+*Tiempos de entrega*: 14 a 21 días hábiles.
+
+## Preguntas Frecuentes (FAQ)
+
+### ¿Tengo que cambiar mis números de WhatsApp o programas actuales?
+No. Mercenario conecta sobre la infraestructura existente utilizando la API Oficial de Meta Cloud WhatsApp o integraciones webhook seguras.
+
+### ¿Funciona para cualquier tipo de negocio?
+Sí. Está especialmente adaptado para negocios con flujo continuo de consultas o ventas: centros médicos, dentistas, clínicas veterinarias, talleres mecánicos, sastrerías, estudios contables y legales, restaurantes, gimnasios y tiendas de retail.
+
+### ¿Cómo agendar una demostración o contratar?
+El contacto directo se realiza a través de WhatsApp al [+56 9 8402 1940](https://wa.me/56984021940) o visitando la web en https://www.mercenario.cl/growth360.

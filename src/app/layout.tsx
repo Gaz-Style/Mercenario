@@ -13,24 +13,123 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mercenario IOS | Una nueva forma de operar pequeñas empresas",
-  description: "Mercenario conecta toda la operación para que tu empresa funcione como una sola. Agenda, facturación, pagos, CRM, ERP y más en una operación conectada.",
-  keywords: ["operación conectada", "SaaS", "automatización de empresas", "Mercenario IOS", "sistema operativo empresarial", "ERP", "CRM"],
+  metadataBase: new URL("https://www.mercenario.cl"),
+  title: {
+    default: "Mercenario | Ecosistema Digital & Operación Conectada para Negocios",
+    template: "%s | Mercenario",
+  },
+  description: "Mercenario conecta toda la operación de tu negocio: Asistentes de IA en WhatsApp 24/7, desarrollo web de alta velocidad, pagos en línea Webpay/Mercado Pago, Meta CAPI y conciliación POS en Chile.",
+  keywords: [
+    "operación conectada",
+    "automatización pymes chile",
+    "asistente ia whatsapp",
+    "desarrollo web nextjs chile",
+    "webpay plus integracion",
+    "mercado pago chile",
+    "meta capi server side",
+    "punto de venta pos chile",
+    "erp crm chile",
+    "growth 360",
+    "agencia digital santiago",
+    "facturación electrónica sii",
+    "mercenario ios",
+  ],
+  authors: [{ name: "Mercenario", url: "https://www.mercenario.cl" }],
+  creator: "Mercenario",
+  publisher: "Mercenario",
+  alternates: {
+    canonical: "https://www.mercenario.cl",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
-    title: "Mercenario IOS | Operación Conectada",
-    description: "Una nueva forma de operar pequeñas empresas. Conectamos todas las herramientas para que funcionen como una sola.",
-    url: "https://mercenario.io",
+    title: "Mercenario | Ecosistema Digital & Operación Conectada",
+    description: "Conecta tu negocio en una sola operación: Ventas con IA en WhatsApp 24/7, Web Next.js, Webpay, Meta CAPI y POS sincronizado.",
+    url: "https://www.mercenario.cl",
     siteName: "Mercenario",
     images: [
       {
         url: "/imagenes/mercenario_preview.png",
         width: 1200,
         height: 630,
+        alt: "Mercenario Ecosistema Digital",
       },
     ],
     locale: "es_CL",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mercenario | Ecosistema Digital & Operación Conectada",
+    description: "Ventas automáticas 24/7 con Inteligencia Artificial en WhatsApp, Web Next.js ultra-rápida y cobros Webpay en Chile.",
+    images: ["/imagenes/mercenario_preview.png"],
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.mercenario.cl/#organization",
+      "name": "Mercenario",
+      "url": "https://www.mercenario.cl",
+      "logo": "https://www.mercenario.cl/imagenes/mercenario_preview.png",
+      "description": "Ecosistema digital y tecnología operativa para empresas y pymes en Chile. Automatización con IA en WhatsApp, desarrollo web Next.js, pasarelas de pago Webpay/Mercado Pago y conciliación POS/ERP.",
+      "telephone": "+56984021940",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "CL",
+        "addressLocality": "Santiago",
+        "addressRegion": "Región Metropolitana"
+      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+56984021940",
+          "contactType": "sales",
+          "areaServed": "CL",
+          "availableLanguage": ["Spanish"]
+        }
+      ],
+      "sameAs": [
+        "https://www.mercenario.cl",
+        "https://wa.me/56984021940"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.mercenario.cl/#website",
+      "url": "https://www.mercenario.cl",
+      "name": "Mercenario",
+      "publisher": {
+        "@id": "https://www.mercenario.cl/#organization"
+      },
+      "inLanguage": "es-CL"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Mercenario IOS & Growth 360",
+      "operatingSystem": "Cloud, Web, WhatsApp, iOS, Android",
+      "applicationCategory": "BusinessApplication",
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "CLP",
+        "lowPrice": "890000",
+        "highPrice": "3490000"
+      },
+      "description": "Automatización integral de ventas con IA en WhatsApp, Web Next.js, pagos Webpay y conciliación POS en Chile."
+    }
+  ]
 };
 
 export default function RootLayout({
@@ -43,6 +142,14 @@ export default function RootLayout({
       lang="es"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <meta name="geo.region" content="CL" />
+        <meta name="geo.placename" content="Santiago, Chile" />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
