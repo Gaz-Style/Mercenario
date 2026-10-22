@@ -113,12 +113,12 @@ export default function Home() {
             
             {/* Header: Pulcro, Stark White, Unificado */}
             <header className="fixed top-0 inset-x-0 w-full z-[100] border-b border-neutral-100 bg-[#FCFCFC]/90 backdrop-blur-md">
-                <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative z-50">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center relative z-50">
                     <div className="flex items-center gap-8">
-                        <Link href="/" className="flex items-center gap-2.5 group">
+                        <Link href="/" className="flex items-center gap-2 group">
                             <div className="w-2 h-2 bg-red-600 rounded-full group-hover:scale-125 transition-transform" />
-                            <span className="text-[11px] font-semibold tracking-[0.2em] text-black uppercase flex items-center gap-2">
-                                MERCENARIO <span className="text-neutral-200">|</span> <span className="text-neutral-500 font-medium">SISTEMAS OPERATIVOS</span>
+                            <span className="text-[11px] font-semibold tracking-[0.2em] text-black uppercase flex items-center gap-1.5 sm:gap-2">
+                                MERCENARIO <span className="hidden sm:inline text-neutral-200">|</span> <span className="hidden sm:inline text-neutral-500 font-medium">SISTEMAS OPERATIVOS</span>
                             </span>
                         </Link>
 
@@ -366,25 +366,31 @@ export default function Home() {
                 </section>
 
                 {/* 3. SECCIÓN: WEKE STUDIO (LA DEMOSTRACIÓN VIVA DEL SITIO WEB + EL SISTEMA COMPLETO) */}
-                <section id="demostracion-weke" className="w-full max-w-5xl mx-auto px-4 py-16 sm:py-24 border-t border-neutral-100">
-                    <div className="border-2 border-neutral-900 bg-white rounded-3xl p-6 sm:p-12 space-y-10 shadow-xl relative overflow-hidden">
-                        <div className="absolute top-0 right-0 bg-neutral-900 text-white text-[10px] font-mono uppercase px-4 py-1.5 rounded-bl-xl font-bold tracking-widest">
+                <section id="demostracion-weke" className="w-full max-w-5xl mx-auto px-4 py-14 sm:py-24 border-t border-neutral-100">
+                    <div className="border-2 border-neutral-900 bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-10 md:p-12 space-y-6 sm:space-y-10 shadow-xl relative overflow-hidden">
+                        <div className="hidden sm:block absolute top-0 right-0 bg-neutral-900 text-white text-[10px] font-mono uppercase px-4 py-1.5 rounded-bl-xl font-bold tracking-widest">
                             DEMOSTRACIÓN REAL EN VIVO
                         </div>
 
                         <div className="space-y-4 max-w-3xl">
-                            <div className="flex items-center gap-3">
-                                <img src="/images/weke-logo.png" alt="Logo WEKE" className="w-10 h-10 object-contain" />
-                                <div>
-                                    <span className="text-xs font-mono font-bold tracking-widest uppercase text-neutral-900 block">
-                                        WEKE STUDIO // E-COMMERCE & SISTEMA CONECTADO
-                                    </span>
-                                    <span className="text-[11px] text-neutral-400 font-mono">
-                                        www.mercenario.cl/tienda
-                                    </span>
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                                <div className="flex items-center gap-3">
+                                    <img src="/images/weke-logo.png" alt="Logo WEKE" className="w-9 h-9 sm:w-10 sm:h-10 object-contain" />
+                                    <div>
+                                        <span className="text-xs font-mono font-bold tracking-widest uppercase text-neutral-900 block">
+                                            WEKE STUDIO // E-COMMERCE & SISTEMA
+                                        </span>
+                                        <span className="text-[11px] text-neutral-400 font-mono">
+                                            www.mercenario.cl/tienda
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="sm:hidden inline-flex items-center gap-1.5 px-2.5 py-1 bg-neutral-900 text-white text-[9px] font-mono uppercase rounded-md font-bold tracking-wider w-max">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                                    <span>DEMO REAL EN VIVO</span>
                                 </div>
                             </div>
-                            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900">
+                            <h2 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight text-neutral-900 leading-tight">
                                 No te mostramos maquetas en Figma.<br />
                                 <span className="text-emerald-700">Mira la Web E-Commerce de WEKE operando en vivo.</span>
                             </h2>
@@ -395,31 +401,31 @@ export default function Home() {
 
                         {/* SHOWCASE VISUAL: BROWSER MOCKUP CON PRODUCTOS REALES */}
                         <div className="border border-neutral-300 rounded-2xl overflow-hidden bg-neutral-50 shadow-lg">
-                            <div className="bg-neutral-200/70 px-4 py-3 border-b border-neutral-300 flex items-center justify-between">
-                                <div className="flex items-center gap-2">
-                                    <span className="w-3 h-3 rounded-full bg-red-400" />
-                                    <span className="w-3 h-3 rounded-full bg-amber-400" />
-                                    <span className="w-3 h-3 rounded-full bg-emerald-400" />
-                                    <span className="text-[10px] font-mono text-neutral-500 ml-2">https://www.mercenario.cl/tienda (WEKE Storefront)</span>
+                            <div className="bg-neutral-200/70 px-3 py-2 sm:px-4 sm:py-3 border-b border-neutral-300 flex items-center justify-between gap-2 overflow-hidden">
+                                <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+                                    <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-400 shrink-0" />
+                                    <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-400 shrink-0" />
+                                    <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-400 shrink-0" />
+                                    <span className="text-[10px] font-mono text-neutral-600 truncate ml-1 sm:ml-2">mercenario.cl/tienda</span>
                                 </div>
-                                <span className="text-[10px] font-mono bg-white px-2 py-0.5 rounded text-emerald-700 font-bold border border-neutral-300">
+                                <span className="text-[9px] sm:text-[10px] font-mono bg-white px-2 py-0.5 rounded text-emerald-700 font-bold border border-neutral-300 shrink-0">
                                     Velocidad: 0.8s · Next.js 16
                                 </span>
                             </div>
 
-                            <div className="p-6 sm:p-8 space-y-6 bg-white">
-                                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-4 border-b border-neutral-100">
+                            <div className="p-4 sm:p-8 space-y-6 bg-white">
+                                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 pb-4 border-b border-neutral-100">
                                     <div>
                                         <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 font-bold block">
                                             CATÁLOGO AUTOADMINISTRABLE EN PRODUCCIÓN REAL
                                         </span>
-                                        <h3 className="text-xl font-bold text-neutral-900">
+                                        <h3 className="text-base sm:text-xl font-bold text-neutral-900">
                                             Prendas Técnicas de Montaña & Outdoor WEKE
                                         </h3>
                                     </div>
                                     <Link
                                         href="/tienda"
-                                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-neutral-900 text-white text-xs font-mono uppercase tracking-wider rounded-lg hover:bg-black transition-colors"
+                                        className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-neutral-900 text-white text-xs font-mono uppercase tracking-wider rounded-xl hover:bg-black transition-colors"
                                     >
                                         <ShoppingCart className="w-3.5 h-3.5" />
                                         <span>Abrir Tienda WEKE en Vivo</span>
@@ -536,51 +542,51 @@ export default function Home() {
                 </section>
 
                 {/* 4. SECCIÓN: SISTEMAS LLAVE EN MANO (La Oferta Desglosada por Industria) */}
-                <section id="sistemas" className="w-full max-w-5xl mx-auto px-4 py-20 space-y-12 border-t border-neutral-100">
-                    <div className="space-y-4 max-w-3xl">
+                <section id="sistemas" className="w-full max-w-5xl mx-auto px-4 py-16 sm:py-20 space-y-8 sm:space-y-12 border-t border-neutral-100">
+                    <div className="space-y-3 sm:space-y-4 max-w-3xl">
                         <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 font-bold">OFERTA COMERCIAL LLAVE EN MANO</span>
-                        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
                             Una arquitectura completa para tu industria.<br />
                             <span className="text-neutral-400 font-semibold">Instalada y lista para operar en 14 a 21 días.</span>
                         </h2>
-                        <p className="text-base text-neutral-500 leading-relaxed font-light pt-2 max-w-2xl">
+                        <p className="text-sm sm:text-base text-neutral-500 leading-relaxed font-light pt-1 sm:pt-2 max-w-2xl">
                             No entregamos páginas web huérfanas ni software que nadie sabe usar. Entregamos un sistema operativo comercial completo: diseño a medida, pagos, inventario, WhatsApp IA y capacitación de tu equipo.
                         </p>
                     </div>
 
                     {/* Selector de Industria */}
-                    <div className="flex flex-wrap items-center gap-2 p-1 bg-neutral-100/70 rounded-2xl w-max max-w-full">
+                    <div className="grid grid-cols-1 sm:flex sm:flex-wrap items-center gap-2 p-1.5 bg-neutral-100/70 rounded-2xl w-full sm:w-max max-w-full">
                         <button
                             onClick={() => setSelectedPackage("ecommerce")}
-                            className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs font-bold transition-all ${
+                            className={`flex items-center justify-start sm:justify-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl text-xs font-bold transition-all w-full sm:w-auto ${
                                 selectedPackage === "ecommerce" 
                                     ? "bg-white text-black shadow-sm" 
                                     : "text-neutral-500 hover:text-black"
                             }`}
                         >
-                            <Store className="w-4 h-4" />
+                            <Store className="w-4 h-4 shrink-0" />
                             <span>E-Commerce & Retail (Caso WEKE)</span>
                         </button>
                         <button
                             onClick={() => setSelectedPackage("clinica")}
-                            className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs font-bold transition-all ${
+                            className={`flex items-center justify-start sm:justify-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl text-xs font-bold transition-all w-full sm:w-auto ${
                                 selectedPackage === "clinica" 
                                     ? "bg-white text-black shadow-sm" 
                                     : "text-neutral-500 hover:text-black"
                             }`}
                         >
-                            <Calendar className="w-4 h-4" />
+                            <Calendar className="w-4 h-4 shrink-0" />
                             <span>Clínica, Estética & Salud</span>
                         </button>
                         <button
                             onClick={() => setSelectedPackage("servicios")}
-                            className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs font-bold transition-all ${
+                            className={`flex items-center justify-start sm:justify-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl text-xs font-bold transition-all w-full sm:w-auto ${
                                 selectedPackage === "servicios" 
                                     ? "bg-white text-black shadow-sm" 
                                     : "text-neutral-500 hover:text-black"
                             }`}
                         >
-                            <Building2 className="w-4 h-4" />
+                            <Building2 className="w-4 h-4 shrink-0" />
                             <span>Servicios B2B & Inmobiliaria</span>
                         </button>
                     </div>
@@ -593,36 +599,36 @@ export default function Home() {
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -10 }}
-                                className="p-8 md:p-12 border border-neutral-200 rounded-3xl bg-white space-y-8 shadow-sm"
+                                className="p-5 sm:p-8 md:p-12 border border-neutral-200 rounded-2xl sm:rounded-3xl bg-white space-y-6 sm:space-y-8 shadow-sm"
                             >
-                                <div className="space-y-3">
+                                <div className="space-y-2 sm:space-y-3">
                                     <span className="text-[10px] font-mono text-emerald-600 uppercase font-bold tracking-widest">
                                         RETAIL · MODA · PRODUCTOS FÍSICOS
                                     </span>
-                                    <h3 className="text-2xl md:text-3xl font-bold text-black">
+                                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-black leading-snug">
                                         Sistema E-Commerce Autoadministrable + WhatsApp IA + POS Sincronizado
                                     </h3>
-                                    <p className="text-sm text-neutral-500 leading-relaxed font-light max-w-2xl">
+                                    <p className="text-xs sm:text-sm text-neutral-500 leading-relaxed font-light max-w-2xl">
                                         El mismo motor que opera WEKE Studio. Permite vender online con Webpay Plus y en tu tienda física con máquina POS, manteniendo el stock descontado en vivo en ambos canales.
                                     </p>
                                 </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-                                    <div className="p-5 bg-neutral-50 rounded-2xl border border-neutral-100 space-y-2">
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 pt-2">
+                                    <div className="p-4 sm:p-5 bg-neutral-50 rounded-2xl border border-neutral-100 space-y-2">
                                         <Store className="w-5 h-5 text-neutral-800" />
                                         <h4 className="text-sm font-bold text-black">Web Next.js de Carga Rápida</h4>
                                         <p className="text-xs text-neutral-500 leading-relaxed font-light">
                                             Catálogo interactivo, carrito flyout, filtros por talla/color y panel para subir fotos y cambiar precios en 1 clic.
                                         </p>
                                     </div>
-                                    <div className="p-5 bg-neutral-50 rounded-2xl border border-neutral-100 space-y-2">
+                                    <div className="p-4 sm:p-5 bg-neutral-50 rounded-2xl border border-neutral-100 space-y-2">
                                         <Bot className="w-5 h-5 text-emerald-600" />
                                         <h4 className="text-sm font-bold text-black">Vendedor IA en WhatsApp 24/7</h4>
                                         <p className="text-xs text-neutral-500 leading-relaxed font-light">
                                             Responde dudas sobre materiales, medidas y stock disponible. Envía links directos de pago con Webpay o Mercado Pago.
                                         </p>
                                     </div>
-                                    <div className="p-5 bg-neutral-50 rounded-2xl border border-neutral-100 space-y-2">
+                                    <div className="p-4 sm:p-5 bg-neutral-50 rounded-2xl border border-neutral-100 space-y-2">
                                         <Receipt className="w-5 h-5 text-neutral-800" />
                                         <h4 className="text-sm font-bold text-black">Recuperador de Carritos</h4>
                                         <p className="text-xs text-neutral-500 leading-relaxed font-light">
@@ -631,16 +637,16 @@ export default function Home() {
                                     </div>
                                 </div>
 
-                                <div className="pt-4 flex flex-wrap items-center gap-4 border-t border-neutral-100">
+                                <div className="pt-4 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 border-t border-neutral-100">
                                     <button 
                                         onClick={() => handleSelectSystemForQuote("E-Commerce & Retail (Caso WEKE)")}
-                                        className="px-6 py-3 bg-black text-white text-xs font-mono uppercase tracking-wider rounded-xl hover:bg-neutral-800 transition-colors font-bold"
+                                        className="w-full sm:w-auto px-6 py-3.5 sm:py-3 bg-black text-white text-xs font-mono uppercase tracking-wider rounded-xl hover:bg-neutral-800 transition-colors font-bold text-center"
                                     >
                                         Cotizar Sistema E-Commerce
                                     </button>
                                     <Link 
                                         href="/tienda" 
-                                        className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-neutral-700 hover:text-black font-semibold"
+                                        className="w-full sm:w-auto justify-center sm:justify-start inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-neutral-700 hover:text-black font-semibold py-2 sm:py-0"
                                     >
                                         <span>Probar Tienda WEKE en Vivo</span>
                                         <ArrowUpRight className="w-4 h-4" />
@@ -655,36 +661,36 @@ export default function Home() {
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -10 }}
-                                className="p-8 md:p-12 border border-neutral-200 rounded-3xl bg-white space-y-8 shadow-sm"
+                                className="p-5 sm:p-8 md:p-12 border border-neutral-200 rounded-2xl sm:rounded-3xl bg-white space-y-6 sm:space-y-8 shadow-sm"
                             >
-                                <div className="space-y-3">
+                                <div className="space-y-2 sm:space-y-3">
                                     <span className="text-[10px] font-mono text-emerald-600 uppercase font-bold tracking-widest">
                                         SALUD · DENTAL · ESTÉTICA · KINESIOLOGÍA
                                     </span>
-                                    <h3 className="text-2xl md:text-3xl font-bold text-black">
+                                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-black leading-snug">
                                         Plataforma de Agendamiento Online con Cobro Webpay + Asistente IA Médico
                                     </h3>
-                                    <p className="text-sm text-neutral-500 leading-relaxed font-light max-w-2xl">
+                                    <p className="text-xs sm:text-sm text-neutral-500 leading-relaxed font-light max-w-2xl">
                                         Diseñado para centros médicos, clínicas dentales y estéticas. Permite reservar horas por especialista y box, exigiendo abono o pago completo para liquidar el ausentismo (No-Show).
                                     </p>
                                 </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-                                    <div className="p-5 bg-neutral-50 rounded-2xl border border-neutral-100 space-y-2">
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 pt-2">
+                                    <div className="p-4 sm:p-5 bg-neutral-50 rounded-2xl border border-neutral-100 space-y-2">
                                         <Calendar className="w-5 h-5 text-neutral-800" />
                                         <h4 className="text-sm font-bold text-black">Agenda Online con Bloqueo</h4>
                                         <p className="text-xs text-neutral-500 leading-relaxed font-light">
                                             Sincronizada con los doctores. Exige cobro de consulta previa con Webpay Plus para asegurar el compromiso del paciente.
                                         </p>
                                     </div>
-                                    <div className="p-5 bg-neutral-50 rounded-2xl border border-neutral-100 space-y-2">
+                                    <div className="p-4 sm:p-5 bg-neutral-50 rounded-2xl border border-neutral-100 space-y-2">
                                         <Bot className="w-5 h-5 text-emerald-600" />
                                         <h4 className="text-sm font-bold text-black">Triage IA en WhatsApp 24/7</h4>
                                         <p className="text-xs text-neutral-500 leading-relaxed font-light">
                                             Responde dudas sobre tratamientos, cuidados post-atención y agenda horas de acuerdo con la disponibilidad real del médico.
                                         </p>
                                     </div>
-                                    <div className="p-5 bg-neutral-50 rounded-2xl border border-neutral-100 space-y-2">
+                                    <div className="p-4 sm:p-5 bg-neutral-50 rounded-2xl border border-neutral-100 space-y-2">
                                         <MessageSquare className="w-5 h-5 text-neutral-800" />
                                         <h4 className="text-sm font-bold text-black">Recordatorios Anti-NoShow 24h</h4>
                                         <p className="text-xs text-neutral-500 leading-relaxed font-light">
@@ -693,10 +699,10 @@ export default function Home() {
                                     </div>
                                 </div>
 
-                                <div className="pt-4 flex flex-wrap items-center gap-4 border-t border-neutral-100">
+                                <div className="pt-4 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 border-t border-neutral-100">
                                     <button 
                                         onClick={() => handleSelectSystemForQuote("Clínica, Estética & Salud")}
-                                        className="px-6 py-3 bg-black text-white text-xs font-mono uppercase tracking-wider rounded-xl hover:bg-neutral-800 transition-colors font-bold"
+                                        className="w-full sm:w-auto px-6 py-3.5 sm:py-3 bg-black text-white text-xs font-mono uppercase tracking-wider rounded-xl hover:bg-neutral-800 transition-colors font-bold text-center"
                                     >
                                         Cotizar Sistema para Clínicas
                                     </button>
@@ -710,36 +716,36 @@ export default function Home() {
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -10 }}
-                                className="p-8 md:p-12 border border-neutral-200 rounded-3xl bg-white space-y-8 shadow-sm"
+                                className="p-5 sm:p-8 md:p-12 border border-neutral-200 rounded-2xl sm:rounded-3xl bg-white space-y-6 sm:space-y-8 shadow-sm"
                             >
-                                <div className="space-y-3">
+                                <div className="space-y-2 sm:space-y-3">
                                     <span className="text-[10px] font-mono text-emerald-600 uppercase font-bold tracking-widest">
                                         B2B · INMOBILIARIAS · SERVICIOS TÉCNICOS
                                     </span>
-                                    <h3 className="text-2xl md:text-3xl font-bold text-black">
+                                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-black leading-snug">
                                         Web Corporativa de Captación + Calificador IA de Leads + CRM de Pipeline
                                     </h3>
-                                    <p className="text-sm text-neutral-500 leading-relaxed font-light max-w-2xl">
+                                    <p className="text-xs sm:text-sm text-neutral-500 leading-relaxed font-light max-w-2xl">
                                         Para inmobiliarias, empresas de ingeniería o consultoras de alto ticket. Transforma visitas anónimas en prospectos perfilados con presupuesto, plazos y derivación instantánea al WhatsApp del vendedor.
                                     </p>
                                 </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-                                    <div className="p-5 bg-neutral-50 rounded-2xl border border-neutral-100 space-y-2">
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 pt-2">
+                                    <div className="p-4 sm:p-5 bg-neutral-50 rounded-2xl border border-neutral-100 space-y-2">
                                         <Building2 className="w-5 h-5 text-neutral-800" />
                                         <h4 className="text-sm font-bold text-black">Web Showcase & Cotizador</h4>
                                         <p className="text-xs text-neutral-500 leading-relaxed font-light">
                                             Catálogo de propiedades o servicios técnicos con calculador interactivo de presupuesto y descarga de brochure.
                                         </p>
                                     </div>
-                                    <div className="p-5 bg-neutral-50 rounded-2xl border border-neutral-100 space-y-2">
+                                    <div className="p-4 sm:p-5 bg-neutral-50 rounded-2xl border border-neutral-100 space-y-2">
                                         <Bot className="w-5 h-5 text-emerald-600" />
                                         <h4 className="text-sm font-bold text-black">Calificación IA de Leads</h4>
                                         <p className="text-xs text-neutral-500 leading-relaxed font-light">
                                             Pregunta requerimiento técnico y presupuesto. Si el lead es calificado, alerta al celular del vendedor en 3 segundos.
                                         </p>
                                     </div>
-                                    <div className="p-5 bg-neutral-50 rounded-2xl border border-neutral-100 space-y-2">
+                                    <div className="p-4 sm:p-5 bg-neutral-50 rounded-2xl border border-neutral-100 space-y-2">
                                         <Layers className="w-5 h-5 text-neutral-800" />
                                         <h4 className="text-sm font-bold text-black">CRM & Envío de Brochures</h4>
                                         <p className="text-xs text-neutral-500 leading-relaxed font-light">
@@ -748,10 +754,10 @@ export default function Home() {
                                     </div>
                                 </div>
 
-                                <div className="pt-4 flex flex-wrap items-center gap-4 border-t border-neutral-100">
+                                <div className="pt-4 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 border-t border-neutral-100">
                                     <button 
                                         onClick={() => handleSelectSystemForQuote("Servicios B2B & Inmobiliaria")}
-                                        className="px-6 py-3 bg-black text-white text-xs font-mono uppercase tracking-wider rounded-xl hover:bg-neutral-800 transition-colors font-bold"
+                                        className="w-full sm:w-auto px-6 py-3.5 sm:py-3 bg-black text-white text-xs font-mono uppercase tracking-wider rounded-xl hover:bg-neutral-800 transition-colors font-bold text-center"
                                     >
                                         Cotizar Sistema B2B
                                     </button>
@@ -762,21 +768,21 @@ export default function Home() {
                 </section>
 
                 {/* 5. SECCIÓN: LOS 5 MÓDULOS DEL SISTEMA OPERATIVO CON MOCKUPS VISUALES */}
-                <section id="modulos" className="w-full max-w-5xl mx-auto px-4 py-24 space-y-16 border-t border-neutral-100">
-                    <div className="space-y-4 max-w-3xl">
+                <section id="modulos" className="w-full max-w-5xl mx-auto px-4 py-16 sm:py-24 space-y-10 sm:space-y-16 border-t border-neutral-100">
+                    <div className="space-y-3 sm:space-y-4 max-w-3xl">
                         <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 font-bold">ARQUITECTURA DE SOFTWARE</span>
-                        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
                             Cinco módulos independientes.<br />
                             <span className="text-neutral-400 font-semibold">Diseñados para comunicarse sin fricción.</span>
                         </h2>
-                        <p className="text-base text-neutral-500 leading-relaxed font-light pt-2 max-w-2xl">
+                        <p className="text-sm sm:text-base text-neutral-500 leading-relaxed font-light pt-1 sm:pt-2 max-w-2xl">
                             Puedes implementar la solución completa o integrar módulos específicos sobre lo que tu empresa ya utiliza.
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
                         {/* MÓDULO 1 */}
-                        <div className="p-6 border border-neutral-200/80 rounded-2xl bg-white space-y-4 hover:border-black transition-colors flex flex-col justify-between shadow-sm">
+                        <div className="p-5 sm:p-6 border border-neutral-200/80 rounded-2xl bg-white space-y-4 hover:border-black transition-colors flex flex-col justify-between shadow-sm">
                             <div className="space-y-3">
                                 <div className="w-full h-36 rounded-xl overflow-hidden bg-neutral-100 border border-neutral-200">
                                     <img src="/images/mod2_web.png" alt="Web Next.js" className="w-full h-full object-cover" />
@@ -791,7 +797,7 @@ export default function Home() {
                         </div>
 
                         {/* MÓDULO 2 */}
-                        <div className="p-6 border border-neutral-200/80 rounded-2xl bg-white space-y-4 hover:border-black transition-colors flex flex-col justify-between shadow-sm">
+                        <div className="p-5 sm:p-6 border border-neutral-200/80 rounded-2xl bg-white space-y-4 hover:border-black transition-colors flex flex-col justify-between shadow-sm">
                             <div className="space-y-3">
                                 <div className="w-full h-36 rounded-xl overflow-hidden bg-neutral-100 border border-neutral-200">
                                     <img src="/images/mod1_whatsapp.png" alt="Asistente WhatsApp IA" className="w-full h-full object-cover" />
@@ -806,7 +812,7 @@ export default function Home() {
                         </div>
 
                         {/* MÓDULO 3 */}
-                        <div className="p-6 border border-neutral-200/80 rounded-2xl bg-white space-y-4 hover:border-black transition-colors flex flex-col justify-between shadow-sm">
+                        <div className="p-5 sm:p-6 border border-neutral-200/80 rounded-2xl bg-white space-y-4 hover:border-black transition-colors flex flex-col justify-between shadow-sm">
                             <div className="space-y-3">
                                 <div className="w-full h-36 rounded-xl overflow-hidden bg-neutral-100 border border-neutral-200">
                                     <img src="/images/mod3_webpay.png" alt="Webpay y Pagos" className="w-full h-full object-cover" />
@@ -821,7 +827,7 @@ export default function Home() {
                         </div>
 
                         {/* MÓDULO 4 */}
-                        <div className="p-6 border border-neutral-200/80 rounded-2xl bg-white space-y-4 hover:border-black transition-colors flex flex-col justify-between shadow-sm">
+                        <div className="p-5 sm:p-6 border border-neutral-200/80 rounded-2xl bg-white space-y-4 hover:border-black transition-colors flex flex-col justify-between shadow-sm">
                             <div className="space-y-3">
                                 <div className="w-full h-36 rounded-xl overflow-hidden bg-neutral-100 border border-neutral-200">
                                     <img src="/images/mod5_pos.png" alt="ERP y POS" className="w-full h-full object-cover" />
@@ -836,7 +842,7 @@ export default function Home() {
                         </div>
 
                         {/* MÓDULO 5 */}
-                        <div className="p-6 border border-neutral-200/80 rounded-2xl bg-white space-y-4 hover:border-black transition-colors flex flex-col justify-between shadow-sm">
+                        <div className="p-5 sm:p-6 border border-neutral-200/80 rounded-2xl bg-white space-y-4 hover:border-black transition-colors flex flex-col justify-between shadow-sm">
                             <div className="space-y-3">
                                 <div className="w-full h-36 rounded-xl overflow-hidden bg-neutral-100 border border-neutral-200">
                                     <img src="/images/mod4_capi.png" alt="Meta CAPI y SEO" className="w-full h-full object-cover" />
@@ -851,7 +857,7 @@ export default function Home() {
                         </div>
 
                         {/* RESUMEN LLAVE EN MANO */}
-                        <div className="p-6 border border-neutral-200/80 rounded-2xl bg-black text-white space-y-4 flex flex-col justify-between shadow-md">
+                        <div className="p-5 sm:p-6 border border-neutral-200/80 rounded-2xl bg-black text-white space-y-4 flex flex-col justify-between shadow-md">
                             <div className="space-y-3">
                                 <span className="text-xs font-mono text-neutral-400 block font-bold">GARANTÍA TOTAL</span>
                                 <h3 className="text-base font-bold text-white">¿Cuánto tarda la entrega?</h3>
@@ -874,13 +880,13 @@ export default function Home() {
 
                 {/* 6. SECCIÓN: LA OPERACIÓN VIVA (MAPA DE METRO) */}
                 <section className="w-full border-t border-neutral-100">
-                    <div className="w-full max-w-5xl mx-auto px-4 pt-16 md:pt-24 pb-4 flex flex-col items-start">
-                        <div className="text-left max-w-2xl mb-4 md:mb-8 space-y-4">
+                    <div className="w-full max-w-5xl mx-auto px-4 pt-14 sm:pt-20 md:pt-24 pb-4 flex flex-col items-start">
+                        <div className="text-left max-w-2xl mb-4 md:mb-8 space-y-3 sm:space-y-4">
                             <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 font-bold">Flujo Operativo Automatizado</span>
-                            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
+                            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
                                 Imagina que cada acción desencadena la siguiente.
                             </h2>
-                            <p className="text-base text-neutral-500 max-w-2xl leading-relaxed font-light pt-2">
+                            <p className="text-sm sm:text-base text-neutral-500 max-w-2xl leading-relaxed font-light pt-1 sm:pt-2">
                                 Sin copiar información a mano. Sin planillas dispersas. Sin depender de que alguien recuerde enviar el recordatorio.
                             </p>
                         </div>
@@ -889,15 +895,15 @@ export default function Home() {
                 </section>
 
                 {/* 7. SECCIÓN TARIFARIO Y PRECIOS: EL TARIFARIO MODULAR AVANZADO + EL EFECTO SAAS */}
-                <section id="tarifario" className="w-full max-w-5xl mx-auto px-4 py-20 space-y-12 border-t border-neutral-100">
-                    <div className="space-y-4 max-w-3xl">
+                <section id="tarifario" className="w-full max-w-5xl mx-auto px-4 py-16 sm:py-20 space-y-8 sm:space-y-12 border-t border-neutral-100">
+                    <div className="space-y-3 sm:space-y-4 max-w-3xl">
                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 border border-emerald-200 rounded-md">
-                            <DollarSign className="w-3.5 h-3.5 text-emerald-700" />
-                            <span className="text-[10px] font-mono tracking-widest uppercase text-emerald-800 font-bold">
+                            <DollarSign className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+                            <span className="text-[9px] sm:text-[10px] font-mono tracking-widest uppercase text-emerald-800 font-bold">
                                 TARIFARIO TRANSPARENTE · SETUP ÚNICO + FEE MENSUAL
                             </span>
                         </div>
-                        <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-neutral-900">
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-black tracking-tight text-neutral-900 leading-tight">
                             Tarifario Modular y la Estrategia de Venta (Efecto SaaS).
                         </h2>
                         <p className="text-sm sm:text-base text-neutral-600 leading-relaxed font-light">
@@ -912,7 +918,7 @@ export default function Home() {
                                 <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 block">
                                     SETUP / PAGO ÚNICO POR IMPLEMENTACIÓN LLAVE EN MANO
                                 </span>
-                                <h3 className="text-base font-bold">Desglose Modular de Infraestructura</h3>
+                                <h3 className="text-sm sm:text-base font-bold">Desglose Modular de Infraestructura</h3>
                             </div>
                             <span className="text-xs font-mono bg-neutral-800 px-3 py-1 rounded-full text-emerald-400 font-bold">
                                 Valores en CLP (+IVA)
@@ -921,138 +927,148 @@ export default function Home() {
 
                         <div className="divide-y divide-neutral-200">
                             {/* MÓDULO 1 */}
-                            <div className="p-6 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 hover:bg-neutral-50/60 transition-colors">
+                            <div className="p-5 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6 hover:bg-neutral-50/60 transition-colors">
                                 <div className="space-y-2 max-w-2xl">
                                     <div className="flex items-center gap-2">
-                                        <span className="w-2 h-2 rounded-full bg-blue-600" />
+                                        <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
                                         <span className="text-xs font-mono font-bold uppercase tracking-wider text-neutral-500">
                                             Módulo Estratégico 01
                                         </span>
                                     </div>
-                                    <h4 className="text-lg font-bold text-neutral-900">
+                                    <h4 className="text-base sm:text-lg font-bold text-neutral-900 leading-snug">
                                         Plataforma Web + Pasarelas de Pago + ERP/CRM Interno
                                     </h4>
                                     <p className="text-xs sm:text-sm text-neutral-600 font-light leading-relaxed">
                                         <em>"No es solo una página web, es la matriz de tu negocio. Una sucursal digital que procesa pagos automáticamente y guarda a cada cliente en un CRM interno (base de datos) para que tengas el control total de tu inventario y tus ventas en una sola pantalla."</em>
                                     </p>
                                 </div>
-                                <div className="text-left md:text-right shrink-0 bg-neutral-50 md:bg-transparent p-3 md:p-0 rounded-xl w-full md:w-auto">
-                                    <span className="text-xs font-mono text-neutral-400 uppercase block">Inversión Setup</span>
-                                    <span className="text-lg sm:text-xl font-mono font-bold text-neutral-900 block">
+                                <div className="text-left md:text-right shrink-0 bg-neutral-50 md:bg-transparent p-3 sm:p-4 md:p-0 rounded-xl w-full md:w-auto flex flex-row md:flex-col justify-between md:justify-start items-center md:items-end">
+                                    <div className="text-left md:text-right">
+                                        <span className="text-[10px] sm:text-xs font-mono text-neutral-400 uppercase block">Inversión Setup</span>
+                                        <span className="text-[10px] font-mono text-neutral-500">Pago único</span>
+                                    </div>
+                                    <span className="text-base sm:text-lg md:text-xl font-mono font-bold text-neutral-900 block">
                                         $750.000 - $1.200.000
                                     </span>
-                                    <span className="text-[10px] font-mono text-neutral-500">Pago único</span>
                                 </div>
                             </div>
 
                             {/* MÓDULO 2 */}
-                            <div className="p-6 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 hover:bg-neutral-50/60 transition-colors">
+                            <div className="p-5 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6 hover:bg-neutral-50/60 transition-colors">
                                 <div className="space-y-2 max-w-2xl">
                                     <div className="flex items-center gap-2">
-                                        <span className="w-2 h-2 rounded-full bg-emerald-600" />
+                                        <span className="w-2 h-2 rounded-full bg-emerald-600 shrink-0" />
                                         <span className="text-xs font-mono font-bold uppercase tracking-wider text-neutral-500">
                                             Módulo Estratégico 02
                                         </span>
                                     </div>
-                                    <h4 className="text-lg font-bold text-neutral-900">
+                                    <h4 className="text-base sm:text-lg font-bold text-neutral-900 leading-snug">
                                         Asistente IA Omnicanal + Panel LiveChat Unificado
                                     </h4>
                                     <p className="text-xs sm:text-sm text-neutral-600 font-light leading-relaxed">
                                         <em>"Un recepcionista con Inteligencia Artificial que atiende WhatsApp, Instagram y tu Web al mismo tiempo. Sabe cuándo responder, pero si la venta es compleja, se silencia y te avisa para que tú o tu equipo tomen el control desde un panel de chat unificado."</em>
                                     </p>
                                 </div>
-                                <div className="text-left md:text-right shrink-0 bg-neutral-50 md:bg-transparent p-3 md:p-0 rounded-xl w-full md:w-auto">
-                                    <span className="text-xs font-mono text-neutral-400 uppercase block">Inversión Setup</span>
-                                    <span className="text-lg sm:text-xl font-mono font-bold text-neutral-900 block">
+                                <div className="text-left md:text-right shrink-0 bg-neutral-50 md:bg-transparent p-3 sm:p-4 md:p-0 rounded-xl w-full md:w-auto flex flex-row md:flex-col justify-between md:justify-start items-center md:items-end">
+                                    <div className="text-left md:text-right">
+                                        <span className="text-[10px] sm:text-xs font-mono text-neutral-400 uppercase block">Inversión Setup</span>
+                                        <span className="text-[10px] font-mono text-neutral-500">Pago único</span>
+                                    </div>
+                                    <span className="text-base sm:text-lg md:text-xl font-mono font-bold text-neutral-900 block">
                                         $500.000 - $850.000
                                     </span>
-                                    <span className="text-[10px] font-mono text-neutral-500">Pago único</span>
                                 </div>
                             </div>
 
                             {/* MÓDULO 3 */}
-                            <div className="p-6 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 hover:bg-neutral-50/60 transition-colors">
+                            <div className="p-5 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6 hover:bg-neutral-50/60 transition-colors">
                                 <div className="space-y-2 max-w-2xl">
                                     <div className="flex items-center gap-2">
-                                        <span className="w-2 h-2 rounded-full bg-purple-600" />
+                                        <span className="w-2 h-2 rounded-full bg-purple-600 shrink-0" />
                                         <span className="text-xs font-mono font-bold uppercase tracking-wider text-neutral-500">
                                             Módulo Estratégico 03
                                         </span>
                                     </div>
-                                    <h4 className="text-lg font-bold text-neutral-900">
+                                    <h4 className="text-base sm:text-lg font-bold text-neutral-900 leading-snug">
                                         Motor de Agendamiento Online + CRM de Citas (Anti No-Show)
                                     </h4>
                                     <p className="text-xs sm:text-sm text-neutral-600 font-light leading-relaxed">
                                         <em>"Tu agenda en piloto automático. El cliente reserva su hora, el sistema lo registra en tu CRM y le envía automáticamente las confirmaciones al instante. Adiós a las confusiones de horarios y al trabajo manual."</em>
                                     </p>
                                 </div>
-                                <div className="text-left md:text-right shrink-0 bg-neutral-50 md:bg-transparent p-3 md:p-0 rounded-xl w-full md:w-auto">
-                                    <span className="text-xs font-mono text-neutral-400 uppercase block">Inversión Setup</span>
-                                    <span className="text-lg sm:text-xl font-mono font-bold text-neutral-900 block">
+                                <div className="text-left md:text-right shrink-0 bg-neutral-50 md:bg-transparent p-3 sm:p-4 md:p-0 rounded-xl w-full md:w-auto flex flex-row md:flex-col justify-between md:justify-start items-center md:items-end">
+                                    <div className="text-left md:text-right">
+                                        <span className="text-[10px] sm:text-xs font-mono text-neutral-400 uppercase block">Inversión Setup</span>
+                                        <span className="text-[10px] font-mono text-neutral-500">Pago único</span>
+                                    </div>
+                                    <span className="text-base sm:text-lg md:text-xl font-mono font-bold text-neutral-900 block">
                                         $350.000 - $600.000
                                     </span>
-                                    <span className="text-[10px] font-mono text-neutral-500">Pago único</span>
                                 </div>
                             </div>
 
                             {/* MÓDULO 4 */}
-                            <div className="p-6 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 hover:bg-neutral-50/60 transition-colors">
+                            <div className="p-5 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6 hover:bg-neutral-50/60 transition-colors">
                                 <div className="space-y-2 max-w-2xl">
                                     <div className="flex items-center gap-2">
-                                        <span className="w-2 h-2 rounded-full bg-amber-600" />
+                                        <span className="w-2 h-2 rounded-full bg-amber-600 shrink-0" />
                                         <span className="text-xs font-mono font-bold uppercase tracking-wider text-neutral-500">
                                             Módulo Estratégico 04
                                         </span>
                                     </div>
-                                    <h4 className="text-lg font-bold text-neutral-900">
+                                    <h4 className="text-base sm:text-lg font-bold text-neutral-900 leading-snug">
                                         Motor de Notificaciones 360° (WhatsApp Cloud API + Email SMTP)
                                     </h4>
                                     <p className="text-xs sm:text-sm text-neutral-600 font-light leading-relaxed">
                                         <em>"El sistema nervioso de tu empresa. Persigue a los que abandonan el carrito para recuperar la venta, envía recordatorios automáticos 24 hrs antes para que nadie falte a su cita, y les pide reseñas (feedback) cuando el servicio termina."</em>
                                     </p>
                                 </div>
-                                <div className="text-left md:text-right shrink-0 bg-neutral-50 md:bg-transparent p-3 md:p-0 rounded-xl w-full md:w-auto">
-                                    <span className="text-xs font-mono text-neutral-400 uppercase block">Inversión Setup</span>
-                                    <span className="text-lg sm:text-xl font-mono font-bold text-neutral-900 block">
+                                <div className="text-left md:text-right shrink-0 bg-neutral-50 md:bg-transparent p-3 sm:p-4 md:p-0 rounded-xl w-full md:w-auto flex flex-row md:flex-col justify-between md:justify-start items-center md:items-end">
+                                    <div className="text-left md:text-right">
+                                        <span className="text-[10px] sm:text-xs font-mono text-neutral-400 uppercase block">Inversión Setup</span>
+                                        <span className="text-[10px] font-mono text-neutral-500">Pago único</span>
+                                    </div>
+                                    <span className="text-base sm:text-lg md:text-xl font-mono font-bold text-neutral-900 block">
                                         $350.000 - $550.000
                                     </span>
-                                    <span className="text-[10px] font-mono text-neutral-500">Pago único</span>
                                 </div>
                             </div>
 
                             {/* MÓDULO 5 */}
-                            <div className="p-6 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 hover:bg-neutral-50/60 transition-colors">
+                            <div className="p-5 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6 hover:bg-neutral-50/60 transition-colors">
                                 <div className="space-y-2 max-w-2xl">
                                     <div className="flex items-center gap-2">
-                                        <span className="w-2 h-2 rounded-full bg-red-600" />
+                                        <span className="w-2 h-2 rounded-full bg-red-600 shrink-0" />
                                         <span className="text-xs font-mono font-bold uppercase tracking-wider text-neutral-500">
                                             Módulo Estratégico 05
                                         </span>
                                     </div>
-                                    <h4 className="text-lg font-bold text-neutral-900">
+                                    <h4 className="text-base sm:text-lg font-bold text-neutral-900 leading-snug">
                                         Infraestructura Growth (CAPI Server-Side, GA4, Clarity & Protocolo GEO llms.txt)
                                     </h4>
                                     <p className="text-xs sm:text-sm text-neutral-600 font-light leading-relaxed">
                                         <em>"El cerebro analítico. Conectamos tu negocio a los algoritmos de Meta, TikTok y Google. Optimizamos tu web para que la IA de ChatGPT te recomiende, y grabamos anónimamente cómo navegan tus clientes (mapas de calor) para saber exactamente por qué compran o por qué se van."</em>
                                     </p>
                                 </div>
-                                <div className="text-left md:text-right shrink-0 bg-neutral-50 md:bg-transparent p-3 md:p-0 rounded-xl w-full md:w-auto">
-                                    <span className="text-xs font-mono text-neutral-400 uppercase block">Inversión Setup</span>
-                                    <span className="text-lg sm:text-xl font-mono font-bold text-neutral-900 block">
+                                <div className="text-left md:text-right shrink-0 bg-neutral-50 md:bg-transparent p-3 sm:p-4 md:p-0 rounded-xl w-full md:w-auto flex flex-row md:flex-col justify-between md:justify-start items-center md:items-end">
+                                    <div className="text-left md:text-right">
+                                        <span className="text-[10px] sm:text-xs font-mono text-neutral-400 uppercase block">Inversión Setup</span>
+                                        <span className="text-[10px] font-mono text-neutral-500">Pago único</span>
+                                    </div>
+                                    <span className="text-base sm:text-lg md:text-xl font-mono font-bold text-neutral-900 block">
                                         $400.000 - $700.000
                                     </span>
-                                    <span className="text-[10px] font-mono text-neutral-500">Pago único</span>
                                 </div>
                             </div>
                         </div>
 
                         {/* SUMA TOTAL SUELTO */}
-                        <div className="bg-neutral-100 p-5 sm:p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-t border-neutral-300">
+                        <div className="bg-neutral-100 p-4 sm:p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-3 border-t border-neutral-300">
                             <div>
-                                <span className="text-xs font-mono text-neutral-500 uppercase block">
-                                    Total de la tecnología contratada por módulos sueltos:
+                                <span className="text-[11px] sm:text-xs font-mono text-neutral-500 uppercase block">
+                                    Total contratado por módulos sueltos:
                                 </span>
-                                <span className="text-xl sm:text-2xl font-mono font-bold text-neutral-900 line-through decoration-red-500 decoration-2">
+                                <span className="text-lg sm:text-2xl font-mono font-bold text-neutral-900 line-through decoration-red-500 decoration-2">
                                     $2.350.000 - $3.900.000 CLP
                                 </span>
                             </div>
@@ -1063,42 +1079,48 @@ export default function Home() {
                     </div>
 
                     {/* LA ESTRATEGIA COMERCIAL: EL PAQUETE FUNDADOR */}
-                    <div className="border-2 border-emerald-600 bg-gradient-to-br from-white to-emerald-50/30 rounded-3xl p-6 sm:p-10 shadow-xl space-y-8 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 bg-emerald-600 text-white text-[10px] font-mono uppercase px-4 py-1.5 rounded-bl-xl font-bold tracking-widest flex items-center gap-1.5">
+                    <div className="border-2 border-emerald-600 bg-gradient-to-br from-white to-emerald-50/30 rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 shadow-xl space-y-6 sm:space-y-8 relative overflow-hidden">
+                        <div className="hidden sm:flex absolute top-0 right-0 bg-emerald-600 text-white text-[10px] font-mono uppercase px-4 py-1.5 rounded-bl-xl font-bold tracking-widest items-center gap-1.5">
                             <Sparkles className="w-3.5 h-3.5" />
                             <span>LA ESTRATEGIA DE VENTA // EL PAQUETE FUNDADOR</span>
                         </div>
 
-                        <div className="space-y-4 max-w-3xl">
-                            <span className="text-[10px] font-mono tracking-widest uppercase text-emerald-800 font-bold block">
-                                OPCIÓN RECOMENDADA · DESCUENTO POR ECOSISTEMA
-                            </span>
-                            <h3 className="text-2xl sm:text-4xl font-black text-neutral-900 tracking-tight">
+                        <div className="space-y-3 sm:space-y-4 max-w-3xl">
+                            <div className="flex items-center gap-2">
+                                <div className="sm:hidden inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-600 text-white text-[9px] font-mono uppercase rounded-md font-bold tracking-widest">
+                                    <Sparkles className="w-3 h-3" />
+                                    <span>EL PAQUETE FUNDADOR</span>
+                                </div>
+                                <span className="text-[10px] font-mono tracking-widest uppercase text-emerald-800 font-bold block">
+                                    OPCIÓN RECOMENDADA · DESCUENTO POR ECOSISTEMA
+                                </span>
+                            </div>
+                            <h3 className="text-xl sm:text-3xl md:text-4xl font-black text-neutral-900 tracking-tight leading-tight">
                                 El Paquete Fundador: Todo el Ecosistema en un solo Setup.
                             </h3>
-                            <p className="text-sm sm:text-base text-neutral-700 leading-relaxed font-light">
+                            <p className="text-xs sm:text-base text-neutral-700 leading-relaxed font-light">
                                 Le demostramos al cliente que comprar tecnología suelta es ineficiente y caro. Al contratar la <strong className="font-semibold text-neutral-900">implementación total del Ecosistema Mercenario</strong> en un solo proyecto, el setup se empaqueta con un beneficio directo:
                             </p>
                         </div>
 
                         {/* PRECIO PAQUETE FUNDADOR */}
-                        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center p-6 bg-white rounded-2xl border border-emerald-200 shadow-sm">
+                        <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 items-center p-4 sm:p-6 bg-white rounded-2xl border border-emerald-200 shadow-sm">
                             <div className="md:col-span-7 space-y-2">
-                                <span className="text-xs font-mono text-emerald-700 font-bold uppercase">
+                                <span className="text-[10px] sm:text-xs font-mono text-emerald-700 font-bold uppercase">
                                     SETUP TOTAL EMPAQUETADO (5 MÓDULOS INTEGRADOS)
                                 </span>
-                                <div className="text-3xl sm:text-5xl font-mono font-black text-neutral-900">
-                                    $1.800.000 <span className="text-lg text-neutral-400 font-normal">-</span> $2.200.000 <span className="text-xs font-sans text-neutral-500 font-normal">CLP</span>
+                                <div className="text-2xl sm:text-4xl md:text-5xl font-mono font-black text-neutral-900 tracking-tight leading-none py-1">
+                                    $1.800.000 <span className="text-base sm:text-lg text-neutral-400 font-normal">-</span> $2.200.000 <span className="text-xs font-sans text-neutral-500 font-normal">CLP</span>
                                 </div>
                                 <p className="text-xs text-neutral-600 font-light">
                                     Ahorro directo de hasta <strong>$1.700.000 CLP</strong> respecto a contratar los 5 módulos por separado. Entrega 100% operativa en 14 a 21 días hábiles con garantía.
                                 </p>
                             </div>
 
-                            <div className="md:col-span-5 flex flex-col gap-3">
+                            <div className="md:col-span-5 flex flex-col gap-2.5 sm:gap-3 w-full">
                                 <button
                                     onClick={() => handleSelectSystemForQuote("Ecosistema Completo (Paquete Fundador: $1.8M - $2.2M CLP)")}
-                                    className="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-mono uppercase tracking-wider rounded-xl transition-all font-bold text-center shadow-md flex items-center justify-center gap-2"
+                                    className="w-full px-5 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-mono uppercase tracking-wider rounded-xl transition-all font-bold text-center shadow-md flex items-center justify-center gap-2"
                                 >
                                     <span>Postular al Paquete Fundador</span>
                                     <ArrowRight className="w-4 h-4" />
@@ -1107,7 +1129,7 @@ export default function Home() {
                                     href={`https://wa.me/${WHATSAPP_NUM}?text=Hola,%20me%20interesa%20conversar%20sobre%20el%20Paquete%20Fundador%20del%20Ecosistema%20Completo`}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-center text-xs font-mono text-neutral-600 hover:text-black underline"
+                                    className="text-center text-xs font-mono text-neutral-600 hover:text-black underline py-1"
                                 >
                                     Hablar directamente por WhatsApp
                                 </a>
@@ -1115,7 +1137,7 @@ export default function Home() {
                         </div>
 
                         {/* DETALLE DE LO QUE INCLUYE EL PAQUETE FUNDADOR */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-2 text-xs text-neutral-700">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3 pt-2 text-xs text-neutral-700">
                             <div className="flex items-start gap-2 bg-emerald-50/50 p-3 rounded-xl border border-emerald-100">
                                 <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                                 <span>Sitio Web Next.js a medida autoadministrable (0.8s de carga).</span>
@@ -1144,12 +1166,12 @@ export default function Home() {
                     </div>
 
                     {/* LA MENSUALIDAD JUSTIFICADA */}
-                    <div className="border border-neutral-200 bg-neutral-900 text-white rounded-3xl p-6 sm:p-10 space-y-8 shadow-lg">
-                        <div className="space-y-3 max-w-3xl">
+                    <div className="border border-neutral-200 bg-neutral-900 text-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 space-y-6 sm:space-y-8 shadow-lg">
+                        <div className="space-y-2 sm:space-y-3 max-w-3xl">
                             <span className="text-[10px] font-mono tracking-widest uppercase text-emerald-400 font-bold block">
                                 MANTENIMIENTO OPERATIVO Y ACOMPAÑAMIENTO MENSUAL
                             </span>
-                            <h3 className="text-2xl sm:text-4xl font-bold tracking-tight text-white">
+                            <h3 className="text-xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white leading-tight">
                                 La Mensualidad Justificada: $150.000 a $250.000 CLP / mes.
                             </h3>
                             <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-light">
@@ -1158,8 +1180,8 @@ export default function Home() {
                         </div>
 
                         {/* CONTENIDO DEL FEE MENSUAL */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div className="p-5 bg-neutral-800/80 rounded-2xl border border-neutral-700 space-y-2">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+                            <div className="p-4 sm:p-5 bg-neutral-800/80 rounded-2xl border border-neutral-700 space-y-2">
                                 <Cpu className="w-5 h-5 text-emerald-400" />
                                 <h4 className="text-sm font-bold text-white">Nube & Base Postgres</h4>
                                 <p className="text-xs text-neutral-400 font-light leading-relaxed">
@@ -1167,7 +1189,7 @@ export default function Home() {
                                 </p>
                             </div>
 
-                            <div className="p-5 bg-neutral-800/80 rounded-2xl border border-neutral-700 space-y-2">
+                            <div className="p-4 sm:p-5 bg-neutral-800/80 rounded-2xl border border-neutral-700 space-y-2">
                                 <Smartphone className="w-5 h-5 text-emerald-400" />
                                 <h4 className="text-sm font-bold text-white">APIs Oficiales de Meta Cloud</h4>
                                 <p className="text-xs text-neutral-400 font-light leading-relaxed">
@@ -1175,7 +1197,7 @@ export default function Home() {
                                 </p>
                             </div>
 
-                            <div className="p-5 bg-neutral-800/80 rounded-2xl border border-neutral-700 space-y-2">
+                            <div className="p-4 sm:p-5 bg-neutral-800/80 rounded-2xl border border-neutral-700 space-y-2">
                                 <Bot className="w-5 h-5 text-emerald-400" />
                                 <h4 className="text-sm font-bold text-white">Soporte Continuo & IA</h4>
                                 <p className="text-xs text-neutral-400 font-light leading-relaxed">
@@ -1185,13 +1207,13 @@ export default function Home() {
                         </div>
 
                         {/* COMPARATIVA DE COSTOS */}
-                        <div className="p-6 bg-neutral-800 rounded-2xl border border-neutral-700 space-y-4">
+                        <div className="p-4 sm:p-6 bg-neutral-800 rounded-2xl border border-neutral-700 space-y-4">
                             <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs uppercase font-bold">
-                                <TrendingDown className="w-4 h-4" />
+                                <TrendingDown className="w-4 h-4 shrink-0" />
                                 <span>Comparativa de Costos: Humano vs. Infraestructura Mercenario</span>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 text-xs">
                                 <div className="space-y-2 text-neutral-300 border-b md:border-b-0 md:border-r border-neutral-700 pb-4 md:pb-0 md:pr-4">
                                     <span className="font-bold text-red-400 uppercase font-mono block">Operación Tradicional Desconectada:</span>
                                     <ul className="space-y-1 font-light text-neutral-400">
@@ -1210,7 +1232,7 @@ export default function Home() {
                                         <li>• Asistente IA 24/7 sin licencias médicas ni ausencias.</li>
                                         <li>• Agenda y cobro con Webpay en piloto automático.</li>
                                         <li>• Todo unificado en una sola mensualidad transparente.</li>
-                                        <li className="text-emerald-400 font-bold pt-1 border-t border-neutral-700 font-mono text-sm">
+                                        <li className="text-emerald-400 font-bold pt-1 border-t border-neutral-700 font-mono text-xs sm:text-sm">
                                             Fee mensual: $150.000 a $250.000 CLP / mes (Ahorro del 85%)
                                         </li>
                                     </ul>
@@ -1221,13 +1243,13 @@ export default function Home() {
                 </section>
 
                 {/* 8. SECCIÓN: CONECTIVIDAD (INTEGRACIONES OFICIALES) */}
-                <section className="w-full max-w-5xl mx-auto px-4 pt-16 md:pt-24 pb-24 space-y-12 border-t border-neutral-100">
-                    <div className="space-y-4">
+                <section className="w-full max-w-5xl mx-auto px-4 pt-14 sm:pt-20 md:pt-24 pb-16 sm:pb-24 space-y-8 sm:space-y-12 border-t border-neutral-100">
+                    <div className="space-y-3 sm:space-y-4">
                         <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 font-bold">Conectividad Nata</span>
-                        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
                             Integrado con las herramientas que ya usas en Chile.
                         </h2>
-                        <p className="text-base text-neutral-500 max-w-2xl leading-relaxed font-light pt-4">
+                        <p className="text-sm sm:text-base text-neutral-500 max-w-2xl leading-relaxed font-light pt-1 sm:pt-4">
                             No necesitas cambiar tus cuentas bancarias ni tus proveedores. Mercenario se conecta sobre tu infraestructura actual.
                         </p>
                     </div>
@@ -1238,7 +1260,7 @@ export default function Home() {
                             {Array.from({ length: 20 }, (_, i) => `/imagenes/logos herramientas con fondo/${i + 1}.png`)
                                 .concat(Array.from({ length: 20 }, (_, i) => `/imagenes/logos herramientas con fondo/${i + 1}.png`))
                                 .map((src, idx) => (
-                                    <div key={idx} className="w-32 h-18 md:w-40 md:h-22 flex items-center justify-center border border-neutral-100 rounded-xl bg-white/80 backdrop-blur-sm grayscale opacity-50 hover:grayscale-0 hover:opacity-100 hover:border-neutral-300 hover:shadow-sm transition-all duration-300 select-none p-3">
+                                    <div key={idx} className="w-28 h-16 sm:w-36 sm:h-20 md:w-40 md:h-22 flex items-center justify-center border border-neutral-100 rounded-xl bg-white/80 backdrop-blur-sm grayscale opacity-50 hover:grayscale-0 hover:opacity-100 hover:border-neutral-300 hover:shadow-sm transition-all duration-300 select-none p-3">
                                         <img src={src} alt={`Logo ${idx + 1}`} className="w-full h-full object-contain" />
                                     </div>
                                 ))
@@ -1254,29 +1276,29 @@ export default function Home() {
                     whileInView={{ opacity: 1 }} 
                     viewport={{ once: true }} 
                     transition={{ duration: 0.8 }} 
-                    className="w-full max-w-5xl mx-auto px-4 py-20 border-t border-neutral-100"
+                    className="w-full max-w-5xl mx-auto px-4 py-16 sm:py-20 border-t border-neutral-100"
                 >
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
-                        <div className="md:col-span-5 space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+                        <div className="md:col-span-5 space-y-5 sm:space-y-6">
                             <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 font-bold">CONTACTO & DIAGNÓSTICO</span>
-                            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
+                            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
                                 Agendemos una sesión técnica de 20 minutos.
                             </h2>
-                            <p className="text-sm text-neutral-500 font-light leading-relaxed">
+                            <p className="text-xs sm:text-sm text-neutral-500 font-light leading-relaxed">
                                 Analizaremos tu operación actual, detectaremos dónde se caen las ventas y te entregaremos una propuesta formal aterrizada al tarifario oficial de Mercenario.
                             </p>
                             
-                            <div className="space-y-4 pt-4 border-t border-neutral-100 text-xs text-neutral-600 font-light">
+                            <div className="space-y-3 sm:space-y-4 pt-4 border-t border-neutral-100 text-xs text-neutral-600 font-light">
                                 <div className="flex items-center gap-3">
-                                    <Clock className="w-4 h-4 text-neutral-400" />
+                                    <Clock className="w-4 h-4 text-neutral-400 shrink-0" />
                                     <span>Tiempo de implementación: 14 a 21 días hábiles</span>
                                 </div>
                                 <div className="flex items-center gap-3">
-                                    <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                                    <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
                                     <span>Garantía de operatividad y capacitación incluida</span>
                                 </div>
                                 <div className="flex items-center gap-3">
-                                    <DollarSign className="w-4 h-4 text-neutral-400" />
+                                    <DollarSign className="w-4 h-4 text-neutral-400 shrink-0" />
                                     <span>Sin costos sorpresa ni comisiones intermedias</span>
                                 </div>
                             </div>
@@ -1286,16 +1308,16 @@ export default function Home() {
                                     href={`https://wa.me/${WHATSAPP_NUM}?text=Hola,%20quisiera%20agendar%20un%20diagn%C3%B3stico%20operativo%20para%20mi%20empresa`}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-mono uppercase tracking-wider font-bold transition-colors"
+                                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 sm:py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-mono uppercase tracking-wider font-bold transition-colors text-center shadow-sm"
                                 >
-                                    <Smartphone className="w-4 h-4" />
+                                    <Smartphone className="w-4 h-4 shrink-0" />
                                     <span>Chatear por WhatsApp Directo</span>
                                 </a>
                             </div>
                         </div>
 
                         {/* Formulario */}
-                        <div className="md:col-span-7 bg-white p-8 md:p-10 border border-neutral-200 rounded-3xl shadow-sm">
+                        <div className="md:col-span-7 bg-white p-5 sm:p-8 md:p-10 border border-neutral-200 rounded-2xl sm:rounded-3xl shadow-sm">
                             {formStatus === "success" ? (
                                 <motion.div 
                                     initial={{ opacity: 0, scale: 0.95 }}
@@ -1311,7 +1333,7 @@ export default function Home() {
                                     </p>
                                 </motion.div>
                             ) : (
-                                <form onSubmit={handleFormSubmit} className="space-y-6">
+                                <form onSubmit={handleFormSubmit} className="space-y-4 sm:space-y-6">
                                     {/* Honeypot field */}
                                     <input 
                                         type="text" 
@@ -1325,7 +1347,7 @@ export default function Home() {
 
                                     <div className="space-y-4">
                                         <div className="space-y-1.5">
-                                            <label className="text-[11px] font-mono uppercase tracking-wider text-neutral-500">
+                                            <label className="text-[11px] font-mono uppercase tracking-wider text-neutral-500 block">
                                                 Nombre o Empresa *
                                             </label>
                                             <input 
@@ -1334,13 +1356,13 @@ export default function Home() {
                                                 placeholder="Ej. Matías Silva - Clínica / Marca X"
                                                 value={formData.name}
                                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                                className="w-full px-4 py-3 border border-neutral-200 rounded-xl text-xs focus:outline-none focus:border-black transition-colors"
+                                                className="w-full px-4 py-3 border border-neutral-200 rounded-xl text-sm sm:text-xs focus:outline-none focus:border-black transition-colors"
                                             />
                                         </div>
 
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <div className="space-y-1.5">
-                                                <label className="text-[11px] font-mono uppercase tracking-wider text-neutral-500">
+                                                <label className="text-[11px] font-mono uppercase tracking-wider text-neutral-500 block">
                                                     Correo Electrónico *
                                                 </label>
                                                 <input 
@@ -1349,11 +1371,11 @@ export default function Home() {
                                                     placeholder="contacto@tuempresa.cl"
                                                     value={formData.email}
                                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                                    className="w-full px-4 py-3 border border-neutral-200 rounded-xl text-xs focus:outline-none focus:border-black transition-colors"
+                                                    className="w-full px-4 py-3 border border-neutral-200 rounded-xl text-sm sm:text-xs focus:outline-none focus:border-black transition-colors"
                                                 />
                                             </div>
                                             <div className="space-y-1.5">
-                                                <label className="text-[11px] font-mono uppercase tracking-wider text-neutral-500">
+                                                <label className="text-[11px] font-mono uppercase tracking-wider text-neutral-500 block">
                                                     Teléfono / WhatsApp *
                                                 </label>
                                                 <input 
@@ -1362,19 +1384,19 @@ export default function Home() {
                                                     placeholder="+56 9 1234 5678"
                                                     value={formData.phone}
                                                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                                    className="w-full px-4 py-3 border border-neutral-200 rounded-xl text-xs focus:outline-none focus:border-black transition-colors"
+                                                    className="w-full px-4 py-3 border border-neutral-200 rounded-xl text-sm sm:text-xs focus:outline-none focus:border-black transition-colors"
                                                 />
                                             </div>
                                         </div>
 
                                         <div className="space-y-1.5">
-                                            <label className="text-[11px] font-mono uppercase tracking-wider text-neutral-500">
+                                            <label className="text-[11px] font-mono uppercase tracking-wider text-neutral-500 block">
                                                 Opción o Paquete de Interés *
                                             </label>
                                             <select 
                                                 value={formData.system}
                                                 onChange={(e) => setFormData({ ...formData, system: e.target.value })}
-                                                className="w-full px-4 py-3 border border-neutral-200 rounded-xl text-xs focus:outline-none focus:border-black transition-colors bg-white"
+                                                className="w-full px-4 py-3 border border-neutral-200 rounded-xl text-sm sm:text-xs focus:outline-none focus:border-black transition-colors bg-white"
                                             >
                                                 <option value="Paquete Fundador (Ecosistema Completo: $1.8M - $2.2M CLP)">★ Paquete Fundador (Ecosistema Completo: $1.8M - $2.2M CLP)</option>
                                                 <option value="Módulo 1: Plataforma Web + Pagos + ERP ($750K - $1.2M CLP)">Módulo 1: Plataforma Web + Pagos + ERP ($750K - $1.2M CLP)</option>
@@ -1389,7 +1411,7 @@ export default function Home() {
                                         </div>
 
                                         <div className="space-y-1.5">
-                                            <label className="text-[11px] font-mono uppercase tracking-wider text-neutral-500">
+                                            <label className="text-[11px] font-mono uppercase tracking-wider text-neutral-500 block">
                                                 ¿Cuál es el mayor dolor en tu operación hoy?
                                             </label>
                                             <textarea 
@@ -1397,7 +1419,7 @@ export default function Home() {
                                                 placeholder="Ej. Perdemos ventas fuera de horario, la gente no asiste a sus citas, o tenemos desorden en las planillas de inventario..."
                                                 value={formData.challenge}
                                                 onChange={(e) => setFormData({ ...formData, challenge: e.target.value })}
-                                                className="w-full px-4 py-3 border border-neutral-200 rounded-xl text-xs focus:outline-none focus:border-black transition-colors resize-none"
+                                                className="w-full px-4 py-3 border border-neutral-200 rounded-xl text-sm sm:text-xs focus:outline-none focus:border-black transition-colors resize-none"
                                             />
                                         </div>
                                     </div>
@@ -1427,14 +1449,14 @@ export default function Home() {
             </main>
 
             {/* Footer */}
-            <footer className="w-full border-t border-neutral-100 bg-[#FCFCFC] py-12 px-6">
-                <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-[11px] font-mono text-neutral-400">
-                    <div className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 bg-red-600 rounded-full" />
+            <footer className="w-full border-t border-neutral-100 bg-[#FCFCFC] py-10 sm:py-12 px-4 sm:px-6">
+                <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-[11px] font-mono text-neutral-400 text-center md:text-left">
+                    <div className="flex items-center gap-2 justify-center md:justify-start">
+                        <div className="w-1.5 h-1.5 bg-red-600 rounded-full shrink-0" />
                         <span className="text-black font-semibold tracking-wider uppercase">MERCENARIO // INFRAESTRUCTURA OPERATIVA & SITIOS WEB</span>
                     </div>
                     
-                    <div className="flex items-center gap-6">
+                    <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-center">
                         <a href="#demostracion-weke" className="hover:text-black transition-colors">Caso WEKE</a>
                         <a href="#sistemas" className="hover:text-black transition-colors">Sistemas</a>
                         <a href="#modulos" className="hover:text-black transition-colors">Módulos</a>
@@ -1449,12 +1471,26 @@ export default function Home() {
             </footer>
 
             {/* Widget Flotante de WhatsApp IA */}
-            <div className="fixed bottom-6 right-6 z-50">
+            <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
+                {/* Mobile: Botón redondo compacto */}
                 <a
                     href={`https://wa.me/${WHATSAPP_NUM}?text=Hola,%20estoy%20viendo%20la%20web%20de%20Mercenario%20y%20quiero%20hacer%20una%20consulta`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2.5 px-4 py-2.5 bg-neutral-900 hover:bg-black text-white text-xs font-mono rounded-full shadow-2xl border border-neutral-700 transition-all hover:scale-105 group"
+                    aria-label="Contactar Asistente IA por WhatsApp"
+                    className="sm:hidden flex items-center justify-center w-12 h-12 bg-neutral-900 text-white rounded-full shadow-2xl border border-neutral-700 relative group active:scale-95 transition-transform"
+                >
+                    <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-emerald-500 rounded-full animate-ping" />
+                    <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-emerald-500 rounded-full" />
+                    <Bot className="w-5 h-5 text-emerald-400" />
+                </a>
+
+                {/* Tablet / Desktop: Pill expandida */}
+                <a
+                    href={`https://wa.me/${WHATSAPP_NUM}?text=Hola,%20estoy%20viendo%20la%20web%20de%20Mercenario%20y%20quiero%20hacer%20una%20consulta`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hidden sm:flex items-center gap-2.5 px-4 py-2.5 bg-neutral-900 hover:bg-black text-white text-xs font-mono rounded-full shadow-2xl border border-neutral-700 transition-all hover:scale-105 group"
                 >
                     <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
                     <span>Asistente IA en WhatsApp</span>

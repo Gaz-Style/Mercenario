@@ -14,28 +14,28 @@ function StationRow({ stage }: { stage: typeof STAGES[0] }) {
         <motion.div 
             initial="inactive"
             whileInView="active"
-            viewport={{ margin: "-49% 0px -49% 0px" }} // Only active exactly in the center 2% of the screen
-            className="relative w-full flex items-center group py-4 md:py-6"
+            viewport={{ margin: "-20% 0px -20% 0px" }} // Activación fluida en móviles y desktop
+            className="relative w-full flex items-center group py-3 md:py-6"
         >
             {/* The Dot */}
             <motion.div 
                 variants={{
                     inactive: { backgroundColor: "#d4d4d8", scale: 1 },
-                    active: { backgroundColor: "#000000", scale: 1.5 }
+                    active: { backgroundColor: "#000000", scale: 1.4 }
                 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                className="absolute left-6 md:left-12 w-1.5 h-1.5 rounded-full -translate-x-1/2 z-10"
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="absolute left-4 sm:left-6 md:left-12 w-2 h-2 rounded-full -translate-x-1/2 z-10"
             />
 
             {/* Single Column: Story */}
-            <div className="pl-16 md:pl-28 pr-4 w-full">
+            <div className="pl-10 sm:pl-16 md:pl-28 pr-2 sm:pr-4 w-full">
                 <motion.p 
                     variants={{
-                        inactive: { color: "#d4d4d8" }, // CSS color transition is cheap if triggered discreetly
+                        inactive: { color: "#a1a1aa" },
                         active: { color: "#000000" }
                     }}
-                    transition={{ duration: 0.5 }}
-                    className="text-base md:text-2xl font-light leading-snug"
+                    transition={{ duration: 0.4 }}
+                    className="text-sm sm:text-base md:text-2xl font-light leading-snug"
                 >
                     {stage.text}
                 </motion.p>
@@ -47,14 +47,14 @@ function StationRow({ stage }: { stage: typeof STAGES[0] }) {
 
 export default function OperationMap() {
     return (
-        <section className="w-full bg-white pb-16 md:pb-24 pt-8 md:pt-16 font-sans selection:bg-black selection:text-white">
+        <section className="w-full bg-white pb-14 md:pb-24 pt-6 md:pt-16 font-sans selection:bg-black selection:text-white">
             <div className="max-w-5xl mx-auto px-4 md:px-8">
                 
                 {/* Track Container */}
                 <div className="relative w-full flex flex-col">
                     
                     {/* The Thin Vertical Line */}
-                    <div className="absolute top-0 bottom-0 left-6 md:left-12 w-[1px] bg-neutral-100 -translate-x-1/2" />
+                    <div className="absolute top-0 bottom-0 left-4 sm:left-6 md:left-12 w-[1px] bg-neutral-200 -translate-x-1/2" />
 
                     {/* The Stations (Driven purely by IntersectionObserver) */}
                     {STAGES.map((stage, i) => (
@@ -66,11 +66,11 @@ export default function OperationMap() {
                 <motion.div 
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-20% 0px" }}
-                    transition={{ duration: 0.8 }}
-                    className="mt-8 md:mt-12 max-w-3xl text-left pl-16 md:pl-28 pr-4"
+                    viewport={{ once: true, margin: "-10% 0px" }}
+                    transition={{ duration: 0.6 }}
+                    className="mt-6 md:mt-12 max-w-3xl text-left pl-10 sm:pl-16 md:pl-28 pr-2 sm:pr-4"
                 >
-                    <p className="text-base md:text-xl font-light text-neutral-500 leading-relaxed max-w-2xl">
+                    <p className="text-sm sm:text-base md:text-xl font-light text-neutral-500 leading-relaxed max-w-2xl">
                         Desde la reserva hasta la reseña final, toda la operación se ejecutó en segundo plano <span className="font-semibold text-black">sin que tocaras un solo botón.</span>
                     </p>
                 </motion.div>

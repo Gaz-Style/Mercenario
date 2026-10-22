@@ -133,126 +133,229 @@ export default function HeroV2() {
     const act6Opacity = useTransform(smoothProgress, [0.85, 0.95], [0, 1]);
 
     return (
-        <section ref={containerRef} className="relative w-full h-[300dvh] bg-black">
-            
-            {/* The Sticky Viewport */}
-            <motion.div 
-                className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center origin-bottom bg-black"
-            >
-                
-                {/* --- VIDEO LAYER --- */}
-                <div className="absolute inset-0 z-0 bg-black" ref={videoContainerRef}>
-                    <div dangerouslySetInnerHTML={{ __html: `
-                        <video
-                            src="/videos/hero-scrub6.mp4"
-                            autoplay
-                            loop
-                            muted
-                            playsinline
-                            webkit-playsinline
-                            disablepictureinpicture
-                            disableremoteplayback
-                            preload="auto"
-                            class="object-cover object-center w-full h-full"
-                            style="pointer-events: none; -webkit-media-controls-overlay-enclosure: none;"
-                        ></video>
-                    `}} className="w-full h-full" />
-                    {/* Cinematic Dark Overlay for Text Legibility (Constant 50% opacity) */}
-                    <div className="absolute inset-0 bg-black/50 pointer-events-none" />
+        <>
+            {/* ── 1. EXPERIENCIA MÓVIL DEDICADA (< 768px): RÁPIDA, SIN BLOQUEO DE SCROLL Y CERO CORTES ── */}
+            <div className="md:hidden w-full bg-black text-white relative overflow-hidden flex flex-col">
+                {/* Video de Fondo Atmosférico Autoplay */}
+                <div className="absolute inset-0 z-0">
+                    <video
+                        src="/videos/hero-scrub6.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        webkit-playsinline="true"
+                        className="w-full h-full object-cover opacity-40"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black pointer-events-none" />
                 </div>
 
-                {/* --- NARRATIVE OVERLAYS --- */}
+                {/* Contenido Hero Móvil */}
+                <div className="relative z-10 w-full px-5 pt-28 pb-14 flex flex-col space-y-6">
+                    {/* Badge */}
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 w-max">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                        <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-200 font-bold">
+                            MERCENARIO // SISTEMAS OPERATIVOS
+                        </span>
+                    </div>
 
-                {/* Initial Instruction */}
-                <motion.div style={{ opacity: promptOpacity }} className="absolute bottom-16 inset-x-0 z-10 flex flex-col items-center gap-2 pointer-events-none">
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-300 drop-shadow-md">Desliza para avanzar</span>
-                    <div className="w-[1px] h-8 bg-neutral-400 animate-pulse" />
-                </motion.div>
+                    {/* Headline */}
+                    <div className="space-y-3">
+                        <span className="text-xs font-mono uppercase tracking-widest text-neutral-400 font-bold block">
+                            No falta talento. Falta operación.
+                        </span>
+                        <h1 className="text-3xl sm:text-4xl font-black tracking-tight leading-[1.15] text-white">
+                            Concéntrate en tu talento. <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">
+                                Nosotros conectamos la operación.
+                            </span>
+                        </h1>
+                        <p className="text-sm text-neutral-300 font-light leading-relaxed pt-1">
+                            Ventas con IA en WhatsApp 24/7, Sitio Web Next.js ultrarrápido, cobro Webpay y ERP sincronizado en un solo lugar.
+                        </p>
+                    </div>
 
-                {/* Act 3: Question */}
-                <motion.div style={{ opacity: questionOpacity, y: questionY }} className="absolute inset-0 z-20 flex flex-col items-center justify-center px-4 pointer-events-none">
-                    <h3 className="text-2xl md:text-4xl font-light text-white tracking-wide text-center drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
-                        ¿En qué ocupaste realmente tu tiempo?
-                    </h3>
-                </motion.div>
+                    {/* Botones de Acción Móviles (Touch Friendly) */}
+                    <div className="flex flex-col gap-3 pt-2">
+                        <a 
+                            href="#sistemas" 
+                            className="w-full py-3.5 px-5 bg-white text-black text-xs font-bold uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 shadow-lg active:scale-98 transition-transform"
+                        >
+                            <span>Ver Sistemas Llave en Mano</span>
+                            <span className="text-sm">→</span>
+                        </a>
+                        <a 
+                            href="/tienda" 
+                            className="w-full py-3.5 px-5 bg-white/10 hover:bg-white/15 border border-white/20 text-white text-xs font-bold uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 backdrop-blur-sm active:scale-98 transition-transform"
+                        >
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                            <span>Probar Tienda Demo (WEKE)</span>
+                        </a>
+                    </div>
 
-                {/* Act 4: The Break */}
-                <motion.div style={{ opacity: breakOpacity, scale: breakScale }} className="absolute inset-0 z-30 flex flex-col items-center justify-start pt-[32vh] md:pt-[25vh] px-4 pointer-events-none">
-                    <span className="text-xs md:text-base font-semibold tracking-[0.2em] uppercase text-neutral-300 mb-4 md:mb-6 drop-shadow-md">
-                        No falta talento.
+                    {/* Chips de Características */}
+                    <div className="grid grid-cols-2 gap-2 pt-2 text-[11px] font-mono text-neutral-300">
+                        <div className="p-2.5 bg-white/5 border border-white/10 rounded-lg flex items-center gap-2">
+                            <span className="text-emerald-400 font-bold">⚡</span>
+                            <span>Carga en 0.8s</span>
+                        </div>
+                        <div className="p-2.5 bg-white/5 border border-white/10 rounded-lg flex items-center gap-2">
+                            <span className="text-emerald-400 font-bold">🤖</span>
+                            <span>WhatsApp IA 24/7</span>
+                        </div>
+                        <div className="p-2.5 bg-white/5 border border-white/10 rounded-lg flex items-center gap-2">
+                            <span className="text-emerald-400 font-bold">💳</span>
+                            <span>Webpay Plus</span>
+                        </div>
+                        <div className="p-2.5 bg-white/5 border border-white/10 rounded-lg flex items-center gap-2">
+                            <span className="text-emerald-400 font-bold">📦</span>
+                            <span>POS & ERP Vivo</span>
+                        </div>
+                    </div>
+                </div>
+
+                {/* El Enfoque (Móvil) */}
+                <div className="relative z-10 w-full bg-white text-black px-5 py-12 space-y-6 border-t border-neutral-200">
+                    <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 font-bold block">
+                        EL ENFOQUE ESTRATÉGICO
                     </span>
-                    <h2 className="text-[8vw] sm:text-5xl md:text-7xl lg:text-[6.5rem] font-bold tracking-tighter text-white text-center leading-[1.1] drop-shadow-[0_6px_20px_rgba(0,0,0,0.8)]">
-                        FALTA OPERACIÓN.
+                    <h2 className="text-2xl font-bold tracking-tight text-neutral-900 leading-snug">
+                        No necesitas más herramientas. <br />
+                        <span className="text-emerald-700">Necesitas que trabajen juntas.</span>
                     </h2>
-                </motion.div>
+                    <div className="space-y-3 text-xs text-neutral-600 font-light leading-relaxed">
+                        <p>
+                            Hoy probablemente tu empresa ya utiliza varias soluciones sueltas: una para agendar, otra para cobrar, planillas de Excel y WhatsApp personal.
+                        </p>
+                        <p className="font-semibold text-neutral-900 bg-neutral-50 p-3 rounded-xl border border-neutral-200">
+                            El problema no son las herramientas. El problema es que ninguna se comunica con las demás. Cuando las unificamos en un solo sistema, tu negocio opera en piloto automático.
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-                {/* Act 5: Brand Reveal */}
-                <motion.div style={{ opacity: brandOpacity, y: brandY }} className="absolute inset-0 z-40 flex flex-col items-center justify-start pt-[26vh] md:pt-[22vh] px-4 pointer-events-none w-full">
-                    <h1 className="text-[9vw] sm:text-6xl md:text-8xl lg:text-[8rem] font-bold tracking-[0.1em] text-white uppercase leading-none whitespace-nowrap drop-shadow-[0_6px_20px_rgba(0,0,0,0.8)]">
-                        MERCENARIO<span className="text-mercenario-danger">.</span>
-                    </h1>
-                    <div className="w-8 md:w-12 h-[2px] bg-white my-6 md:my-8 drop-shadow-md" />
-                    <p className="text-sm md:text-2xl font-medium text-white tracking-wide text-center drop-shadow-md">
-                        Concéntrate en tu talento. <br className="md:hidden" />
-                        <span className="text-neutral-300 font-light">Nosotros conectamos la operación.</span>
-                    </p>
+            {/* ── 2. EXPERIENCIA DESKTOP (>= 768px): VIDEO SCRUBBING NARRATIVO ── */}
+            <section ref={containerRef} className="hidden md:block relative w-full h-[300dvh] bg-black">
+                
+                {/* The Sticky Viewport */}
+                <motion.div 
+                    className="sticky top-0 w-full h-[100dvh] overflow-hidden flex items-center justify-center origin-bottom bg-black"
+                >
                     
-                    <div className="absolute bottom-12 animate-bounce">
-                        <ChevronDown className="w-6 h-6 text-neutral-400 drop-shadow-md" />
+                    {/* --- VIDEO LAYER --- */}
+                    <div className="absolute inset-0 z-0 bg-black" ref={videoContainerRef}>
+                        <div dangerouslySetInnerHTML={{ __html: `
+                            <video
+                                src="/videos/hero-scrub6.mp4"
+                                autoplay
+                                loop
+                                muted
+                                playsinline
+                                webkit-playsinline
+                                disablepictureinpicture
+                                disableremoteplayback
+                                preload="auto"
+                                class="object-cover object-center w-full h-full"
+                                style="pointer-events: none; -webkit-media-controls-overlay-enclosure: none;"
+                            ></video>
+                        `}} className="w-full h-full" />
+                        <div className="absolute inset-0 bg-black/50 pointer-events-none" />
                     </div>
-                </motion.div>
 
-                {/* Fade to White Cover */}
-                <motion.div style={{ opacity: fadeToWhite }} className="absolute inset-0 z-50 bg-white pointer-events-none" />
+                    {/* --- NARRATIVE OVERLAYS --- */}
 
-                {/* Act 6: The Approach */}
-                <motion.div style={{ opacity: act6Opacity }} className="absolute inset-0 z-50 flex flex-col items-start justify-center bg-white pointer-events-none">
-                    <div className="w-full max-w-5xl mx-auto px-6 md:px-8 space-y-8 text-left pointer-events-auto">
-                        <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">El Enfoque</span>
-                        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
-                            No necesitas más herramientas. <br />
-                            <span className="text-neutral-400 font-semibold">Necesitas que trabajen juntas.</span>
+                    {/* Initial Instruction */}
+                    <motion.div style={{ opacity: promptOpacity }} className="absolute bottom-16 inset-x-0 z-10 flex flex-col items-center gap-2 pointer-events-none">
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-300 drop-shadow-md">Desliza para avanzar</span>
+                        <div className="w-[1px] h-8 bg-neutral-400 animate-pulse" />
+                    </motion.div>
+
+                    {/* Act 3: Question */}
+                    <motion.div style={{ opacity: questionOpacity, y: questionY }} className="absolute inset-0 z-20 flex flex-col items-center justify-center px-4 pointer-events-none">
+                        <h3 className="text-2xl md:text-4xl font-light text-white tracking-wide text-center drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+                            ¿En qué ocupaste realmente tu tiempo?
+                        </h3>
+                    </motion.div>
+
+                    {/* Act 4: The Break */}
+                    <motion.div style={{ opacity: breakOpacity, scale: breakScale }} className="absolute inset-0 z-30 flex flex-col items-center justify-start pt-[25vh] px-4 pointer-events-none">
+                        <span className="text-xs md:text-base font-semibold tracking-[0.2em] uppercase text-neutral-300 mb-4 md:mb-6 drop-shadow-md">
+                            No falta talento.
+                        </span>
+                        <h2 className="text-5xl md:text-7xl lg:text-[6.5rem] font-bold tracking-tighter text-white text-center leading-[1.1] drop-shadow-[0_6px_20px_rgba(0,0,0,0.8)]">
+                            FALTA OPERACIÓN.
                         </h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-neutral-500 font-light text-sm md:text-base leading-relaxed pt-2 text-left">
-                            <div className="space-y-4">
-                                <p>Hoy probablemente tu empresa ya utiliza varias soluciones.</p>
-                                <p>Una para agendar. Otra para cobrar. Otra para emitir documentos. Otra para comunicarte con tus clientes.</p>
-                            </div>
-                            <div className="space-y-4">
-                                <p>El problema nunca fueron las herramientas.</p>
-                                <p className="font-semibold text-black">El problema es que ninguna trabaja con las demás. Cuando comienzan a comunicarse, la operación cambia por completo.</p>
-                            </div>
-                        </div>
+                    </motion.div>
 
-                        {/* Conversion CTAs in Hero */}
-                        <div className="pt-4 flex flex-wrap items-center gap-4">
-                            <a 
-                                href="#sistemas" 
-                                className="inline-flex items-center gap-2.5 px-7 py-4 bg-black text-white text-[11px] font-semibold uppercase tracking-widest rounded-full hover:bg-neutral-800 transition-all shadow-sm group"
-                            >
-                                <span>Ver Sistemas Llave en Mano</span>
-                                <span className="text-xs group-hover:translate-x-1 transition-transform">→</span>
-                            </a>
-                            <a 
-                                href="/tienda" 
-                                className="inline-flex items-center gap-2 px-6 py-4 border border-neutral-200 text-black text-[11px] font-semibold uppercase tracking-widest rounded-full hover:border-black hover:bg-neutral-50 transition-all"
-                            >
-                                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                                <span>Probar Demo en Vivo (WEKE)</span>
-                            </a>
+                    {/* Act 5: Brand Reveal */}
+                    <motion.div style={{ opacity: brandOpacity, y: brandY }} className="absolute inset-0 z-40 flex flex-col items-center justify-start pt-[22vh] px-4 pointer-events-none w-full">
+                        <h1 className="text-6xl md:text-8xl lg:text-[8rem] font-bold tracking-[0.1em] text-white uppercase leading-none whitespace-normal md:whitespace-nowrap drop-shadow-[0_6px_20px_rgba(0,0,0,0.8)]">
+                            MERCENARIO<span className="text-mercenario-danger">.</span>
+                        </h1>
+                        <div className="w-8 md:w-12 h-[2px] bg-white my-6 md:my-8 drop-shadow-md" />
+                        <p className="text-sm md:text-2xl font-medium text-white tracking-wide text-center drop-shadow-md">
+                            Concéntrate en tu talento. <br className="md:hidden" />
+                            <span className="text-neutral-300 font-light">Nosotros conectamos la operación.</span>
+                        </p>
+                        
+                        <div className="absolute bottom-12 animate-bounce">
+                            <ChevronDown className="w-6 h-6 text-neutral-400 drop-shadow-md" />
                         </div>
+                    </motion.div>
 
-                        <div className="pt-2 flex flex-wrap items-center gap-6 text-[10px] font-mono text-neutral-400 uppercase tracking-wider">
-                            <span>⚡ Implementación en 14 días</span>
-                            <span>•</span>
-                            <span>Meta WhatsApp Cloud API</span>
-                            <span>•</span>
-                            <span>Webpay Plus & SII</span>
+                    {/* Fade to White Cover */}
+                    <motion.div style={{ opacity: fadeToWhite }} className="absolute inset-0 z-50 bg-white pointer-events-none" />
+
+                    {/* Act 6: The Approach */}
+                    <motion.div style={{ opacity: act6Opacity }} className="absolute inset-0 z-50 flex flex-col items-start justify-center bg-white pointer-events-none overflow-y-auto">
+                        <div className="w-full max-w-5xl mx-auto px-6 md:px-8 py-8 space-y-6 md:space-y-8 text-left pointer-events-auto">
+                            <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400">El Enfoque</span>
+                            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black leading-tight">
+                                No necesitas más herramientas. <br />
+                                <span className="text-neutral-400 font-semibold">Necesitas que trabajen juntas.</span>
+                            </h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 text-neutral-500 font-light text-sm md:text-base leading-relaxed text-left">
+                                <div className="space-y-3">
+                                    <p>Hoy probablemente tu empresa ya utiliza varias soluciones.</p>
+                                    <p>Una para agendar. Otra para cobrar. Otra para emitir documentos. Otra para comunicarte con tus clientes.</p>
+                                </div>
+                                <div className="space-y-3">
+                                    <p>El problema nunca fueron las herramientas.</p>
+                                    <p className="font-semibold text-black">El problema es que ninguna trabaja con las demás. Cuando comienzan a comunicarse, la operación cambia por completo.</p>
+                                </div>
+                            </div>
+
+                            {/* Conversion CTAs in Hero */}
+                            <div className="pt-2 flex flex-wrap items-center gap-4">
+                                <a 
+                                    href="#sistemas" 
+                                    className="inline-flex items-center gap-2.5 px-7 py-4 bg-black text-white text-[11px] font-semibold uppercase tracking-widest rounded-full hover:bg-neutral-800 transition-all shadow-sm group"
+                                >
+                                    <span>Ver Sistemas Llave en Mano</span>
+                                    <span className="text-xs group-hover:translate-x-1 transition-transform">→</span>
+                                </a>
+                                <a 
+                                    href="/tienda" 
+                                    className="inline-flex items-center gap-2 px-6 py-4 border border-neutral-200 text-black text-[11px] font-semibold uppercase tracking-widest rounded-full hover:border-black hover:bg-neutral-50 transition-all"
+                                >
+                                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                                    <span>Probar Demo en Vivo (WEKE)</span>
+                                </a>
+                            </div>
+
+                            <div className="pt-1 flex flex-wrap items-center gap-4 md:gap-6 text-[10px] font-mono text-neutral-400 uppercase tracking-wider">
+                                <span>⚡ Implementación en 14 días</span>
+                                <span>•</span>
+                                <span>Meta WhatsApp Cloud API</span>
+                                <span>•</span>
+                                <span>Webpay Plus & SII</span>
+                            </div>
                         </div>
-                    </div>
+                    </motion.div>
+
                 </motion.div>
-
-            </motion.div>
-        </section>
+            </section>
+        </>
     );
 }
