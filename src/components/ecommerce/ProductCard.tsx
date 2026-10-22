@@ -9,14 +9,9 @@ import { Product } from '@/types/ecommerce';
 export default function ProductCard({ product }: { product: Product }) {
   const router = useRouter();
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
-  const [dragOffset, setDragOffset] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-
-  // Swipe detection refs
-  const touchStartX = useRef<number | null>(null);
-  const touchStartY = useRef<number | null>(null);
-  const isHorizontalSwipe = useRef<boolean | null>(null);
-  const hasMovedSignificantly = useRef(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const isScrollingOrSwiping = useRef(false);
+  const touchStartPos = useRef<{ x: number; y: number; time: number } | null>(null);
 
   const images = product.images && product.images.length > 0
     ? product.images
@@ -28,60 +23,28 @@ export default function ProductCard({ product }: { product: Product }) {
     ? Math.round(((product.base_price - product.sale_price!) / product.base_price) * 100)
     : 0;
 
-  // Touch Swipe Handlers (Fluid App-Style Slider)
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-    touchStartY.current = e.touches[0].clientY;
-    isHorizontalSwipe.current = null;
-    hasMovedSignificantly.current = false;
-    setIsDragging(false);
-    setDragOffset(0);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (touchStartX.current === null || touchStartY.current === null) return;
-    const currentX = e.touches[0].clientX;
-    const currentY = e.touches[0].clientY;
-    const diffX = currentX - touchStartX.current;
-    const diffY = currentY - touchStartY.current;
-
-    // Detect direction lock
-    if (isHorizontalSwipe.current === null) {
-      if (Math.abs(diffX) > 6 || Math.abs(diffY) > 6) {
-        isHorizontalSwipe.current = Math.abs(diffX) > Math.abs(diffY);
-      }
-    }
-
-    if (isHorizontalSwipe.current) {
-      hasMovedSignificantly.current = true;
-      setIsDragging(true);
-
-      // Rubber-band resistance on bounds
-      if ((currentImgIndex === 0 && diffX > 0) || (currentImgIndex === images.length - 1 && diffX < 0)) {
-        setDragOffset(diffX * 0.25);
-      } else {
-        setDragOffset(diffX);
+  // Sincronizar índice activo al hacer scroll snap
+  const handleScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const width = el.clientWidth;
+    if (width > 0) {
+      const newIndex = Math.round(el.scrollLeft / width);
+      if (newIndex >= 0 && newIndex < images.length && newIndex !== currentImgIndex) {
+        setCurrentImgIndex(newIndex);
       }
     }
   };
 
-  const handleTouchEnd = () => {
-    if (touchStartX.current === null) return;
-
-    if (isDragging) {
-      const swipeThreshold = 40;
-      if (dragOffset < -swipeThreshold && currentImgIndex < images.length - 1) {
-        setCurrentImgIndex((prev) => prev + 1);
-      } else if (dragOffset > swipeThreshold && currentImgIndex > 0) {
-        setCurrentImgIndex((prev) => prev - 1);
-      }
-    }
-
-    setIsDragging(false);
-    setDragOffset(0);
-    touchStartX.current = null;
-    touchStartY.current = null;
-    isHorizontalSwipe.current = null;
+  const scrollToIndex = (index: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const target = Math.max(0, Math.min(index, images.length - 1));
+    el.scrollTo({
+      left: target * el.clientWidth,
+      behavior: 'smooth',
+    });
+    setCurrentImgIndex(target);
   };
 
   const handlePrevImage = (e?: React.MouseEvent) => {
@@ -89,7 +52,8 @@ export default function ProductCard({ product }: { product: Product }) {
       e.preventDefault();
       e.stopPropagation();
     }
-    setCurrentImgIndex((prev) => (prev - 1 + images.length) % images.length);
+    const prevIdx = (currentImgIndex - 1 + images.length) % images.length;
+    scrollToIndex(prevIdx);
   };
 
   const handleNextImage = (e?: React.MouseEvent) => {
@@ -97,11 +61,35 @@ export default function ProductCard({ product }: { product: Product }) {
       e.preventDefault();
       e.stopPropagation();
     }
-    setCurrentImgIndex((prev) => (prev + 1) % images.length);
+    const nextIdx = (currentImgIndex + 1) % images.length;
+    scrollToIndex(nextIdx);
+  };
+
+  // Detección de tap limpio vs swipe para no navegar accidentalmente
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartPos.current = {
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY,
+      time: Date.now(),
+    };
+    isScrollingOrSwiping.current = false;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!touchStartPos.current) return;
+    const diffX = Math.abs(e.touches[0].clientX - touchStartPos.current.x);
+    const diffY = Math.abs(e.touches[0].clientY - touchStartPos.current.y);
+    if (diffX > 10 || diffY > 10) {
+      isScrollingOrSwiping.current = true;
+    }
+  };
+
+  const handleTouchEnd = () => {
+    touchStartPos.current = null;
   };
 
   const handleCardClick = (e: React.MouseEvent) => {
-    if (hasMovedSignificantly.current) {
+    if (isScrollingOrSwiping.current) {
       e.preventDefault();
       e.stopPropagation();
       return;
@@ -117,30 +105,27 @@ export default function ProductCard({ product }: { product: Product }) {
       onTouchEnd={handleTouchEnd}
       className="group relative aspect-[4/5] w-full bg-[#111111] overflow-hidden rounded-none select-none cursor-pointer border-0"
     >
-      {/* ─── 1. Background Carousel Image Track (Transición Suave Tipo App) ─── */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <div
-          className={`flex h-full w-full ${
-            isDragging
-              ? ''
-              : 'transition-transform duration-350 ease-[cubic-bezier(0.25,1,0.5,1)]'
-          }`}
-          style={{
-            transform: `translateX(calc(-${currentImgIndex * 100}% + ${dragOffset}px))`,
-          }}
-        >
-          {images.map((img, idx) => (
-            <div key={idx} className="relative min-w-full h-full flex-shrink-0">
-              <img
-                src={img}
-                alt={`${product.name} - Imagen ${idx + 1}`}
-                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                loading={idx === 0 ? "eager" : "lazy"}
-                draggable={false}
-              />
-            </div>
-          ))}
-        </div>
+      {/* ─── 1. Background Carousel Image Track (Scroll Snap Nativo 100% Fluido) ─── */}
+      <div
+        ref={scrollRef}
+        onScroll={handleScroll}
+        className="absolute inset-0 w-full h-full flex overflow-x-auto overflow-y-hidden snap-x snap-mandatory scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        style={{ scrollSnapType: 'x mandatory' }}
+      >
+        {images.map((img, idx) => (
+          <div
+            key={idx}
+            className="w-full h-full min-w-full max-w-full flex-shrink-0 snap-center snap-always relative overflow-hidden"
+          >
+            <img
+              src={img}
+              alt={`${product.name} - Imagen ${idx + 1}`}
+              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+              loading={idx === 0 ? "eager" : "lazy"}
+              draggable={false}
+            />
+          </div>
+        ))}
       </div>
 
       {/* ─── 2. Top Badges & Indicator ─── */}
@@ -191,13 +176,20 @@ export default function ProductCard({ product }: { product: Product }) {
       {images.length > 1 && (
         <div className="absolute bottom-[92px] inset-x-0 flex items-center justify-center gap-1.5 z-20 pointer-events-none">
           {images.map((_, idx) => (
-            <span
+            <button
               key={idx}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                scrollToIndex(idx);
+              }}
+              className={`pointer-events-auto h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
                 idx === currentImgIndex
                   ? 'w-4 bg-white shadow-sm'
-                  : 'w-1.5 bg-white/45'
+                  : 'w-1.5 bg-white/45 hover:bg-white/70'
               }`}
+              aria-label={`Ir a imagen ${idx + 1}`}
             />
           ))}
         </div>

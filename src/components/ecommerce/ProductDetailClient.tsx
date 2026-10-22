@@ -16,13 +16,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
     : ['https://images.unsplash.com/photo-1544923246-77307dd654cb?q=80&w=1000'];
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const [dragOffset, setDragOffset] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-
-  // Swipe detection refs
-  const touchStartX = useRef<number | null>(null);
-  const touchStartY = useRef<number | null>(null);
-  const isHorizontalSwipe = useRef<boolean | null>(null);
+  const galleryScrollRef = useRef<HTMLDivElement>(null);
 
   const [quantity, setQuantity] = useState(1);
   const [addedAnimation, setAddedAnimation] = useState(false);
@@ -31,66 +25,39 @@ export default function ProductDetailClient({ product }: { product: Product }) {
   const comparePrice = selectedVariant?.compare_at_price || (product.sale_price ? product.base_price : null);
   const stock = selectedVariant?.stock ?? product.total_stock ?? 10;
 
-  // Touch handlers for fluid app-like sliding
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-    touchStartY.current = e.touches[0].clientY;
-    isHorizontalSwipe.current = null;
-    setIsDragging(false);
-    setDragOffset(0);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (touchStartX.current === null || touchStartY.current === null) return;
-    const currentX = e.touches[0].clientX;
-    const currentY = e.touches[0].clientY;
-    const diffX = currentX - touchStartX.current;
-    const diffY = currentY - touchStartY.current;
-
-    if (isHorizontalSwipe.current === null) {
-      if (Math.abs(diffX) > 6 || Math.abs(diffY) > 6) {
-        isHorizontalSwipe.current = Math.abs(diffX) > Math.abs(diffY);
-      }
-    }
-
-    if (isHorizontalSwipe.current) {
-      setIsDragging(true);
-      // Rubber-band resistance on ends
-      if ((activeImageIndex === 0 && diffX > 0) || (activeImageIndex === images.length - 1 && diffX < 0)) {
-        setDragOffset(diffX * 0.25);
-      } else {
-        setDragOffset(diffX);
+  const handleScroll = () => {
+    const el = galleryScrollRef.current;
+    if (!el) return;
+    const width = el.clientWidth;
+    if (width > 0) {
+      const newIndex = Math.round(el.scrollLeft / width);
+      if (newIndex >= 0 && newIndex < images.length && newIndex !== activeImageIndex) {
+        setActiveImageIndex(newIndex);
       }
     }
   };
 
-  const handleTouchEnd = () => {
-    if (touchStartX.current === null) return;
-
-    if (isDragging) {
-      const threshold = 40;
-      if (dragOffset < -threshold && activeImageIndex < images.length - 1) {
-        setActiveImageIndex((prev) => prev + 1);
-      } else if (dragOffset > threshold && activeImageIndex > 0) {
-        setActiveImageIndex((prev) => prev - 1);
-      }
-    }
-
-    setIsDragging(false);
-    setDragOffset(0);
-    touchStartX.current = null;
-    touchStartY.current = null;
-    isHorizontalSwipe.current = null;
+  const scrollToIndex = (index: number) => {
+    const el = galleryScrollRef.current;
+    if (!el) return;
+    const target = Math.max(0, Math.min(index, images.length - 1));
+    el.scrollTo({
+      left: target * el.clientWidth,
+      behavior: 'smooth',
+    });
+    setActiveImageIndex(target);
   };
 
   const handlePrevImage = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
-    setActiveImageIndex((prev) => (prev - 1 + images.length) % images.length);
+    const prevIdx = (activeImageIndex - 1 + images.length) % images.length;
+    scrollToIndex(prevIdx);
   };
 
   const handleNextImage = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
-    setActiveImageIndex((prev) => (prev + 1) % images.length);
+    const nextIdx = (activeImageIndex + 1) % images.length;
+    scrollToIndex(nextIdx);
   };
 
   const handleAddToCart = () => {
@@ -118,23 +85,16 @@ export default function ProductDetailClient({ product }: { product: Product }) {
       <div className="lg:col-span-7 space-y-4">
         <div 
           className="group relative aspect-[4/5] bg-[#F7F7F7] overflow-hidden border border-neutral-200 shadow-xs select-none"
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
         >
-          {/* Sliding Track */}
+          {/* Sliding Track (Scroll Snap Nativo & Preciso) */}
           <div
-            className={`flex h-full w-full ${
-              isDragging
-                ? ''
-                : 'transition-transform duration-350 ease-[cubic-bezier(0.25,1,0.5,1)]'
-            }`}
-            style={{
-              transform: `translateX(calc(-${activeImageIndex * 100}% + ${dragOffset}px))`,
-            }}
+            ref={galleryScrollRef}
+            onScroll={handleScroll}
+            className="flex h-full w-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden touch-pan-x"
+            style={{ scrollSnapType: 'x mandatory' }}
           >
             {images.map((img, idx) => (
-              <div key={idx} className="relative min-w-full h-full flex-shrink-0">
+              <div key={idx} className="w-full h-full min-w-full max-w-full flex-shrink-0 snap-center snap-always relative overflow-hidden">
                 <img
                   src={img}
                   alt={`${product.name} ${idx + 1}`}
@@ -170,13 +130,16 @@ export default function ProductDetailClient({ product }: { product: Product }) {
           {images.length > 1 && (
             <div className="absolute bottom-3 inset-x-0 flex items-center justify-center gap-1.5 z-20 pointer-events-none md:hidden">
               {images.map((_, idx) => (
-                <span
+                <button
                   key={idx}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                  type="button"
+                  onClick={() => scrollToIndex(idx)}
+                  className={`pointer-events-auto h-1.5 rounded-full transition-all duration-300 ${
                     idx === activeImageIndex
                       ? 'w-4 bg-white shadow-sm'
                       : 'w-1.5 bg-white/50'
                   }`}
+                  aria-label={`Ver imagen ${idx + 1}`}
                 />
               ))}
             </div>
@@ -189,7 +152,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
             {images.map((img, idx) => (
               <button
                 key={idx}
-                onClick={() => setActiveImageIndex(idx)}
+                onClick={() => scrollToIndex(idx)}
                 className={`relative w-16 h-20 sm:w-20 sm:h-24 overflow-hidden border transition-all flex-shrink-0 cursor-pointer ${
                   activeImageIndex === idx
                     ? 'border-black opacity-100 ring-1 ring-black'
