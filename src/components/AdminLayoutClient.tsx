@@ -40,7 +40,7 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
   return (
     <div className={cn(
       "flex w-full bg-zinc-50 text-zinc-900 font-sans selection:bg-zinc-200/60",
-      isFullHeight ? "h-screen overflow-hidden" : "min-h-screen"
+      isFullHeight ? "h-[100dvh] overflow-hidden" : "min-h-screen"
     )}>
       
       {/* ── Mobile Top Bar (Copiado de la arquitectura gaz_style) ── */}
@@ -83,11 +83,13 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
       <div 
         className={cn(
           "flex-1 transition-all duration-300 relative flex flex-col overflow-x-hidden pt-14 lg:pt-0",
-          isFullHeight ? "h-screen overflow-hidden" : "min-h-screen",
+          isFullHeight ? "h-[100dvh] lg:h-screen overflow-hidden" : "min-h-screen",
           isCollapsed ? "ml-0 lg:ml-[80px]" : "ml-0 lg:ml-[280px]"
         )}
       >
-        {children}
+        <div className={cn("flex-1 min-h-0 flex flex-col w-full", isFullHeight && "h-full overflow-hidden")}>
+          {children}
+        </div>
       </div>
     </div>
   );

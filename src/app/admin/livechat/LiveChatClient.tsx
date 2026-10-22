@@ -73,34 +73,65 @@ export default function LiveChatClient({ initialChats = [] }: { initialChats?: a
     }, 1000);
   };
 
-  const refreshChats = async () => {
+  const selectedChatIdRef = useRef<string | null>(selectedChat?.id || null);
+  useEffect(() => {
+    selectedChatIdRef.current = selectedChat?.id || null;
+  }, [selectedChat?.id]);
+
+  const refreshChats = React.useCallback(async () => {
     const data = await getWhatsAppChatsAction();
     setChats(data);
-    if (selectedChat) {
-      const match = data.find((c: any) => c.id === selectedChat.id);
-      if (match) setSelectedChat(match);
+    const activeId = selectedChatIdRef.current;
+    if (activeId) {
+      const match = data.find((c: any) => c.id === activeId);
+      if (match) {
+        setSelectedChat((prev: any) => {
+          if (!prev || prev.id !== match.id) return prev;
+          if (prev.session_status === match.session_status && prev.last_message === match.last_message) {
+            return prev;
+          }
+          return { ...prev, ...match };
+        });
+      }
     }
-  };
-
-  // Poll chats periodically
-  useEffect(() => {
-    refreshChats();
-    const interval = setInterval(refreshChats, 10000);
-    return () => clearInterval(interval);
   }, []);
 
-  // Poll messages for selected chat
+  // Poll chats periodically without switching active chat
   useEffect(() => {
-    if (!selectedChat?.id) return;
-    
+    refreshChats();
+    const interval = setInterval(refreshChats, 8000);
+    return () => clearInterval(interval);
+  }, [refreshChats]);
+
+  // Poll messages for selected chat without breaking typing focus
+  useEffect(() => {
+    const currentId = selectedChat?.id;
+    if (!currentId) return;
+
+    let isSubscribed = true;
+
     const loadMessages = async () => {
-      const msgs = await getWhatsAppMessagesAction(selectedChat.id);
-      setMessages(msgs);
+      const msgs = await getWhatsAppMessagesAction(currentId);
+      if (!isSubscribed) return;
+
+      setMessages((prev) => {
+        if (prev.length === msgs.length) {
+          const lastPrev = prev[prev.length - 1];
+          const lastNew = msgs[msgs.length - 1];
+          if (lastPrev?.id === lastNew?.id && lastPrev?.content === lastNew?.content) {
+            return prev;
+          }
+        }
+        return msgs;
+      });
     };
 
     loadMessages();
-    const interval = setInterval(loadMessages, 5000);
-    return () => clearInterval(interval);
+    const interval = setInterval(loadMessages, 3500);
+    return () => {
+      isSubscribed = false;
+      clearInterval(interval);
+    };
   }, [selectedChat?.id]);
 
   // Manage auto-revert timer
@@ -265,7 +296,7 @@ export default function LiveChatClient({ initialChats = [] }: { initialChats?: a
   };
 
   return (
-    <div className="flex flex-col h-full w-full bg-[#f0f2f5] overflow-hidden select-none">
+    <div className="flex flex-col h-full w-full bg-[#f0f2f5] overflow-hidden">
       
       {/* ── TOPBAR WHATSAPP BUSINESS OFICIAL ────────────────────────── */}
       <header className="h-14 bg-[#075e54] text-white flex items-center justify-between px-3.5 sm:px-5 shrink-0 z-20 shadow-sm">
@@ -685,9 +716,6 @@ export default function LiveChatClient({ initialChats = [] }: { initialChats?: a
                         setSendError(null);
                         e.target.style.height = 'auto';
                         e.target.style.height = `${Math.min(e.target.scrollHeight, 120)}px`;
-                        if (selectedChat?.id && selectedChat?.session_status !== 'bot') {
-                          startAutoRevert(selectedChat.id);
-                        }
                       }}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' && !e.shiftKey) {
