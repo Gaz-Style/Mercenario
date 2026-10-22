@@ -1,0 +1,22 @@
+{
+  "name": "Mercenario | Operación Conectada & Sistema Empresarial",
+  "short_name": "Mercenario",
+  "description": "Una nueva forma de operar pequeñas empresas en Chile",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "lang": "es-CL",
+  "dir": "ltr",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

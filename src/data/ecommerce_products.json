@@ -1,0 +1,181 @@
+[
+  {
+    "id": "prod-chanar-mujer-01",
+    "sku": "CHAK-MUJET-1",
+    "name": "Chaqueta con gorro Chañar Mujer",
+    "slug": "chaqueta-con-gorro-chanar-mujer",
+    "description": "Chaqueta técnica con gorro para mujer. Membrana cortaviento y térmica diseñada para climas fríos y senderismo en montaña.",
+    "category": "Chaquetas & Abrigos",
+    "base_price": 59990,
+    "sale_price": 49990,
+    "cost_price": 25000,
+    "has_variants": false,
+    "is_active": true,
+    "featured": true,
+    "total_stock": 20,
+    "images": [
+      "/uploads/products/1792615326517_Retrato_de_senderismo_en_los_Alpes.webp",
+      "/uploads/products/1792615331620_Excursionista_ante_monta_as_nevadas.webp",
+      "/uploads/products/1792615335916_Aventura_alpina_con_mochila_beige.webp"
+    ],
+    "variants": [
+      {
+        "id": "v-chanar-01",
+        "product_id": "prod-chanar-mujer-01",
+        "sku": "CHAK-MUJET-1-STD",
+        "title": "Estándar",
+        "attributes": {},
+        "price": 49990,
+        "compare_at_price": 59990,
+        "stock": 20,
+        "is_active": true
+      }
+    ],
+    "seo_title": "Chaqueta con gorro Chañar Mujer | Mercenario"
+  },
+  {
+    "id": "a1111111-1111-1111-1111-111111111111",
+    "sku": "PARKA-TACT-01",
+    "name": "Chaqueta técnica Acacio Hombre",
+    "slug": "chaqueta-tecnica-acacio-hombre",
+    "description": "Chaqueta térmica para hombre con diseño técnico y versátil, ideal para climas fríos. Membrana impermeable 20.000mm y costuras termoselladas.",
+    "category": "Chaquetas & Abrigos",
+    "base_price": 59990,
+    "sale_price": 49990,
+    "cost_price": 26000,
+    "has_variants": true,
+    "is_active": true,
+    "featured": true,
+    "total_stock": 10,
+    "images": [
+      "/uploads/products/1792614911476_Aventura_alpina_con_chaqueta_amarilla.webp",
+      "/uploads/products/1792615209190_Explorador_alpino_ante_monta_as_nevadas.webp",
+      "/uploads/products/1792615217513_Hiker_amarillo_ante_monta_as_nevadas-1.webp"
+    ],
+    "variants": [
+      {
+        "id": "v1111111-1111-1111-1111-111111111111",
+        "product_id": "a1111111-1111-1111-1111-111111111111",
+        "sku": "PARKA-BK-M",
+        "title": "Talla M",
+        "attributes": {
+          "talla": "M"
+        },
+        "price": 49990,
+        "compare_at_price": 59990,
+        "stock": 5,
+        "is_active": true
+      },
+      {
+        "id": "v1111111-1111-1111-1111-111111111112",
+        "product_id": "a1111111-1111-1111-1111-111111111111",
+        "sku": "PARKA-BK-L",
+        "title": "Talla L",
+        "attributes": {
+          "talla": "L"
+        },
+        "price": 49990,
+        "compare_at_price": 59990,
+        "stock": 5,
+        "is_active": true
+      }
+    ],
+    "seo_title": "Chaqueta técnica Acacio Hombre | Mercenario"
+  },
+  {
+    "id": "a2222222-2222-2222-2222-222222222222",
+    "sku": "PANT-APEX-02",
+    "name": "Pantalón técnico Chilca",
+    "slug": "pantal-n-t-cnico-chilca",
+    "description": "Pantalón térmico elasticado con cintura alta y suave interior afelpado. Diseñado para proteger del frío en travesías de media montaña.",
+    "category": "Pantalones Técnicos",
+    "base_price": 39990,
+    "sale_price": 34990,
+    "cost_price": 72000,
+    "has_variants": true,
+    "is_active": true,
+    "featured": true,
+    "total_stock": 10,
+    "images": [
+      "/uploads/products/1792617919597_Aventurera_en_las_monta_as_nevadas.webp",
+      "/uploads/products/1792617923851_Aventurera_entre_cumbres_nevadas.webp",
+      "/uploads/products/1792617927817_Excursionista_ante_el_lago_alpino.webp"
+    ],
+    "variants": [
+      {
+        "id": "v2222222-2222-2222-2222-222222222221",
+        "product_id": "a2222222-2222-2222-2222-222222222222",
+        "sku": "BOTA-41",
+        "title": "Talla 41 EU",
+        "attributes": {
+          "talla": "41"
+        },
+        "price": 169990,
+        "stock": 12,
+        "is_active": true
+      },
+      {
+        "id": "v2222222-2222-2222-2222-222222222222",
+        "product_id": "a2222222-2222-2222-2222-222222222222",
+        "sku": "BOTA-42",
+        "title": "Talla 42 EU",
+        "attributes": {
+          "talla": "42"
+        },
+        "price": 169990,
+        "stock": 18,
+        "is_active": true
+      },
+      {
+        "id": "v2222222-2222-2222-2222-222222222223",
+        "product_id": "a2222222-2222-2222-2222-222222222222",
+        "sku": "BOTA-43",
+        "title": "Talla 43 EU",
+        "attributes": {
+          "talla": "43"
+        },
+        "price": 169990,
+        "stock": 7,
+        "is_active": true
+      }
+    ],
+    "seo_title": "Botas Cordillera Apex Vibram | Mercenario"
+  },
+  {
+    "id": "a3333333-3333-3333-3333-333333333333",
+    "sku": "MOCHILA-STEALTH-03",
+    "name": "Mochila M30 Quintral",
+    "slug": "mochila-m30-quintral",
+    "description": "Mochila outdoor de 30L, resistente al agua, ideal para excursiones.",
+    "category": "Mochilas & Cargas",
+    "base_price": 34990,
+    "sale_price": 29990,
+    "cost_price": 15000,
+    "has_variants": false,
+    "is_active": true,
+    "featured": true,
+    "total_stock": 10,
+    "images": [
+      "/uploads/products/1792617197739_Aventurero_ante_los_picos_nevados.webp",
+      "/uploads/products/1792617202869_Mochila_amarilla_ante_monta_as_alpinas.webp",
+      "/uploads/products/1792617212505_Hiker_amarillo_ante_monta_as_nevadas-1.webp",
+      "/uploads/products/1792617217540_Aventura_alpina_ante_el_lago-2.webp"
+    ],
+    "variants": [
+      {
+        "id": "v3333333-3333-3333-3333-333333333331",
+        "product_id": "a3333333-3333-3333-3333-333333333333",
+        "sku": "MOCHILA-30L",
+        "title": "Talla Única (30L)",
+        "attributes": {
+          "capacidad": "30L"
+        },
+        "price": 29990,
+        "compare_at_price": 34990,
+        "stock": 10,
+        "is_active": true
+      }
+    ],
+    "seo_title": "Mochila M30 Quintral | Mercenario"
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "cat-chaquetas",
+    "name": "Chaquetas & Abrigos",
+    "slug": "chaquetas-abrigos",
+    "description": "Tercera capa impermeable y cortaviento para alta montaña"
+  },
+  {
+    "id": "cat-pantalones",
+    "name": "Pantalones Técnicos",
+    "slug": "pantalones-tecnicos",
+    "description": "Pantalones reforzados de trekking y escalada"
+  },
+  {
+    "id": "cat-polerones",
+    "name": "Polerones & Polar",
+    "slug": "polerones-polar",
+    "description": "Segunda capa térmica y transpirable"
+  },
+  {
+    "id": "cat-calzado",
+    "name": "Calzado Técnico",
+    "slug": "calzado-tecnico",
+    "description": "Botas de montaña con suela Vibram y zapatillas trail"
+  },
+  {
+    "id": "cat-accesorios",
+    "name": "Mochilas & Cargas",
+    "slug": "mochilas-cargas",
+    "description": "Mochilas técnicas, arneses y accesorios tácticos"
+  },
+  {
+    "id": "cat-1792647706092",
+    "name": "Inclusivo",
+    "slug": "inclusivo",
+    "description": "Diseño unisex con costuras planas, sin etiquetas y tejidos suave. Ideal como primera capa"
+  }
+]

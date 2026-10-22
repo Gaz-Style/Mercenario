@@ -82,7 +82,7 @@ export default function Growth360LandingPage() {
         }
     ];
 
-    const WHATSAPP_NUM = "56984021940";
+    const WHATSAPP_NUM = "56957958467";
 
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -190,7 +190,7 @@ export default function Growth360LandingPage() {
                     </span>
 
                     <a 
-                        href={`https://wa.me/56984021940?text=${encodeURIComponent("Hola! Estoy viendo la página de Growth 360 y quiero coordinar una demostración.")}`}
+                        href={`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent("Hola! Estoy viendo la página de Growth 360 y quiero coordinar una demostración.")}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-4 py-2 bg-[#25D366] text-white text-[11px] font-bold uppercase tracking-wider rounded-full hover:bg-[#20bd5a] transition-all shadow-xs flex items-center gap-1.5"
@@ -662,12 +662,12 @@ export default function Growth360LandingPage() {
             {/* FOOTER MÍNIMO */}
             <footer className="w-full py-10 border-t border-neutral-200 bg-white text-center text-[10px] text-neutral-400 tracking-wider uppercase">
                 <p className="font-bold text-black">MERCENARIO IOS · GROWTH 360</p>
-                <p className="pt-1">Listo en 14 a 21 días hábiles · Soporte en Chile vía WhatsApp +56 9 8402 1940</p>
+                <p className="pt-1">Listo en 14 a 21 días hábiles · Soporte en Chile vía Asistente Virtual WhatsApp +56 9 5795 8467</p>
             </footer>
 
-            {/* BOTÓN FLOTANTE PERMANENTE DE WHATSAPP (+56 9 8402 1940) */}
+            {/* BOTÓN FLOTANTE PERMANENTE DE WHATSAPP (+56 9 5795 8467) */}
             <a 
-                href={`https://wa.me/56984021940?text=${encodeURIComponent("Hola! Tengo dudas sobre el sistema Growth 360 y quiero hablar con un especialista.")}`}
+                href={`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent("Hola! Tengo dudas sobre el sistema Growth 360 y quiero hablar con el asistente virtual.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 px-5 py-3.5 bg-[#25D366] text-white rounded-full shadow-2xl hover:bg-[#20bd5a] hover:scale-105 active:scale-95 transition-all text-xs font-bold tracking-wide border border-white/20"
@@ -675,7 +675,7 @@ export default function Growth360LandingPage() {
             >
                 <div className="w-2.5 h-2.5 rounded-full bg-white animate-pulse" />
                 <MessageSquare className="w-4 h-4 fill-current" />
-                <span className="hidden sm:inline">Hablar por WhatsApp (+56 9 8402 1940)</span>
+                <span className="hidden sm:inline">Asistente Virtual WhatsApp (+56 9 5795 8467)</span>
                 <span className="sm:hidden">WhatsApp</span>
             </a>
 

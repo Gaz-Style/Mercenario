@@ -4,24 +4,37 @@ import { createClient } from '@/lib/supabase/server';
 import { revalidatePath } from 'next/cache';
 
 export async function getLeadsAction() {
-    const supabase = await createClient();
-    const { data, error } = await supabase.from('leads').select('*').order('created_at', { ascending: false });
-    if (error) {
-        console.error('Error fetching leads:', error.message, '| Code:', error.code);
+    try {
+        const supabase = await createClient();
+        const { data, error } = await supabase.from('leads').select('*').order('created_at', { ascending: false });
+        if (error) {
+            console.warn('[Marketing] Supabase notice for leads:', error.message);
+            return [];
+        }
+        return data || [];
+    } catch (err: any) {
+        console.warn('[Marketing] Offline or unreachable database for leads:', err?.message || err);
         return [];
     }
-    return data || [];
 }
 
 export async function getMarketingTasks() {
-    const supabase = await createClient();
-    const { data, error } = await supabase.from('marketing_tasks').select('*').order('created_at', { ascending: true });
-    
-    // Fallback: Si Supabase falla, devolvemos las 22 herramientas hardcodeadas para que la UI no quede vacía
-    if (error || !data || data.length === 0) {
-        if (error) console.error('Error fetching marketing tasks:', error.message, '| Code:', error.code);
+    try {
+        const supabase = await createClient();
+        const { data, error } = await supabase.from('marketing_tasks').select('*').order('created_at', { ascending: true });
         
-        return [
+        if (!error && data && data.length > 0) {
+            return data;
+        }
+        if (error) {
+            console.warn('[Marketing] Supabase notice for tasks:', error.message);
+        }
+    } catch (err: any) {
+        console.warn('[Marketing] Offline or unreachable database for tasks:', err?.message || err);
+    }
+    
+    // Fallback: Si Supabase falla o no responde, devolvemos las 22 herramientas hardcodeadas para que la UI no quede vacía
+    return [
             // PILAR 1: SEO & GEO
             { id: '1', title: 'Optimización de Metadatos B2B', description: 'Implementar el título premium y la meta descripción optimizada para Google.', category: 'SEO & GEO', status: 'completed', target_date: 'Logrado', impact: 'Alto' },
             { id: '2', title: 'Schema LocalBusiness Estructurado', description: 'Inyección de JSON-LD con coordenadas y servicios clave para IA.', category: 'SEO & GEO', status: 'completed', target_date: 'Logrado', impact: 'Alto' },
@@ -54,9 +67,6 @@ export async function getMarketingTasks() {
             { id: '21', title: 'Leaderboard de Adopción', description: 'Gamificación interna mostrando qué clientes tienen mejor uso del ecosistema.', category: 'Viral Loop (Referidos)', status: 'pending', target_date: 'Pendiente', impact: 'Bajo' },
             { id: '22', title: 'Sello "Powered by Mercenario"', description: 'Widget en las facturas y correos de las empresas clientes llevando a nuestra landing.', category: 'Viral Loop (Referidos)', status: 'pending', target_date: 'Pendiente', impact: 'Alto' },
         ];
-    }
-    
-    return data;
 }
 
 export async function updateMarketingTaskStatus(id: string, newStatus: string, newDate: string) {

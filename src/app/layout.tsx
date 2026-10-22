@@ -14,8 +14,17 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.mercenario.cl"),
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Mercenario",
+  },
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icon.svg",
+  },
   title: {
-    default: "Mercenario | Ecosistema Digital & Operación Conectada para Negocios",
+    default: "Mercenario IOS | Una nueva forma de operar pequeñas empresas",
     template: "%s | Mercenario",
   },
   description: "Mercenario conecta toda la operación de tu negocio: Asistentes de IA en WhatsApp 24/7, desarrollo web de alta velocidad, pagos en línea Webpay/Mercado Pago, Meta CAPI y conciliación POS en Chile.",
@@ -85,7 +94,7 @@ const jsonLd = {
       "url": "https://www.mercenario.cl",
       "logo": "https://www.mercenario.cl/imagenes/mercenario_preview.png",
       "description": "Ecosistema digital y tecnología operativa para empresas y pymes en Chile. Automatización con IA en WhatsApp, desarrollo web Next.js, pasarelas de pago Webpay/Mercado Pago y conciliación POS/ERP.",
-      "telephone": "+56984021940",
+      "telephone": "+56957958467",
       "address": {
         "@type": "PostalAddress",
         "addressCountry": "CL",
@@ -95,7 +104,7 @@ const jsonLd = {
       "contactPoint": [
         {
           "@type": "ContactPoint",
-          "telephone": "+56984021940",
+          "telephone": "+56957958467",
           "contactType": "sales",
           "areaServed": "CL",
           "availableLanguage": ["Spanish"]
@@ -103,7 +112,7 @@ const jsonLd = {
       ],
       "sameAs": [
         "https://www.mercenario.cl",
-        "https://wa.me/56984021940"
+        "https://wa.me/56957958467"
       ]
     },
     {
@@ -149,6 +158,10 @@ export default function RootLayout({
         />
         <meta name="geo.region" content="CL" />
         <meta name="geo.placename" content="Santiago, Chile" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

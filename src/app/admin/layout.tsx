@@ -12,7 +12,7 @@ export default async function AdminLayout({
 
   return (
     <AdminLayoutClient>
-      <div className="flex-grow w-full max-w-full overflow-x-hidden">
+      <div className="flex-grow w-full max-w-full overflow-x-hidden h-full flex flex-col">
         {children}
       </div>
     </AdminLayoutClient>

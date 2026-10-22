@@ -213,7 +213,7 @@ export default function HeroV2() {
                             No necesitas más herramientas. <br />
                             <span className="text-neutral-400 font-semibold">Necesitas que trabajen juntas.</span>
                         </h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-neutral-500 font-light text-sm md:text-base leading-relaxed pt-8 text-left">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-neutral-500 font-light text-sm md:text-base leading-relaxed pt-2 text-left">
                             <div className="space-y-4">
                                 <p>Hoy probablemente tu empresa ya utiliza varias soluciones.</p>
                                 <p>Una para agendar. Otra para cobrar. Otra para emitir documentos. Otra para comunicarte con tus clientes.</p>
@@ -222,6 +222,32 @@ export default function HeroV2() {
                                 <p>El problema nunca fueron las herramientas.</p>
                                 <p className="font-semibold text-black">El problema es que ninguna trabaja con las demás. Cuando comienzan a comunicarse, la operación cambia por completo.</p>
                             </div>
+                        </div>
+
+                        {/* Conversion CTAs in Hero */}
+                        <div className="pt-4 flex flex-wrap items-center gap-4">
+                            <a 
+                                href="#sistemas" 
+                                className="inline-flex items-center gap-2.5 px-7 py-4 bg-black text-white text-[11px] font-semibold uppercase tracking-widest rounded-full hover:bg-neutral-800 transition-all shadow-sm group"
+                            >
+                                <span>Ver Sistemas Llave en Mano</span>
+                                <span className="text-xs group-hover:translate-x-1 transition-transform">→</span>
+                            </a>
+                            <a 
+                                href="/tienda" 
+                                className="inline-flex items-center gap-2 px-6 py-4 border border-neutral-200 text-black text-[11px] font-semibold uppercase tracking-widest rounded-full hover:border-black hover:bg-neutral-50 transition-all"
+                            >
+                                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                                <span>Probar Demo en Vivo (WEKE)</span>
+                            </a>
+                        </div>
+
+                        <div className="pt-2 flex flex-wrap items-center gap-6 text-[10px] font-mono text-neutral-400 uppercase tracking-wider">
+                            <span>⚡ Implementación en 14 días</span>
+                            <span>•</span>
+                            <span>Meta WhatsApp Cloud API</span>
+                            <span>•</span>
+                            <span>Webpay Plus & SII</span>
                         </div>
                     </div>
                 </motion.div>
