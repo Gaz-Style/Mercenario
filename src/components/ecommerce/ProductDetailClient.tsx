@@ -1,24 +1,97 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Product, ProductVariant } from '@/types/ecommerce';
 import { useCart } from '@/lib/ecommerce/cart-context';
-import { ShoppingBag, ShieldCheck, Truck, RefreshCw, Check, AlertCircle } from 'lucide-react';
+import { ShoppingBag, ShieldCheck, Truck, RefreshCw, Check, AlertCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function ProductDetailClient({ product }: { product: Product }) {
   const { addItem } = useCart();
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | undefined>(
     product.variants?.[0]
   );
-  const [selectedImage, setSelectedImage] = useState<string>(
-    product.images[0] || 'https://images.unsplash.com/photo-1544923246-77307dd654cb?q=80&w=1000'
-  );
+  
+  const images = product.images && product.images.length > 0
+    ? product.images
+    : ['https://images.unsplash.com/photo-1544923246-77307dd654cb?q=80&w=1000'];
+
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+
+  // Swipe detection refs
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+  const isHorizontalSwipe = useRef<boolean | null>(null);
+
   const [quantity, setQuantity] = useState(1);
   const [addedAnimation, setAddedAnimation] = useState(false);
 
   const price = selectedVariant?.price || product.sale_price || product.base_price;
   const comparePrice = selectedVariant?.compare_at_price || (product.sale_price ? product.base_price : null);
   const stock = selectedVariant?.stock ?? product.total_stock ?? 10;
+
+  // Touch handlers for fluid app-like sliding
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    isHorizontalSwipe.current = null;
+    setIsDragging(false);
+    setDragOffset(0);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    const diffX = currentX - touchStartX.current;
+    const diffY = currentY - touchStartY.current;
+
+    if (isHorizontalSwipe.current === null) {
+      if (Math.abs(diffX) > 6 || Math.abs(diffY) > 6) {
+        isHorizontalSwipe.current = Math.abs(diffX) > Math.abs(diffY);
+      }
+    }
+
+    if (isHorizontalSwipe.current) {
+      setIsDragging(true);
+      // Rubber-band resistance on ends
+      if ((activeImageIndex === 0 && diffX > 0) || (activeImageIndex === images.length - 1 && diffX < 0)) {
+        setDragOffset(diffX * 0.25);
+      } else {
+        setDragOffset(diffX);
+      }
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current === null) return;
+
+    if (isDragging) {
+      const threshold = 40;
+      if (dragOffset < -threshold && activeImageIndex < images.length - 1) {
+        setActiveImageIndex((prev) => prev + 1);
+      } else if (dragOffset > threshold && activeImageIndex > 0) {
+        setActiveImageIndex((prev) => prev - 1);
+      }
+    }
+
+    setIsDragging(false);
+    setDragOffset(0);
+    touchStartX.current = null;
+    touchStartY.current = null;
+    isHorizontalSwipe.current = null;
+  };
+
+  const handlePrevImage = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setActiveImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const handleNextImage = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setActiveImageIndex((prev) => (prev + 1) % images.length);
+  };
 
   const handleAddToCart = () => {
     addItem(
@@ -28,7 +101,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
         product_name: product.name,
         variant_title: selectedVariant?.title || 'Estándar',
         sku: selectedVariant?.sku || product.sku,
-        image: product.images[0] || '',
+        image: images[0] || '',
         unit_price: price,
         max_stock: stock,
       },
@@ -40,30 +113,90 @@ export default function ProductDetailClient({ product }: { product: Product }) {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start bg-white text-neutral-900 font-sans">
-      {/* Product Image Gallery (7 cols) */}
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start bg-white text-neutral-900 font-sans">
+      {/* Product Image Gallery (7 cols) - Transición Suave Tipo App */}
       <div className="lg:col-span-7 space-y-4">
-        <div className="aspect-[4/5] bg-[#F7F7F7] overflow-hidden border border-neutral-200 shadow-xs relative">
-          <img
-            src={selectedImage}
-            alt={product.name}
-            className="w-full h-full object-cover object-center"
-          />
+        <div 
+          className="group relative aspect-[4/5] bg-[#F7F7F7] overflow-hidden border border-neutral-200 shadow-xs select-none"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          {/* Sliding Track */}
+          <div
+            className={`flex h-full w-full ${
+              isDragging
+                ? ''
+                : 'transition-transform duration-350 ease-[cubic-bezier(0.25,1,0.5,1)]'
+            }`}
+            style={{
+              transform: `translateX(calc(-${activeImageIndex * 100}% + ${dragOffset}px))`,
+            }}
+          >
+            {images.map((img, idx) => (
+              <div key={idx} className="relative min-w-full h-full flex-shrink-0">
+                <img
+                  src={img}
+                  alt={`${product.name} ${idx + 1}`}
+                  className="w-full h-full object-cover object-center"
+                  loading={idx === 0 ? "eager" : "lazy"}
+                  draggable={false}
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop Chevrons */}
+          {images.length > 1 && (
+            <>
+              <button
+                onClick={handlePrevImage}
+                aria-label="Imagen anterior"
+                className="hidden md:flex absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-black shadow-md items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20 cursor-pointer active:scale-95"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={handleNextImage}
+                aria-label="Siguiente imagen"
+                className="hidden md:flex absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-black shadow-md items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20 cursor-pointer active:scale-95"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </>
+          )}
+
+          {/* Pagination Dots (Mobile) */}
+          {images.length > 1 && (
+            <div className="absolute bottom-3 inset-x-0 flex items-center justify-center gap-1.5 z-20 pointer-events-none md:hidden">
+              {images.map((_, idx) => (
+                <span
+                  key={idx}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    idx === activeImageIndex
+                      ? 'w-4 bg-white shadow-sm'
+                      : 'w-1.5 bg-white/50'
+                  }`}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
-        {product.images.length > 1 && (
-          <div className="flex gap-3 overflow-x-auto pb-2">
-            {product.images.map((img, idx) => (
+        {/* Thumbnails row */}
+        {images.length > 1 && (
+          <div className="flex gap-2.5 overflow-x-auto pb-1">
+            {images.map((img, idx) => (
               <button
                 key={idx}
-                onClick={() => setSelectedImage(img)}
-                className={`relative w-20 h-24 overflow-hidden border transition-all flex-shrink-0 cursor-pointer ${
-                  selectedImage === img
+                onClick={() => setActiveImageIndex(idx)}
+                className={`relative w-16 h-20 sm:w-20 sm:h-24 overflow-hidden border transition-all flex-shrink-0 cursor-pointer ${
+                  activeImageIndex === idx
                     ? 'border-black opacity-100 ring-1 ring-black'
-                    : 'border-neutral-200 opacity-60 hover:opacity-100'
+                    : 'border-neutral-200 opacity-50 hover:opacity-100'
                 }`}
               >
-                <img src={img} alt={`${product.name} ${idx}`} className="w-full h-full object-cover" />
+                <img src={img} alt={`${product.name} ${idx + 1}`} className="w-full h-full object-cover" />
               </button>
             ))}
           </div>
@@ -149,7 +282,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
           )}
         </div>
 
-        {/* Actions: Quantity + Arc'teryx Black CTA Button */}
+        {/* Actions: Quantity + Black CTA Button */}
         <div className="flex gap-3 pt-2">
           {/* Quantity selector */}
           <div className="flex items-center border border-neutral-300 bg-white px-3">
@@ -173,7 +306,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
             disabled={stock <= 0}
             className={`flex-1 flex items-center justify-center gap-2 font-mono uppercase tracking-widest text-xs py-4 px-6 transition-all shadow-sm cursor-pointer disabled:opacity-50 ${
               addedAnimation
-                ? 'bg-emerald-600 text-white'
+                ? 'bg-neutral-900 text-white'
                 : 'bg-black hover:bg-neutral-800 text-white active:scale-[0.99]'
             }`}
           >

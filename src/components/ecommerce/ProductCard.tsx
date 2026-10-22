@@ -3,17 +3,20 @@
 import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ArrowUpRight, ChevronLeft, ChevronRight, ShoppingBag } from 'lucide-react';
+import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Product } from '@/types/ecommerce';
 
 export default function ProductCard({ product }: { product: Product }) {
   const router = useRouter();
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
 
   // Swipe detection refs
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
-  const isSwiping = useRef(false);
+  const isHorizontalSwipe = useRef<boolean | null>(null);
+  const hasMovedSignificantly = useRef(false);
 
   const images = product.images && product.images.length > 0
     ? product.images
@@ -25,43 +28,60 @@ export default function ProductCard({ product }: { product: Product }) {
     ? Math.round(((product.base_price - product.sale_price!) / product.base_price) * 100)
     : 0;
 
-  // Touch Swipe Handlers (Instagram Style)
+  // Touch Swipe Handlers (Fluid App-Style Slider)
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
-    isSwiping.current = false;
+    isHorizontalSwipe.current = null;
+    hasMovedSignificantly.current = false;
+    setIsDragging(false);
+    setDragOffset(0);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (touchStartX.current === null || touchStartY.current === null) return;
-    const diffX = touchStartX.current - e.touches[0].clientX;
-    const diffY = touchStartY.current - e.touches[0].clientY;
-    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 10) {
-      isSwiping.current = true;
-    }
-  };
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    const diffX = currentX - touchStartX.current;
+    const diffY = currentY - touchStartY.current;
 
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null || touchStartY.current === null) return;
-    const diffX = touchStartX.current - e.changedTouches[0].clientX;
-    const diffY = touchStartY.current - e.changedTouches[0].clientY;
-
-    // Minimum distance for horizontal swipe
-    if (Math.abs(diffX) > 35 && Math.abs(diffX) > Math.abs(diffY)) {
-      if (diffX > 0) {
-        // Swiped left -> next image
-        handleNextImage();
-      } else {
-        // Swiped right -> prev image
-        handlePrevImage();
+    // Detect direction lock
+    if (isHorizontalSwipe.current === null) {
+      if (Math.abs(diffX) > 6 || Math.abs(diffY) > 6) {
+        isHorizontalSwipe.current = Math.abs(diffX) > Math.abs(diffY);
       }
     }
 
+    if (isHorizontalSwipe.current) {
+      hasMovedSignificantly.current = true;
+      setIsDragging(true);
+
+      // Rubber-band resistance on bounds
+      if ((currentImgIndex === 0 && diffX > 0) || (currentImgIndex === images.length - 1 && diffX < 0)) {
+        setDragOffset(diffX * 0.25);
+      } else {
+        setDragOffset(diffX);
+      }
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current === null) return;
+
+    if (isDragging) {
+      const swipeThreshold = 40;
+      if (dragOffset < -swipeThreshold && currentImgIndex < images.length - 1) {
+        setCurrentImgIndex((prev) => prev + 1);
+      } else if (dragOffset > swipeThreshold && currentImgIndex > 0) {
+        setCurrentImgIndex((prev) => prev - 1);
+      }
+    }
+
+    setIsDragging(false);
+    setDragOffset(0);
     touchStartX.current = null;
     touchStartY.current = null;
-    setTimeout(() => {
-      isSwiping.current = false;
-    }, 100);
+    isHorizontalSwipe.current = null;
   };
 
   const handlePrevImage = (e?: React.MouseEvent) => {
@@ -81,7 +101,7 @@ export default function ProductCard({ product }: { product: Product }) {
   };
 
   const handleCardClick = (e: React.MouseEvent) => {
-    if (isSwiping.current) {
+    if (hasMovedSignificantly.current) {
       e.preventDefault();
       e.stopPropagation();
       return;
@@ -97,19 +117,33 @@ export default function ProductCard({ product }: { product: Product }) {
       onTouchEnd={handleTouchEnd}
       className="group relative aspect-[4/5] w-full bg-[#111111] overflow-hidden rounded-none select-none cursor-pointer border-0"
     >
-      {/* ─── 1. Background Carousel Image (Swipeable) ─── */}
-      <div className="absolute inset-0 w-full h-full">
-        <img
-          key={images[currentImgIndex]}
-          src={images[currentImgIndex]}
-          alt={`${product.name} - Imagen ${currentImgIndex + 1}`}
-          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out animate-in fade-in duration-200"
-          loading="lazy"
-          draggable={false}
-        />
+      {/* ─── 1. Background Carousel Image Track (Transición Suave Tipo App) ─── */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
+        <div
+          className={`flex h-full w-full ${
+            isDragging
+              ? ''
+              : 'transition-transform duration-350 ease-[cubic-bezier(0.25,1,0.5,1)]'
+          }`}
+          style={{
+            transform: `translateX(calc(-${currentImgIndex * 100}% + ${dragOffset}px))`,
+          }}
+        >
+          {images.map((img, idx) => (
+            <div key={idx} className="relative min-w-full h-full flex-shrink-0">
+              <img
+                src={img}
+                alt={`${product.name} - Imagen ${idx + 1}`}
+                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading={idx === 0 ? "eager" : "lazy"}
+                draggable={false}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* ─── 2. Top Badges & Instagram Dots ─── */}
+      {/* ─── 2. Top Badges & Indicator ─── */}
       <div className="absolute top-3 inset-x-3 flex items-start justify-between z-20 pointer-events-none">
         {/* Badges */}
         <div className="flex flex-col gap-1.5 pointer-events-auto">
@@ -153,7 +187,7 @@ export default function ProductCard({ product }: { product: Product }) {
         </>
       )}
 
-      {/* ─── 4. Instagram Style Pagination Dots (Bottom Center) ─── */}
+      {/* ─── 4. Instagram / App Style Pagination Dots (Bottom Center) ─── */}
       {images.length > 1 && (
         <div className="absolute bottom-[92px] inset-x-0 flex items-center justify-center gap-1.5 z-20 pointer-events-none">
           {images.map((_, idx) => (

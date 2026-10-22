@@ -1,5 +1,10 @@
-import { redirect } from 'next/navigation';
+import React from 'react';
+import LiveChatClient from './LiveChatClient';
+import { getWhatsAppChatsAction } from './actions';
 
-export default function LiveChatRedirect() {
-  redirect('/admin/asistente');
+export const dynamic = 'force-dynamic';
+
+export default async function LiveChatPage() {
+    const chats = await getWhatsAppChatsAction();
+    return <LiveChatClient initialChats={chats} />;
 }

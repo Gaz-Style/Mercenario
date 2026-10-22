@@ -20,7 +20,7 @@ import {
   AlertCircle,
   CreditCard,
   FileSpreadsheet,
-  Bot
+  MessageSquare
 } from 'lucide-react';
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -147,12 +147,12 @@ export default function StoreAdminDashboard() {
       borderAccent: 'hover:border-zinc-900',
     },
     {
-      title: 'Asistente Virtual IA',
-      desc: 'Atención 24/7 en WhatsApp, asesoría en tallas, resolución de dudas y derivación a operador humano.',
-      href: '/admin/asistente',
-      icon: Bot,
-      badge: 'IA Activa 24/7',
-      cta: 'Abrir Asistente',
+      title: 'LiveChat WhatsApp',
+      desc: 'Atención 24/7 en WhatsApp, mensajería en vivo, control de bot/operador y derivación humana.',
+      href: '/admin/livechat',
+      icon: MessageSquare,
+      badge: 'En Vivo',
+      cta: 'Abrir LiveChat',
       borderAccent: 'hover:border-emerald-600',
     },
     {
