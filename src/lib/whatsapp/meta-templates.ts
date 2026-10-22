@@ -1,85 +1,55 @@
 import { createClient } from '@supabase/supabase-js';
 
-export interface MetaTemplateSpec {
-  name: string;
-  category: 'UTILITY' | 'MARKETING' | 'AUTHENTICATION';
-  language: string;
-  header?: string;
-  body: string;
-  footer?: string;
-  buttons?: Array<{
-    type: 'PHONE_NUMBER' | 'URL' | 'QUICK_REPLY';
-    text: string;
-    value?: string;
-  }>;
-  sampleVariables: string[];
-}
+export {
+  OFFICIAL_META_TEMPLATES,
+  buildMetaTemplatePayload,
+  type MetaTemplateSpec,
+  type MetaTemplateButton,
+} from './meta-templates-catalog';
+import { OFFICIAL_META_TEMPLATES } from './meta-templates-catalog';
+
+// Alias de retrocompatibilidad
+export const WEKE_META_TEMPLATES = OFFICIAL_META_TEMPLATES;
 
 /**
- * Catálogo de Plantillas Oficiales de Meta WhatsApp Cloud API para WEKE
+ * Función Maestra para despachar cualquier Plantilla Oficial de Meta WhatsApp Cloud API
+ * con soporte de Variables dinámicas, Fallback inteligente a texto y registro en Supabase.
  */
-export const WEKE_META_TEMPLATES: Record<string, MetaTemplateSpec> = {
-  // ── Plantilla de Derivación a Asistencia Humana ────────────────────────────
-  asistencia_humana_weke: {
-    name: 'asistencia_humana_weke',
-    category: 'UTILITY',
-    language: 'es',
-    header: 'Atención Personalizada WEKE',
-    body: 'Estimado/a {{1}}, hemos transferido su solicitud a un asesor de nuestro taller en Las Condes. Un especialista de nuestro equipo se comunicará con usted a la brevedad para asistirle con su consulta sobre {{2}}.\n\nHorario de atención: Lunes a Viernes de 9:00 a 18:00 hrs.',
-    footer: 'WEKE • Confección Técnica & Sustentable (Gredos 7952, Las Condes)',
-    buttons: [
-      {
-        type: 'PHONE_NUMBER',
-        text: 'Llamar al Taller',
-        value: '+56998785258',
-      },
-      {
-        type: 'URL',
-        text: 'Ver Catálogo',
-        value: 'https://www.weke.cl/tienda',
-      },
-    ],
-    sampleVariables: ['Carlos', 'asesoría de tallas y chaquetas 3 capas'],
-  },
+export async function sendOfficialMetaTemplate(params: {
+  templateKey: keyof typeof OFFICIAL_META_TEMPLATES;
+  recipientPhone: string;
+  variables: string[];
+  chatId?: string;
+}): Promise<{
+  success: boolean;
+  mode: 'template' | 'text_fallback' | 'simulated';
+  templateName: string;
+  messageId?: string;
+  error?: string;
+}> {
+  const { templateKey, recipientPhone, variables, chatId } = params;
+  const templateSpec = OFFICIAL_META_TEMPLATES[templateKey];
 
-  // ── Plantilla de Alerta al Operador / Administrador ────────────────────────
-  alerta_operador_humano: {
-    name: 'alerta_operador_humano',
-    category: 'UTILITY',
-    language: 'es',
-    header: '⚠️ Solicitud de Asistencia Humana',
-    body: 'Atención equipo WEKE: El cliente {{1}} (teléfono: {{2}}) ha solicitado atención humana con respecto a: {{3}}.\n\nPor favor ingresar al panel administrativo para tomar el control de la conversación.',
-    footer: 'Mercenario OS • Notificaciones en Tiempo Real',
-    buttons: [
-      {
-        type: 'URL',
-        text: 'Abrir Chat en Admin',
-        value: 'https://mercenario.cl/admin/asistente',
-      },
-    ],
-    sampleVariables: ['Camila Sepúlveda', '+56 9 8402 1940', 'consulta sobre reparación de cierre en chaqueta'],
-  },
-};
-
-/**
- * Envía la plantilla oficial de Meta WhatsApp Cloud API para asistencia humana.
- * Si la plantilla aún está pendiente de aprobación en Meta Business Manager,
- * realiza un fallback inteligente enviando el texto estructurado para no dejar al cliente sin respuesta.
- */
-export async function sendHumanHandoffMetaTemplate(params: {
-  chatId: string;
-  customerPhone: string;
-  customerName?: string;
-  reason?: string;
-}): Promise<{ success: boolean; mode: 'template' | 'text_fallback' | 'simulated'; error?: string }> {
-  const { chatId, customerPhone, customerName = 'cliente', reason = 'su consulta' } = params;
+  if (!templateSpec) {
+    return {
+      success: false,
+      mode: 'simulated',
+      templateName: String(templateKey),
+      error: `Plantilla '${String(templateKey)}' no existe en el catálogo`,
+    };
+  }
 
   const token = process.env.WHATSAPP_API_TOKEN;
   const phoneId = process.env.WHATSAPP_PHONE_NUMBER_ID;
-  const cleanPhone = customerPhone.replace(/\D/g, '');
-  const templateSpec = WEKE_META_TEMPLATES.asistencia_humana_weke;
+  const cleanPhone = recipientPhone.replace(/\D/g, '');
 
-  const fallbackBody = `Estimado/a ${customerName}, hemos transferido su solicitud a un asesor de nuestro taller en Las Condes. Un especialista de nuestro equipo se comunicará con usted a la brevedad para asistirle con su consulta sobre ${reason}.\n\nHorario de atención: Lunes a Viernes de 9:00 a 18:00 hrs.\n\n— WEKE • Confección Técnica & Sustentable (Gredos 7952, Las Condes)`;
+  // Reemplazar variables {{1}}, {{2}}, etc. en el cuerpo para el fallback
+  let compiledBody = templateSpec.body;
+  variables.forEach((val, idx) => {
+    compiledBody = compiledBody.replace(new RegExp(`\\{\\{${idx + 1}\\}\\}`, 'g'), val);
+  });
+
+  const fullFallbackText = `${templateSpec.header ? `*${templateSpec.header}*\n\n` : ''}${compiledBody}${templateSpec.footer ? `\n\n_${templateSpec.footer}_` : ''}`;
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -89,31 +59,28 @@ export async function sendHumanHandoffMetaTemplate(params: {
     supabase = createClient(supabaseUrl, supabaseKey);
   }
 
-  // 1. Si no hay credenciales de Meta configuradas, registramos simulación en Supabase
+  // 1. Simulación cuando no hay credenciales de Meta Cloud configuradas
   if (!token || !phoneId) {
-    if (supabase) {
+    if (supabase && chatId) {
       await supabase.from('crm_whatsapp_messages').insert([
         {
           chat_id: chatId,
           sender_type: 'bot',
           message_type: 'text',
-          content: fallbackBody,
+          content: fullFallbackText,
           metadata: {
             is_template: true,
             template_name: templateSpec.name,
+            variables,
             status: 'simulated_no_meta_token',
           },
         },
       ]);
-      await supabase
-        .from('crm_whatsapp_chats')
-        .update({ session_status: 'human_handoff', last_interaction: new Date().toISOString() })
-        .eq('id', chatId);
     }
-    return { success: true, mode: 'simulated' };
+    return { success: true, mode: 'simulated', templateName: templateSpec.name };
   }
 
-  // 2. Intentar enviar la plantilla oficial vía Meta Cloud API
+  // 2. Envío de plantilla oficial homologada a través de Meta Graph API
   try {
     const metaResponse = await fetch(`https://graph.facebook.com/v21.0/${phoneId}/messages`, {
       method: 'POST',
@@ -132,10 +99,7 @@ export async function sendHumanHandoffMetaTemplate(params: {
           components: [
             {
               type: 'body',
-              parameters: [
-                { type: 'text', text: customerName },
-                { type: 'text', text: reason },
-              ],
+              parameters: variables.map((val) => ({ type: 'text', text: val })),
             },
           ],
         },
@@ -145,31 +109,28 @@ export async function sendHumanHandoffMetaTemplate(params: {
     const metaData = await metaResponse.json();
 
     if (metaResponse.ok && metaData.messages) {
-      // Guardar en Supabase
-      if (supabase) {
+      const msgId = metaData.messages[0]?.id;
+      if (supabase && chatId) {
         await supabase.from('crm_whatsapp_messages').insert([
           {
             chat_id: chatId,
             sender_type: 'bot',
             message_type: 'text',
-            content: `[Plantilla Meta: ${templateSpec.name}]\n${fallbackBody}`,
+            content: `[Plantilla Meta Homologada: ${templateSpec.name}]\n${fullFallbackText}`,
             metadata: {
               is_template: true,
               template_name: templateSpec.name,
-              meta_message_id: metaData.messages[0]?.id,
+              meta_message_id: msgId,
+              variables,
             },
           },
         ]);
-        await supabase
-          .from('crm_whatsapp_chats')
-          .update({ session_status: 'human_handoff', last_interaction: new Date().toISOString() })
-          .eq('id', chatId);
       }
-      return { success: true, mode: 'template' };
+      return { success: true, mode: 'template', templateName: templateSpec.name, messageId: msgId };
     }
 
-    // 3. Si la plantilla no está aprobada aún en Meta (error 132001 o similar), enviar texto de respaldo
-    console.warn('Plantilla Meta no aprobada o error en Meta API, enviando texto de respaldo...', metaData);
+    // 3. Fallback a texto en caso de que la plantilla esté pendiente de revisión en Meta
+    console.warn(`Plantilla Meta '${templateSpec.name}' no disponible aún en Meta Business Manager. Enviando texto de respaldo...`, metaData);
 
     const textResponse = await fetch(`https://graph.facebook.com/v21.0/${phoneId}/messages`, {
       method: 'POST',
@@ -181,35 +142,59 @@ export async function sendHumanHandoffMetaTemplate(params: {
         messaging_product: 'whatsapp',
         to: cleanPhone,
         type: 'text',
-        text: { body: fallbackBody },
+        text: { body: fullFallbackText },
       }),
     });
 
     if (textResponse.ok) {
-      if (supabase) {
+      if (supabase && chatId) {
         await supabase.from('crm_whatsapp_messages').insert([
           {
             chat_id: chatId,
             sender_type: 'bot',
             message_type: 'text',
-            content: fallbackBody,
+            content: fullFallbackText,
             metadata: {
               is_template_fallback: true,
               template_name: templateSpec.name,
+              variables,
             },
           },
         ]);
-        await supabase
-          .from('crm_whatsapp_chats')
-          .update({ session_status: 'human_handoff', last_interaction: new Date().toISOString() })
-          .eq('id', chatId);
       }
-      return { success: true, mode: 'text_fallback' };
+      return { success: true, mode: 'text_fallback', templateName: templateSpec.name };
     }
 
-    return { success: false, mode: 'text_fallback', error: 'No se pudo enviar por Meta API' };
+    return {
+      success: false,
+      mode: 'text_fallback',
+      templateName: templateSpec.name,
+      error: metaData.error?.message || 'Error en Meta Graph API',
+    };
   } catch (err: any) {
-    console.error('Error enviando plantilla Meta:', err);
-    return { success: false, mode: 'text_fallback', error: err.message };
+    console.error('Excepción enviando plantilla Meta:', err);
+    return {
+      success: false,
+      mode: 'text_fallback',
+      templateName: templateSpec.name,
+      error: err.message,
+    };
   }
+}
+
+/**
+ * Función de derivación humana específica (compatibilidad)
+ */
+export async function sendHumanHandoffMetaTemplate(params: {
+  chatId: string;
+  customerPhone: string;
+  customerName?: string;
+  reason?: string;
+}) {
+  return sendOfficialMetaTemplate({
+    templateKey: 'asistencia_humana_weke',
+    recipientPhone: params.customerPhone,
+    variables: [params.customerName || 'cliente', params.reason || 'su consulta'],
+    chatId: params.chatId,
+  });
 }

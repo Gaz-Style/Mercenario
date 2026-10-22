@@ -406,3 +406,39 @@ export async function triggerHumanHandoffTemplateAction(chatId: string, reason?:
   }
 }
 
+// ── 9. Enviar Cualquier Plantilla Oficial de Meta Cloud API ──────────────────
+export async function sendOfficialMetaTemplateAction(params: {
+  chatId: string;
+  templateKey: string;
+  variables: string[];
+}) {
+  const { chatId, templateKey, variables } = params;
+  const admin = getAdminClient();
+  if (!admin) return { success: false, error: 'Sin conexión a Supabase' };
+
+  try {
+    const { data: chat } = await admin
+      .from('crm_whatsapp_chats')
+      .select('phone_number')
+      .eq('id', chatId)
+      .single();
+
+    if (!chat) return { success: false, error: 'Chat no encontrado' };
+
+    const { sendOfficialMetaTemplate } = await import('@/lib/whatsapp/meta-templates');
+    const result = await sendOfficialMetaTemplate({
+      templateKey: templateKey as any,
+      recipientPhone: chat.phone_number,
+      variables,
+      chatId,
+    });
+
+    const msgs = await getWhatsAppMessagesAction(chatId);
+    return { success: true, mode: result.mode, templateName: result.templateName, messages: msgs };
+  } catch (err: any) {
+    console.error('Error enviando plantilla Meta en sendOfficialMetaTemplateAction:', err);
+    return { success: false, error: err.message };
+  }
+}
+
+

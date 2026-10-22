@@ -24,7 +24,12 @@ import {
   ShoppingBag,
   Zap,
   Smile,
-  FileText
+  FileText,
+  Code,
+  ChevronDown,
+  ChevronUp,
+  AlertCircle,
+  MessageSquare,
 } from 'lucide-react';
 import {
   getWhatsAppChatsAction,
@@ -35,7 +40,13 @@ import {
   testAIAssistantAction,
   simulateCustomerMessageAction,
   triggerHumanHandoffTemplateAction,
+  sendOfficialMetaTemplateAction,
 } from './actions';
+import {
+  OFFICIAL_META_TEMPLATES,
+  buildMetaTemplatePayload,
+  type MetaTemplateSpec,
+} from '@/lib/whatsapp/meta-templates-catalog';
 
 // Icono Oficial de WhatsApp SVG
 const WhatsAppIcon = ({ className }: { className?: string }) => (
@@ -86,6 +97,18 @@ export default function AsistenteClient({ initialChats = [] }: { initialChats?: 
 
   // Copiado de credenciales
   const [copiedEnv, setCopiedEnv] = useState(false);
+
+  // Plantillas Oficiales de Meta Cloud API
+  const [selectedTemplateKey, setSelectedTemplateKey] = useState<string>('asistencia_humana_weke');
+  const [templateInputs, setTemplateInputs] = useState<Record<string, string[]>>({});
+  const [sendingTemplate, setSendingTemplate] = useState(false);
+  const [copiedTemplateJson, setCopiedTemplateJson] = useState(false);
+  const [templateFeedback, setTemplateFeedback] = useState<{
+    success: boolean;
+    mode?: string;
+    message: string;
+  } | null>(null);
+  const [showJsonPayload, setShowJsonPayload] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -263,28 +286,92 @@ export default function AsistenteClient({ initialChats = [] }: { initialChats?: 
     refreshChats();
   };
 
-  // Enviar Plantilla Oficial Meta de Asistencia Humana
-  const handleSendHandoffTemplate = async () => {
-    if (!selectedChat || sending) return;
-    setSending(true);
+  // Modificar variables de la plantilla activa
+  const handleTemplateVariableChange = (templateKey: string, index: number, value: string) => {
+    const spec = OFFICIAL_META_TEMPLATES[templateKey];
+    const currentVars = templateInputs[templateKey]
+      ? [...templateInputs[templateKey]]
+      : [...(spec?.sampleVariables || [])];
+    currentVars[index] = value;
+    setTemplateInputs((prev) => ({
+      ...prev,
+      [templateKey]: currentVars,
+    }));
+  };
+
+  const handleResetTemplateVariables = (templateKey: string) => {
+    const spec = OFFICIAL_META_TEMPLATES[templateKey];
+    if (!spec) return;
+    setTemplateInputs((prev) => ({
+      ...prev,
+      [templateKey]: [...spec.sampleVariables],
+    }));
+  };
+
+  const handleCopyTemplateJson = (templateKey: string) => {
+    const spec = OFFICIAL_META_TEMPLATES[templateKey];
+    if (!spec) return;
+    const payload = buildMetaTemplatePayload(spec);
+    navigator.clipboard.writeText(JSON.stringify(payload, null, 2));
+    setCopiedTemplateJson(true);
+    setTimeout(() => setCopiedTemplateJson(false), 2500);
+  };
+
+  // Enviar cualquier plantilla oficial seleccionada
+  const handleSendSelectedTemplate = async () => {
+    if (!selectedChat || sendingTemplate) return;
+    setSendingTemplate(true);
+    setTemplateFeedback(null);
     try {
-      const res = await triggerHumanHandoffTemplateAction(
-        selectedChat.id,
-        'consulta técnica y asesoría de prendas'
-      );
-      if (res.success && res.messages) {
-        setMessages(res.messages);
-      }
-      setSelectedChat({
-        ...selectedChat,
-        session_status: 'human_handoff',
+      const spec = OFFICIAL_META_TEMPLATES[selectedTemplateKey];
+      if (!spec) return;
+      const vars = templateInputs[selectedTemplateKey] || spec.sampleVariables;
+
+      const res = await sendOfficialMetaTemplateAction({
+        chatId: selectedChat.id,
+        templateKey: selectedTemplateKey,
+        variables: vars,
       });
-      refreshChats();
-    } catch (e) {
-      console.error('Error enviando plantilla Meta:', e);
+
+      if (res.success) {
+        if (res.messages) {
+          setMessages(res.messages);
+        }
+        if (selectedTemplateKey === 'asistencia_humana_weke') {
+          setSelectedChat({
+            ...selectedChat,
+            session_status: 'human_handoff',
+          });
+        }
+        setTemplateFeedback({
+          success: true,
+          mode: res.mode,
+          message:
+            res.mode === 'template'
+              ? `Plantilla oficial '${spec.title}' enviada con éxito mediante Meta Cloud API.`
+              : `Plantilla '${spec.title}' enviada en modo respaldo seguro (texto estructurado) a ${selectedChat.phone_number}.`,
+        });
+        refreshChats();
+      } else {
+        setTemplateFeedback({
+          success: false,
+          message: res.error || 'No se pudo despachar la plantilla',
+        });
+      }
+    } catch (err: any) {
+      setTemplateFeedback({
+        success: false,
+        message: err.message || 'Error de conexión',
+      });
     } finally {
-      setSending(false);
+      setSendingTemplate(false);
     }
+  };
+
+  // Enviar Plantilla Oficial Meta de Asistencia Humana rápida
+  const handleSendHandoffTemplate = async () => {
+    setSelectedTemplateKey('asistencia_humana_weke');
+    setShowRightPanel('templates');
   };
 
   // Iniciar nuevo chat
@@ -674,15 +761,23 @@ WHATSAPP_VERIFY_TOKEN=weke_studio_secure_token`;
                     )}
                   </button>
 
-                  {/* Botón Disparar Plantilla Meta de Asistencia Humana */}
+                  {/* Botón Catálogo de Plantillas Meta Oficiales */}
                   <button
-                    onClick={handleSendHandoffTemplate}
-                    disabled={sending}
-                    className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-600 text-black transition-colors cursor-pointer shadow-xs disabled:opacity-50"
-                    title="Enviar plantilla oficial de Meta de asistencia humana al cliente"
+                    onClick={() =>
+                      setShowRightPanel(showRightPanel === 'templates' ? null : 'templates')
+                    }
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs ${
+                      showRightPanel === 'templates'
+                        ? 'bg-emerald-700 text-white shadow-md'
+                        : 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                    }`}
+                    title="Catálogo Oficial de Plantillas Homologadas de Meta WhatsApp"
                   >
                     <FileText className="w-3.5 h-3.5" />
-                    <span>Plantilla Asistencia</span>
+                    <span className="hidden sm:inline">Plantillas Meta</span>
+                    <span className="px-1.5 py-0.5 rounded-full bg-emerald-800/80 text-white text-[10px] font-mono font-bold">
+                      8
+                    </span>
                   </button>
 
                   <button
@@ -891,9 +986,9 @@ WHATSAPP_VERIFY_TOKEN=weke_studio_secure_token`;
           )}
         </main>
 
-        {/* ── COLUMNA 3: DRAWER LATERAL (CRM / SIMULADOR / CONFIGURACIÓN) ──── */}
+        {/* ── COLUMNA 3: DRAWER LATERAL (CRM / SIMULADOR / CONFIGURACIÓN / PLANTILLAS META) ──── */}
         {showRightPanel && (
-          <aside className="w-full md:w-[360px] lg:w-[400px] border-l border-zinc-200 bg-white flex flex-col shrink-0 z-20 overflow-y-auto animate-fadeIn">
+          <aside className="w-full md:w-[380px] lg:w-[440px] border-l border-zinc-200 bg-white flex flex-col shrink-0 z-20 overflow-y-auto animate-fadeIn">
             {/* Header del Panel Lateral */}
             <div className="h-14 bg-zinc-50 border-b border-zinc-200 px-4 flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -923,9 +1018,9 @@ WHATSAPP_VERIFY_TOKEN=weke_studio_secure_token`;
                 )}
                 {showRightPanel === 'templates' && (
                   <>
-                    <FileText className="w-4 h-4 text-emerald-600" />
+                    <FileText className="w-4 h-4 text-[#00a884]" />
                     <span className="text-xs font-bold uppercase tracking-wider text-zinc-900">
-                      Plantillas Meta Cloud API
+                      Plantillas Meta Cloud API (8)
                     </span>
                   </>
                 )}
@@ -1159,113 +1254,308 @@ WHATSAPP_VERIFY_TOKEN=weke_token`}
                 </div>
               )}
 
-              {/* 4. PLANTILLAS OFICIALES META CLOUD API */}
-              {showRightPanel === 'templates' && (
-                <div className="space-y-4 text-xs">
-                  <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-950 space-y-1.5">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-1.5 font-bold">
-                        <FileText className="w-3.5 h-3.5 text-emerald-700" />
-                        <span>Plantilla Oficial de Meta Cloud API</span>
-                      </div>
-                      <span className="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded-full bg-emerald-200 text-emerald-900">
-                        UTILITY
+              {/* 4. CATÁLOGO COMPLETO DE PLANTILLAS OFICIALES META CLOUD API (8) */}
+              {showRightPanel === 'templates' && (() => {
+                const spec =
+                  OFFICIAL_META_TEMPLATES[selectedTemplateKey] ||
+                  OFFICIAL_META_TEMPLATES.asistencia_humana_weke;
+                const currentVars =
+                  templateInputs[selectedTemplateKey] || spec.sampleVariables;
+
+                // Construir texto del cuerpo reemplazando {{1}}, {{2}}, etc. para preview
+                const renderPreviewBody = () => {
+                  const parts: React.ReactNode[] = [];
+                  const text = spec.body;
+                  const regex = /\{\{(\d+)\}\}/g;
+                  let lastIndex = 0;
+                  let match;
+
+                  while ((match = regex.exec(spec.body)) !== null) {
+                    const varIndex = parseInt(match[1], 10) - 1;
+                    const val = currentVars[varIndex] || `{{${match[1]}}}`;
+                    if (match.index > lastIndex) {
+                      parts.push(text.substring(lastIndex, match.index));
+                    }
+                    parts.push(
+                      <span
+                        key={match.index}
+                        className="font-bold text-emerald-800 bg-emerald-100/80 px-1 py-0.5 rounded border border-emerald-300"
+                      >
+                        {val}
                       </span>
-                    </div>
-                    <p className="text-[11px] leading-relaxed text-emerald-800">
-                      Plantilla oficial para cuando el bot pausa la atención automática y transfiere la conversación a un operador del taller.
-                    </p>
-                  </div>
+                    );
+                    lastIndex = regex.lastIndex;
+                  }
+                  if (lastIndex < text.length) {
+                    parts.push(text.substring(lastIndex));
+                  }
+                  return parts;
+                };
 
-                  {/* Ficha Técnica de la Plantilla */}
-                  <div className="bg-zinc-50 border border-zinc-200 rounded-xl p-3 space-y-2">
-                    <div className="grid grid-cols-2 gap-2 text-[11px]">
-                      <div>
-                        <span className="text-zinc-400 font-mono text-[10px] block uppercase">Nombre Plantilla:</span>
-                        <code className="font-bold text-zinc-900 font-mono text-xs">asistencia_humana_weke</code>
-                      </div>
-                      <div>
-                        <span className="text-zinc-400 font-mono text-[10px] block uppercase">Categoría:</span>
-                        <span className="font-bold text-zinc-900">Utilidad (UTILITY)</span>
-                      </div>
-                      <div>
-                        <span className="text-zinc-400 font-mono text-[10px] block uppercase">Idioma:</span>
-                        <span className="font-bold text-zinc-900">Español (es)</span>
-                      </div>
-                      <div>
-                        <span className="text-zinc-400 font-mono text-[10px] block uppercase">Variables Dinámicas:</span>
-                        <span className="font-bold text-zinc-900">2 (Nombre y Motivo)</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Preview Visual de WhatsApp */}
-                  <div className="space-y-1.5">
-                    <span className="font-bold text-zinc-800 text-[11px] block">
-                      Vista Previa en WhatsApp del Cliente:
-                    </span>
-                    <div className="bg-[#efeae2] p-4 rounded-2xl border border-zinc-300 shadow-inner">
-                      {/* Burbuja WhatsApp */}
-                      <div className="bg-white rounded-2xl rounded-tl-none p-3.5 shadow-sm space-y-2 max-w-[280px] border border-zinc-100 text-zinc-900">
-                        {/* Header */}
-                        <p className="font-bold text-[11px] text-zinc-800 border-b border-zinc-100 pb-1">
-                          Atención Personalizada WEKE
-                        </p>
-
-                        {/* Body */}
-                        <p className="text-[11px] leading-relaxed text-zinc-700">
-                          Estimado/a <span className="text-emerald-700 font-semibold">[Nombre Cliente]</span>, hemos transferido su solicitud a un asesor de nuestro taller en Las Condes. Un especialista de nuestro equipo se comunicará con usted a la brevedad para asistirle con su consulta sobre <span className="text-emerald-700 font-semibold">[Motivo/Prenda]</span>.
-                        </p>
-                        <p className="text-[10px] text-zinc-500 leading-tight">
-                          Horario de atención: Lunes a Viernes de 9:00 a 18:00 hrs.
-                        </p>
-
-                        {/* Footer */}
-                        <p className="text-[9px] text-zinc-400 font-mono pt-1 border-t border-zinc-100">
-                          WEKE • Confección Técnica & Sustentable (Gredos 7952, Las Condes)
-                        </p>
-
-                        {/* Botones de Acción */}
-                        <div className="pt-1.5 space-y-1 border-t border-zinc-100">
-                          <div className="w-full py-1 text-center text-[10px] font-bold text-[#00a884] bg-emerald-50/50 rounded flex items-center justify-center gap-1">
-                            <Phone className="w-3 h-3" />
-                            <span>Llamar al Taller</span>
-                          </div>
-                          <div className="w-full py-1 text-center text-[10px] font-bold text-[#00a884] bg-emerald-50/50 rounded flex items-center justify-center gap-1">
-                            <ExternalLink className="w-3 h-3" />
-                            <span>Ver Catálogo</span>
-                          </div>
+                return (
+                  <div className="space-y-4 text-xs">
+                    {/* Banner de Contexto de Envío */}
+                    <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1.5 font-bold text-emerald-950">
+                          <FileText className="w-4 h-4 text-[#00a884]" />
+                          <span>Meta Cloud API Homologada</span>
                         </div>
-
-                        <span className="text-[9px] text-zinc-400 block text-right font-mono">
-                          12:00 ✓✓
+                        <span
+                          className={`text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded-full ${
+                            spec.category === 'MARKETING'
+                              ? 'bg-purple-100 text-purple-900 border border-purple-200'
+                              : 'bg-emerald-200/80 text-emerald-900 border border-emerald-300'
+                          }`}
+                        >
+                          {spec.category}
                         </span>
                       </div>
-                    </div>
-                  </div>
-
-                  {/* Acciones de Disparo y Copia */}
-                  <div className="space-y-2 pt-2">
-                    <button
-                      onClick={handleSendHandoffTemplate}
-                      disabled={!selectedChat || sending}
-                      className="w-full py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 disabled:bg-zinc-300 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm active:scale-98"
-                    >
-                      <Send className="w-3.5 h-3.5" />
-                      <span>Disparar Plantilla al Chat Seleccionado</span>
-                    </button>
-
-                    <div className="p-3 bg-zinc-900 text-zinc-300 rounded-xl space-y-1 font-mono text-[10px]">
-                      <span className="text-zinc-400 uppercase tracking-widest block font-bold text-[9px]">
-                        Texto del Cuerpo para Meta Business Suite:
-                      </span>
-                      <p className="text-zinc-200 select-all leading-relaxed">
-                        {`Estimado/a {{1}}, hemos transferido su solicitud a un asesor de nuestro taller en Las Condes. Un especialista de nuestro equipo se comunicará con usted a la brevedad para asistirle con su consulta sobre {{2}}.\n\nHorario de atención: Lunes a Viernes de 9:00 a 18:00 hrs.`}
+                      <p className="text-[11px] text-emerald-900 leading-snug">
+                        {selectedChat ? (
+                          <>
+                            Destinatario activo:{' '}
+                            <strong className="text-black font-semibold">
+                              {selectedChat.customers?.full_name || selectedChat.phone_number}
+                            </strong>{' '}
+                            (<span className="font-mono">{selectedChat.phone_number}</span>)
+                          </>
+                        ) : (
+                          <span className="text-emerald-700 italic">
+                            Selecciona una conversación a la izquierda para despachar esta plantilla en vivo.
+                          </span>
+                        )}
                       </p>
                     </div>
+
+                    {/* Selector de Plantilla */}
+                    <div className="space-y-1.5">
+                      <label className="text-[11px] font-bold uppercase tracking-wider text-zinc-600 block">
+                        Seleccionar Plantilla Homologada (8 disponibles):
+                      </label>
+                      <div className="relative">
+                        <select
+                          value={selectedTemplateKey}
+                          onChange={(e) => {
+                            setSelectedTemplateKey(e.target.value);
+                            setTemplateFeedback(null);
+                          }}
+                          className="w-full px-3 py-2 text-xs bg-zinc-50 border border-zinc-300 rounded-xl font-medium text-zinc-900 outline-none focus:border-emerald-600 cursor-pointer appearance-none pr-8 shadow-2xs"
+                        >
+                          {Object.entries(OFFICIAL_META_TEMPLATES).map(([key, t]) => (
+                            <option key={key} value={key}>
+                              {t.category === 'MARKETING' ? '📢' : '⚙️'} {t.title}
+                            </option>
+                          ))}
+                        </select>
+                        <ChevronDown className="w-4 h-4 text-zinc-400 absolute right-2.5 top-2.5 pointer-events-none" />
+                      </div>
+                    </div>
+
+                    {/* Ficha Técnica de la Plantilla */}
+                    <div className="p-3 bg-zinc-50 border border-zinc-200 rounded-xl space-y-2">
+                      <div className="flex items-center justify-between gap-2">
+                        <code className="font-mono font-bold text-zinc-900 text-[11px]">
+                          {spec.name}
+                        </code>
+                        <span className="text-[10px] text-zinc-500 font-mono">
+                          Idioma: <strong>{spec.language}</strong>
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-zinc-600 leading-snug">
+                        {spec.description}
+                      </p>
+                      <div className="flex items-center gap-3 pt-1 text-[10px] text-zinc-500 font-mono border-t border-zinc-200">
+                        <span>Variables: <strong>{spec.sampleVariables.length}</strong></span>
+                        <span>Botones: <strong>{spec.buttons?.length || 0}</strong></span>
+                        <span>Tipo: <strong>{spec.category}</strong></span>
+                      </div>
+                    </div>
+
+                    {/* Editor de Variables Dinámicas */}
+                    {spec.sampleVariables.length > 0 && (
+                      <div className="space-y-2 border border-zinc-200 rounded-xl p-3 bg-white shadow-2xs">
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-zinc-800 text-[11px] flex items-center gap-1.5">
+                            <Sliders className="w-3.5 h-3.5 text-zinc-600" />
+                            Variables Dinámicas ({spec.sampleVariables.length})
+                          </span>
+                          <button
+                            onClick={() => handleResetTemplateVariables(selectedTemplateKey)}
+                            className="text-[10px] font-bold text-emerald-700 hover:text-emerald-900 hover:underline cursor-pointer"
+                          >
+                            Restablecer Ejemplos
+                          </button>
+                        </div>
+
+                        <div className="space-y-2 pt-1">
+                          {spec.sampleVariables.map((sample, idx) => {
+                            const currentVal = currentVars[idx] ?? sample;
+                            return (
+                              <div key={idx} className="space-y-1">
+                                <div className="flex justify-between items-center text-[10px] text-zinc-500">
+                                  <span className="font-mono font-bold text-zinc-700">
+                                    {`{{${idx + 1}}}`}
+                                  </span>
+                                  <span className="truncate max-w-[200px] text-zinc-400 italic">
+                                    Ej: {sample}
+                                  </span>
+                                </div>
+                                <input
+                                  type="text"
+                                  value={currentVal}
+                                  onChange={(e) =>
+                                    handleTemplateVariableChange(
+                                      selectedTemplateKey,
+                                      idx,
+                                      e.target.value
+                                    )
+                                  }
+                                  placeholder={sample}
+                                  className="w-full px-2.5 py-1.5 text-xs bg-zinc-50 border border-zinc-200 rounded-lg outline-none focus:border-emerald-600 text-zinc-900 font-mono shadow-2xs"
+                                />
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Vista Previa WhatsApp */}
+                    <div className="space-y-1.5">
+                      <span className="font-bold text-zinc-800 text-[11px] block">
+                        Vista Previa en WhatsApp del Destinatario:
+                      </span>
+                      <div className="bg-[#efeae2] p-4 rounded-2xl border border-zinc-300 shadow-inner">
+                        <div className="bg-white rounded-2xl rounded-tl-none p-3.5 shadow-sm space-y-2 max-w-[290px] border border-zinc-100 text-zinc-900">
+                          {/* Header */}
+                          {spec.header && (
+                            <p className="font-bold text-xs text-zinc-900 border-b border-zinc-100 pb-1.5 leading-tight">
+                              {spec.header}
+                            </p>
+                          )}
+
+                          {/* Body */}
+                          <div className="text-[11px] leading-relaxed text-zinc-800 whitespace-pre-line">
+                            {renderPreviewBody()}
+                          </div>
+
+                          {/* Footer */}
+                          {spec.footer && (
+                            <p className="text-[9px] text-zinc-400 font-sans pt-1 border-t border-zinc-100 leading-tight">
+                              {spec.footer}
+                            </p>
+                          )}
+
+                          {/* Botones Interactivos */}
+                          {spec.buttons && spec.buttons.length > 0 && (
+                            <div className="pt-2 space-y-1.5 border-t border-zinc-100">
+                              {spec.buttons.map((btn, bIdx) => (
+                                <div
+                                  key={bIdx}
+                                  className="w-full py-1.5 px-2 text-center text-[10px] font-bold text-[#00a884] bg-emerald-50/70 hover:bg-emerald-100 rounded-lg flex items-center justify-center gap-1.5 transition-colors"
+                                >
+                                  {btn.type === 'PHONE_NUMBER' && <Phone className="w-3 h-3" />}
+                                  {btn.type === 'URL' && <ExternalLink className="w-3 h-3" />}
+                                  {btn.type === 'QUICK_REPLY' && <MessageSquare className="w-3 h-3" />}
+                                  <span>{btn.text}</span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+
+                          <span className="text-[9px] text-zinc-400 block text-right font-mono">
+                            12:00 <span className="text-[#53bdeb]">✓✓</span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Feedback Banner */}
+                    {templateFeedback && (
+                      <div
+                        className={`p-3 rounded-xl border text-[11px] leading-snug flex items-start gap-2 ${
+                          templateFeedback.success
+                            ? 'bg-emerald-50 border-emerald-200 text-emerald-900'
+                            : 'bg-red-50 border-red-200 text-red-900'
+                        }`}
+                      >
+                        {templateFeedback.success ? (
+                          <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                        ) : (
+                          <AlertCircle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
+                        )}
+                        <div>
+                          <p className="font-bold">{templateFeedback.message}</p>
+                          {templateFeedback.mode === 'text_fallback' && (
+                            <p className="text-[10px] text-emerald-700 mt-1">
+                              Meta WhatsApp Manager: la plantilla está en proceso de revisión oficial; se utilizó el fallback a texto con variables dinámicas para evitar pérdida de contacto.
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Acciones: Disparar y Copiar JSON */}
+                    <div className="space-y-2 pt-1">
+                      <button
+                        onClick={handleSendSelectedTemplate}
+                        disabled={!selectedChat || sendingTemplate}
+                        className="w-full py-2.5 px-3 bg-[#00a884] hover:bg-[#008f6f] disabled:bg-zinc-200 disabled:text-zinc-400 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm active:scale-98 disabled:cursor-not-allowed"
+                      >
+                        {sendingTemplate ? (
+                          <>
+                            <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                            <span>Despachando Plantilla...</span>
+                          </>
+                        ) : (
+                          <>
+                            <Send className="w-3.5 h-3.5" />
+                            <span>
+                              {selectedChat
+                                ? `Disparar a ${selectedChat.customers?.full_name || selectedChat.phone_number}`
+                                : 'Selecciona un chat para disparar'}
+                            </span>
+                          </>
+                        )}
+                      </button>
+
+                      <button
+                        onClick={() => handleCopyTemplateJson(selectedTemplateKey)}
+                        className="w-full py-2 px-3 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer border border-zinc-200"
+                      >
+                        {copiedTemplateJson ? (
+                          <>
+                            <Check className="w-3.5 h-3.5 text-emerald-600" />
+                            <span className="text-emerald-700">¡JSON Copiado al Portapapeles!</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-3.5 h-3.5 text-zinc-600" />
+                            <span>Copiar JSON para Meta Business Suite</span>
+                          </>
+                        )}
+                      </button>
+
+                      {/* Botón Acordeón Ver JSON Oficial */}
+                      <button
+                        onClick={() => setShowJsonPayload(!showJsonPayload)}
+                        className="w-full py-1 text-center text-[11px] text-zinc-500 hover:text-black flex items-center justify-center gap-1 cursor-pointer"
+                      >
+                        <Code className="w-3 h-3" />
+                        <span>{showJsonPayload ? 'Ocultar Estructura JSON' : 'Ver Payload JSON Oficial (Graph API)'}</span>
+                        {showJsonPayload ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                      </button>
+
+                      {showJsonPayload && (
+                        <pre className="p-3 bg-zinc-900 text-emerald-400 rounded-xl font-mono text-[10px] overflow-x-auto max-h-56 select-all border border-zinc-800 leading-relaxed">
+                          {JSON.stringify(buildMetaTemplatePayload(spec), null, 2)}
+                        </pre>
+                      )}
+                    </div>
                   </div>
-                </div>
-              )}
+                );
+              })()}
             </div>
           </aside>
         )}
