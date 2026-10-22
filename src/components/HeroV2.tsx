@@ -119,12 +119,13 @@ export default function HeroV2() {
                     
                     {/* Titular sobre el video */}
                     <div className="absolute inset-0 flex flex-col justify-end px-6 pb-8 space-y-3">
-                        <span className="text-[10px] font-mono tracking-[0.2em] uppercase text-neutral-300 font-bold">
-                            MERCENARIO // SISTEMAS OPERATIVOS
+                        <span className="text-[10px] font-mono tracking-[0.2em] uppercase text-emerald-400 font-bold flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                            E-COMMERCE &amp; ERP SAAS CHILE · 0% COMISIÓN
                         </span>
                         <h1 className="text-3xl font-black tracking-tight text-white leading-[1.1]">
-                            Concéntrate en tu talento.<br />
-                            <span className="text-neutral-300 font-light">Nosotros conectamos la operación.</span>
+                            Vende sin comisiones.<br />
+                            <span className="text-neutral-300 font-light">Opera con ERP, Boletas SII y WhatsApp.</span>
                         </h1>
                     </div>
                 </div>
@@ -132,22 +133,22 @@ export default function HeroV2() {
                 {/* Propuesta y CTAs */}
                 <div className="px-5 py-8 space-y-6">
                     <p className="text-sm text-neutral-600 font-light leading-relaxed">
-                        Un software de gestión (ERP/CRM) disfrazado de sitio web de alta conversión, conectado a tu WhatsApp oficial 24/7 y pasarelas de pago. Entregado y operando en 14 días.
+                        Tu tienda online de alta velocidad con Webpay y Starken, punto de venta (POS) para tu local físico, boletas electrónicas SII automáticas y asistente de WhatsApp con IA 24/7.
                     </p>
 
                     <div className="flex flex-col gap-3">
                         <a
-                            href="#sandbox"
-                            className="w-full py-4 px-5 bg-black text-white text-xs font-bold uppercase tracking-widest rounded-xl flex items-center justify-center gap-2 hover:bg-neutral-800 transition-colors"
+                            href="#planes"
+                            className="w-full py-4 px-5 bg-black text-white text-xs font-bold uppercase tracking-widest rounded-xl flex items-center justify-center gap-2 hover:bg-neutral-800 transition-colors shadow-sm"
                         >
-                            <span>Web Demo</span>
+                            <span>Ver Planes SaaS (Desde $9.990 CLP)</span>
                             <ArrowRight className="w-4 h-4" />
                         </a>
                         <a
-                            href="#arquitectura"
+                            href="#calculadora"
                             className="w-full py-4 px-5 border border-neutral-200 text-black text-xs font-bold uppercase tracking-widest rounded-xl flex items-center justify-center gap-2 hover:border-black transition-colors"
                         >
-                            <span>Ver Arquitectura del Sistema</span>
+                            <span>Calcular Ahorro 0% Comisión</span>
                             <ArrowRight className="w-4 h-4" />
                         </a>
                     </div>
@@ -155,16 +156,16 @@ export default function HeroV2() {
                     {/* Datos clave */}
                     <div className="grid grid-cols-3 gap-3 pt-2 border-t border-neutral-100">
                         <div className="text-center space-y-1">
-                            <span className="text-sm font-mono font-black text-black block">14 días</span>
-                            <span className="text-[10px] text-neutral-400 font-mono uppercase">entrega</span>
+                            <span className="text-sm font-mono font-black text-emerald-600 block">0%</span>
+                            <span className="text-[10px] text-neutral-400 font-mono uppercase">comisión venta</span>
                         </div>
                         <div className="text-center space-y-1 border-x border-neutral-100">
-                            <span className="text-sm font-mono font-black text-black block">24/7</span>
-                            <span className="text-[10px] text-neutral-400 font-mono uppercase">operativo</span>
+                            <span className="text-sm font-mono font-black text-black block">Webpay+SII</span>
+                            <span className="text-[10px] text-neutral-400 font-mono uppercase">nativo chile</span>
                         </div>
                         <div className="text-center space-y-1">
-                            <span className="text-sm font-mono font-black text-black block">0.8s</span>
-                            <span className="text-[10px] text-neutral-400 font-mono uppercase">carga web</span>
+                            <span className="text-sm font-mono font-black text-black block">24/7</span>
+                            <span className="text-[10px] text-neutral-400 font-mono uppercase">bot whatsapp</span>
                         </div>
                     </div>
                 </div>
@@ -259,27 +260,36 @@ export default function HeroV2() {
 
                             <div className="pt-2 flex flex-wrap items-center gap-4">
                                 <a 
-                                    href="#sandbox" 
+                                    href="#planes" 
                                     className="inline-flex items-center gap-2.5 px-7 py-4 bg-black text-white text-[11px] font-semibold uppercase tracking-widest rounded-full hover:bg-neutral-800 transition-all shadow-sm group"
                                 >
-                                    <span>Web Demo</span>
+                                    <span>Ver Planes SaaS (Desde $9.990)</span>
                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                 </a>
                                 <a 
-                                    href="#arquitectura" 
+                                    href="#calculadora" 
                                     className="inline-flex items-center gap-2 px-6 py-4 border border-neutral-200 text-black text-[11px] font-semibold uppercase tracking-widest rounded-full hover:border-black hover:bg-neutral-50 transition-all"
                                 >
-                                    <span>Ver Arquitectura del Sistema</span>
+                                    <span>Calcular Ahorro 0% Comisión</span>
+                                    <ArrowRight className="w-4 h-4" />
+                                </a>
+                                <a 
+                                    href="#sandbox" 
+                                    className="inline-flex items-center gap-2 px-5 py-4 text-neutral-500 hover:text-black text-[11px] font-semibold uppercase tracking-widest transition-colors"
+                                >
+                                    <span>Probar Demo en Vivo</span>
                                     <ArrowRight className="w-4 h-4" />
                                 </a>
                             </div>
 
                             <div className="pt-1 flex flex-wrap items-center gap-4 md:gap-6 text-[10px] font-mono text-neutral-400 uppercase tracking-wider">
-                                <span>Implementación en 14 días</span>
+                                <span className="text-emerald-600 font-bold">0% Comisión por Venta</span>
                                 <span>·</span>
-                                <span>Meta WhatsApp Cloud API Oficial</span>
+                                <span>Webpay Plus &amp; Mercado Pago</span>
                                 <span>·</span>
-                                <span>Webpay Plus &amp; SII</span>
+                                <span>Boletas SII Automáticas</span>
+                                <span>·</span>
+                                <span>Meta WhatsApp API Oficial</span>
                             </div>
                         </div>
                     </motion.div>
