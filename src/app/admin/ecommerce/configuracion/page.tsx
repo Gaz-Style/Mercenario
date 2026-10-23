@@ -14,7 +14,11 @@ import {
   ShieldCheck,
   Save,
   Building,
-  DollarSign
+  DollarSign,
+  MapPin,
+  Clock,
+  ToggleLeft,
+  ToggleRight
 } from 'lucide-react';
 
 export default function StoreSettingsPage() {
@@ -28,6 +32,13 @@ export default function StoreSettingsPage() {
     freeShippingThreshold: 100000,
     flatShippingRate: 4990,
     deliveryEstimate: '24 a 48 horas hábiles vía Courier',
+    // ── Retiro en Tienda ──────────────────────────────────────────────────────
+    pickupEnabled: false,
+    pickupAddress: '',
+    pickupCommune: '',
+    pickupSchedule: '',
+    pickupNote: '',
+    // ─────────────────────────────────────────────────────────────────────────
     bankName: 'Banco Santander',
     accountType: 'Cuenta Corriente',
     accountNumber: '78-987654-2',
@@ -39,23 +50,60 @@ export default function StoreSettingsPage() {
   });
 
   useEffect(() => {
-    const local = localStorage.getItem('mercenario_store_settings');
-    if (local) {
+    async function loadInitial() {
+      const local = localStorage.getItem('mercenario_store_settings');
+      if (local) {
+        try {
+          setSettings(JSON.parse(local));
+          return;
+        } catch (e) {
+          console.warn('Error reading store settings', e);
+        }
+      }
       try {
-        setSettings(JSON.parse(local));
-      } catch (e) {
-        console.warn('Error reading store settings', e);
+        const res = await fetch('/api/store/settings');
+        if (res.ok) {
+          const data = await res.json();
+          setSettings((prev) => ({
+            ...prev,
+            pickupEnabled: data.pickupEnabled ?? prev.pickupEnabled,
+            pickupAddress: data.pickupAddress || prev.pickupAddress,
+            pickupCommune: data.pickupCommune || prev.pickupCommune,
+            pickupSchedule: data.pickupSchedule || prev.pickupSchedule,
+            pickupNote: data.pickupNote || prev.pickupNote,
+          }));
+        }
+      } catch (err) {
+        console.warn('Could not fetch /api/store/settings', err);
       }
     }
+    loadInitial();
   }, []);
 
   const handleChange = (field: string, value: any) => {
     setSettings((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     localStorage.setItem('mercenario_store_settings', JSON.stringify(settings));
+
+    try {
+      await fetch('/api/store/settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          pickupEnabled: settings.pickupEnabled,
+          pickupAddress: settings.pickupAddress,
+          pickupCommune: settings.pickupCommune,
+          pickupSchedule: settings.pickupSchedule,
+          pickupNote: settings.pickupNote,
+        }),
+      });
+    } catch (err) {
+      console.warn('Could not post to /api/store/settings', err);
+    }
+
     setSaved(true);
     setTimeout(() => setSaved(false), 3000);
   };
@@ -246,6 +294,105 @@ export default function StoreSettingsPage() {
                 />
               </div>
             </div>
+          </div>
+
+          {/* 2b. Retiro en Tienda Física */}
+          <div className="bg-white border border-zinc-200/90 rounded-2xl p-6 shadow-sm space-y-6">
+            <div className="flex items-center justify-between pb-4 border-b border-zinc-100">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-zinc-100 flex items-center justify-center text-zinc-800 font-bold">
+                  <MapPin className="w-4 h-4" />
+                </div>
+                <div>
+                  <h2 className="text-base font-bold text-zinc-900">Retiro en Tienda Física</h2>
+                  <p className="text-xs text-zinc-500">Si tienes local físico, activa esta opción para que el cliente pueda retirar su pedido sin costo de envío.</p>
+                </div>
+              </div>
+              {/* Toggle principal */}
+              <button
+                type="button"
+                onClick={() => handleChange('pickupEnabled', !settings.pickupEnabled)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${
+                  settings.pickupEnabled
+                    ? 'bg-black text-white'
+                    : 'bg-zinc-100 text-zinc-500 hover:bg-zinc-200'
+                }`}
+              >
+                {settings.pickupEnabled
+                  ? <><ToggleRight className="w-4 h-4" /> Activado</>
+                  : <><ToggleLeft className="w-4 h-4" /> Desactivado</>}
+              </button>
+            </div>
+
+            {settings.pickupEnabled && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
+                <div className="md:col-span-2">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-600 mb-2 flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5" /> Dirección Exacta del Local
+                  </label>
+                  <input
+                    type="text"
+                    value={settings.pickupAddress}
+                    onChange={(e) => handleChange('pickupAddress', e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-sm bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black transition-all"
+                    placeholder="Ej: Av. Vitacura 2939, Local 4"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-600 mb-2">
+                    Comuna
+                  </label>
+                  <input
+                    type="text"
+                    value={settings.pickupCommune}
+                    onChange={(e) => handleChange('pickupCommune', e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-sm bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black transition-all"
+                    placeholder="Ej: Vitacura, Las Condes"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-600 mb-2 flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5" /> Horario de Retiro
+                  </label>
+                  <input
+                    type="text"
+                    value={settings.pickupSchedule}
+                    onChange={(e) => handleChange('pickupSchedule', e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-sm bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black transition-all"
+                    placeholder="Ej: Lun-Vie 10:00 a 19:00 · Sáb 10:00 a 14:00"
+                  />
+                </div>
+
+                <div className="md:col-span-2">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-600 mb-2">
+                    Nota Visible en el Checkout (Instrucciones para el cliente)
+                  </label>
+                  <input
+                    type="text"
+                    value={settings.pickupNote}
+                    onChange={(e) => handleChange('pickupNote', e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-sm bg-zinc-50 border border-zinc-200 rounded-lg focus:outline-none focus:border-black transition-all"
+                    placeholder="Ej: Traer RUT y número de orden. Pedido listo en 2h hábiles."
+                  />
+                </div>
+
+                <div className="md:col-span-2 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-800 flex items-start gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
+                  <span>
+                    <strong>Retiro activado:</strong> Los clientes verán la opción «Retiro en Tienda (Gratis)» en el checkout junto a las opciones de courier.
+                    Al elegir esta opción, el costo de envío es $0 y recibirán instrucciones de retiro por WhatsApp.
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {!settings.pickupEnabled && (
+              <p className="text-xs text-zinc-400 font-mono">
+                Activa esta opción si tienes un local físico donde el cliente puede buscar su pedido sin pagar despacho.
+              </p>
+            )}
           </div>
 
           {/* 3. Pagos y Datos de Transferencia */}

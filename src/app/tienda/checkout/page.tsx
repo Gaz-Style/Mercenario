@@ -26,6 +26,14 @@ interface CourierRate {
   estimated_days: number;
 }
 
+interface PickupSettings {
+  pickupEnabled: boolean;
+  pickupAddress: string;
+  pickupCommune: string;
+  pickupSchedule: string;
+  pickupNote: string;
+}
+
 // ─── COMUNAS DE FALLBACK (para cuando Shipit no está configurado aún) ─────────
 const FALLBACK_COMMUNES: ShipitCommune[] = [
   { id: 306, name: 'Las Condes', region_name: 'Región Metropolitana' },
@@ -57,6 +65,14 @@ const FALLBACK_COMMUNES: ShipitCommune[] = [
 
 // ─── HELPER ───────────────────────────────────────────────────────────────────
 
+const PICKUP_RATE: CourierRate = {
+  courier_id: -1,
+  courier_name: 'Retiro en Tienda',
+  service_name: 'Gratis · Sin costo de envío',
+  total_price: 0,
+  estimated_days: 0,
+};
+
 const courierLogos: Record<string, string> = {
   Starken: '★',
   Chilexpress: '⚡',
@@ -74,6 +90,15 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  // Retiro en tienda (configuración del admin)
+  const [pickupSettings, setPickupSettings] = useState<PickupSettings>({
+    pickupEnabled: false,
+    pickupAddress: '',
+    pickupCommune: '',
+    pickupSchedule: '',
+    pickupNote: '',
+  });
+
   // Comunas
   const [communes, setCommunes] = useState<ShipitCommune[]>([]);
   const [communeSearch, setCommuneSearch] = useState('');
@@ -84,6 +109,8 @@ export default function CheckoutPage() {
   const [quotingRates, setQuotingRates] = useState(false);
   const [courierRates, setCourierRates] = useState<CourierRate[]>([]);
   const [selectedRate, setSelectedRate] = useState<CourierRate | null>(null);
+
+  const isPickup = selectedRate?.courier_id === -1;
 
   // Cálculos dinámicos
   const FREE_SHIPPING_THRESHOLD = 100000;
@@ -101,6 +128,42 @@ export default function CheckoutPage() {
     notes: '',
     paymentGateway: 'webpay' as 'webpay' | 'mercadopago' | 'transferencia',
   });
+
+  // ─── CARGA DE CONFIGURACIÓN DEL ADMIN ──────────────────────────────────────
+
+  useEffect(() => {
+    async function loadSettings() {
+      try {
+        const stored = localStorage.getItem('mercenario_store_settings');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          setPickupSettings({
+            pickupEnabled: parsed.pickupEnabled ?? false,
+            pickupAddress: parsed.pickupAddress ?? '',
+            pickupCommune: parsed.pickupCommune ?? '',
+            pickupSchedule: parsed.pickupSchedule ?? '',
+            pickupNote: parsed.pickupNote ?? '',
+          });
+          return;
+        }
+
+        const res = await fetch('/api/store/settings');
+        if (res.ok) {
+          const data = await res.json();
+          setPickupSettings({
+            pickupEnabled: data.pickupEnabled ?? false,
+            pickupAddress: data.pickupAddress ?? '',
+            pickupCommune: data.pickupCommune ?? '',
+            pickupSchedule: data.pickupSchedule ?? '',
+            pickupNote: data.pickupNote ?? '',
+          });
+        }
+      } catch (e) {
+        console.warn('Could not read store settings', e);
+      }
+    }
+    loadSettings();
+  }, []);
 
   // ─── CARGA DE COMUNAS ─────────────────────────────────────────────────────
 
@@ -187,16 +250,20 @@ export default function CheckoutPage() {
       setErrorMessage('Tu bolsa está vacía. Agrega productos antes de pagar.');
       return;
     }
-    if (!formData.fullName || !formData.email || !formData.phone || !formData.street) {
-      setErrorMessage('Por favor completa todos los campos requeridos para el despacho.');
+    if (!formData.fullName || !formData.email || !formData.phone) {
+      setErrorMessage('Por favor completa los datos de contacto.');
       return;
     }
-    if (!selectedCommune) {
+    if (!isPickup && !formData.street) {
+      setErrorMessage('Por favor ingresa tu dirección de despacho.');
+      return;
+    }
+    if (!isPickup && !selectedCommune) {
       setErrorMessage('Selecciona una comuna de destino para calcular el envío.');
       return;
     }
     if (!selectedRate) {
-      setErrorMessage('Selecciona un courier para continuar.');
+      setErrorMessage('Selecciona una opción de envío para continuar.');
       return;
     }
 
@@ -209,12 +276,22 @@ export default function CheckoutPage() {
         customer_email: formData.email,
         customer_phone: formData.phone,
         rut_dni: formData.rut,
-        shipping_address: {
-          street: `${formData.street} ${formData.streetNumber}`.trim(),
-          city: selectedCommune.name,
-          region: selectedCommune.region_name,
-          notes: formData.notes,
-        },
+        shipping_address: isPickup
+          ? {
+              street: `Retiro en Tienda: ${pickupSettings.pickupAddress}`,
+              city: pickupSettings.pickupCommune || 'Tienda Física',
+              region: 'Retiro en Tienda',
+              notes: [
+                formData.notes,
+                pickupSettings.pickupNote ? `Instrucciones retiro: ${pickupSettings.pickupNote}` : '',
+              ].filter(Boolean).join(' | '),
+            }
+          : {
+              street: `${formData.street} ${formData.streetNumber}`.trim(),
+              city: selectedCommune?.name || '',
+              region: selectedCommune?.region_name || '',
+              notes: formData.notes,
+            },
         items: items.map((i) => ({
           product_id: i.product_id,
           variant_id: i.variant_id,
@@ -431,8 +508,8 @@ export default function CheckoutPage() {
               </div>
             </section>
 
-            {/* [03] SELECCIÓN DE COURIER (aparece solo cuando se elige una comuna) */}
-            {(quotingRates || courierRates.length > 0) && (
+                {/* SELECCIÓN DE ENVÍO / RETIRO */}
+            {(pickupSettings.pickupEnabled || quotingRates || courierRates.length > 0) && (
               <section className="space-y-4">
                 <div className="flex items-center gap-2 pb-2 border-b border-neutral-200">
                   <span className="text-xs font-mono font-bold text-neutral-400">[03]</span>
@@ -441,64 +518,100 @@ export default function CheckoutPage() {
                   </h2>
                 </div>
 
-                {quotingRates ? (
-                  // Estado: Cotizando...
-                  <div className="flex items-center gap-3 p-4 bg-neutral-50 border border-neutral-200 text-xs font-mono text-neutral-600">
-                    <Loader2 className="w-4 h-4 animate-spin text-black" />
-                    <span>Cotizando tarifas de envío para <strong>{communeSearch}</strong>...</span>
-                  </div>
-                ) : (
-                  // Estado: Resultados de cotización
-                  <div className="space-y-2 pt-1">
-                    {courierRates.map((rate) => (
-                      <label
-                        key={rate.courier_id}
-                        className={`flex items-center justify-between p-4 border cursor-pointer transition-all ${
-                          selectedRate?.courier_id === rate.courier_id
-                            ? 'border-black bg-neutral-50 ring-1 ring-black'
-                            : 'border-neutral-200 bg-white hover:border-neutral-400'
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <input
-                            type="radio"
-                            name="courierRate"
-                            value={rate.courier_id}
-                            checked={selectedRate?.courier_id === rate.courier_id}
-                            onChange={() => setSelectedRate(rate)}
-                            className="accent-black"
-                          />
-                          <div>
-                            <div className="flex items-center gap-2">
-                              <span className="text-sm font-mono">
-                                {courierLogos[rate.courier_name] || '📦'}
-                              </span>
-                              <p className="text-xs font-bold text-black uppercase font-mono">
-                                {rate.courier_name}
-                              </p>
-                              <span className="text-[10px] text-neutral-400 font-mono">
-                                {rate.service_name}
-                              </span>
-                            </div>
-                            <p className="text-[10px] text-neutral-500 mt-0.5 flex items-center gap-1">
-                              <Truck className="w-3 h-3" />
-                              {rate.estimated_days === 1 ? '1 día hábil' : `${rate.estimated_days} días hábiles`}
-                            </p>
+                <div className="space-y-2 pt-1">
+
+                  {/* ── Tarjeta: Retiro en Tienda (si está activado) ── */}
+                  {pickupSettings.pickupEnabled && (
+                    <label
+                      className={`flex items-start justify-between p-4 border cursor-pointer transition-all ${
+                        selectedRate?.courier_id === -1
+                          ? 'border-black bg-neutral-50 ring-1 ring-black'
+                          : 'border-neutral-200 bg-white hover:border-neutral-400'
+                      }`}
+                    >
+                      <div className="flex items-start gap-3">
+                        <input
+                          type="radio"
+                          name="courierRate"
+                          value="-1"
+                          checked={selectedRate?.courier_id === -1}
+                          onChange={() => setSelectedRate(PICKUP_RATE)}
+                          className="accent-black mt-0.5"
+                        />
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-mono">🏪</span>
+                            <p className="text-xs font-bold text-black uppercase font-mono">Retiro en Tienda</p>
+                            <span className="text-[10px] bg-black text-white px-2 py-0.5 rounded-full font-mono">GRATIS</span>
                           </div>
-                        </div>
-                        <div className="text-right">
-                          {rate.total_price === 0 ? (
-                            <span className="text-xs font-black text-emerald-600 font-mono uppercase">GRATIS</span>
-                          ) : (
-                            <span className="text-sm font-black text-black font-mono">
-                              ${rate.total_price.toLocaleString('es-CL')}
-                            </span>
+                          <p className="text-[10px] text-neutral-500 mt-1">
+                            📍 {pickupSettings.pickupAddress}, {pickupSettings.pickupCommune}
+                          </p>
+                          {pickupSettings.pickupSchedule && (
+                            <p className="text-[10px] text-neutral-400 mt-0.5">
+                              🕐 {pickupSettings.pickupSchedule}
+                            </p>
+                          )}
+                          {pickupSettings.pickupNote && selectedRate?.courier_id === -1 && (
+                            <p className="text-[10px] text-neutral-600 mt-1.5 p-2 bg-amber-50 border border-amber-200 rounded">
+                              ⚠️ {pickupSettings.pickupNote}
+                            </p>
                           )}
                         </div>
-                      </label>
-                    ))}
-                  </div>
-                )}
+                      </div>
+                      <span className="text-sm font-black text-emerald-600 font-mono whitespace-nowrap">$0</span>
+                    </label>
+                  )}
+
+                  {/* ── Spinner de cotización ── */}
+                  {quotingRates && (
+                    <div className="flex items-center gap-3 p-4 bg-neutral-50 border border-neutral-200 text-xs font-mono text-neutral-600">
+                      <Loader2 className="w-4 h-4 animate-spin text-black" />
+                      <span>Cotizando tarifas para <strong>{communeSearch}</strong>...</span>
+                    </div>
+                  )}
+
+                  {/* ── Opciones de courier ── */}
+                  {!quotingRates && courierRates.map((rate) => (
+                    <label
+                      key={rate.courier_id}
+                      className={`flex items-center justify-between p-4 border cursor-pointer transition-all ${
+                        selectedRate?.courier_id === rate.courier_id
+                          ? 'border-black bg-neutral-50 ring-1 ring-black'
+                          : 'border-neutral-200 bg-white hover:border-neutral-400'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <input
+                          type="radio"
+                          name="courierRate"
+                          value={rate.courier_id}
+                          checked={selectedRate?.courier_id === rate.courier_id}
+                          onChange={() => setSelectedRate(rate)}
+                          className="accent-black"
+                        />
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-mono">{courierLogos[rate.courier_name] || '📦'}</span>
+                            <p className="text-xs font-bold text-black uppercase font-mono">{rate.courier_name}</p>
+                            <span className="text-[10px] text-neutral-400 font-mono">{rate.service_name}</span>
+                          </div>
+                          <p className="text-[10px] text-neutral-500 mt-0.5 flex items-center gap-1">
+                            <Truck className="w-3 h-3" />
+                            {rate.estimated_days === 1 ? '1 día hábil' : `${rate.estimated_days} días hábiles`}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        {rate.total_price === 0 ? (
+                          <span className="text-xs font-black text-emerald-600 font-mono uppercase">GRATIS</span>
+                        ) : (
+                          <span className="text-sm font-black text-black font-mono">${rate.total_price.toLocaleString('es-CL')}</span>
+                        )}
+                      </div>
+                    </label>
+                  ))}
+                </div>
               </section>
             )}
 
