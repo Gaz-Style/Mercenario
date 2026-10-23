@@ -13,10 +13,10 @@ export default function OmnichannelPillars() {
         },
         {
             icon: Truck,
-            tag: "LOGÍSTICA INTEGRADA",
-            title: "Envíos a todo Chile sin enredos",
-            description: "Cotizador automático en el checkout para Starken, Chilexpress y Blue Express. Tus clientes eligen despacho a domicilio o retiro en sucursal, y tú imprimes las etiquetas con un clic.",
-            highlight: "Cálculo de tarifas en vivo"
+            tag: "LOGÍSTICA & DESPACHO",
+            title: "Multi-Courier en vivo y Retiro en Tienda",
+            description: "Cotizador inteligente por comuna conectado a Starken, Chilexpress y Blue Express vía Shipit. Tus clientes eligen el courier más rápido o económico, o seleccionan Retiro en Tienda ($0) con los horarios que tú configuras en el panel.",
+            highlight: "Cotización por comuna + Retiro"
         },
         {
             icon: MessageCircle,

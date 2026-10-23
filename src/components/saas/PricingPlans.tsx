@@ -24,7 +24,8 @@ export default function PricingPlans({ onSelectPlan }: PricingPlansProps) {
                 "Catálogo, visitas y ventas 100% ilimitadas",
                 "0% de comisión por venta de la plataforma",
                 "Integración Webpay Plus (Transbank) y Mercado Pago",
-                "Cotizador de envíos en tiempo real (Starken y Chilexpress)",
+                "Cotizador multi-courier en vivo (Shipit, Starken, Chilexpress)",
+                "Módulo de Retiro en Tienda física configurable ($0)",
                 "Checkout optimizado con autocompletado de RUT chileno",
                 "Certificado SSL gratis y dominio propio .cl",
                 "1 usuario administrador con panel móvil"
@@ -254,7 +255,7 @@ export default function PricingPlans({ onSelectPlan }: PricingPlansProps) {
                         Toda nueva empresa inicia con Setup Técnico 100% Llave en Mano.
                     </h4>
                     <p className="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed">
-                        Nuestros ingenieros asumen la puesta en marcha completa: homologamos tu certificado del SII, integramos Webpay/Mercado Pago y dejamos el POS listo para operar.
+                        Nuestros ingenieros asumen la puesta en marcha completa: homologamos tu certificado del SII, integramos Webpay/Mercado Pago, conectamos couriers con cotizador en vivo y dejamos el POS listo para operar.
                     </p>
                     <div className="pt-1 flex flex-wrap items-center gap-4 text-[11px] font-mono text-neutral-400">
                         <span className="flex items-center gap-1.5">
@@ -265,6 +266,9 @@ export default function PricingPlans({ onSelectPlan }: PricingPlansProps) {
                         </span>
                         <span className="flex items-center gap-1.5">
                             <span className="text-emerald-400 font-bold">✓</span> Pasarelas de Pago
+                        </span>
+                        <span className="flex items-center gap-1.5">
+                            <span className="text-emerald-400 font-bold">✓</span> Couriers &amp; Retiro en Tienda
                         </span>
                         <span className="flex items-center gap-1.5">
                             <span className="text-emerald-400 font-bold">✓</span> Entrega en 48-72h

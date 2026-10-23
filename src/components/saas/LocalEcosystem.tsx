@@ -13,8 +13,8 @@ export default function LocalEcosystem() {
         {
             icon: Truck,
             category: "Couriers & Despacho",
-            title: "Starken, Chilexpress & Blue Express",
-            desc: "Cotización de fletes en tiempo real para todas las comunas de Chile, retiro en tienda y generación de números de orden."
+            title: "Multi-Courier (Shipit, Starken, Chilexpress) + Retiro en Tienda",
+            desc: "Cotización de tarifas en vivo para todas las comunas de Chile, selección de operador más conveniente y módulo de retiro en tienda física con horarios y dirección administrable."
         },
         {
             icon: Receipt,

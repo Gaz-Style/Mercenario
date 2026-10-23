@@ -23,11 +23,11 @@ export default function ThreeSteps() {
         },
         {
             number: "03",
-            title: "Envía a todo Chile y emite boletas SII",
-            description: "Tus clientes calculan el despacho en vivo con Starken, Chilexpress y Blue Express. Cada venta genera automáticamente su boleta electrónica del SII sin que muevas un dedo.",
+            title: "Envía a todo Chile o Retiro en Tienda",
+            description: "Cotizador automático multicourier en tiempo real (Starken, Chilexpress y Blue Express vía Shipit) según la comuna del cliente, o retiro en tienda física ($0) configurable desde tu panel.",
             icon: Truck,
-            badge: "100% Automático",
-            detail: "Etiquetas listas para imprimir y DTE en tiempo real."
+            badge: "Multi-Courier + Retiro",
+            detail: "Cálculo por comuna, tarifas reales y DTE automático."
         }
     ];
 

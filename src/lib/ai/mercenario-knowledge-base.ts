@@ -52,8 +52,8 @@ export const MERCENARIO_KNOWLEDGE_CORPUS: MercenarioKnowledgeChunk[] = [
     id: 'mercenario-06-integraciones',
     category: 'integraciones',
     title: 'Conectividad e Integraciones Oficiales en Chile',
-    keywords: ['integraciones', 'webpay', 'transbank', 'mercado pago', 'sii', 'boleta', 'meta', 'whatsapp api', 'google', 'outlook', 'facturacion'],
-    content: `Mercenario no requiere que la empresa cambie sus bancos ni su proveedor actual. Nos integramos de forma nativa con: Transbank Webpay Plus (débito, crédito y Redcompra), Mercado Pago Chile, Boleta y Factura Electrónica SII, API Oficial de Meta Cloud WhatsApp y calendarios corporativos de Google y Microsoft Outlook.`,
+    keywords: ['integraciones', 'webpay', 'transbank', 'mercado pago', 'sii', 'boleta', 'meta', 'whatsapp api', 'google', 'outlook', 'facturacion', 'shipit', 'starken', 'chilexpress', 'couriers', 'retiro en tienda', 'envios'],
+    content: `Mercenario no requiere que la empresa cambie sus bancos ni sus operadores logísticos. Nos integramos de forma nativa con: Transbank Webpay Plus (débito, crédito y Redcompra), Mercado Pago Chile, Boleta y Factura Electrónica SII, API Oficial de Meta Cloud WhatsApp, Couriers en tiempo real vía Shipit (Starken, Chilexpress, Blue Express) y Retiro en Tienda física configurable, además de calendarios corporativos de Google y Microsoft Outlook.`,
     metadata: { country: 'Chile' }
   },
   {

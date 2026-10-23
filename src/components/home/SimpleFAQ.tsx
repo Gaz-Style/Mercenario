@@ -32,6 +32,10 @@ export default function SimpleFAQ() {
             a: "Conectamos tu empresa con el Servicio de Impuestos Internos (SII). Cada vez que un cliente realiza un pago exitoso en la web o en el POS, el sistema genera la boleta electrónica legal, la timbra ante el SII y se la despacha automáticamente por correo electrónico al cliente."
         },
         {
+            q: "¿Cómo funcionan los envíos por courier y el retiro en tienda?",
+            a: "Integramos tu tienda con Starken, Chilexpress y Blue Express a través de Shipit. En el checkout, cuando el cliente escribe su comuna, el cotizador calcula automáticamente los valores y tiempos de entrega reales. Además, si tienes tienda física, puedes habilitar con un solo clic la opción 'Retiro en Tienda ($0 GRATIS)' indicando tu dirección, horarios de atención y notas especiales para la entrega."
+        },
+        {
             q: "¿Hay contratos forzosos o cláusulas de permanencia?",
             a: "Ninguno. Puedes pagar mes a mes o anual (con 2 meses de regalo) y cancelar cuando tú lo decidas desde tu panel, sin multas ni letra chica."
         }

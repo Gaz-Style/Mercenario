@@ -60,6 +60,14 @@ export default function PlatformComparison() {
                     shopify: "Limitado por plan USD",
                     jumpseller: "Limitado por espacio GB",
                     bsale: "Cobro por sucursal extra"
+                },
+                {
+                    name: "Cotizador Multi-Courier & Retiro en Tienda",
+                    mercenario: "Nativo en vivo (Shipit, Starken, Chilexpress) + Retiro $0",
+                    tiendanube: "Requiere apps o tablas fijas",
+                    shopify: "Exige plan Advanced ($299 USD/mes)",
+                    jumpseller: "Básico manual",
+                    bsale: "Solo manual"
                 }
             ]
         },
