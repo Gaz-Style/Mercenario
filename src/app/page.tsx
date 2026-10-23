@@ -110,6 +110,9 @@ export default function Home() {
                         </Link>
 
                         <nav className="hidden lg:flex items-center gap-6 text-[11px] font-bold tracking-wider text-neutral-500 uppercase select-none">
+                            <Link href="/que-es-mercenario" className="text-black font-extrabold hover:opacity-80 transition-opacity py-2 border-b-2 border-black">
+                                ¿Qué es Mercenario?
+                            </Link>
                             <a href="#como-funciona" className="hover:text-black transition-colors py-2">
                                 Cómo Funciona
                             </a>
@@ -171,6 +174,14 @@ export default function Home() {
                             className="lg:hidden bg-white border-b border-neutral-100 px-6 py-8 flex flex-col gap-5 shadow-2xl"
                         >
                             <div className="flex flex-col gap-4 text-sm font-bold text-neutral-900">
+                                <Link 
+                                    href="/que-es-mercenario" 
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="py-1 text-black font-extrabold flex items-center justify-between border-b border-neutral-100 pb-2"
+                                >
+                                    <span>¿Qué es Mercenario? (Manifiesto)</span>
+                                    <span className="text-xs text-neutral-400">→</span>
+                                </Link>
                                 <a 
                                     href="#como-funciona" 
                                     onClick={() => setIsMobileMenuOpen(false)}
@@ -487,6 +498,7 @@ export default function Home() {
                     </div>
                     
                     <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-center text-xs">
+                        <Link href="/que-es-mercenario" className="font-bold text-black hover:opacity-80 transition-opacity">¿Qué es Mercenario?</Link>
                         <a href="#como-funciona" className="hover:text-black transition-colors">Cómo Funciona</a>
                         <a href="#soluciones" className="hover:text-black transition-colors">Soluciones</a>
                         <a href="#disenos" className="hover:text-black transition-colors">Diseños</a>

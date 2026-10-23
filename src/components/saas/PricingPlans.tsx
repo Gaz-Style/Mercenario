@@ -232,8 +232,8 @@ export default function PricingPlans({ onSelectPlan }: PricingPlansProps) {
                                     <span>{p.cta}</span>
                                     <ArrowRight className="w-3.5 h-3.5" />
                                 </button>
-                                <span className={`text-[10px] text-center block pt-2 font-mono ${p.isFeatured ? "text-neutral-400" : "text-neutral-400"}`}>
-                                    Configuración y puesta en marcha personalizada
+                                <span className={`text-[10px] text-center block pt-2 font-mono ${p.isFeatured ? "text-neutral-300" : "text-neutral-500"}`}>
+                                    + Setup inicial técnico obligatorio (100% Llave en mano)
                                 </span>
                             </div>
                         </div>
@@ -241,34 +241,49 @@ export default function PricingPlans({ onSelectPlan }: PricingPlansProps) {
                 })}
             </div>
 
-            {/* Servicio Addon: Llave en Mano Express */}
-            <div className="border border-neutral-200 bg-neutral-50 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-                <div className="space-y-2 max-w-2xl">
+            {/* Puesta en Marcha Inicial Obligatoria: Llave en Mano */}
+            <div className="border-2 border-black bg-neutral-900 text-white rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-xl relative overflow-hidden">
+                <div className="space-y-2 max-w-2xl relative z-10">
                     <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                        <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 font-bold">
-                            SERVICIO OPCIONAL · ACTIVACIÓN EXPRESS 48H
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-black">
+                            PUESTA EN MARCHA 100% LLAVE EN MANO
                         </span>
                     </div>
-                    <h4 className="text-lg sm:text-xl font-bold text-neutral-900">
-                        ¿No tienes tiempo de configurar? Te entregamos el sistema 100% llave en mano.
+                    <h4 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+                        Toda nueva empresa inicia con Setup Técnico 100% Llave en Mano.
                     </h4>
-                    <p className="text-xs sm:text-sm text-neutral-600 font-light leading-relaxed">
-                        Cargamos tus productos iniciales, homologamos tu certificado del SII con la pasarela para boletas automáticas, integramos Webpay/Mercado Pago, Starken y dejamos el Punto de Venta listo para operar.
+                    <p className="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed">
+                        Nuestros ingenieros asumen la puesta en marcha completa: homologamos tu certificado del SII, integramos Webpay/Mercado Pago y dejamos el POS listo para operar.
                     </p>
+                    <div className="pt-1 flex flex-wrap items-center gap-4 text-[11px] font-mono text-neutral-400">
+                        <span className="flex items-center gap-1.5">
+                            <span className="text-emerald-400 font-bold">✓</span> Carga de catálogo
+                        </span>
+                        <span className="flex items-center gap-1.5">
+                            <span className="text-emerald-400 font-bold">✓</span> Conexión directa SII
+                        </span>
+                        <span className="flex items-center gap-1.5">
+                            <span className="text-emerald-400 font-bold">✓</span> Pasarelas de Pago
+                        </span>
+                        <span className="flex items-center gap-1.5">
+                            <span className="text-emerald-400 font-bold">✓</span> Entrega en 48-72h
+                        </span>
+                    </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 shrink-0 w-full md:w-auto">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 shrink-0 w-full md:w-auto relative z-10">
                     <div className="text-left md:text-right">
-                        <span className="text-[10px] font-mono text-neutral-400 uppercase block">Setup Personalizado Único</span>
-                        <span className="text-xl font-mono font-bold text-neutral-900">$149.000 + IVA CLP</span>
+                        <span className="text-[10px] font-mono text-neutral-400 uppercase block tracking-wider">Setup Único de Habilitación</span>
+                        <span className="text-2xl font-mono font-black text-white">$149.000 + IVA CLP</span>
+                        <span className="text-[10px] font-mono text-neutral-400 block">(Pago único inicial)</span>
                     </div>
                     <button
                         type="button"
-                        onClick={() => onSelectPlan("Servicio Llave en Mano Express ($149.000 CLP)")}
-                        className="w-full sm:w-auto px-5 py-3 border border-neutral-300 hover:border-black bg-white text-black text-xs font-mono uppercase tracking-wider rounded-xl transition-colors font-bold whitespace-nowrap text-center"
+                        onClick={() => onSelectPlan("Setup Inicial Obligatorio Llave en Mano ($149.000 CLP)")}
+                        className="w-full sm:w-auto px-6 py-4 bg-white text-black hover:bg-neutral-100 text-xs font-mono uppercase tracking-wider rounded-xl transition-all font-black whitespace-nowrap text-center shadow-lg hover:scale-[1.02]"
                     >
-                        Solicitar Setup Express
+                        Iniciar con Setup Llave en Mano
                     </button>
                 </div>
             </div>
