@@ -36,7 +36,7 @@ export default function Home() {
         name: "", 
         email: "", 
         phone: "",
-        system: "Negocio Omnicanal ($24.990 CLP/mes) - Más Elegido", 
+        system: "Negocio Omnicanal ($44.990 CLP/mes) - Más Elegido", 
         challenge: "", 
         _honeypot: "" 
     });
@@ -58,7 +58,7 @@ export default function Home() {
         
         if (formData._honeypot) {
             setFormStatus("success");
-            setFormData({ name: "", email: "", phone: "", system: "Negocio Omnicanal ($24.990 CLP/mes) - Más Elegido", challenge: "", _honeypot: "" });
+            setFormData({ name: "", email: "", phone: "", system: "Negocio Omnicanal ($44.990 CLP/mes) - Más Elegido", challenge: "", _honeypot: "" });
             setTimeout(() => setFormStatus("idle"), 5000);
             return;
         }
@@ -80,7 +80,7 @@ export default function Home() {
             setTimeout(() => setFormStatus("idle"), 4000);
         } else {
             setFormStatus("success");
-            setFormData({ name: "", email: "", phone: "", system: "Negocio Omnicanal ($24.990 CLP/mes) - Más Elegido", challenge: "", _honeypot: "" });
+            setFormData({ name: "", email: "", phone: "", system: "Negocio Omnicanal ($44.990 CLP/mes) - Más Elegido", challenge: "", _honeypot: "" });
             setTimeout(() => setFormStatus("idle"), 5000);
         }
     };
@@ -314,7 +314,7 @@ export default function Home() {
                                 Hablemos de tu tienda y tu negocio.
                             </h2>
                             <p className="text-sm text-neutral-600 font-light leading-relaxed">
-                                Déjanos tus datos y te ayudamos a poner en marcha tu tienda online y tu sistema de ventas en minutos.
+                                <strong>Cada proyecto es personalizado:</strong> adaptamos el software, la identidad visual, los flujos de cobro y los circuitos de inventario exactamente a la medida de tu negocio.
                             </p>
                             
                             <div className="space-y-3 pt-2 text-xs text-neutral-600 font-light">
@@ -426,11 +426,11 @@ export default function Home() {
                                                 onChange={(e) => setFormData({ ...formData, system: e.target.value })}
                                                 className="w-full px-4 py-3 border border-neutral-200 rounded-xl text-sm focus:outline-none focus:border-black transition-colors bg-white font-medium"
                                             >
-                                                <option value="Negocio Omnicanal ($24.990 CLP/mes) - Más Elegido">★ Negocio Omnicanal ($24.990 CLP/mes) - POS + Boleta SII</option>
-                                                <option value="Starter Digital ($9.990 CLP/mes)">Starter Digital ($9.990 CLP/mes) - Tienda Web + Pagos</option>
-                                                <option value="Pro + Asistente IA ($64.990 CLP/mes)">Pro + Asistente IA ($64.990 CLP/mes) - WhatsApp Bot 24/7</option>
-                                                <option value="Servicio Llave en Mano Express ($89.000 CLP Setup)">Setup Llave en Mano Express ($89.000 CLP únicos)</option>
-                                                <option value="Arquitectura Dedicada / Enterprise">Arquitectura Dedicada a Medida</option>
+                                                <option value="Negocio Omnicanal ($44.990 CLP/mes) - Más Elegido">★ Negocio Omnicanal ($44.990 CLP/mes) - POS + Boleta SII</option>
+                                                <option value="Starter Digital ($14.990 CLP/mes)">Starter Digital ($14.990 CLP/mes) - Tienda Web + Pagos</option>
+                                                <option value="Retail Pro + Asistente IA ($89.990 CLP/mes)">Retail Pro + Asistente IA ($89.990 CLP/mes) - WhatsApp Bot (1.000 chats)</option>
+                                                <option value="Servicio Llave en Mano Express ($149.000 CLP Setup)">Setup Llave en Mano Express ($149.000 CLP únicos)</option>
+                                                <option value="Arquitectura Dedicada / Enterprise">Arquitectura Dedicada / Enterprise</option>
                                             </select>
                                         </div>
 

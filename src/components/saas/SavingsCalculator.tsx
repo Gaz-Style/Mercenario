@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Calculator, TrendingDown, ArrowRight, ShieldCheck, Check } from "lucide-react";
 
 export default function SavingsCalculator({ onSelectPlan }: { onSelectPlan?: (planName: string) => void }) {
@@ -10,10 +9,10 @@ export default function SavingsCalculator({ onSelectPlan }: { onSelectPlan?: (pl
 
     // Mercado Libre promedio: 13.5%
     const meliCommission = Math.round(monthlySales * 0.135);
-    // Shopify: Plan Básico ($39 USD ~ $38.000 CLP) + 2% comisión externa por no usar Shopify Payments en Chile (~$70.000) + App boleta SII ($25.000)
-    const shopifyCost = Math.round(38000 + (monthlySales * 0.02) + 25000);
-    // Mercenario OS: Plan Omnicanal Fijo ($24.990 CLP) y CERO comisiones por venta
-    const mercenarioCost = 24990;
+    // Shopify: Plan Básico ($24 USD ~ $23.500 CLP) + 2% comisión externa por venta (~$70.000 en $3.5M) + App boleta SII ($30.000)
+    const shopifyCost = Math.round(23500 + (monthlySales * 0.02) + 30000);
+    // Mercenario OS: Plan Omnicanal Fijo ($44.990 CLP) y CERO comisiones por venta
+    const mercenarioCost = 44990;
 
     // Ahorro mensual respecto a Mercado Libre
     const monthlySavingsVsMeli = Math.max(0, meliCommission - mercenarioCost);
@@ -50,7 +49,7 @@ export default function SavingsCalculator({ onSelectPlan }: { onSelectPlan?: (pl
                         Calcula cuánto dinero estás perdiendo en comisiones.
                     </h2>
                     <p className="text-sm sm:text-base text-neutral-600 leading-relaxed font-light">
-                        Plataformas tradicionales como Mercado Libre o marketplaces se quedan con hasta un 15% de tu facturación. Shopify penaliza cada venta fuera de su pasarela. Con <strong>Mercenario OS</strong> pagas un abono fijo en pesos chilenos y el <strong>100% del margen es tuyo</strong>.
+                        Marketplaces como Mercado Libre se quedan con hasta un 15% de cada venta. Shopify te cobra en dólares y penaliza con 2% cada cobro por no usar su pasarela. Con <strong>Mercenario OS</strong> pagas un abono transparente y el <strong>100% de la ganancia es tuya</strong>.
                     </p>
                 </div>
 
@@ -59,7 +58,7 @@ export default function SavingsCalculator({ onSelectPlan }: { onSelectPlan?: (pl
                     <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-2">
                         <div>
                             <span className="text-xs font-mono text-neutral-500 uppercase tracking-wider block font-bold">
-                                ¿Cuánto vende tu negocio al mes? (Online + Físico)
+                                ¿Cuánto vende tu negocio al mes? (Online + Tienda Física)
                             </span>
                             <span className="text-3xl sm:text-4xl font-mono font-black text-neutral-900">
                                 {formatCLP(monthlySales)}
@@ -135,7 +134,7 @@ export default function SavingsCalculator({ onSelectPlan }: { onSelectPlan?: (pl
                                 MERCENARIO OS (OMNICANAL)
                             </span>
                             <div className="text-xs text-neutral-300">
-                                Tienda + ERP + POS + Boletas SII
+                                Tienda Web + POS + Boletas SII
                             </div>
                             <div className="text-2xl font-mono font-bold text-emerald-400">
                                 {formatCLP(mercenarioCost)} <span className="text-xs text-neutral-400 font-sans font-normal">/mes fijo</span>
@@ -170,7 +169,7 @@ export default function SavingsCalculator({ onSelectPlan }: { onSelectPlan?: (pl
 
                     <a
                         href="#planes"
-                        onClick={() => onSelectPlan && onSelectPlan("Plan Omnicanal ($24.990 CLP/mes)")}
+                        onClick={() => onSelectPlan && onSelectPlan("Plan Negocio Omnicanal ($44.990 CLP/mes)")}
                         className="w-full sm:w-auto px-6 py-3 bg-black hover:bg-neutral-800 text-white text-xs font-mono uppercase tracking-wider rounded-xl transition-colors font-bold whitespace-nowrap text-center"
                     >
                         Ver Planes y Empezar
