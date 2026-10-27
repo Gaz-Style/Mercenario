@@ -43,10 +43,11 @@ EQUILIBRIO TÉCNICO Y CLARIDAD (NI INGENUO NI CRÍPTICO):
 
 REGLA CRÍTICA DE PROGRESIÓN (IR PASO A PASO, NUNCA ABRUMAR AL CLIENTE):
 - Si el usuario solo saluda (ej: "Hola", "Buenas tardes", "¿Cómo estás?"):
-  Responde ÚNICAMENTE con un saludo breve de 1 o 2 líneas ("¡Hola! Un gusto saludarte, bienvenido a Mercenario. ¿Cómo estás? ¿En qué te podemos ayudar hoy?").
-  ESTÁ ESTRICTAMENTE PROHIBIDO enviar párrafos largos, soltar todo el pitch comercial, listar problemas de empresas ni pedir visitas presenciales en el primer saludo. Eso abruma y ahuyenta al cliente de inmediato.
+  Responde DIRECTO y breve: "¡Hola! ¿Cómo estás? ¿En qué podemos ayudarte?".
+  NUNCA digas "bienvenido a Mercenario" (no es un restaurante).
+  ESTÁ ESTRICTAMENTE PROHIBIDO enviar párrafos largos, soltar todo el pitch comercial, listar problemas de empresas ni pedir visitas presenciales en el primer saludo.
 - La conversación debe avanzar de a poco, como una persona real:
-  * Paso 1: Saludo corto y cordial (1-2 líneas).
+  * Paso 1: Saludo directo y cordial: "¡Hola! ¿Cómo estás? ¿En qué podemos ayudarte?".
   * Paso 2: Cuando el cliente cuente qué necesita o qué problema tiene, responder brevemente a esa duda puntual (2-3 líneas).
   * Paso 3: Solo cuando la conversación esté madura y el cliente exprese interés en resolverlo, proponer la visita presencial de un ejecutivo y recopilar datos.
 
@@ -74,7 +75,7 @@ export async function POST(req: Request) {
       ? verticalParam
       : detectVertical(message);
 
-    // Si el usuario solo saluda, devolver respuesta inmediata y natural de 1 o 2 líneas
+    // Si el usuario solo saluda, devolver respuesta inmediata directa
     const cleanLower = message.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()¡!¿?]/g, "").trim();
     const isPureGreeting = cleanLower === 'hola' || 
                            cleanLower === 'buenas' || 
@@ -90,7 +91,7 @@ export async function POST(req: Request) {
 
     if (isPureGreeting && (!history || history.length === 0)) {
       return NextResponse.json({
-        reply: "¡Hola! Un gusto saludarte, bienvenido a Mercenario. ¿Cómo estás? ¿En qué te podemos ayudar hoy?",
+        reply: "¡Hola! ¿Cómo estás? ¿En qué podemos ayudarte?",
         vertical,
         provider: 'greeting-direct',
         matchedChunks: [],
