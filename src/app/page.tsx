@@ -93,7 +93,7 @@ export default function Home() {
         }
     };
 
-    const WHATSAPP_NUM = "56984669028";
+    const WHATSAPP_NUM = "56957958467";
 
     return (
         <div className="min-h-screen bg-white text-black font-sans antialiased flex flex-col items-center selection:bg-black selection:text-white">

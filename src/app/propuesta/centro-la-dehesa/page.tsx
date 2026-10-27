@@ -1225,7 +1225,7 @@ export default function PropuestaCentroLaDehesaPage() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="https://wa.me/56900000000?text=Hola,%20leí%20la%20propuesta%20de%20evolución%20operativa%20para%20Centro%20La%20Dehesa%20y%20me%20gustaría%20agendar%20una%20sesión%20de%20diagnóstico"
+              href="https://wa.me/56957958467?text=Hola,%20leí%20la%20propuesta%20de%20evolución%20operativa%20para%20Centro%20La%20Dehesa%20y%20me%20gustaría%20agendar%20una%20sesión%20de%20diagnóstico"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-slate-950 bg-emerald-400 hover:bg-emerald-300 transition shadow-lg"

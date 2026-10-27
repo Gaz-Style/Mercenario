@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     description: "Descubre qué es Mercenario, para quién fue diseñado, cómo funciona nuestro sistema operativo empresarial y por qué no somos un software tradicional.",
 };
 
-const WHATSAPP_NUM = "56984669028";
+const WHATSAPP_NUM = "56957958467";
 
 export default function QueEsMercenarioPage() {
     return (

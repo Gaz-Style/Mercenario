@@ -80,7 +80,7 @@ export default async function OrdenConfirmadaPage({
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">
           <a
-            href={`https://wa.me/56987654321?text=${whatsappMessage}`}
+            href={`https://wa.me/56957958467?text=${whatsappMessage}`}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba59] text-black font-mono font-bold uppercase tracking-wider text-xs py-3.5 px-6 shadow-sm"

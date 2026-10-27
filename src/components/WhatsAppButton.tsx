@@ -4,10 +4,12 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 
+import { WHATSAPP_CONFIG } from '@/lib/whatsapp/config';
+
 export default function WhatsAppButton() {
     const pathname = usePathname();
-    const phoneNumber = '56937667709';
-    const message = 'Hola, me gustaría agendar una cita o hacer una consulta.';
+    const phoneNumber = WHATSAPP_CONFIG.botPhone;
+    const message = 'Hola Mercenario, quisiera consultar sobre la automatización operativa de mi empresa.';
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     
     const [isScrolling, setIsScrolling] = useState(false);
@@ -76,17 +78,17 @@ export default function WhatsAppButton() {
 
             {/* Tooltip appearance on hover */}
             <span 
-                className="absolute right-full mr-4 px-4 py-2.5 text-[#f5f2eb] text-xs font-serif rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 whitespace-nowrap pointer-events-none"
+                className="absolute right-full mr-4 px-4 py-2.5 text-[#f5f2eb] text-xs font-sans rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none shadow-xl flex items-center gap-2"
                 style={{
-                    background: 'radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.08) 0%, rgba(26, 26, 26, 0.85) 100%)',
+                    background: 'radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.12) 0%, rgba(15, 23, 42, 0.95) 100%)',
                     backdropFilter: 'blur(10px)',
                     WebkitBackdropFilter: 'blur(10px)',
-                    boxShadow: 'inset 0px 2px 4px rgba(255, 255, 255, 0.1), 0px 6px 20px rgba(0, 0, 0, 0.4)',
-                    border: '0.5px solid rgba(255, 255, 255, 0.08)',
-                    letterSpacing: '0.15em'
+                    border: '1px solid rgba(255, 255, 255, 0.12)',
                 }}
             >
-                ¿En qué podemos ayudarte?
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="font-semibold text-white">Chatbot Oficial Mercenario</span>
+                <span className="text-white/60 text-[11px]">| En línea 24/7</span>
             </span>
 
             {/* Pulsación sand muy tenue y lenta */}

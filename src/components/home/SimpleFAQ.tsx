@@ -109,7 +109,7 @@ export default function SimpleFAQ() {
                         </p>
                     </div>
                     <a
-                        href="https://wa.me/56984669028?text=Hola,%20tengo%20una%20consulta%20sobre%20la%20plataforma%20Mercenario"
+                        href="https://wa.me/56957958467?text=Hola,%20tengo%20una%20consulta%20sobre%20la%20plataforma%20Mercenario"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-5 py-2.5 bg-black text-white text-xs font-bold uppercase tracking-wider rounded-xl hover:bg-neutral-800 transition-colors whitespace-nowrap"

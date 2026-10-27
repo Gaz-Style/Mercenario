@@ -10,7 +10,7 @@ interface TiendaHeroProps {
 
 export default function TiendaHero({ onStartTrial }: TiendaHeroProps) {
     const [storeName, setStoreName] = useState("");
-    const WHATSAPP_NUM = "56984669028";
+    const WHATSAPP_NUM = "56957958467";
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
