@@ -20,7 +20,7 @@ export default function StoreShowcase() {
         description: string;
         highlights: string[];
         accentColor: string;
-        products: { name: string; price: string; color: string }[];
+        products: { name: string; price: string; color: string; image: string }[];
     }> = {
         moda: {
             title: "Tiendas pensadas para marcas de ropa, calzado y accesorios",
@@ -28,9 +28,9 @@ export default function StoreShowcase() {
             highlights: ["Selector de tallas y colores dinámico", "Fotos en alta resolución con zoom fluido", "Cálculo de despacho en tiempo real"],
             accentColor: "from-stone-900 to-neutral-800",
             products: [
-                { name: "Parka Impermeable Andes", price: "$64.990", color: "Negro Matte" },
-                { name: "Polerón Oversize Algodón", price: "$29.990", color: "Gris Melange" },
-                { name: "Pantalón Cargo Técnico", price: "$39.990", color: "Verde Militar" },
+                { name: "Parka Impermeable Andes", price: "$64.990", color: "Negro Matte", image: "/images/showcase/parka-impermeable.jpg" },
+                { name: "Polerón Oversize Algodón", price: "$29.990", color: "Gris Melange", image: "/images/showcase/poleron-oversize.jpg" },
+                { name: "Pantalón Cargo Técnico", price: "$39.990", color: "Verde Militar", image: "/images/showcase/pantalon-cargo.jpg" },
             ]
         },
         belleza: {
@@ -39,9 +39,9 @@ export default function StoreShowcase() {
             highlights: ["Reseñas con fotos de clientes", "Kits y combos con descuento automático", "Recordatorio de recompra automática"],
             accentColor: "from-rose-950 to-neutral-900",
             products: [
-                { name: "Serum Ácido Hialurónico 30ml", price: "$21.990", color: "Edición Botánica" },
-                { name: "Crema Hidratante Ceramid", price: "$18.990", color: "Día & Noche" },
-                { name: "Aceite Regenerador Rosa Mosqueta", price: "$14.990", color: "100% Orgánico" },
+                { name: "Serum Ácido Hialurónico 30ml", price: "$21.990", color: "Edición Botánica", image: "/images/showcase/serum-hialuronico.jpg" },
+                { name: "Crema Hidratante Ceramid", price: "$18.990", color: "Día & Noche", image: "/images/showcase/crema-ceramid.jpg" },
+                { name: "Aceite Regenerador Rosa Mosqueta", price: "$14.990", color: "100% Orgánico", image: "/images/showcase/aceite-rosa-mosqueta.jpg" },
             ]
         },
         gourmet: {
@@ -50,9 +50,9 @@ export default function StoreShowcase() {
             highlights: ["Programación de fecha de despacho", "Selector de molienda y tostado", "Retiro inmediato en local comercial"],
             accentColor: "from-amber-950 to-neutral-900",
             products: [
-                { name: "Café Origen Colombia 500g", price: "$14.990", color: "Grano Entero" },
-                { name: "Prensa Francesa Acero 600ml", price: "$22.990", color: "Cobre Pulido" },
-                { name: "Pack Degustación 3 Orígenes", price: "$36.990", color: "Edición Limitada" },
+                { name: "Café Origen Colombia 500g", price: "$14.990", color: "Grano Entero", image: "/images/showcase/cafe-colombia.jpg" },
+                { name: "Botella Acero Térmica 1L", price: "$18.990", color: "Negro & Bambú", image: "/images/demo-store/botella-acero.jpg" },
+                { name: "Pack Degustación 3 Orígenes", price: "$36.990", color: "Edición Limitada", image: "/images/showcase/cafe-colombia.jpg" },
             ]
         },
         mascotas: {
@@ -61,9 +61,9 @@ export default function StoreShowcase() {
             highlights: ["Filtros por peso, edad y raza", "Venta programada mensual", "Cálculo de despacho por volumen"],
             accentColor: "from-emerald-950 to-neutral-900",
             products: [
-                { name: "Alimento Super Premium 15kg", price: "$52.990", color: "Perro Adulto" },
-                { name: "Arnés Ergonómico Reflectante", price: "$17.990", color: "Talla M / Naranja" },
-                { name: "Snacks Dentales Naturales 300g", price: "$8.990", color: "Pack Familiar" },
+                { name: "Alimento Super Premium 15kg", price: "$52.990", color: "Perro Adulto", image: "/images/demo-store/mochila-urbana.jpg" },
+                { name: "Arnés Ergonómico Reflectante", price: "$17.990", color: "Talla M / Naranja", image: "/images/demo-store/gorro-lana-merino.jpg" },
+                { name: "Snacks Dentales Naturales 300g", price: "$8.990", color: "Pack Familiar", image: "/images/demo-store/botella-acero.jpg" },
             ]
         },
         tech: {
@@ -72,9 +72,9 @@ export default function StoreShowcase() {
             highlights: ["Fichas técnicas con especificaciones", "Garantía legal y boleta electrónica", "Hasta 12 cuotas bancarias"],
             accentColor: "from-blue-950 to-neutral-900",
             products: [
-                { name: "Audífonos Inalámbricos ANC", price: "$69.990", color: "Bluetooth 5.3" },
-                { name: "Cargador Rápido GaN 65W", price: "$24.990", color: "3 Puertos USB-C" },
-                { name: "Soporte Ergonómico Aluminio", price: "$19.990", color: "Plegable" },
+                { name: "Audífonos Inalámbricos ANC", price: "$69.990", color: "Bluetooth 5.3", image: "/images/showcase/audifonos-anc.jpg" },
+                { name: "Cargador Rápido GaN 65W", price: "$24.990", color: "3 Puertos USB-C", image: "/images/demo-store/botella-acero.jpg" },
+                { name: "Mochila Tech Impermeable", price: "$34.990", color: "Antirrobo USB", image: "/images/demo-store/mochila-urbana.jpg" },
             ]
         }
     };
@@ -175,9 +175,14 @@ export default function StoreShowcase() {
 
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             {current.products.map((prod, idx) => (
-                                <div key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl p-4 space-y-3">
-                                    <div className="w-full aspect-[4/3] bg-neutral-800 rounded-lg flex items-center justify-center text-neutral-500 font-mono text-[11px]">
-                                        Foto 0{idx + 1}
+                                <div key={idx} className="group/card bg-neutral-900 border border-neutral-800 hover:border-neutral-700 rounded-xl p-4 space-y-3 transition-colors">
+                                    <div className="w-full aspect-[4/3] bg-neutral-800 rounded-lg overflow-hidden relative shadow-inner">
+                                        <img
+                                            src={prod.image}
+                                            alt={prod.name}
+                                            loading="lazy"
+                                            className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-300"
+                                        />
                                     </div>
                                     <div className="space-y-1">
                                         <h4 className="text-xs font-bold text-white truncate">
