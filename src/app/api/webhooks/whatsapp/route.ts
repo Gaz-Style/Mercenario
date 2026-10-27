@@ -51,10 +51,10 @@ export async function POST(req: Request) {
             .eq('phone_number', phoneNumber)
             .maybeSingle();
 
-          // Detectar vertical inicial a partir del mensaje: Por defecto Mercenario B2B
+          // Detectar vertical inicial a partir del mensaje: Por defecto Mercenario ('general')
           const lowerInitial = content.toLowerCase();
           const isWekeQuery = lowerInitial.includes('weke') || lowerInitial.includes('chaqueta') || lowerInitial.includes('talla') || lowerInitial.includes('pantalon') || lowerInitial.includes('poleron') || lowerInitial.includes('outdoor') || lowerInitial.includes('trekking');
-          const initialVertical = isWekeQuery ? 'retail' : 'b2b';
+          const initialVertical = isWekeQuery ? 'retail' : 'general';
 
           if (!chatData) {
             const { data: newChat } = await supabase
@@ -77,10 +77,10 @@ export async function POST(req: Request) {
             if (isWekeQuery && chatData.vertical !== 'retail') {
               chatData.vertical = 'retail';
               await supabase.from('crm_whatsapp_chats').update({ vertical: 'retail' }).eq('id', chatData.id);
-            } else if (!isWekeQuery && (lowerInitial.includes('mercenario') || lowerInitial.includes('sistema') || lowerInitial.includes('automatiz') || lowerInitial.includes('clinica') || lowerInitial.includes('empresa') || chatData.vertical === 'retail')) {
-              // Si ya no pregunta por prendas de WEKE, reenfocar a Mercenario B2B
-              chatData.vertical = 'b2b';
-              await supabase.from('crm_whatsapp_chats').update({ vertical: 'b2b' }).eq('id', chatData.id);
+            } else if (!isWekeQuery && chatData.vertical !== 'general') {
+              // Si no consulta por prendas técnicas, reenfocar a Mercenario ('general')
+              chatData.vertical = 'general';
+              await supabase.from('crm_whatsapp_chats').update({ vertical: 'general' }).eq('id', chatData.id);
             }
           }
 
@@ -155,7 +155,7 @@ export async function POST(req: Request) {
                 if (token && phoneId) {
                   try {
                     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
-                    const targetVertical = chatData.vertical === 'b2b' ? 'mercenario' : (chatData.vertical === 'retail' ? 'weke' : 'auto');
+                    const targetVertical = chatData.vertical === 'retail' ? 'weke' : 'mercenario';
 
                     const aiRes = await fetch(`${baseUrl}/api/assistant`, {
                       method: 'POST',
@@ -169,16 +169,16 @@ export async function POST(req: Request) {
                       replyText = aiData.reply;
 
                       // Si el detector identificó un cambio de vertical, sincronizar en el chat
-                      if (aiData.vertical && (aiData.vertical === 'mercenario' ? 'b2b' : 'retail') !== chatData.vertical) {
-                        const newVert = aiData.vertical === 'mercenario' ? 'b2b' : 'retail';
+                      if (aiData.vertical && (aiData.vertical === 'weke' ? 'retail' : 'general') !== chatData.vertical) {
+                        const newVert = aiData.vertical === 'weke' ? 'retail' : 'general';
                         await supabase.from('crm_whatsapp_chats').update({ vertical: newVert }).eq('id', chatData.id);
                       }
                     }
 
                     if (!replyText) {
-                      replyText = chatData.vertical === 'b2b'
-                        ? 'Hola. En Mercenario conectamos la operación completa de su empresa en 14 días. ¿Qué proceso desea automatizar?'
-                        : 'Estimado/a cliente, en WEKE confeccionamos indumentaria técnica sustentable e inclusiva. ¿En qué podemos orientarle hoy?';
+                      replyText = chatData.vertical === 'retail'
+                        ? 'Estimado/a cliente, en WEKE confeccionamos indumentaria técnica sustentable e inclusiva. ¿En qué podemos orientarle hoy?'
+                        : 'Hola. En Mercenario conectamos la operación comercial de su empresa (Web, WhatsApp IA, Pagos y POS). ¿Qué desafío busca automatizar?';
                     }
 
                     if (replyText) {
