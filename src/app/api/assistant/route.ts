@@ -41,17 +41,17 @@ EQUILIBRIO TÉCNICO Y CLARIDAD (NI INGENUO NI CRÍPTICO):
   * Sincronización en Base de Datos: Explica que conectamos el POS de mostrador y la web mediante webhooks bidireccionales: al cobrar en caja física, el stock se descuenta en el mismo segundo en la web para evitar sobreventas o descuadres.
   * Pagos: Transbank Webpay Plus y Mercado Pago con confirmación automática de transacciones con tarjeta para asegurar abonos o compras al instante.
 
-PROCESO CONVERSACIONAL CONSULTIVO (PASO A PASO):
-1. Descubrir el problema: Cuando el cliente hable, indaga cordialmente de qué se trata su negocio y cuál es el cuello de botella o dolor que busca resolver (ej: citas médicas perdidas, WhatsApp colapsado sin responder, ventas lentas, o inventario desordenado entre local y web).
-2. Ofrecer la solución concreta con solvencia técnica: Explica la arquitectura y cómo lo resolvemos, balanceando el término técnico con su beneficio práctico.
-3. Recopilar datos y agendar la visita presencial: Conforme avanza la conversación, recopila con cordialidad los datos para que un ejecutivo lo visite en su oficina o local:
-   * Nombre de la persona y de su empresa/negocio
-   * Comuna o dirección de su oficina/local
-   * Teléfono de contacto o correo
-   * Qué día u horario le acomoda para que un ejecutivo lo visite presencialmente (o lo llame para coordinar la visita).
+REGLA CRÍTICA DE PROGRESIÓN (IR PASO A PASO, NUNCA ABRUMAR AL CLIENTE):
+- Si el usuario solo saluda (ej: "Hola", "Buenas tardes", "¿Cómo estás?"):
+  Responde ÚNICAMENTE con un saludo breve de 1 o 2 líneas ("¡Hola! Un gusto saludarte, bienvenido a Mercenario. ¿Cómo estás? ¿En qué te podemos ayudar hoy?").
+  ESTÁ ESTRICTAMENTE PROHIBIDO enviar párrafos largos, soltar todo el pitch comercial, listar problemas de empresas ni pedir visitas presenciales en el primer saludo. Eso abruma y ahuyenta al cliente de inmediato.
+- La conversación debe avanzar de a poco, como una persona real:
+  * Paso 1: Saludo corto y cordial (1-2 líneas).
+  * Paso 2: Cuando el cliente cuente qué necesita o qué problema tiene, responder brevemente a esa duda puntual (2-3 líneas).
+  * Paso 3: Solo cuando la conversación esté madura y el cliente exprese interés en resolverlo, proponer la visita presencial de un ejecutivo y recopilar datos.
 
 DIRECTIVA DE LONGITUD:
-- Responde de forma ágil, normalmente en 3 a 5 líneas (o 5 a 6 si estás explicando una arquitectura técnica solicitada).
+- Responde de forma ágil, normalmente en 2 a 4 líneas (o 5 líneas si estás explicando una arquitectura técnica solicitada).
 - No des discursos innecesarios: acompaña al cliente paso a paso.
 - Dispones de hasta 15 mensajes previos en el chat para entender perfectamente el contexto técnico y comercial de la conversación.
 
@@ -73,6 +73,30 @@ export async function POST(req: Request) {
     const vertical: BotVertical = verticalParam && (verticalParam === 'mercenario' || verticalParam === 'santiagohiking')
       ? verticalParam
       : detectVertical(message);
+
+    // Si el usuario solo saluda, devolver respuesta inmediata y natural de 1 o 2 líneas
+    const cleanLower = message.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()¡!¿?]/g, "").trim();
+    const isPureGreeting = cleanLower === 'hola' || 
+                           cleanLower === 'buenas' || 
+                           cleanLower === 'buenos dias' || 
+                           cleanLower === 'buenas tardes' || 
+                           cleanLower === 'buenas noches' || 
+                           cleanLower === 'hola buenas' || 
+                           cleanLower === 'hola buenas tardes' || 
+                           cleanLower === 'hola buenas noches' || 
+                           cleanLower === 'hola que tal' || 
+                           cleanLower === 'que tal' || 
+                           cleanLower === 'hola como estas';
+
+    if (isPureGreeting && (!history || history.length === 0)) {
+      return NextResponse.json({
+        reply: "¡Hola! Un gusto saludarte, bienvenido a Mercenario. ¿Cómo estás? ¿En qué te podemos ayudar hoy?",
+        vertical,
+        provider: 'greeting-direct',
+        matchedChunks: [],
+        categories: [],
+      });
+    }
 
     // ── 2. RECUPERACIÓN CONTEXTUAL AUMENTADA (RAC / RAG) ──────────────────────
     const { context: racContext, matchedChunks, categories } = await retrieveContext(message, 3, vertical);
