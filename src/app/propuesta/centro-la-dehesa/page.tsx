@@ -233,61 +233,124 @@ export default function PropuestaCentroLaDehesaPage() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-12 pb-16 md:pt-20 md:pb-24 bg-white border-b border-slate-200">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-900 text-xs font-semibold mb-6 shadow-xs">
-            <Building2 className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Auditoría Digital & Propuesta de Evolución Operativa • Sedes La Dehesa & San Carlos</span>
+      <section className="relative overflow-hidden pt-8 pb-14 md:pt-14 md:pb-20 bg-white border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* Columna Izquierda: Copywriting conciso & CTAs */}
+            <div className="lg:col-span-6 text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs font-semibold mb-4 shadow-2xs">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Auditoría & Evolución Operativa</span>
+                <span className="text-emerald-300">•</span>
+                <span className="text-emerald-700 font-medium">Sedes La Dehesa & San Carlos</span>
+              </div>
+
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-950 leading-[1.12] mb-4">
+                Evolución Operativa para{" "}
+                <span className="text-emerald-700 block mt-1">Centro La Dehesa.</span>
+              </h1>
+
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed mb-6 max-w-xl">
+                Arquitectura invisible para que agendar sesiones 24/7 por WhatsApp, cobrar con boleta médica para Isapre y liquidar honorarios a terapeutas tome segundos en sus dos sedes.
+              </p>
+
+              {/* Botones de acción */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-6">
+                <a
+                  href="#auditoria"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white bg-slate-950 hover:bg-slate-800 transition shadow-md"
+                >
+                  <span>Ver Auditoría en Vivo</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+                <a
+                  href="#pilares"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 transition"
+                >
+                  <span>Explorar 5 Pilares</span>
+                </a>
+              </div>
+
+              {/* Micro-Badges de Confianza al estilo Clinicafy */}
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-slate-600 font-medium pt-2 border-t border-slate-100">
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>Sincronización 2 Sedes</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>Reembolso Isapre 90%</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>Liquidaciones en 30 seg</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Columna Derecha: Tarjeta Fotográfica con Badges Flotantes */}
+            <div className="lg:col-span-6 relative">
+              <div className="relative rounded-2xl overflow-hidden border border-slate-200 shadow-xl bg-slate-100 group">
+                <img
+                  src="/images/propuesta-dehesa/hero-centro-dehesa.jpg"
+                  alt="Operación Digital Centro La Dehesa"
+                  className="w-full h-auto object-cover max-h-[460px] group-hover:scale-102 transition-transform duration-500 ease-out"
+                />
+
+                {/* Badge Flotante 1: Agendamiento WhatsApp */}
+                <div className="absolute top-3.5 left-3.5 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-xl px-3 py-2 shadow-lg flex items-center gap-2.5 max-w-[85%]">
+                  <div className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                    <MessageSquare className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-slate-900 leading-tight">Agendamiento WhatsApp</div>
+                    <div className="text-[10px] text-emerald-600 font-semibold">● 24/7 sin esperas humanas</div>
+                  </div>
+                </div>
+
+                {/* Badge Flotante 2: Sedes Conectadas */}
+                <div className="absolute top-3.5 right-3.5 bg-slate-900/85 backdrop-blur-md border border-white/10 text-white rounded-lg px-2.5 py-1.5 shadow-md text-[11px] font-semibold flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                  <span>La Dehesa & San Carlos</span>
+                </div>
+
+                {/* Badge Flotante 3: Boleta Médica Isapre */}
+                <div className="absolute bottom-3.5 right-3.5 bg-slate-950/95 backdrop-blur-md border border-white/10 rounded-xl px-3.5 py-2 shadow-2xl flex items-center gap-2.5 max-w-[85%] text-white">
+                  <div className="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                    <FileCheck2 className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-white leading-tight">Boleta Médica Isapre</div>
+                    <div className="text-[10px] text-emerald-400 font-medium">Reembolso directo hasta 90%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
 
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-950 leading-[1.14] mb-6">
-            Evolución Operativa para Centro La Dehesa:{" "}
-            <span className="text-emerald-700 block mt-2">
-              Agendamiento 24/7, Boleta Médica para Isapre y Control de sus 2 Sedes.
-            </span>
-          </h1>
-
-          <p className="max-w-3xl mx-auto text-base sm:text-lg text-slate-600 leading-relaxed mb-8">
-            Diagnóstico operativo y propuesta exclusiva para la Dirección de Centro La Dehesa (La Dehesa y San Carlos de Apoquindo). Diseñamos la arquitectura invisible para que sus familias agenden la orientación sin esperas en WhatsApp, paguen con boleta lista para reembolso Isapre y el cálculo de comisiones a terapeutas tome 30 segundos sin planillas Excel.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-12">
-            <a
-              href="#auditoria"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-white bg-slate-950 hover:bg-slate-800 transition shadow-md"
-            >
-              <span>Ver Auditoría & Diagnóstico Técnico</span>
-              <ArrowRight className="w-4 h-4" />
-            </a>
-            <a
-              href="#pilares"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200/80 transition"
-            >
-              Explorar los 5 Pilares de Evolución
-            </a>
-          </div>
-
-          {/* Quick Metrics */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-6 border-t border-slate-100 text-left">
-            <div className="p-3 bg-slate-50/80 rounded-xl border border-slate-100">
+          {/* Quick Metrics Strip */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto mt-12 pt-8 border-t border-slate-100 text-left">
+            <div className="p-3.5 bg-slate-50/80 rounded-xl border border-slate-100">
               <div className="text-xl md:text-2xl font-bold text-slate-900">24/7</div>
               <div className="text-xs text-slate-500 font-medium mt-0.5">
                 Agendamiento continuo sin perder pacientes por chat
               </div>
             </div>
-            <div className="p-3 bg-slate-50/80 rounded-xl border border-slate-100">
+            <div className="p-3.5 bg-slate-50/80 rounded-xl border border-slate-100">
               <div className="text-xl md:text-2xl font-bold text-emerald-700">100%</div>
               <div className="text-xs text-slate-500 font-medium mt-0.5">
                 Boletas automáticas con código para reembolso Isapre
               </div>
             </div>
-            <div className="p-3 bg-slate-50/80 rounded-xl border border-slate-100">
+            <div className="p-3.5 bg-slate-50/80 rounded-xl border border-slate-100">
               <div className="text-xl md:text-2xl font-bold text-slate-900">30 seg</div>
               <div className="text-xs text-slate-500 font-medium mt-0.5">
                 Liquidación de honorarios a terapeutas sin Excel
               </div>
             </div>
-            <div className="p-3 bg-slate-50/80 rounded-xl border border-slate-100">
+            <div className="p-3.5 bg-slate-50/80 rounded-xl border border-slate-100">
               <div className="text-xl md:text-2xl font-bold text-emerald-700">2 Sedes</div>
               <div className="text-xs text-slate-500 font-medium mt-0.5">
                 La Dehesa & San Carlos unificadas en tiempo real
