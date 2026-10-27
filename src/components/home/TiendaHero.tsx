@@ -171,14 +171,18 @@ export default function TiendaHero({ onStartTrial }: TiendaHeroProps) {
                             {/* Grid de productos de muestra */}
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
                                 {[
-                                    { name: "Chaqueta Cortaviento Térmica", price: "$49.990", tag: "Más Vendido", stock: "12 disponibles" },
-                                    { name: "Botella Acero Térmica 1L", price: "$18.990", tag: "Envío Gratis", stock: "28 disponibles" },
-                                    { name: "Mochila Urbana Impermeable", price: "$34.990", tag: "Webpay 3 cuotas", stock: "5 disponibles" },
-                                    { name: "Gorro Lana Merino", price: "$12.990", tag: "0% Comisión", stock: "40 disponibles" },
+                                    { name: "Chaqueta Cortaviento Térmica", price: "$49.990", tag: "Más Vendido", stock: "12 disponibles", image: "/images/demo-store/chaqueta-cortaviento.jpg" },
+                                    { name: "Botella Acero Térmica 1L", price: "$18.990", tag: "Envío Gratis", stock: "28 disponibles", image: "/images/demo-store/botella-acero.jpg" },
+                                    { name: "Mochila Urbana Impermeable", price: "$34.990", tag: "Webpay 3 cuotas", stock: "5 disponibles", image: "/images/demo-store/mochila-urbana.jpg" },
+                                    { name: "Gorro Lana Merino", price: "$12.990", tag: "0% Comisión", stock: "40 disponibles", image: "/images/demo-store/gorro-lana-merino.jpg" },
                                 ].map((prod, idx) => (
-                                    <div key={idx} className="p-3 bg-neutral-50 rounded-xl border border-neutral-100 space-y-2">
-                                        <div className="w-full aspect-square bg-neutral-200/70 rounded-lg flex items-center justify-center text-neutral-400 text-xs font-mono">
-                                            Producto 0{idx + 1}
+                                    <div key={idx} className="p-2.5 sm:p-3 bg-neutral-50 rounded-xl border border-neutral-100 space-y-2 group/card hover:border-neutral-300 transition-all">
+                                        <div className="w-full aspect-square bg-neutral-100 rounded-lg overflow-hidden relative shadow-2xs">
+                                            <img
+                                                src={prod.image}
+                                                alt={prod.name}
+                                                className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-300"
+                                            />
                                         </div>
                                         <div className="space-y-1">
                                             <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 bg-neutral-200/80 text-neutral-700 rounded">
