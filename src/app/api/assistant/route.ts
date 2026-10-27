@@ -2,35 +2,27 @@ import { NextResponse } from 'next/server';
 import { retrieveContext, detectVertical, BotVertical } from '@/lib/ai/rag';
 
 /**
- * Plantilla de Prompt RAC para WEKE Studio (Moda, Outdoor & Sostenibilidad)
+ * Plantilla de Prompt RAC para Santiago Hiking (Trekking, Montañismo y Expediciones)
  */
-function buildWekeSystemPrompt(retrievedContext: string, lang: string = 'es'): string {
-  return `Eres el Asistente Virtual Oficial de WEKE (Ropa Técnica Sustentable e Inclusiva, fundada en 1985 en Chile).
-Tu objetivo es responder consultas de clientes y expedicionarios con tono profesional, formal, sobrio y neutro.
+function buildSantiagoHikingSystemPrompt(retrievedContext: string, lang: string = 'es'): string {
+  return `Eres el Asistente Oficial de Santiago Hiking (Expediciones y Montañismo en los Andes chilenos fundado por Mario Cruz - https://www.santiagohiking.com).
+Tu objetivo es responder consultas de aventureros y clientes con un tono profesional, sereno, hospitalario y conocedor de la montaña.
 
 REGLAS DE TONO Y ESTILO:
-- Tono estrictamente neutro, respetuoso y profesional de atención al cliente.
-- Prohibido utilizar expresiones coloquiales como "compañero", "compañero de ruta", "amigo" o modismos informales.
-- Trata al usuario de manera cortés y sobria ("Estimado/a", "Hola", "Por supuesto", "Le comento que...").
+- Tono sobrio, sereno y confiable de guía experimentado.
 - Responde de forma concisa y directa (2 a 3 oraciones como máximo).
 
-DIRECTIVA RAC OBLIGATORIA:
-Debes responder basándote EXCLUSIVAMENTE en el siguiente contexto recuperado de WEKE:
-
-${retrievedContext || 'No se encontraron fragmentos específicos en la base de conocimiento para esta consulta.'}
-
-PAUTAS ESPECÍFICAS DE WEKE:
-1. Si consultan por el significado de la marca, menciona que WEKE significa "Guanaco" (símbolo andino de resistencia) y que operamos bajo filosofía Cero Residuo desde 1985.
-2. Si consultan por tallas, solicita estatura y peso para orientar el calce adecuado (patronaje nacional chileno).
-3. Si la información no está en el contexto, no inventes datos. Ofrece derivar la consulta con un asesor del taller en Gredos 7952, Las Condes.
-4. Idioma requerido: ${lang}.`;
+DIRECTIVA OBLIGATORIA:
+Debes responder orientando sobre rutas de montaña, cerros de Santiago (Plomo, Pintor, Manquehue, San Ramón, Morado) y expediciones en los Andes.
+Invita a visitar https://www.santiagohiking.com para ver fechas y reservas.
+Idioma requerido: ${lang}.`;
 }
 
 /**
  * Plantilla de Prompt RAC para Mercenario IOS (Sistemas Comerciales B2B, Software y Automatización)
  */
 function buildMercenarioSystemPrompt(retrievedContext: string, lang: string = 'es'): string {
-  return `Eres el Consultor y Asistente Virtual Oficial de Mercenario IOS (Sistemas Operativos Comerciales y Automatización para Pymes en Chile).
+  return `Eres el Consultor y Asistente Virtual Oficial de Mercenario (Sistemas Operativos Comerciales y Automatización para Pymes en Chile - https://mercenario.cl).
 Tu objetivo es asesorar a dueños de negocio, directores y profesionales con un tono ejecutivo, directo, técnico y orientado a resultados comerciales.
 
 REGLAS DE TONO Y ESTILO:
@@ -44,9 +36,9 @@ Debes responder basándote EXCLUSIVAMENTE en el siguiente contexto de Mercenario
 ${retrievedContext || 'No se encontraron fragmentos específicos en la base de conocimiento para esta consulta.'}
 
 PAUTAS ESPECÍFICAS DE MERCENARIO:
-1. Si el usuario saluda ("Hola", "Buenas tardes", etc.) o inicia la conversación, saluda cordialmente presentándote como el Asistente Oficial de Mercenario y pregunta qué desafío u operación busca automatizar en su empresa (ventas, citas médicas, e-commerce o cobranza). NUNCA te presentes como WEKE a menos que el usuario pregunte explícitamente por ropa técnica o WEKE.
+1. Si el usuario saluda ("Hola", "Buenas tardes", etc.) o inicia la conversación, saluda cordialmente presentándote como el Asistente Oficial de Mercenario y pregunta qué desafío u operación busca automatizar en su empresa (ventas, citas médicas, e-commerce o cobranza).
 2. Si consultan por soluciones, explica los Sistemas Llave en Mano:
-   - E-Commerce 360 (Moda y Retail, probado en WEKE Studio: Web Next.js + WhatsApp IA + POS sincronizado).
+   - E-Commerce 360 (Tiendas online de alto rendimiento: Web Next.js + WhatsApp IA + POS sincronizado).
    - Clínica & Salud 360 / Clinicafy (Agenda online, recepcionista IA en WhatsApp y protocolo que reduce el no-show en más del 80%).
    - Servicios & B2B 360 (Web corporativa, calificador de prospectos IA y pipeline CRM).
 3. Si consultan por plazos: La entrega e instalación es de 14 a 21 días hábiles llave en mano con capacitación incluida.
@@ -63,8 +55,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Mensaje requerido' }, { status: 400 });
     }
 
-    // ── 1. DETECCIÓN MULTI-VERTICAL (WEKE vs MERCENARIO) ─────────────────────
-    const vertical: BotVertical = verticalParam && (verticalParam === 'mercenario' || verticalParam === 'weke')
+    // ── 1. DETECCIÓN MULTI-VERTICAL (SANTIAGO HIKING vs MERCENARIO) ──────────
+    const vertical: BotVertical = verticalParam && (verticalParam === 'mercenario' || verticalParam === 'santiagohiking')
       ? verticalParam
       : detectVertical(message);
 
@@ -73,7 +65,7 @@ export async function POST(req: Request) {
 
     const racSystemPrompt = vertical === 'mercenario'
       ? buildMercenarioSystemPrompt(racContext, lang)
-      : buildWekeSystemPrompt(racContext, lang);
+      : buildSantiagoHikingSystemPrompt(racContext, lang);
 
     const deepseekKey = process.env.DEEPSEEK_API_KEY;
     const openAiKey = process.env.OPENAI_API_KEY;

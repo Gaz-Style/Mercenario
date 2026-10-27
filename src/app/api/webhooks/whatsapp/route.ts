@@ -51,10 +51,7 @@ export async function POST(req: Request) {
             .eq('phone_number', phoneNumber)
             .maybeSingle();
 
-          // Detectar vertical inicial a partir del mensaje: Por defecto Mercenario ('general')
-          const lowerInitial = content.toLowerCase();
-          const isWekeQuery = lowerInitial.includes('weke') || lowerInitial.includes('chaqueta') || lowerInitial.includes('talla') || lowerInitial.includes('pantalon') || lowerInitial.includes('poleron') || lowerInitial.includes('outdoor') || lowerInitial.includes('trekking');
-          const initialVertical = isWekeQuery ? 'retail' : 'general';
+          const initialVertical = 'general';
 
           if (!chatData) {
             const { data: newChat } = await supabase
@@ -72,16 +69,9 @@ export async function POST(req: Request) {
               .single();
 
             chatData = newChat;
-          } else {
-            // Actualizar vertical dinámicamente si el cliente consulta por WEKE o por Mercenario
-            if (isWekeQuery && chatData.vertical !== 'retail') {
-              chatData.vertical = 'retail';
-              await supabase.from('crm_whatsapp_chats').update({ vertical: 'retail' }).eq('id', chatData.id);
-            } else if (!isWekeQuery && chatData.vertical !== 'general') {
-              // Si no consulta por prendas técnicas, reenfocar a Mercenario ('general')
-              chatData.vertical = 'general';
-              await supabase.from('crm_whatsapp_chats').update({ vertical: 'general' }).eq('id', chatData.id);
-            }
+          } else if (chatData.vertical !== 'general') {
+            chatData.vertical = 'general';
+            await supabase.from('crm_whatsapp_chats').update({ vertical: 'general' }).eq('id', chatData.id);
           }
 
           if (chatData) {

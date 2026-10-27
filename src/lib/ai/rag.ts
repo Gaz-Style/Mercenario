@@ -12,7 +12,7 @@ export function normalizeText(text: string): string {
     .trim();
 }
 
-export type BotVertical = 'weke' | 'mercenario';
+export type BotVertical = 'santiagohiking' | 'mercenario';
 
 export interface RACRetrievalResult {
   context: string;
@@ -23,15 +23,15 @@ export interface RACRetrievalResult {
 
 /**
  * Clasificador inteligente de intención / vertical
- * Detecta si el usuario está consultando sobre WEKE (moda, ropa técnica, montaña)
+ * Detecta si el usuario está consultando sobre SANTIAGO HIKING (turismo aventura, salidas a la montaña, rutas, cumbres)
  * o sobre MERCENARIO (sistemas B2B, software, clínicas, automatización, Webpay).
  */
 export function detectVertical(query: string, explicitHint?: string): BotVertical {
   if (explicitHint === 'mercenario' || explicitHint === 'b2b' || explicitHint === 'growth360' || explicitHint === 'salud') {
     return 'mercenario';
   }
-  if (explicitHint === 'weke' || explicitHint === 'retail' || explicitHint === 'moda') {
-    return 'weke';
+  if (explicitHint === 'santiagohiking' || explicitHint === 'hiking' || explicitHint === 'outdoor') {
+    return 'santiagohiking';
   }
 
   const normalized = normalizeText(query);
@@ -46,25 +46,21 @@ export function detectVertical(query: string, explicitHint?: string): BotVertica
     'automatizacion', 'automatizacion operativa', 'operativa', 'operacion', 'empresa', 'diagnostico operativo', 'reunion tecnica'
   ];
 
-  // Palabras clave inequívocas de WEKE / Moda & Ropa Técnica
-  const wekeTriggers = [
-    'weke', 'chaqueta', 'parka', 'pantalon', 'poleron', 'polar', 'talla',
-    'calce', 'estatura', 'peso', 'outdoor', 'trekking', 'montana', 'guanaco',
-    'vidalina', 'taller', 'gredos', 'las condes', 'cero residuo', 'upcycling',
-    'carpa', 'inclusiv', 'adaptad', 'despacho', 'envio', 'comunidad', 'boletin'
+  // Palabras clave inequívocas de Santiago Hiking (Montaña, Trekking, Rutas)
+  const hikingTriggers = [
+    'santiago hiking', 'hiking', 'trekking', 'montana', 'montaña', 'cumbre', 'cumbres',
+    'cerro', 'cerros', 'ruta', 'rutas', 'salida', 'salidas', 'expedicion', 'expedición',
+    'hike and fly', 'hike & fly', 'parapente', 'morado', 'pintor', 'plomo', 'san ramon',
+    'manquehue', 'provincia', 'pochoco', 'cordillera', 'andes'
   ];
 
   const mercenarioScore = mercenarioTriggers.filter(kw => normalized.includes(kw)).length;
-  const wekeScore = wekeTriggers.filter(kw => normalized.includes(kw)).length;
+  const hikingScore = hikingTriggers.filter(kw => normalized.includes(kw)).length;
 
-  // Si hay más palabras de WEKE, asignar WEKE
-  if (wekeScore > mercenarioScore) return 'weke';
-  if (mercenarioScore > wekeScore) return 'mercenario';
+  if (hikingScore > mercenarioScore) return 'santiagohiking';
+  if (mercenarioScore > hikingScore) return 'mercenario';
 
-  // Si contiene mención expresa de WEKE
-  if (normalized.includes('weke')) return 'weke';
-
-  // Por defecto, Mercenario es el sistema operativo B2B principal
+  // Por defecto, Mercenario es el sistema principal en este portal
   return 'mercenario';
 }
 
@@ -82,7 +78,7 @@ export async function retrieveContext(
       context: '',
       matchedChunks: [],
       categories: [],
-      vertical: 'weke',
+      vertical: 'mercenario',
     };
   }
 
@@ -225,6 +221,6 @@ export async function retrieveContext(
     context: formattedContext,
     matchedChunks: finalMatches,
     categories: Array.from(new Set(finalMatches.map((c) => c.category))),
-    vertical: 'weke',
+    vertical: 'santiagohiking',
   };
 }
