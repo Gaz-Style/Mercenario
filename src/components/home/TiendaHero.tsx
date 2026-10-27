@@ -52,7 +52,7 @@ export default function TiendaHero({ onStartTrial }: TiendaHeroProps) {
 
                     {/* Selector de Demos en Vivo: E-Commerce (WEKE) & Clínicas (Clinicafy) */}
                     <div className="w-full max-w-xl flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-                        {/* Botón 1: Demo E-Commerce / Tienda WEKE */}
+                        {/* Botón 1: Demo E-Commerce / Retail */}
                         <Link
                             href="/tienda"
                             className="w-full sm:w-1/2 px-6 py-4 bg-black hover:bg-neutral-800 text-white rounded-2xl flex items-center justify-between gap-3 transition-all hover:scale-[1.02] shadow-xl group border border-black"
@@ -66,7 +66,7 @@ export default function TiendaHero({ onStartTrial }: TiendaHeroProps) {
                                         Retail &amp; Marcas
                                     </span>
                                     <span className="text-sm font-black tracking-tight text-white block">
-                                        Demo Tienda WEKE
+                                        Demo E-Commerce
                                     </span>
                                 </div>
                             </div>

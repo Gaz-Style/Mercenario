@@ -242,7 +242,7 @@ export default function Home() {
                                     onClick={() => setIsMobileMenuOpen(false)}
                                     className="py-1 text-neutral-500 font-normal"
                                 >
-                                    Ver Tienda de Prueba (WEKE)
+                                    Ver Tienda Demo (Retail)
                                 </Link>
                                 <a 
                                     href="https://clinicafy-beige.vercel.app/" 
