@@ -35,11 +35,15 @@ import {
   Zap,
   Globe,
   ExternalLink,
+  Menu,
+  X,
+  FileDown,
 } from "lucide-react";
 
 export default function PropuestaCentroLaDehesaPage() {
   const [activeTab, setActiveTab] = useState<number>(0);
   const [auditTab, setAuditTab] = useState<number>(0);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
   const pillars = [
     {
@@ -186,23 +190,24 @@ export default function PropuestaCentroLaDehesaPage() {
       </div>
 
       {/* Main Header */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center text-white font-bold tracking-wider text-sm shadow-sm">
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-900 flex items-center justify-center text-white font-bold tracking-wider text-xs sm:text-sm shadow-sm">
               M
             </div>
             <div>
-              <span className="font-semibold text-slate-900 tracking-tight text-sm block">
+              <span className="font-semibold text-slate-900 tracking-tight text-xs sm:text-sm block">
                 Mercenario
               </span>
-              <span className="text-[11px] text-slate-500 block leading-tight">
+              <span className="text-[10px] sm:text-[11px] text-slate-500 block leading-tight">
                 Diseño & Evolución Operativa
               </span>
             </div>
           </div>
 
-          <div className="hidden md:flex items-center gap-6 text-sm text-slate-600 font-medium">
+          {/* Desktop Navigation Links */}
+          <div className="hidden md:flex items-center gap-5 lg:gap-6 text-sm text-slate-600 font-medium">
             <a href="#pilares" className="hover:text-slate-900 transition-colors">
               Puntos de Mejora
             </a>
@@ -221,108 +226,203 @@ export default function PropuestaCentroLaDehesaPage() {
             </a>
           </div>
 
-          <div className="flex items-center gap-3">
+          {/* Actions: CTA + Mobile Hamburger */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            <a
+              href="/Informe-Evolucion-Operativa-Centro-La-Dehesa.pdf"
+              download="Informe-Evolucion-Operativa-Centro-La-Dehesa.pdf"
+              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition"
+            >
+              <FileDown className="w-3.5 h-3.5 text-emerald-600" />
+              <span>PDF</span>
+            </a>
+
             <a
               href="#contacto"
-              className="inline-flex items-center justify-center px-4 py-2 text-xs md:text-sm font-medium rounded-lg text-white bg-emerald-600 hover:bg-emerald-700 transition shadow-sm"
+              className="inline-flex items-center justify-center px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg text-white bg-emerald-600 hover:bg-emerald-700 transition shadow-sm"
             >
-              Agendar Diagnóstico (20 min)
+              <span className="hidden sm:inline">Agendar Diagnóstico (20 min)</span>
+              <span className="sm:hidden">Diagnóstico 20m</span>
             </a>
+
+            {/* Mobile Hamburger Button */}
+            <button
+              type="button"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition border border-slate-200"
+              aria-label="Abrir menú"
+            >
+              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Dropdown Drawer */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden border-t border-slate-200 bg-white/98 px-4 py-4 space-y-2.5 shadow-xl animate-in slide-in-from-top-2 duration-200">
+            <a
+              href="#auditoria"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-between p-2.5 rounded-xl bg-emerald-50 text-emerald-900 font-semibold text-xs border border-emerald-200/80"
+            >
+              <div className="flex items-center gap-2">
+                <BarChart3 className="w-4 h-4 text-emerald-600" />
+                <span>Auditoría & Tráfico (centroladehesa.com)</span>
+              </div>
+              <ChevronRight className="w-4 h-4 text-emerald-600" />
+            </a>
+
+            <a
+              href="#pilares"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 text-slate-700 font-medium text-xs"
+            >
+              <span>Los 5 Pilares de Evolución</span>
+              <ChevronRight className="w-4 h-4 text-slate-400" />
+            </a>
+
+            <a
+              href="#comparativa"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 text-slate-700 font-medium text-xs"
+            >
+              <span>Antes vs. Después</span>
+              <ChevronRight className="w-4 h-4 text-slate-400" />
+            </a>
+
+            <a
+              href="#beneficios"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 text-slate-700 font-medium text-xs"
+            >
+              <span>Beneficios por Actor</span>
+              <ChevronRight className="w-4 h-4 text-slate-400" />
+            </a>
+
+            <a
+              href="#faq"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 text-slate-700 font-medium text-xs"
+            >
+              <span>Preguntas Frecuentes</span>
+              <ChevronRight className="w-4 h-4 text-slate-400" />
+            </a>
+
+            <div className="pt-2 border-t border-slate-100 flex flex-col gap-2">
+              <a
+                href="/Informe-Evolucion-Operativa-Centro-La-Dehesa.pdf"
+                download="Informe-Evolucion-Operativa-Centro-La-Dehesa.pdf"
+                className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl text-xs font-semibold text-slate-800 bg-slate-100 hover:bg-slate-200 transition"
+              >
+                <FileDown className="w-4 h-4 text-emerald-600" />
+                <span>Descargar Informe Técnico en PDF</span>
+              </a>
+
+              <a
+                href="#contacto"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl text-xs font-semibold text-white bg-slate-950 hover:bg-slate-800 transition"
+              >
+                <span>Agendar Diagnóstico Operativo (20 min)</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+        )}
       </header>
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden pt-8 pb-14 md:pt-14 md:pb-20 bg-white border-b border-slate-200">
+      {/* Hero Section (Optimizado Mobile & Desktop) */}
+      <section className="relative overflow-hidden pt-6 pb-12 sm:pt-10 sm:pb-16 md:pt-14 md:pb-20 bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
             {/* Columna Izquierda: Copywriting conciso & CTAs */}
             <div className="lg:col-span-6 text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs font-semibold mb-4 shadow-2xs">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>Auditoría & Evolución Operativa</span>
+              <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-900 text-[11px] sm:text-xs font-semibold mb-3 sm:mb-4 shadow-2xs">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                <span className="truncate">Auditoría & Evolución Operativa</span>
                 <span className="text-emerald-300">•</span>
                 <span className="text-emerald-700 font-medium">Sedes La Dehesa & San Carlos</span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-950 leading-[1.12] mb-4">
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-950 leading-[1.14] mb-3 sm:mb-4">
                 Evolución Operativa para{" "}
-                <span className="text-emerald-700 block mt-1">Centro La Dehesa.</span>
+                <span className="text-emerald-700 block sm:inline lg:block mt-0.5 sm:mt-1">Centro La Dehesa.</span>
               </h1>
 
-              <p className="text-base sm:text-lg text-slate-600 leading-relaxed mb-6 max-w-xl">
+              <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed mb-5 sm:mb-6 max-w-xl">
                 Arquitectura invisible para que agendar sesiones 24/7 por WhatsApp, cobrar con boleta médica para Isapre y liquidar honorarios a terapeutas tome segundos en sus dos sedes.
               </p>
 
-              {/* Botones de acción */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-6">
+              {/* Botones de acción (Full width en mobile para fácil tap táctil) */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 mb-5 sm:mb-6">
                 <a
                   href="#auditoria"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white bg-slate-950 hover:bg-slate-800 transition shadow-md"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-white bg-slate-950 hover:bg-slate-800 transition shadow-md w-full sm:w-auto"
                 >
                   <span>Ver Auditoría en Vivo</span>
                   <ArrowRight className="w-4 h-4" />
                 </a>
                 <a
                   href="#pilares"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 transition"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 transition w-full sm:w-auto"
                 >
                   <span>Explorar 5 Pilares</span>
                 </a>
               </div>
 
               {/* Micro-Badges de Confianza al estilo Clinicafy */}
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-slate-600 font-medium pt-2 border-t border-slate-100">
+              <div className="flex flex-wrap items-center gap-x-4 sm:gap-x-5 gap-y-2 text-[11px] sm:text-xs text-slate-600 font-medium pt-3 border-t border-slate-100">
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600 shrink-0" />
                   <span>Sincronización 2 Sedes</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600 shrink-0" />
                   <span>Reembolso Isapre 90%</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600 shrink-0" />
                   <span>Liquidaciones en 30 seg</span>
                 </div>
               </div>
             </div>
 
-            {/* Columna Derecha: Tarjeta Fotográfica con Badges Flotantes */}
-            <div className="lg:col-span-6 relative">
+            {/* Columna Derecha: Tarjeta Fotográfica con Badges Flotantes Responsivos */}
+            <div className="lg:col-span-6 relative mt-4 lg:mt-0">
               <div className="relative rounded-2xl overflow-hidden border border-slate-200 shadow-xl bg-slate-100 group">
                 <img
                   src="/images/propuesta-dehesa/hero-centro-dehesa.jpg"
                   alt="Operación Digital Centro La Dehesa"
-                  className="w-full h-auto object-cover max-h-[460px] group-hover:scale-102 transition-transform duration-500 ease-out"
+                  className="w-full h-auto object-cover max-h-[340px] sm:max-h-[460px] group-hover:scale-102 transition-transform duration-500 ease-out"
                 />
 
-                {/* Badge Flotante 1: Agendamiento WhatsApp */}
-                <div className="absolute top-3.5 left-3.5 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-xl px-3 py-2 shadow-lg flex items-center gap-2.5 max-w-[85%]">
-                  <div className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-                    <MessageSquare className="w-4 h-4" />
+                {/* Badge Flotante 1: Agendamiento WhatsApp (adaptativo para mobile) */}
+                <div className="absolute top-2.5 left-2.5 sm:top-3.5 sm:left-3.5 bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-xl px-2.5 py-1.5 sm:px-3 sm:py-2 shadow-lg flex items-center gap-2 max-w-[65%] sm:max-w-[85%]">
+                  <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                    <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-slate-900 leading-tight">Agendamiento WhatsApp</div>
-                    <div className="text-[10px] text-emerald-600 font-semibold">● 24/7 sin esperas humanas</div>
+                    <div className="text-[11px] sm:text-xs font-bold text-slate-900 leading-tight truncate">Agendamiento WhatsApp</div>
+                    <div className="text-[9px] sm:text-[10px] text-emerald-600 font-semibold truncate">● 24/7 sin esperas</div>
                   </div>
                 </div>
 
                 {/* Badge Flotante 2: Sedes Conectadas */}
-                <div className="absolute top-3.5 right-3.5 bg-slate-900/85 backdrop-blur-md border border-white/10 text-white rounded-lg px-2.5 py-1.5 shadow-md text-[11px] font-semibold flex items-center gap-1.5">
+                <div className="absolute top-2.5 right-2.5 sm:top-3.5 sm:right-3.5 bg-slate-900/90 backdrop-blur-md border border-white/10 text-white rounded-lg px-2 py-1 sm:px-2.5 sm:py-1.5 shadow-md text-[10px] sm:text-[11px] font-semibold flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                  <span>La Dehesa & San Carlos</span>
+                  <span className="hidden sm:inline">La Dehesa & San Carlos</span>
+                  <span className="sm:hidden">2 Sedes</span>
                 </div>
 
                 {/* Badge Flotante 3: Boleta Médica Isapre */}
-                <div className="absolute bottom-3.5 right-3.5 bg-slate-950/95 backdrop-blur-md border border-white/10 rounded-xl px-3.5 py-2 shadow-2xl flex items-center gap-2.5 max-w-[85%] text-white">
-                  <div className="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
-                    <FileCheck2 className="w-4 h-4" />
+                <div className="absolute bottom-2.5 right-2.5 sm:bottom-3.5 sm:right-3.5 bg-slate-950/95 backdrop-blur-md border border-white/10 rounded-xl px-2.5 py-1.5 sm:px-3.5 sm:py-2 shadow-2xl flex items-center gap-2 max-w-[80%] sm:max-w-[85%] text-white">
+                  <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                    <FileCheck2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-white leading-tight">Boleta Médica Isapre</div>
-                    <div className="text-[10px] text-emerald-400 font-medium">Reembolso directo hasta 90%</div>
+                    <div className="text-[11px] sm:text-xs font-bold text-white leading-tight">Boleta Médica Isapre</div>
+                    <div className="text-[9px] sm:text-[10px] text-emerald-400 font-medium">Reembolso hasta 90%</div>
                   </div>
                 </div>
               </div>
@@ -330,29 +430,29 @@ export default function PropuestaCentroLaDehesaPage() {
 
           </div>
 
-          {/* Quick Metrics Strip */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto mt-12 pt-8 border-t border-slate-100 text-left">
-            <div className="p-3.5 bg-slate-50/80 rounded-xl border border-slate-100">
-              <div className="text-xl md:text-2xl font-bold text-slate-900">24/7</div>
-              <div className="text-xs text-slate-500 font-medium mt-0.5">
+          {/* Quick Metrics Strip (2x2 en mobile, 4 en desktop) */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 max-w-6xl mx-auto mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-slate-100 text-left">
+            <div className="p-3 sm:p-3.5 bg-slate-50/90 rounded-xl border border-slate-100">
+              <div className="text-lg sm:text-2xl font-bold text-slate-900">24/7</div>
+              <div className="text-[11px] sm:text-xs text-slate-500 font-medium mt-0.5 leading-snug">
                 Agendamiento continuo sin perder pacientes por chat
               </div>
             </div>
-            <div className="p-3.5 bg-slate-50/80 rounded-xl border border-slate-100">
-              <div className="text-xl md:text-2xl font-bold text-emerald-700">100%</div>
-              <div className="text-xs text-slate-500 font-medium mt-0.5">
+            <div className="p-3 sm:p-3.5 bg-slate-50/90 rounded-xl border border-slate-100">
+              <div className="text-lg sm:text-2xl font-bold text-emerald-700">100%</div>
+              <div className="text-[11px] sm:text-xs text-slate-500 font-medium mt-0.5 leading-snug">
                 Boletas automáticas con código para reembolso Isapre
               </div>
             </div>
-            <div className="p-3.5 bg-slate-50/80 rounded-xl border border-slate-100">
-              <div className="text-xl md:text-2xl font-bold text-slate-900">30 seg</div>
-              <div className="text-xs text-slate-500 font-medium mt-0.5">
+            <div className="p-3 sm:p-3.5 bg-slate-50/90 rounded-xl border border-slate-100">
+              <div className="text-lg sm:text-2xl font-bold text-slate-900">30 seg</div>
+              <div className="text-[11px] sm:text-xs text-slate-500 font-medium mt-0.5 leading-snug">
                 Liquidación de honorarios a terapeutas sin Excel
               </div>
             </div>
-            <div className="p-3.5 bg-slate-50/80 rounded-xl border border-slate-100">
-              <div className="text-xl md:text-2xl font-bold text-emerald-700">2 Sedes</div>
-              <div className="text-xs text-slate-500 font-medium mt-0.5">
+            <div className="p-3 sm:p-3.5 bg-slate-50/90 rounded-xl border border-slate-100">
+              <div className="text-lg sm:text-2xl font-bold text-emerald-700">2 Sedes</div>
+              <div className="text-[11px] sm:text-xs text-slate-500 font-medium mt-0.5 leading-snug">
                 La Dehesa & San Carlos unificadas en tiempo real
               </div>
             </div>
@@ -374,13 +474,13 @@ export default function PropuestaCentroLaDehesaPage() {
           </p>
         </div>
 
-        {/* Tab Selector */}
-        <div className="flex flex-wrap items-center justify-center gap-2.5 mb-10">
+        {/* Tab Selector (Scroll horizontal en mobile, centrado en desktop) */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-8 sm:mb-10 sm:flex-wrap sm:justify-center no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
           {pillars.map((p, idx) => (
             <button
               key={p.id}
               onClick={() => setActiveTab(idx)}
-              className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 border ${
+              className={`px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-2 border whitespace-nowrap shrink-0 ${
                 activeTab === idx
                   ? "bg-slate-900 text-white border-slate-900 shadow-sm"
                   : "bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900 border-slate-200"
@@ -576,24 +676,24 @@ export default function PropuestaCentroLaDehesaPage() {
 
         <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
           <div className="divide-y divide-slate-200">
-            {/* Header row */}
-            <div className="grid grid-cols-12 bg-slate-100/80 px-4 py-3.5 text-xs font-semibold text-slate-700">
-              <div className="col-span-3 sm:col-span-3">MOMENTO DEL DÍA</div>
-              <div className="col-span-4 sm:col-span-4 text-rose-800">CÓMO ES HOY (MANUAL)</div>
-              <div className="col-span-5 sm:col-span-5 text-emerald-800">CON LA OPERACIÓN INTEGRADA</div>
+            {/* Header row (visible on md+) */}
+            <div className="hidden md:grid md:grid-cols-12 bg-slate-100/80 px-4 py-3.5 text-xs font-semibold text-slate-700">
+              <div className="col-span-3">MOMENTO DEL DÍA</div>
+              <div className="col-span-4 text-rose-800">CÓMO ES HOY (MANUAL)</div>
+              <div className="col-span-5 text-emerald-800">CON LA OPERACIÓN INTEGRADA</div>
             </div>
 
             {comparativeRows.map((row, i) => (
-              <div key={i} className="grid grid-cols-12 px-4 py-4 sm:py-5 text-xs sm:text-sm gap-2 sm:gap-4 items-start">
-                <div className="col-span-3 sm:col-span-3 font-semibold text-slate-900">
+              <div key={i} className="flex flex-col md:grid md:grid-cols-12 p-4 sm:p-5 text-xs sm:text-sm gap-2 sm:gap-3 md:gap-4 items-start">
+                <div className="w-full md:col-span-3 font-bold md:font-semibold text-slate-900 text-sm md:text-xs">
                   {row.aspect}
                 </div>
-                <div className="col-span-4 sm:col-span-4 text-slate-600 bg-rose-50/50 p-2.5 rounded-lg border border-rose-100/60 leading-relaxed">
-                  <span className="text-[11px] font-bold text-rose-700 block mb-1">Fricción:</span>
+                <div className="w-full md:col-span-4 text-slate-600 bg-rose-50/60 p-3 rounded-xl border border-rose-100/70 leading-relaxed">
+                  <span className="text-[11px] font-bold text-rose-700 block mb-1 md:hidden">Fricción Actual (Manual):</span>
                   {row.before}
                 </div>
-                <div className="col-span-5 sm:col-span-5 text-slate-800 bg-emerald-50/60 p-2.5 rounded-lg border border-emerald-100 leading-relaxed font-medium">
-                  <span className="text-[11px] font-bold text-emerald-700 block mb-1">Fluidez:</span>
+                <div className="w-full md:col-span-5 text-slate-800 bg-emerald-50/70 p-3 rounded-xl border border-emerald-100 leading-relaxed font-medium">
+                  <span className="text-[11px] font-bold text-emerald-700 block mb-1 md:hidden">Operación Integrada:</span>
                   {row.after}
                 </div>
               </div>
