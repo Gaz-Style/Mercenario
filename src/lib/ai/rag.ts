@@ -57,13 +57,15 @@ export function detectVertical(query: string, explicitHint?: string): BotVertica
   const mercenarioScore = mercenarioTriggers.filter(kw => normalized.includes(kw)).length;
   const wekeScore = wekeTriggers.filter(kw => normalized.includes(kw)).length;
 
-  if (mercenarioScore > wekeScore) return 'mercenario';
+  // Si hay más palabras de WEKE, asignar WEKE
   if (wekeScore > mercenarioScore) return 'weke';
+  if (mercenarioScore > wekeScore) return 'mercenario';
 
-  // Por defecto, si incluye 'hola mercenario' va a mercenario
-  if (normalized.includes('mercenario')) return 'mercenario';
+  // Si contiene mención expresa de WEKE
+  if (normalized.includes('weke')) return 'weke';
 
-  return 'weke';
+  // Por defecto, Mercenario es el sistema operativo B2B principal
+  return 'mercenario';
 }
 
 /**

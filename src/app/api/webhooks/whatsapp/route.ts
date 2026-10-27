@@ -51,10 +51,10 @@ export async function POST(req: Request) {
             .eq('phone_number', phoneNumber)
             .maybeSingle();
 
-          // Detectar vertical inicial a partir del mensaje
+          // Detectar vertical inicial a partir del mensaje: Por defecto Mercenario B2B
           const lowerInitial = content.toLowerCase();
-          const isMercenarioInitial = lowerInitial.includes('mercenario') || lowerInitial.includes('growth') || lowerInitial.includes('sistema') || lowerInitial.includes('llave en mano') || lowerInitial.includes('clinica');
-          const initialVertical = isMercenarioInitial ? 'b2b' : 'retail';
+          const isWekeQuery = lowerInitial.includes('weke') || lowerInitial.includes('chaqueta') || lowerInitial.includes('talla') || lowerInitial.includes('pantalon') || lowerInitial.includes('poleron') || lowerInitial.includes('outdoor') || lowerInitial.includes('trekking');
+          const initialVertical = isWekeQuery ? 'retail' : 'b2b';
 
           if (!chatData) {
             const { data: newChat } = await supabase
@@ -73,13 +73,14 @@ export async function POST(req: Request) {
 
             chatData = newChat;
           } else {
-            // Si el cliente existente cambia explícitamente de contexto, actualizar vertical
-            if (isMercenarioInitial && chatData.vertical !== 'b2b') {
-              chatData.vertical = 'b2b';
-              await supabase.from('crm_whatsapp_chats').update({ vertical: 'b2b' }).eq('id', chatData.id);
-            } else if ((lowerInitial.includes('weke') || lowerInitial.includes('chaqueta') || lowerInitial.includes('talla')) && chatData.vertical !== 'retail') {
+            // Actualizar vertical dinámicamente si el cliente consulta por WEKE o por Mercenario
+            if (isWekeQuery && chatData.vertical !== 'retail') {
               chatData.vertical = 'retail';
               await supabase.from('crm_whatsapp_chats').update({ vertical: 'retail' }).eq('id', chatData.id);
+            } else if (!isWekeQuery && (lowerInitial.includes('mercenario') || lowerInitial.includes('sistema') || lowerInitial.includes('automatiz') || lowerInitial.includes('clinica') || lowerInitial.includes('empresa') || chatData.vertical === 'retail')) {
+              // Si ya no pregunta por prendas de WEKE, reenfocar a Mercenario B2B
+              chatData.vertical = 'b2b';
+              await supabase.from('crm_whatsapp_chats').update({ vertical: 'b2b' }).eq('id', chatData.id);
             }
           }
 

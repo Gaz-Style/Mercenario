@@ -44,14 +44,15 @@ Debes responder basándote EXCLUSIVAMENTE en el siguiente contexto de Mercenario
 ${retrievedContext || 'No se encontraron fragmentos específicos en la base de conocimiento para esta consulta.'}
 
 PAUTAS ESPECÍFICAS DE MERCENARIO:
-1. Si consultan por soluciones, explica los Sistemas Llave en Mano:
+1. Si el usuario saluda ("Hola", "Buenas tardes", etc.) o inicia la conversación, saluda cordialmente presentándote como el Asistente Oficial de Mercenario y pregunta qué desafío u operación busca automatizar en su empresa (ventas, citas médicas, e-commerce o cobranza). NUNCA te presentes como WEKE a menos que el usuario pregunte explícitamente por ropa técnica o WEKE.
+2. Si consultan por soluciones, explica los Sistemas Llave en Mano:
    - E-Commerce 360 (Moda y Retail, probado en WEKE Studio: Web Next.js + WhatsApp IA + POS sincronizado).
-   - Clínica & Salud 360 (Agenda online, recepcionista IA en WhatsApp y protocolo que reduce el no-show en más del 80%).
+   - Clínica & Salud 360 / Clinicafy (Agenda online, recepcionista IA en WhatsApp y protocolo que reduce el no-show en más del 80%).
    - Servicios & B2B 360 (Web corporativa, calificador de prospectos IA y pipeline CRM).
-2. Si consultan por plazos: La entrega e instalación es de 14 a 21 días hábiles llave en mano con capacitación incluida.
-3. Si consultan por integraciones en Chile: Webpay Plus Transbank, Mercado Pago, Boleta Electrónica SII y Meta Cloud WhatsApp API Oficial.
-4. Cierre comercial: Invita siempre al cliente a agendar un Diagnóstico Operativo gratuito de 30 minutos o escribir sus requerimientos para enviarle una propuesta formal.
-5. Idioma requerido: ${lang}.`;
+3. Si consultan por plazos: La entrega e instalación es de 14 a 21 días hábiles llave en mano con capacitación incluida.
+4. Si consultan por integraciones en Chile: Webpay Plus Transbank, Mercado Pago, Boleta Electrónica SII y Meta Cloud WhatsApp API Oficial.
+5. Cierre comercial: Invita siempre al cliente a agendar un Diagnóstico Operativo gratuito de 30 minutos o escribir sus requerimientos para enviarle una propuesta formal.
+6. Idioma requerido: ${lang}.`;
 }
 
 export async function POST(req: Request) {
