@@ -235,35 +235,35 @@ export default function PropuestaCentroLaDehesaPage() {
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-12 pb-16 md:pt-20 md:pb-24 bg-white border-b border-slate-200">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-xs font-semibold mb-6">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-900 text-xs font-semibold mb-6 shadow-xs">
             <Building2 className="w-3.5 h-3.5 text-emerald-600" />
-            <span>De la coordinación manual a una operación que fluye sola</span>
+            <span>Auditoría Digital & Propuesta de Evolución Operativa • Sedes La Dehesa & San Carlos</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-slate-950 leading-[1.15] mb-6">
-            Más tiempo para el cuidado infantil.{" "}
-            <span className="text-emerald-700 block mt-1">
-              Menos tiempo en tareas administrativas.
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-950 leading-[1.14] mb-6">
+            Evolución Operativa para Centro La Dehesa:{" "}
+            <span className="text-emerald-700 block mt-2">
+              Agendamiento 24/7, Boleta Médica para Isapre y Control de sus 2 Sedes.
             </span>
           </h1>
 
-          <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-600 leading-relaxed mb-8">
-            El éxito de Centro La Dehesa y la nueva sede en San Carlos de Apoquindo demuestran la confianza de las familias. Proponemos una arquitectura operativa invisible para que agendar, cobrar, liquidar honorarios y coordinar salas sea instantáneo.
+          <p className="max-w-3xl mx-auto text-base sm:text-lg text-slate-600 leading-relaxed mb-8">
+            Diagnóstico operativo y propuesta exclusiva para la Dirección de Centro La Dehesa (La Dehesa y San Carlos de Apoquindo). Diseñamos la arquitectura invisible para que sus familias agenden la orientación sin esperas en WhatsApp, paguen con boleta lista para reembolso Isapre y el cálculo de comisiones a terapeutas tome 30 segundos sin planillas Excel.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-12">
             <a
-              href="#contacto"
+              href="#auditoria"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-white bg-slate-950 hover:bg-slate-800 transition shadow-md"
             >
-              <span>Ver cómo funciona en vivo</span>
+              <span>Ver Auditoría & Diagnóstico Técnico</span>
               <ArrowRight className="w-4 h-4" />
             </a>
             <a
               href="#pilares"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200/80 transition"
             >
-              Explorar los 4 pilares visuales
+              Explorar los 5 Pilares de Evolución
             </a>
           </div>
 
@@ -272,25 +272,25 @@ export default function PropuestaCentroLaDehesaPage() {
             <div className="p-3 bg-slate-50/80 rounded-xl border border-slate-100">
               <div className="text-xl md:text-2xl font-bold text-slate-900">24/7</div>
               <div className="text-xs text-slate-500 font-medium mt-0.5">
-                Atención y agendamiento sin esperas
+                Agendamiento continuo sin perder pacientes por chat
               </div>
             </div>
             <div className="p-3 bg-slate-50/80 rounded-xl border border-slate-100">
               <div className="text-xl md:text-2xl font-bold text-emerald-700">100%</div>
               <div className="text-xs text-slate-500 font-medium mt-0.5">
-                Boletas listas para reembolso Isapre
+                Boletas automáticas con código para reembolso Isapre
               </div>
             </div>
             <div className="p-3 bg-slate-50/80 rounded-xl border border-slate-100">
               <div className="text-xl md:text-2xl font-bold text-slate-900">30 seg</div>
               <div className="text-xs text-slate-500 font-medium mt-0.5">
-                Cálculo de comisiones por terapeuta
+                Liquidación de honorarios a terapeutas sin Excel
               </div>
             </div>
             <div className="p-3 bg-slate-50/80 rounded-xl border border-slate-100">
               <div className="text-xl md:text-2xl font-bold text-emerald-700">2 Sedes</div>
               <div className="text-xs text-slate-500 font-medium mt-0.5">
-                Controladas desde un solo smartphone
+                La Dehesa & San Carlos unificadas en tiempo real
               </div>
             </div>
           </div>
