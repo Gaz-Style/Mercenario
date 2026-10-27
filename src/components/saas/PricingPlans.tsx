@@ -30,7 +30,7 @@ export default function PricingPlans({ onSelectPlan }: PricingPlansProps) {
                 "Certificado SSL gratis y dominio propio .cl",
                 "1 usuario administrador con panel móvil"
             ],
-            cta: "Probar 14 días gratis",
+            cta: "Empezar con Starter",
             isFeatured: false
         },
         {

@@ -80,7 +80,7 @@ export default function TiendaHero({ onStartTrial }: TiendaHeroProps) {
                     <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-neutral-500 pt-1">
                         <div className="flex items-center gap-1.5">
                             <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                            <span>14 días de prueba gratis</span>
+                            <span>100% Llave en mano</span>
                         </div>
                         <div className="flex items-center gap-1.5">
                             <CheckCircle2 className="w-4 h-4 text-emerald-600" />

@@ -97,7 +97,7 @@ export default function ThreeSteps() {
                         href="#planes"
                         className="px-8 py-4 bg-black text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-full hover:bg-neutral-800 transition-colors shadow-sm flex items-center gap-2"
                     >
-                        <span>Empieza tu prueba gratis de 14 días</span>
+                        <span>Comenzar mi proyecto</span>
                         <ArrowRight className="w-4 h-4" />
                     </a>
                     <Link

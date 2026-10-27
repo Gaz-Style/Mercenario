@@ -265,7 +265,7 @@ export default function Home() {
                                     onClick={() => setIsMobileMenuOpen(false)}
                                     className="w-full py-4 bg-black text-white text-center text-xs font-bold tracking-widest uppercase rounded-full shadow-md"
                                 >
-                                    Crear Mi Tienda Gratis
+                                    Comenzar Mi Proyecto
                                 </a>
                                 <a 
                                     href={`https://wa.me/${WHATSAPP_NUM}?text=Hola,%20quisiera%20conversar%20sobre%20los%20planes%20para%20mi%20tienda`}
@@ -405,7 +405,7 @@ export default function Home() {
                             <div className="space-y-3 pt-2 text-xs text-neutral-600 font-light">
                                 <div className="flex items-center gap-3">
                                     <Clock className="w-4 h-4 text-emerald-600 shrink-0" />
-                                    <span>Activación inmediata de tu prueba de 14 días</span>
+                                    <span>Puesta en marcha rápida con entrega llave en mano</span>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
@@ -545,7 +545,7 @@ export default function Home() {
                                             </>
                                         ) : (
                                             <>
-                                                <span>Comenzar Prueba de 14 Días</span>
+                                                <span>Solicitar Puesta en Marcha</span>
                                                 <ArrowRight className="w-4 h-4" />
                                             </>
                                         )}
