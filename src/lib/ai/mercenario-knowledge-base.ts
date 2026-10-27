@@ -57,11 +57,11 @@ export const MERCENARIO_KNOWLEDGE_CORPUS: MercenarioKnowledgeChunk[] = [
     metadata: { country: 'Chile' }
   },
   {
-    id: 'mercenario-07-diagnostico',
+    id: 'mercenario-07-reunion-presencial',
     category: 'diagnostico',
-    title: 'Cómo Iniciar y Proceso de Diagnóstico Gratuito',
-    keywords: ['empezar', 'iniciar', 'diagnostico', 'reunion', 'agendar', 'contacto', 'como funciona', 'pasos'],
-    content: `El proceso comienza con un Diagnóstico Operativo gratuito de 30 minutos donde conversamos sobre los cuellos de botella de tu negocio (horas médicas perdidas, ventas que se enfrían por responder tarde o inventario desordenado). Luego te mostramos una solución a tu medida y el plan de entrega en 14 a 21 días. Puedes agendar directamente por WhatsApp o en mercenario.cl/#contacto.`,
-    metadata: { cta: 'agendar reunion' }
+    title: 'Cómo Iniciar y Coordinación de Reunión Presencial',
+    keywords: ['empezar', 'iniciar', 'diagnostico', 'reunion', 'visita', 'presencial', 'agendar', 'oficina', 'local', 'contacto', 'como funciona', 'pasos'],
+    content: `El proceso comienza coordinando una reunión presencial en tu empresa, oficina, local o centro médico. Un ejecutivo de Mercenario te visita en terreno para conocer cómo opera tu negocio hoy, entender tus cuellos de botella y mostrarte la solución adecuada con tiempos y valores exactos. Puedes coordinar la visita indicando tu nombre, negocio y comuna.`,
+    metadata: { cta: 'agendar reunion presencial' }
   }
 ];
