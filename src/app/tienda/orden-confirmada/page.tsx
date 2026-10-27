@@ -18,7 +18,7 @@ export default async function OrdenConfirmadaPage({
   const customerName = resolved?.name ? decodeURIComponent(resolved.name) : 'Estimado Cliente';
 
   const whatsappMessage = encodeURIComponent(
-    `Hola Mercenario, acabo de realizar la orden #${orderNumber} por $${total.toLocaleString(
+    `Hola, acabo de realizar la orden #${orderNumber} por $${total.toLocaleString(
       'es-CL'
     )}. ¡Gracias!`
   );

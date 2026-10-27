@@ -43,7 +43,7 @@ export function detectVertical(query: string, explicitHint?: string): BotVertica
     'agendamiento', 'horas', 'box', 'no show', 'inasistencia', 'b2b',
     'cotizacion', 'cotizador', 'crm', 'erp', 'api', 'webpay', 'pos mostrador',
     'facturacion', 'sii', 'cuanto vale implementar', 'precio del sistema',
-    'automatizacion', 'diagnostico operativo', 'reunion tecnica'
+    'automatizacion', 'automatizacion operativa', 'operativa', 'operacion', 'empresa', 'diagnostico operativo', 'reunion tecnica'
   ];
 
   // Palabras clave inequívocas de WEKE / Moda & Ropa Técnica

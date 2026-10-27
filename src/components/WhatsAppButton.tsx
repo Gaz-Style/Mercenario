@@ -9,7 +9,7 @@ import { WHATSAPP_CONFIG } from '@/lib/whatsapp/config';
 export default function WhatsAppButton() {
     const pathname = usePathname();
     const phoneNumber = WHATSAPP_CONFIG.botPhone;
-    const message = 'Hola Mercenario, quisiera consultar sobre la automatización operativa de mi empresa.';
+    const message = 'Hola, quisiera consultar sobre la automatización operativa de mi empresa.';
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     
     const [isScrolling, setIsScrolling] = useState(false);

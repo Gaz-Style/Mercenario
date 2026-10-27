@@ -23,7 +23,7 @@ export const WHATSAPP_CONFIG = {
 
   // Generador de enlace de diagnóstico para Mercenario
   getMercenarioBotUrl: (message?: string) => {
-    const defaultMsg = 'Hola, quisiera consultar sobre un sistema operativo llave en mano para mi empresa.';
+    const defaultMsg = 'Hola, quisiera consultar sobre la automatización operativa de mi empresa.';
     const text = encodeURIComponent(message || defaultMsg);
     return `https://wa.me/56957958467?text=${text}`;
   }
