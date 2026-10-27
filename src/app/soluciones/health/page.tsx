@@ -145,14 +145,30 @@ export default function ClinicaConectadaPage() {
 
                 {/* CTA */}
                 <div className="mt-20 pt-12 border-t border-neutral-100 flex flex-col items-center gap-6">
-                    <div className="text-center space-y-2">
-                        <h4 className="text-lg font-bold text-black">Cada empresa tiene una operación distinta.</h4>
-                        <p className="text-sm text-neutral-500 font-light">Descubre cómo podría funcionar la tuya.</p>
+                    <div className="text-center space-y-2 max-w-xl">
+                        <span className="text-[10px] font-mono tracking-widest uppercase text-emerald-600 font-bold">SOFTWARE CLÍNICO ESPECIALIZADO</span>
+                        <h4 className="text-xl sm:text-2xl font-bold text-black">Conoce Clinicafy en vivo o agenda un diagnóstico.</h4>
+                        <p className="text-sm text-neutral-500 font-light">
+                            Explora la demo interactiva de Clinicafy para centros médicos y consultas especializadas, con agendamiento WhatsApp, cálculo de honorarios y reembolso Isapre.
+                        </p>
                     </div>
-                    <Link href="/empresa/filosofia" className="inline-flex items-center gap-2 px-8 py-4.5 bg-black text-white font-semibold text-[11px] uppercase tracking-widest hover:bg-neutral-800 transition-colors rounded-full">
-                        <span>Agendar una reunión</span>
-                        <ChevronRight className="w-4 h-4" />
-                    </Link>
+                    <div className="flex flex-col sm:flex-row items-center gap-4">
+                        <a 
+                            href="https://clinicafy-beige.vercel.app/" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="inline-flex items-center gap-2 px-8 py-4.5 bg-emerald-600 text-white font-semibold text-[11px] uppercase tracking-widest hover:bg-emerald-700 transition-colors rounded-full shadow-md"
+                        >
+                            <span>Probar Demo Clinicafy</span>
+                            <ChevronRight className="w-4 h-4" />
+                        </a>
+                        <Link 
+                            href="/propuesta/centro-la-dehesa" 
+                            className="inline-flex items-center gap-2 px-8 py-4.5 bg-neutral-100 text-black font-semibold text-[11px] uppercase tracking-widest hover:bg-neutral-200 transition-colors rounded-full"
+                        >
+                            <span>Caso Clínico Real</span>
+                        </Link>
+                    </div>
                 </div>
 
             </main>

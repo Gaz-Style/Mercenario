@@ -27,10 +27,10 @@ export const MERCENARIO_KNOWLEDGE_CORPUS: MercenarioKnowledgeChunk[] = [
   {
     id: 'mercenario-03-clinica-salud-360',
     category: 'sistemas_360',
-    title: 'Sistema Clínica & Salud 360 (Estética, Dental y Centros Médicos)',
-    keywords: ['clinica', 'salud', 'medico', 'estetica', 'dental', 'spa', 'agenda', 'agendamiento', 'horas', 'recordatorio', 'inasistencias', 'no-show', 'box'],
-    content: `El Sistema Clínica & Salud 360 resuelve el principal dolor de las consultas médicas y centros estéticos: las inasistencias (no-shows) y las recepciones saturadas. Incluye: Agenda online con selección de especialista y box, Recepcionista IA en WhatsApp 24/7 que responde preparaciones y agenda horas, cobro de abonos previos con Webpay y protocolo automático de recordatorios por WhatsApp 24h y 2h antes que reduce inasistencias en más del 80%.`,
-    metadata: { vertical: 'salud' }
+    title: 'Sistema Clínica & Salud 360 // Clinicafy (Estética, Dental y Centros Médicos)',
+    keywords: ['clinica', 'clinicafy', 'salud', 'medico', 'estetica', 'dental', 'spa', 'agenda', 'agendamiento', 'horas', 'recordatorio', 'inasistencias', 'no-show', 'box', 'honorarios', 'isapre'],
+    content: `El Sistema Clínica & Salud 360 se materializa en nuestra plataforma especializada Clinicafy (demo en vivo: https://clinicafy-beige.vercel.app/). Resuelve el principal dolor de las consultas médicas y centros de salud: las inasistencias (no-shows) y las recepciones saturadas. Incluye: Agenda online con selección de especialista y box, Recepcionista IA en WhatsApp 24/7 que responde dudas y agenda horas, cobro de abonos con Webpay, liquidación de honorarios a terapeutas/médicos y protocolo automático de recordatorios por WhatsApp 24h y 2h antes que reduce inasistencias en más del 80%.`,
+    metadata: { vertical: 'salud', demoUrl: 'https://clinicafy-beige.vercel.app/' }
   },
   {
     id: 'mercenario-04-servicios-b2b-360',

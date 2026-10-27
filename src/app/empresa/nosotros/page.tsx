@@ -164,7 +164,7 @@ export default function QueEsMercenarioPage() {
                                 </li>
                                 <li className="flex items-start gap-2">
                                     <span className="text-black font-bold">4.</span>
-                                    <span><strong>Rubros idóneos:</strong> Clínicas y salud, centros de estética, retail, talleres, tiendas de especialidad, distribución y empresas de servicios profesionales.</span>
+                                    <span><strong>Rubros idóneos:</strong> Clínicas y salud (<a href="https://clinicafy-beige.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 font-bold underline hover:text-emerald-900">Clinicafy</a>), centros de estética, retail &amp; moda (<Link href="/tienda" className="text-black font-bold underline hover:opacity-80">WEKE Studio</Link>), talleres, distribución y servicios profesionales.</span>
                                 </li>
                             </ul>
                         </div>
@@ -384,6 +384,7 @@ export default function QueEsMercenarioPage() {
                     <div className="flex items-center gap-6">
                         <Link href="/" className="hover:text-black transition-colors">Inicio</Link>
                         <Link href="/tienda" className="hover:text-black transition-colors">Tienda Demo</Link>
+                        <a href="https://clinicafy-beige.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-emerald-700 font-bold hover:text-emerald-900 transition-colors">Clinicafy (Salud) ↗</a>
                         <a href={`https://wa.me/${WHATSAPP_NUM}`} target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">WhatsApp</a>
                     </div>
                 </div>

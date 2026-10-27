@@ -13,7 +13,10 @@ import {
     Smartphone,
     RefreshCw,
     Sparkles,
-    CheckCircle2
+    CheckCircle2,
+    Stethoscope,
+    ExternalLink,
+    Activity
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
@@ -134,6 +137,16 @@ export default function Home() {
                             <Link href="/tienda" className="hover:text-black transition-colors py-2 text-neutral-400">
                                 Tienda Demo
                             </Link>
+                            <a 
+                                href="https://clinicafy-beige.vercel.app/" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 hover:bg-emerald-100 border border-emerald-200 transition-colors text-[10px] font-bold"
+                            >
+                                <Stethoscope className="w-3 h-3 text-emerald-600" />
+                                <span>Clinicafy (Salud)</span>
+                                <ExternalLink className="w-2.5 h-2.5 opacity-60" />
+                            </a>
                         </nav>
                     </div>
 
@@ -229,8 +242,21 @@ export default function Home() {
                                     onClick={() => setIsMobileMenuOpen(false)}
                                     className="py-1 text-neutral-500 font-normal"
                                 >
-                                    Ver Tienda de Prueba
+                                    Ver Tienda de Prueba (WEKE)
                                 </Link>
+                                <a 
+                                    href="https://clinicafy-beige.vercel.app/" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="py-2.5 px-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 font-bold flex items-center justify-between"
+                                >
+                                    <div className="flex items-center gap-2">
+                                        <Stethoscope className="w-4 h-4 text-emerald-600" />
+                                        <span>Clinicafy (Clínicas &amp; Salud)</span>
+                                    </div>
+                                    <ExternalLink className="w-3.5 h-3.5 text-emerald-600" />
+                                </a>
                             </div>
 
                             <div className="pt-4 border-t border-neutral-100 flex flex-col gap-3">
@@ -285,7 +311,55 @@ export default function Home() {
                 <SimpleFAQ />
 
                 {/* ─── 10. BANNER SECUNDARIO PARA CLIENTES CORPORATIVOS O CÓDIGO DEDICADO ─── */}
-                <section className="w-full max-w-5xl mx-auto px-4 py-12">
+                <section className="w-full max-w-5xl mx-auto px-4 py-8 space-y-6">
+                    {/* Tarjeta Clinicafy para Centros Médicos & Clínicas */}
+                    <div className="bg-gradient-to-br from-emerald-950 via-neutral-900 to-black text-white rounded-3xl p-7 sm:p-9 border border-emerald-800/40 shadow-2xl relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+                        
+                        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                            <div className="space-y-3 max-w-2xl">
+                                <div className="flex items-center gap-2">
+                                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                                    <span className="text-[10px] font-mono tracking-widest uppercase text-emerald-400 font-bold">
+                                        SOLUCIÓN VERTICAL DE SALUD // CLINICAFY
+                                    </span>
+                                </div>
+                                <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-white leading-tight">
+                                    ¿Operas un Centro Médico, Clínica Dental o Terapéutica?
+                                </h3>
+                                <p className="text-sm text-neutral-300 font-light leading-relaxed">
+                                    Diseñamos <strong className="text-white font-semibold">Clinicafy</strong>: la plataforma operativa especializada en agendamiento automatizado por WhatsApp con IA, confirmación de citas para reducir inasistencias (no-shows) bajo el 8%, cobro Webpay y liquidación automática a especialistas médicos con boleta de honorarios.
+                                </p>
+                                <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono text-emerald-300/90 pt-1">
+                                    <span className="flex items-center gap-1.5">✓ Agendamiento 24/7</span>
+                                    <span className="flex items-center gap-1.5">✓ Ficha Clínica Digital</span>
+                                    <span className="flex items-center gap-1.5">✓ Reembolso Isapre</span>
+                                    <span className="flex items-center gap-1.5">✓ Multi-Sucursal</span>
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
+                                <a
+                                    href="https://clinicafy-beige.vercel.app/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-6 py-3.5 bg-emerald-400 text-neutral-950 hover:bg-emerald-300 text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 font-mono group-hover:scale-102"
+                                >
+                                    <Stethoscope className="w-4 h-4" />
+                                    <span>Ver Demo Clinicafy</span>
+                                    <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+                                </a>
+                                <Link
+                                    href="/propuesta/centro-la-dehesa"
+                                    className="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-colors border border-white/15 text-center font-mono"
+                                >
+                                    Caso Centro La Dehesa
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Banner Empresas y Alto Volumen */}
                     <div className="bg-neutral-50 rounded-3xl p-6 sm:p-8 border border-neutral-200 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
                         <div className="space-y-1">
                             <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-400 font-bold">
@@ -505,7 +579,16 @@ export default function Home() {
                         <a href="#planes" className="hover:text-black transition-colors font-bold text-neutral-900">Planes CLP</a>
                         <a href="#calculadora" className="hover:text-black transition-colors">Calculadora Ahorro</a>
                         <a href="#faq" className="hover:text-black transition-colors">Preguntas</a>
-                        <Link href="/tienda" className="hover:text-black text-neutral-700 transition-colors">Tienda Demo</Link>
+                        <Link href="/tienda" className="hover:text-black text-neutral-700 transition-colors">Tienda Demo (Retail)</Link>
+                        <a 
+                            href="https://clinicafy-beige.vercel.app/" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="font-bold text-emerald-700 hover:text-emerald-900 transition-colors inline-flex items-center gap-1"
+                        >
+                            <span>Clinicafy (Salud)</span>
+                            <span className="text-[10px]">↗</span>
+                        </a>
                         <Link href="/admin" className="hover:text-black transition-colors">Panel Admin</Link>
                     </div>
 
