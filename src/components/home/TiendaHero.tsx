@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, CheckCircle2, ShieldCheck, Zap, Sparkles, Smartphone, CreditCard, ShoppingBag } from "lucide-react";
+import { ArrowRight, CheckCircle2, ShieldCheck, Zap, Sparkles, Smartphone, CreditCard, ShoppingBag, Stethoscope, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
 interface TiendaHeroProps {
@@ -50,31 +50,52 @@ export default function TiendaHero({ onStartTrial }: TiendaHeroProps) {
                         Todo lo que tu marca necesita: pagos con tarjetas y cuotas, envíos automáticos con Starken y Chilexpress, boletas del SII y control de stock unificado. <strong className="font-semibold text-neutral-900">Sin saber de programación.</strong>
                     </p>
 
-                    {/* Formulario de entrada instantáneo estilo Tiendanube */}
-                    <form 
-                        onSubmit={handleSubmit}
-                        className="w-full max-w-xl flex flex-col sm:flex-row items-center gap-2.5 p-2 bg-white rounded-2xl sm:rounded-full border-2 border-neutral-200 focus-within:border-black shadow-lg transition-all"
-                    >
-                        <div className="relative w-full flex items-center pl-4 pr-2">
-                            <span className="text-neutral-400 text-sm font-medium pr-1 select-none">
-                                mitienda.cl/
-                            </span>
-                            <input
-                                type="text"
-                                value={storeName}
-                                onChange={(e) => setStoreName(e.target.value)}
-                                placeholder="el-nombre-de-tu-marca"
-                                className="w-full py-2.5 text-sm md:text-base font-semibold text-neutral-900 placeholder:text-neutral-400 placeholder:font-normal bg-transparent focus:outline-none"
-                            />
-                        </div>
-                        <button
-                            type="submit"
-                            className="w-full sm:w-auto shrink-0 px-7 py-3.5 bg-black hover:bg-neutral-800 text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-xl sm:rounded-full flex items-center justify-center gap-2 transition-transform active:scale-95 shadow-md"
+                    {/* Selector de Demos en Vivo: E-Commerce (WEKE) & Clínicas (Clinicafy) */}
+                    <div className="w-full max-w-xl flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                        {/* Botón 1: Demo E-Commerce / Tienda WEKE */}
+                        <Link
+                            href="/tienda"
+                            className="w-full sm:w-1/2 px-6 py-4 bg-black hover:bg-neutral-800 text-white rounded-2xl flex items-center justify-between gap-3 transition-all hover:scale-[1.02] shadow-xl group border border-black"
                         >
-                            <span>Crear mi tienda</span>
-                            <ArrowRight className="w-4 h-4" />
-                        </button>
-                    </form>
+                            <div className="flex items-center gap-3 text-left">
+                                <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white shrink-0 group-hover:bg-white/20 transition-colors">
+                                    <ShoppingBag className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block font-semibold">
+                                        Retail &amp; Marcas
+                                    </span>
+                                    <span className="text-sm font-black tracking-tight text-white block">
+                                        Demo Tienda WEKE
+                                    </span>
+                                </div>
+                            </div>
+                            <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                        </Link>
+
+                        {/* Botón 2: Demo Clinicafy */}
+                        <a
+                            href="https://clinicafy-beige.vercel.app/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full sm:w-1/2 px-6 py-4 bg-emerald-500 hover:bg-emerald-400 text-neutral-950 rounded-2xl flex items-center justify-between gap-3 transition-all hover:scale-[1.02] shadow-xl group border border-emerald-400"
+                        >
+                            <div className="flex items-center gap-3 text-left">
+                                <div className="w-10 h-10 rounded-xl bg-black/10 flex items-center justify-center text-neutral-950 shrink-0 group-hover:bg-black/15 transition-colors">
+                                    <Stethoscope className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-950/70 block font-semibold">
+                                        Salud &amp; Consultas
+                                    </span>
+                                    <span className="text-sm font-black tracking-tight text-neutral-950 block">
+                                        Demo Clinicafy
+                                    </span>
+                                </div>
+                            </div>
+                            <ExternalLink className="w-4 h-4 text-emerald-950/70 group-hover:text-neutral-950 group-hover:translate-x-0.5 transition-all" />
+                        </a>
+                    </div>
 
                     {/* Micro-beneficios de confianza inmediata */}
                     <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-neutral-500 pt-1">
