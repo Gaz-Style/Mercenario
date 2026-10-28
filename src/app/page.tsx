@@ -125,9 +125,6 @@ export default function Home() {
                             <a href="#disenos" className="hover:text-black transition-colors py-2">
                                 Diseños
                             </a>
-                            <a href="#planes" className="hover:text-black transition-colors py-2 text-black font-black">
-                                Planes CLP
-                            </a>
                             <a href="#calculadora" className="hover:text-black transition-colors py-2">
                                 0% Comisión
                             </a>
@@ -217,13 +214,6 @@ export default function Home() {
                                     Diseños y Plantillas
                                 </a>
                                 <a 
-                                    href="#planes" 
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                    className="py-1 text-black font-black"
-                                >
-                                    Planes en CLP (0% Comisión)
-                                </a>
-                                <a 
                                     href="#calculadora" 
                                     onClick={() => setIsMobileMenuOpen(false)}
                                     className="py-1 text-neutral-700"
@@ -301,8 +291,8 @@ export default function Home() {
                 {/* ─── 06. CALCULADORA INTERACTIVA DE AHORRO 0% COMISIÓN ─── */}
                 <SavingsCalculator onSelectPlan={handleSelectSystemForQuote} />
 
-                {/* ─── 07. PLANES & PRECIOS SAAS EN PESOS CHILENOS (CLP) ─── */}
-                <PricingPlans onSelectPlan={handleSelectSystemForQuote} />
+                {/* ─── 07. SECCIÓN DE PRECIOS OCULTA A PETICIÓN ─── */}
+                {/* <PricingPlans onSelectPlan={handleSelectSystemForQuote} /> */}
 
                 {/* ─── 08. TABLA COMPARATIVA DIRECTA VS TIENDANUBE / SHOPIFY ─── */}
                 <PlatformComparison />
