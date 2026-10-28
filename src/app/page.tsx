@@ -294,8 +294,8 @@ export default function Home() {
                 {/* ─── 07. SECCIÓN DE PRECIOS OCULTA A PETICIÓN ─── */}
                 {/* <PricingPlans onSelectPlan={handleSelectSystemForQuote} /> */}
 
-                {/* ─── 08. TABLA COMPARATIVA DIRECTA VS TIENDANUBE / SHOPIFY ─── */}
-                <PlatformComparison />
+                {/* ─── 08. TABLA COMPARATIVA OCULTADA A PETICIÓN ─── */}
+                {/* <PlatformComparison /> */}
 
                 {/* ─── 09. PREGUNTAS FRECUENTES CLARAS Y HUMANAS (FAQ) ─── */}
                 <SimpleFAQ />
