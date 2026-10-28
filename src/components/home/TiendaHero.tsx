@@ -27,171 +27,267 @@ export default function TiendaHero({ onStartTrial }: TiendaHeroProps) {
             <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-tr from-emerald-100/40 via-neutral-100/60 to-transparent blur-3xl pointer-events-none rounded-full" />
             
             <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col items-center text-center space-y-6 max-w-3xl mx-auto">
+                {/* ─── HERO SUPERIOR EN 2 COLUMNAS (ESTILO CLINICAFY) ─── */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                     
-                    {/* Badge de confianza */}
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 text-white text-[11px] font-medium tracking-wide shadow-sm">
-                        <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-                        <span>La plataforma de comercio para vender en Chile</span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                        <span className="text-neutral-300 font-bold">0% Comisión</span>
+                    {/* Columna Izquierda: Copy, CTAs y Beneficios */}
+                    <div className="lg:col-span-7 flex flex-col items-start text-left space-y-6">
+                        
+                        {/* Badge de confianza */}
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 text-white text-[11px] font-medium tracking-wide shadow-sm">
+                            <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                            <span>La plataforma de comercio para vender en Chile</span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                            <span className="text-neutral-300 font-bold">0% Comisión</span>
+                        </div>
+
+                        {/* Titular Principal simple y directo */}
+                        <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-black text-neutral-950 tracking-tight leading-[1.08]">
+                            Crea tu tienda online y vende a todo Chile{" "}
+                            <span className="bg-gradient-to-r from-neutral-900 via-neutral-700 to-neutral-900 bg-clip-text text-transparent">
+                                sin complicaciones.
+                            </span>
+                        </h1>
+
+                        {/* Bajada clara, humana y sin tecnicismos */}
+                        <p className="text-base sm:text-lg text-neutral-600 font-light leading-relaxed max-w-xl">
+                            Todo lo que tu marca necesita: pagos con tarjetas y cuotas, envíos automáticos con Starken y Chilexpress, boletas del SII y control de stock unificado. <strong className="font-semibold text-neutral-900">Sin saber de programación.</strong>
+                        </p>
+
+                        {/* Selector de Demos en Vivo: E-Commerce (WEKE) & Clínicas (Clinicafy) */}
+                        <div className="w-full max-w-xl flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+                            {/* Botón 1: Demo E-Commerce / Retail */}
+                            <Link
+                                href="/tienda"
+                                className="w-full sm:w-1/2 px-5 py-3.5 bg-black hover:bg-neutral-800 text-white rounded-2xl flex items-center justify-between gap-3 transition-all hover:scale-[1.02] shadow-xl group border border-black"
+                            >
+                                <div className="flex items-center gap-3 text-left">
+                                    <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white shrink-0 group-hover:bg-white/20 transition-colors">
+                                        <ShoppingBag className="w-5 h-5" />
+                                    </div>
+                                    <div>
+                                        <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block font-semibold">
+                                            Retail &amp; Marcas
+                                        </span>
+                                        <span className="text-sm font-black tracking-tight text-white block">
+                                            Demo E-Commerce
+                                        </span>
+                                    </div>
+                                </div>
+                                <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                            </Link>
+
+                            {/* Botón 2: Demo Clinicafy */}
+                            <a
+                                href="https://clinicafy-beige.vercel.app/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full sm:w-1/2 px-5 py-3.5 bg-emerald-500 hover:bg-emerald-400 text-neutral-950 rounded-2xl flex items-center justify-between gap-3 transition-all hover:scale-[1.02] shadow-xl group border border-emerald-400"
+                            >
+                                <div className="flex items-center gap-3 text-left">
+                                    <div className="w-10 h-10 rounded-xl bg-black/10 flex items-center justify-center text-neutral-950 shrink-0 group-hover:bg-black/15 transition-colors">
+                                        <Stethoscope className="w-5 h-5" />
+                                    </div>
+                                    <div>
+                                        <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-950/70 block font-semibold">
+                                            Salud &amp; Consultas
+                                        </span>
+                                        <span className="text-sm font-black tracking-tight text-neutral-950 block">
+                                            Demo Clinicafy
+                                        </span>
+                                    </div>
+                                </div>
+                                <ExternalLink className="w-4 h-4 text-emerald-950/70 group-hover:text-neutral-950 group-hover:translate-x-0.5 transition-all" />
+                            </a>
+                        </div>
+
+                        {/* Micro-beneficios de confianza inmediata */}
+                        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-neutral-500 pt-1">
+                            <div className="flex items-center gap-1.5">
+                                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                                <span>100% Llave en mano</span>
+                            </div>
+                            <div className="flex items-center gap-1.5">
+                                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                                <span>Sin tarjeta de crédito</span>
+                            </div>
+                            <div className="flex items-center gap-1.5">
+                                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                                <span>0% comisión por venta</span>
+                            </div>
+                            <div className="flex items-center gap-1.5">
+                                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                                <span>Lista en 15 min</span>
+                            </div>
+                        </div>
                     </div>
 
-                    {/* Titular Principal simple y directo */}
-                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-neutral-950 tracking-tight leading-[1.08]">
-                        Crea tu tienda online y vende a todo Chile <br className="hidden sm:inline" />
-                        <span className="bg-gradient-to-r from-neutral-900 via-neutral-700 to-neutral-900 bg-clip-text text-transparent">
-                            sin complicaciones.
-                        </span>
-                    </h1>
-
-                    {/* Bajada clara, humana y sin tecnicismos */}
-                    <p className="text-base sm:text-lg md:text-xl text-neutral-600 font-light leading-relaxed max-w-2xl">
-                        Todo lo que tu marca necesita: pagos con tarjetas y cuotas, envíos automáticos con Starken y Chilexpress, boletas del SII y control de stock unificado. <strong className="font-semibold text-neutral-900">Sin saber de programación.</strong>
-                    </p>
-
-                    {/* Selector de Demos en Vivo: E-Commerce (WEKE) & Clínicas (Clinicafy) */}
-                    <div className="w-full max-w-xl flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-                        {/* Botón 1: Demo E-Commerce / Retail */}
-                        <Link
-                            href="/tienda"
-                            className="w-full sm:w-1/2 px-6 py-4 bg-black hover:bg-neutral-800 text-white rounded-2xl flex items-center justify-between gap-3 transition-all hover:scale-[1.02] shadow-xl group border border-black"
-                        >
-                            <div className="flex items-center gap-3 text-left">
-                                <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white shrink-0 group-hover:bg-white/20 transition-colors">
-                                    <ShoppingBag className="w-5 h-5" />
+                    {/* Columna Derecha: Imagen Comercial con Badges Flotantes (Exacto a Referencia Clinicafy) */}
+                    <div className="lg:col-span-5 relative w-full">
+                        <div className="relative rounded-3xl overflow-hidden border border-neutral-200/90 shadow-2xl bg-neutral-100 aspect-[4/3] group">
+                            {/* Imagen Principal */}
+                            <img
+                                src="/images/mercenario_hero_founders.jpg"
+                                alt="Fundadores operando con Mercenario en Chile"
+                                className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                            />
+                            
+                            {/* Badge Flotante Superior Izquierdo: Estado Operativo */}
+                            <div className="absolute top-4 left-4 flex items-center gap-2.5 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl shadow-lg border border-neutral-200/80">
+                                <div className="w-7 h-7 rounded-xl bg-emerald-50 border border-emerald-200/60 flex items-center justify-center text-emerald-600">
+                                    <Sparkles className="w-4 h-4" />
                                 </div>
-                                <div>
-                                    <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block font-semibold">
-                                        Retail &amp; Marcas
-                                    </span>
-                                    <span className="text-sm font-black tracking-tight text-white block">
-                                        Demo E-Commerce
-                                    </span>
+                                <div className="text-left">
+                                    <p className="text-[11px] font-bold text-neutral-900 leading-tight">
+                                        E-Commerce Activo
+                                    </p>
+                                    <p className="text-[10px] text-emerald-700 font-medium flex items-center gap-1">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse" />
+                                        99.9% Uptime · SII Auto
+                                    </p>
                                 </div>
                             </div>
-                            <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-white group-hover:translate-x-1 transition-all" />
-                        </Link>
 
-                        {/* Botón 2: Demo Clinicafy */}
-                        <a
-                            href="https://clinicafy-beige.vercel.app/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-full sm:w-1/2 px-6 py-4 bg-emerald-500 hover:bg-emerald-400 text-neutral-950 rounded-2xl flex items-center justify-between gap-3 transition-all hover:scale-[1.02] shadow-xl group border border-emerald-400"
-                        >
-                            <div className="flex items-center gap-3 text-left">
-                                <div className="w-10 h-10 rounded-xl bg-black/10 flex items-center justify-center text-neutral-950 shrink-0 group-hover:bg-black/15 transition-colors">
-                                    <Stethoscope className="w-5 h-5" />
+                            {/* Badge Flotante Inferior Derecho: Pasarela & Logística */}
+                            <div className="absolute bottom-4 right-4 flex items-center gap-2.5 bg-neutral-950/90 backdrop-blur-md px-3.5 py-2 rounded-2xl shadow-xl border border-neutral-800 text-white">
+                                <div className="w-7 h-7 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+                                    <Zap className="w-4 h-4" />
                                 </div>
-                                <div>
-                                    <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-950/70 block font-semibold">
-                                        Salud &amp; Consultas
-                                    </span>
-                                    <span className="text-sm font-black tracking-tight text-neutral-950 block">
-                                        Demo Clinicafy
-                                    </span>
+                                <div className="text-left">
+                                    <p className="text-[11px] font-bold text-white leading-tight">
+                                        Webpay + Starken
+                                    </p>
+                                    <p className="text-[10px] text-neutral-300 font-light">
+                                        &lt; 3 seg despacho y pago
+                                    </p>
                                 </div>
                             </div>
-                            <ExternalLink className="w-4 h-4 text-emerald-950/70 group-hover:text-neutral-950 group-hover:translate-x-0.5 transition-all" />
-                        </a>
-                    </div>
-
-                    {/* Micro-beneficios de confianza inmediata */}
-                    <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-neutral-500 pt-1">
-                        <div className="flex items-center gap-1.5">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                            <span>100% Llave en mano</span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                            <span>Sin tarjeta de crédito</span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                            <span>0% de comisión por venta</span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                            <span>Lista en 15 minutos</span>
                         </div>
                     </div>
                 </div>
 
-                {/* ─── HERO VISUAL: PLATAFORMA OPERATIVA MERCENARIO EN VIVO ─── */}
+                {/* ─── SHOWCASE MOCKUP VISUAL DE LA TIENDA ─── */}
                 <div className="mt-12 md:mt-16 relative max-w-5xl mx-auto">
-                    <div className="relative rounded-2xl md:rounded-3xl border border-neutral-200/90 bg-neutral-950 p-2 sm:p-3 shadow-2xl overflow-hidden group">
+                    <div className="relative rounded-2xl md:rounded-3xl border border-neutral-200/80 bg-neutral-950 p-2 sm:p-4 shadow-2xl overflow-hidden">
                         
-                        {/* Barra superior de navegador de alta fidelidad */}
-                        <div className="flex items-center justify-between px-3 py-2 border-b border-neutral-800 text-neutral-400 text-xs bg-neutral-900/80 rounded-t-xl">
+                        {/* Barra superior de navegador falso */}
+                        <div className="flex items-center justify-between px-3 py-2 border-b border-neutral-800 text-neutral-400 text-xs">
                             <div className="flex items-center gap-1.5">
                                 <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
                                 <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
                                 <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
                             </div>
-                            <div className="bg-neutral-950 px-4 py-1 rounded-full text-[11px] font-mono text-neutral-300 flex items-center gap-1.5 border border-white/5">
+                            <div className="bg-neutral-900 px-4 py-1 rounded-full text-[11px] font-mono text-neutral-300 flex items-center gap-1.5">
                                 <ShieldCheck className="w-3 h-3 text-emerald-400" />
-                                <span>https://mercenario.cl/operacion-conectada</span>
+                                <span>https://tumarca.cl</span>
                             </div>
-                            <div className="text-[10px] font-mono text-emerald-400 flex items-center gap-1.5">
-                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                                <span>0.8s Edge Carga</span>
+                            <div className="text-[10px] font-mono text-neutral-500">
+                                0.8s Carga
                             </div>
                         </div>
 
-                        {/* Imagen Hero Central con Overlay Editorial y Badges Operativos en Vivo */}
-                        <div className="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-xl overflow-hidden bg-neutral-900">
-                            <img
-                                src="/images/mercenario_hero_dashboard.jpg"
-                                alt="Mercenario OS - Plataforma Operativa Comercial"
-                                className="w-full h-full object-cover object-center group-hover:scale-[1.01] transition-transform duration-700"
-                            />
+                        {/* Contenido interactivo simulado de la tienda */}
+                        <div className="bg-white rounded-xl p-4 sm:p-8 space-y-6">
                             
-                            {/* Gradiente sutil para legibilidad y acabado cinematográfico */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
-
-                            {/* Badge Flotante Superior Izquierdo: Estado de la Operación */}
-                            <div className="absolute top-4 left-4 sm:top-6 sm:left-6 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-white/15 text-white text-[11px] font-mono">
-                                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                                <span className="font-bold tracking-wider">SISTEMA ACTIVO 24/7</span>
-                            </div>
-
-                            {/* Badge Flotante Superior Derecho: Webpay & Boleta SII */}
-                            <div className="absolute top-4 right-4 sm:top-6 sm:right-6 hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-white/15 text-white text-[11px] font-mono">
-                                <CreditCard className="w-3.5 h-3.5 text-emerald-400" />
-                                <span>Webpay Plus & Boleta SII Conectados</span>
-                            </div>
-
-                            {/* Barra Inferior de Métricas en Vivo */}
-                            <div className="absolute bottom-4 inset-x-4 sm:bottom-6 sm:inset-x-6 flex flex-col sm:flex-row items-center justify-between gap-3 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-black/85 backdrop-blur-md border border-white/10 text-white">
-                                <div className="flex items-center gap-3 w-full sm:w-auto">
-                                    <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center shrink-0">
-                                        <Sparkles className="w-5 h-5" />
-                                    </div>
-                                    <div className="text-left">
-                                        <div className="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
-                                            <span>Operación Unificada en Tiempo Real</span>
-                                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500 text-black font-black uppercase">
-                                                Sin Fricción
-                                            </span>
-                                        </div>
-                                        <div className="text-[11px] text-neutral-300 font-light">
-                                            Web ultra rápida &bull; WhatsApp IA 24/7 &bull; Pagos &bull; Stock sincronizado
-                                        </div>
+                            {/* Barra de la tienda demo */}
+                            <div className="flex items-center justify-between border-b border-neutral-100 pb-4">
+                                <div className="flex items-center gap-2">
+                                    <span className="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center font-black text-sm">
+                                        M
+                                    </span>
+                                    <span className="font-bold text-neutral-900 text-sm sm:text-base tracking-tight">
+                                        TU MARCA CHILE
+                                    </span>
+                                </div>
+                                <div className="hidden sm:flex items-center gap-6 text-xs font-medium text-neutral-600">
+                                    <span>Colección 2026</span>
+                                    <span>Lo más vendido</span>
+                                    <span>Sucursales</span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <div className="p-2 rounded-full bg-neutral-100 text-neutral-800 relative">
+                                        <ShoppingBag className="w-4 h-4" />
+                                        <span className="absolute -top-1 -right-1 w-4 h-4 bg-black text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+                                            2
+                                        </span>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div className="flex items-center gap-2.5 w-full sm:w-auto justify-end">
+                            {/* Banner promocional limpio */}
+                            <div className="w-full bg-neutral-900 text-white rounded-xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                                <div className="space-y-1 text-center sm:text-left">
+                                    <span className="text-[10px] font-mono tracking-widest uppercase text-emerald-400 font-bold">
+                                        EN VIVO · WEBPAY PLUS ACTIVO
+                                    </span>
+                                    <h3 className="text-xl sm:text-2xl font-black tracking-tight">
+                                        Envío a todo Chile con Starken y Chilexpress
+                                    </h3>
+                                    <p className="text-xs text-neutral-300 font-light">
+                                        Paga hasta en 6 cuotas sin interés y recibe boleta electrónica al instante.
+                                    </p>
+                                </div>
+                                <div className="shrink-0">
                                     <Link
                                         href="/tienda"
-                                        className="px-4 py-2 bg-white text-black hover:bg-neutral-100 text-xs font-bold rounded-lg transition-colors whitespace-nowrap"
+                                        className="px-5 py-2.5 bg-white text-black text-xs font-bold uppercase tracking-wider rounded-lg hover:bg-neutral-100 transition-colors inline-block"
                                     >
-                                        Explorar Tienda Demo &rarr;
+                                        Ver tienda demo
                                     </Link>
                                 </div>
                             </div>
+
+                            {/* Grid de productos de muestra */}
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+                                {[
+                                    { name: "Chaqueta Cortaviento Térmica", price: "$49.990", tag: "Más Vendido", stock: "12 disponibles", image: "/images/demo-store/chaqueta-cortaviento.jpg" },
+                                    { name: "Botella Acero Térmica 1L", price: "$18.990", tag: "Envío Gratis", stock: "28 disponibles", image: "/images/demo-store/botella-acero.jpg" },
+                                    { name: "Mochila Urbana Impermeable", price: "$34.990", tag: "Webpay 3 cuotas", stock: "5 disponibles", image: "/images/demo-store/mochila-urbana.jpg" },
+                                    { name: "Gorro Lana Merino", price: "$12.990", tag: "0% Comisión", stock: "40 disponibles", image: "/images/demo-store/gorro-lana-merino.jpg" },
+                                ].map((prod, idx) => (
+                                    <div key={idx} className="p-2.5 sm:p-3 bg-neutral-50 rounded-xl border border-neutral-100 space-y-2 group/card hover:border-neutral-300 transition-all">
+                                        <div className="w-full aspect-square bg-neutral-100 rounded-lg overflow-hidden relative shadow-2xs">
+                                            <img
+                                                src={prod.image}
+                                                alt={prod.name}
+                                                className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-300"
+                                            />
+                                        </div>
+                                        <div className="space-y-1">
+                                            <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 bg-neutral-200/80 text-neutral-700 rounded">
+                                                {prod.tag}
+                                            </span>
+                                            <h4 className="text-xs font-bold text-neutral-900 truncate">
+                                                {prod.name}
+                                            </h4>
+                                            <div className="flex items-center justify-between pt-1">
+                                                <span className="text-xs font-black text-neutral-900 font-mono">
+                                                    {prod.price}
+                                                </span>
+                                                <span className="text-[10px] text-emerald-600 font-mono">
+                                                    {prod.stock}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
 
+                        {/* Floating Notification: Venta en vivo */}
+                        <div className="absolute bottom-6 right-6 hidden sm:flex items-center gap-3 bg-white/95 backdrop-blur-md border border-neutral-200 shadow-xl rounded-2xl px-4 py-3 max-w-sm animate-bounce-subtle">
+                            <div className="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                                <CreditCard className="w-4 h-4" />
+                            </div>
+                            <div className="text-left text-xs">
+                                <p className="font-bold text-neutral-900">
+                                    ¡Nueva venta de $49.990!
+                                </p>
+                                <p className="text-[11px] text-neutral-500 font-light">
+                                    Pagado con Webpay · Boleta SII #412 emitida
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
