@@ -47,7 +47,7 @@ export default function TiendaHero({ onStartTrial }: TiendaHeroProps) {
 
                     {/* Bajada clara, humana y sin tecnicismos */}
                     <p className="text-base sm:text-lg md:text-xl text-neutral-600 font-light leading-relaxed max-w-2xl">
-                        Todo lo que tu marca necesita: pagos con tarjetas y cuotas, envíos automáticos con Starken y Chilexpress, boletas del SII y control de stock unificado. <strong className="font-semibold text-neutral-900">Sin saber de programación.</strong>
+                        Todo lo que tu marca necesita: pagos con tarjetas y cuotas, envíos automáticos con Starken y Chilexpress, boletas del SII y control de stock unificado.
                     </p>
 
                     {/* Selector de Demos en Vivo: E-Commerce (WEKE) & Clínicas (Clinicafy) */}
